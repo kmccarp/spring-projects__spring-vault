@@ -65,8 +65,8 @@ class ClientCertificateAuthenticationStepsIntegrationTests extends ClientCertifi
 				clientHttpRequestFactory);
 
 		assertThatExceptionOfType(NestedRuntimeException.class).isThrownBy(
-				() -> new AuthenticationStepsExecutor(ClientCertificateAuthentication.createAuthenticationSteps(),
-						restTemplate).login());
+				new AuthenticationStepsExecutor(ClientCertificateAuthentication.createAuthenticationSteps(),
+						restTemplate)::login);
 	}
 
 }

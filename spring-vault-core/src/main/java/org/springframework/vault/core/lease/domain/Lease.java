@@ -26,7 +26,7 @@ import org.springframework.util.Assert;
  * @author Mark Paluch
  * @author Steven Swor
  */
-public class Lease {
+public final class Lease {
 
 	private static final Lease NONE = new Lease(null, Duration.ZERO, false);
 
@@ -117,17 +117,21 @@ public class Lease {
 	@Override
 	public boolean equals(Object o) {
 
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof Lease))
+		}
+		if (!(o instanceof Lease)) {
 			return false;
+		}
 
 		Lease lease = (Lease) o;
 
-		if (this.leaseDuration != lease.leaseDuration)
+		if (this.leaseDuration != lease.leaseDuration) {
 			return false;
-		if (this.renewable != lease.renewable)
+		}
+		if (this.renewable != lease.renewable) {
 			return false;
+		}
 		return this.leaseId != null ? this.leaseId.equals(lease.leaseId) : lease.leaseId == null;
 	}
 

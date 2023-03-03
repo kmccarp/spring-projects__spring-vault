@@ -58,7 +58,7 @@ class AppIdAuthenticationIntegrationTests extends AppIdAuthenticationIntegration
 		RestTemplate restTemplate = TestRestTemplateFactory.create(Settings.createSslConfiguration());
 
 		assertThatExceptionOfType(VaultException.class)
-				.isThrownBy(() -> new AppIdAuthentication(options, restTemplate).login());
+				.isThrownBy(new AppIdAuthentication(options, restTemplate)::login);
 
 	}
 

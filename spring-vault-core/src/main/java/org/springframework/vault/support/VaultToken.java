@@ -76,10 +76,12 @@ public class VaultToken {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof VaultToken))
+		}
+		if (!(o instanceof VaultToken)) {
 			return false;
+		}
 		VaultToken that = (VaultToken) o;
 		return Arrays.equals(this.token, that.token);
 	}

@@ -25,7 +25,7 @@ import org.springframework.vault.support.VaultToken;
  *
  * @author Mark Paluch
  */
-public class LoginToken extends VaultToken {
+public final class LoginToken extends VaultToken {
 
 	private final boolean renewable;
 

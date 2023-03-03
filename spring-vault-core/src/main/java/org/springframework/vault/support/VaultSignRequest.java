@@ -26,7 +26,7 @@ import org.springframework.util.Assert;
  * @author My-Lan Aragon
  * @since 2.0
  */
-public class VaultSignRequest {
+public final class VaultSignRequest {
 
 	private final Plaintext plaintext;
 

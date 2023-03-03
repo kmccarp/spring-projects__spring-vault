@@ -25,7 +25,7 @@ import org.springframework.util.Assert;
  * @author Mark Paluch
  * @author Sven Schürmann
  */
-public class VaultTransitKeyCreationRequest {
+public final class VaultTransitKeyCreationRequest {
 
 	private final boolean derived;
 

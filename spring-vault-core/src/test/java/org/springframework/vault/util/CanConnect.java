@@ -49,7 +49,7 @@ class CanConnect {
 			try {
 				socket.close();
 			}
-			catch (IOException o_O) {
+			catch (IOException oO) {
 			}
 		}
 	}

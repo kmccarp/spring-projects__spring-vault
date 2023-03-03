@@ -395,7 +395,7 @@ public class LifecycleAwareSessionManager extends LifecycleAwareSessionManagerSu
 
 	}
 
-	static class RenewOutcome {
+	static final class RenewOutcome {
 
 		private static final RenewOutcome SUCCESS = new RenewOutcome(false, true);
 

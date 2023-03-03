@@ -86,7 +86,7 @@ class ClientHttpRequestFactoryFactoryIntegrationTests {
 	@Test
 	void httpComponentsClientWithExplicitEnabledCipherSuitesShouldWork() throws Exception {
 
-		List<String> enabledCipherSuites = new ArrayList<String>();
+		List<String> enabledCipherSuites = new ArrayList<>();
 		enabledCipherSuites.add("TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384");
 		enabledCipherSuites.add("TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256");
 
@@ -105,7 +105,7 @@ class ClientHttpRequestFactoryFactoryIntegrationTests {
 	@Test
 	void httpComponentsClientWithExplicitEnabledProtocolsShouldWork() throws Exception {
 
-		List<String> enabledProtocols = new ArrayList<String>();
+		List<String> enabledProtocols = new ArrayList<>();
 		enabledProtocols.add("TLSv1.2");
 
 		ClientHttpRequestFactory factory = HttpComponents.usingHttpComponents(new ClientOptions(),
@@ -137,7 +137,7 @@ class ClientHttpRequestFactoryFactoryIntegrationTests {
 	@Test
 	void okHttp3ClientWithExplicitCipherSuitesShouldWork() throws Exception {
 
-		List<String> enabledCipherSuites = new ArrayList<String>();
+		List<String> enabledCipherSuites = new ArrayList<>();
 		enabledCipherSuites.add("TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384");
 		enabledCipherSuites.add("TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256");
 
@@ -156,7 +156,7 @@ class ClientHttpRequestFactoryFactoryIntegrationTests {
 	@Test
 	void okHttp3ClientWithExplicitProtocolsShouldWork() throws Exception {
 
-		List<String> enabledProtocols = new ArrayList<String>();
+		List<String> enabledProtocols = new ArrayList<>();
 		enabledProtocols.add("TLSv1.2");
 
 		ClientHttpRequestFactory factory = OkHttp3.usingOkHttp3(new ClientOptions(),
