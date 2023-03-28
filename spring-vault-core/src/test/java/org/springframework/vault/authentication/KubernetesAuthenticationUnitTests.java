@@ -85,7 +85,7 @@ class KubernetesAuthenticationUnitTests {
 				.andRespond(withServerError());
 
 		assertThatExceptionOfType(VaultException.class)
-				.isThrownBy(() -> new KubernetesAuthentication(options, this.restTemplate).login());
+				.isThrownBy(new KubernetesAuthentication(options, this.restTemplate)::login);
 	}
 
 	@Test

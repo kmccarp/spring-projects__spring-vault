@@ -26,7 +26,7 @@ import org.springframework.util.Assert;
  * @author Mark Paluch
  * @since 2.0
  */
-public class Signature {
+public final class Signature {
 
 	private final String signature;
 
@@ -52,10 +52,12 @@ public class Signature {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof Signature))
+		}
+		if (!(o instanceof Signature)) {
 			return false;
+		}
 		Signature that = (Signature) o;
 		return this.signature.equals(that.signature);
 	}

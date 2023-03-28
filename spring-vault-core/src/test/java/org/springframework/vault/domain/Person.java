@@ -67,10 +67,12 @@ public class Person {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof Person))
+		}
+		if (!(o instanceof Person)) {
 			return false;
+		}
 		Person person = (Person) o;
 		return Objects.equals(this.id, person.id) && Objects.equals(this.firstname, person.firstname)
 				&& Objects.equals(this.password, person.password);

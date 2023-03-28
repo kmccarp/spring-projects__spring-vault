@@ -217,12 +217,9 @@ public class ReactiveVaultTemplate implements ReactiveVaultOperations {
 
 	private ExchangeFilterFunction getSessionFilter() {
 
-		return ofRequestProcessor(request -> this.vaultTokenSupplier.getVaultToken().map(token -> {
-
-			return ClientRequest.from(request).headers(headers -> {
+		return ofRequestProcessor(request -> this.vaultTokenSupplier.getVaultToken().map(token -> ClientRequest.from(request).headers(headers -> {
 				headers.set(VaultHttpHeaders.VAULT_TOKEN, token.getToken());
-			}).build();
-		}));
+			}).build()));
 	}
 
 	@Override
