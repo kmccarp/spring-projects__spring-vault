@@ -28,7 +28,7 @@ import org.springframework.util.Assert;
  * @see Mode
  * @see Lease#isRenewable()
  */
-public class RequestedSecret {
+public final class RequestedSecret {
 
 	private final String path;
 
@@ -98,15 +98,18 @@ public class RequestedSecret {
 	@Override
 	public boolean equals(Object o) {
 
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof RequestedSecret))
+		}
+		if (!(o instanceof RequestedSecret)) {
 			return false;
+		}
 
 		RequestedSecret that = (RequestedSecret) o;
 
-		if (!this.path.equals(that.path))
+		if (!this.path.equals(that.path)) {
 			return false;
+		}
 		return this.mode == that.mode;
 	}
 
@@ -140,7 +143,7 @@ public class RequestedSecret {
 		 * Renew lease of the requested secret. Obtains new secret along a new lease once
 		 * the previous lease expires its max lease time.
 		 */
-		ROTATE;
+		ROTATE
 
 	}
 

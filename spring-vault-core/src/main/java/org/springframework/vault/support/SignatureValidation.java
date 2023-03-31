@@ -23,7 +23,7 @@ import java.util.Objects;
  * @author Mark Paluch
  * @since 2.0
  */
-public class SignatureValidation {
+public final class SignatureValidation {
 
 	private static final SignatureValidation VALID = new SignatureValidation(true);
 
@@ -61,10 +61,12 @@ public class SignatureValidation {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof SignatureValidation))
+		}
+		if (!(o instanceof SignatureValidation)) {
 			return false;
+		}
 		SignatureValidation that = (SignatureValidation) o;
 		return this.state == that.state;
 	}

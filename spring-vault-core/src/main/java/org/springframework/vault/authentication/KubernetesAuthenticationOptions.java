@@ -38,7 +38,7 @@ import org.springframework.util.Assert;
  * @see KubernetesServiceAccountTokenFile
  * @see #builder()
  */
-public class KubernetesAuthenticationOptions {
+public final class KubernetesAuthenticationOptions {
 
 	public static final String DEFAULT_KUBERNETES_AUTHENTICATION_PATH = "kubernetes";
 

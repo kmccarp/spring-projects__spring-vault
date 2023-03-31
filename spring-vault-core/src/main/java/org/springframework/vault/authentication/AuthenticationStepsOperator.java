@@ -236,7 +236,7 @@ public class AuthenticationStepsOperator implements VaultTokenSupplier {
 
 	enum Undefinded {
 
-		UNDEFINDED;
+		UNDEFINDED
 
 	}
 

@@ -158,7 +158,7 @@ public abstract class VaultResponses {
 				}
 
 			}
-			catch (IOException o_O) {
+			catch (IOException oO) {
 				// ignore
 			}
 		}
