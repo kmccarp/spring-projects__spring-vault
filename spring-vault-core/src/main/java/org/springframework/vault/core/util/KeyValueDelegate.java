@@ -136,7 +136,7 @@ public class KeyValueDelegate {
 		return mountInfo;
 	}
 
-	public static class MountInfo {
+	public static final class MountInfo {
 
 		static final MountInfo UNAVAILABLE = new MountInfo("", Collections.emptyMap(), false);
 
@@ -180,11 +180,11 @@ public class KeyValueDelegate {
 
 			if (version != null) {
 
-				if (version.toString().equals("1") && versioned == KeyValueBackend.KV_1) {
+				if ("1".equals(version.toString()) && versioned == KeyValueBackend.KV_1) {
 					return true;
 				}
 
-				if (version.toString().equals("2") && versioned == KeyValueBackend.KV_2) {
+				if ("2".equals(version.toString()) && versioned == KeyValueBackend.KV_2) {
 					return true;
 				}
 			}

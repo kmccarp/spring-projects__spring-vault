@@ -84,7 +84,7 @@ class AppIdAuthenticationUnitTests {
 				.andRespond(withServerError());
 
 		assertThatExceptionOfType(VaultException.class)
-				.isThrownBy(() -> new AppIdAuthentication(options, this.restTemplate).login());
+				.isThrownBy(new AppIdAuthentication(options, this.restTemplate)::login);
 	}
 
 }

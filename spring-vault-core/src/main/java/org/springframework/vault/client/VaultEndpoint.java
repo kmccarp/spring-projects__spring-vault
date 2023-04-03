@@ -34,6 +34,8 @@ import org.springframework.util.StringUtils;
  */
 public class VaultEndpoint implements Serializable {
 
+	private static final long serialVersionUID = 1;
+
 	public static final String API_VERSION = "v1";
 
 	/**
@@ -207,10 +209,12 @@ public class VaultEndpoint implements Serializable {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof VaultEndpoint))
+		}
+		if (!(o instanceof VaultEndpoint)) {
 			return false;
+		}
 		VaultEndpoint that = (VaultEndpoint) o;
 		return this.port == that.port && this.host.equals(that.host) && this.scheme.equals(that.scheme)
 				&& this.path.equals(that.path);

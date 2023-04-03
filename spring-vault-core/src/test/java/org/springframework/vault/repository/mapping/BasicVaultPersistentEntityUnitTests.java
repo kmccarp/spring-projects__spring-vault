@@ -34,7 +34,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 class BasicVaultPersistentEntityUnitTests {
 
-	private VaultMappingContext mappingContext = new VaultMappingContext();
+	private final VaultMappingContext mappingContext = new VaultMappingContext();
 
 	@Test
 	void shouldSetIdPropertyThroughName() {
@@ -67,7 +67,8 @@ class BasicVaultPersistentEntityUnitTests {
 
 	private static class IdProperty {
 
-		String id, username;
+		String id;
+		String username;
 
 	}
 

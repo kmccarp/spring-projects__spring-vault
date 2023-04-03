@@ -27,7 +27,7 @@ import org.springframework.util.StringUtils;
  * @author Lauren Voswinkel
  * @since 2.3
  */
-public class VaultTransformContext {
+public final class VaultTransformContext {
 
 	/**
 	 * Empty (default) {@link VaultTransformContext} without a {@literal context} and
@@ -101,10 +101,12 @@ public class VaultTransformContext {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof VaultTransformContext))
+		}
+		if (!(o instanceof VaultTransformContext)) {
 			return false;
+		}
 		VaultTransformContext that = (VaultTransformContext) o;
 		return this.transformation.equals(that.transformation) && Arrays.equals(this.tweak, that.tweak);
 	}
@@ -119,7 +121,7 @@ public class VaultTransformContext {
 	/**
 	 * Builder for {@link VaultTransformContext}.
 	 */
-	public static class VaultTransformRequestBuilder {
+	public static final class VaultTransformRequestBuilder {
 
 		private String transformation = "";
 

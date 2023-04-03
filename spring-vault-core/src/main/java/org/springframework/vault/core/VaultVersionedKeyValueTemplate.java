@@ -162,13 +162,13 @@ public class VaultVersionedKeyValueTemplate extends VaultKeyValue2Accessor imple
 	private static Metadata getMetadata(Map<String, Object> responseMetadata) {
 
 		MetadataBuilder builder = Metadata.builder();
-		TemporalAccessor created_time = getDate(responseMetadata, "created_time");
-		TemporalAccessor deletion_time = getDate(responseMetadata, "deletion_time");
+		TemporalAccessor createdTime = getDate(responseMetadata, "created_time");
+		TemporalAccessor deletionTime = getDate(responseMetadata, "deletion_time");
 
-		builder.createdAt(Instant.from(created_time));
+		builder.createdAt(Instant.from(createdTime));
 
-		if (deletion_time != null) {
-			builder.deletedAt(Instant.from(deletion_time));
+		if (deletionTime != null) {
+			builder.deletedAt(Instant.from(deletionTime));
 		}
 
 		if (Boolean.TRUE.equals(responseMetadata.get("destroyed"))) {

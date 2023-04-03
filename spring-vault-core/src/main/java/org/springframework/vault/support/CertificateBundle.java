@@ -323,10 +323,10 @@ public class CertificateBundle extends Certificate {
 	private static KeySpec getPrivateKey(byte[] privateKey, String keyType)
 			throws GeneralSecurityException, IOException {
 
-		switch (keyType.toLowerCase(Locale.ROOT)) {
-		case "rsa":
+		if ("rsa".equals(keyType.toLowerCase(Locale.ROOT))) {
 			return KeyFactories.RSA_PRIVATE.getKey(privateKey);
-		case "ec":
+		}
+		else if ("ec".equals(keyType.toLowerCase(Locale.ROOT))) {
 			return KeyFactories.EC.getKey(privateKey);
 		}
 
