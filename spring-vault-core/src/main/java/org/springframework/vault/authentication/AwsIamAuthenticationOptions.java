@@ -40,7 +40,7 @@ import org.springframework.util.Assert;
  * @see AwsIamAuthentication
  * @see #builder()
  */
-public class AwsIamAuthenticationOptions {
+public final class AwsIamAuthenticationOptions {
 
 	public static final String DEFAULT_AWS_AUTHENTICATION_PATH = "aws";
 

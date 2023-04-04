@@ -25,7 +25,7 @@ import java.util.Objects;
  * @author Lauren Voswinkel
  * @since 2.3
  */
-public class TransformCiphertext {
+public final class TransformCiphertext {
 
 	private final String ciphertext;
 
@@ -73,10 +73,12 @@ public class TransformCiphertext {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof TransformCiphertext))
+		}
+		if (!(o instanceof TransformCiphertext)) {
 			return false;
+		}
 		TransformCiphertext that = (TransformCiphertext) o;
 		return this.ciphertext.equals(that.ciphertext) && this.context.equals(that.context);
 	}

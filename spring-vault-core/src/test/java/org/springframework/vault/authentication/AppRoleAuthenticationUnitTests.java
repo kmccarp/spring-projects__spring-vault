@@ -158,7 +158,7 @@ class AppRoleAuthenticationUnitTests {
 				.andRespond(withServerError());
 
 		assertThatExceptionOfType(VaultException.class)
-				.isThrownBy(() -> new AppRoleAuthentication(options, this.restTemplate).login());
+				.isThrownBy(new AppRoleAuthentication(options, this.restTemplate)::login);
 	}
 
 	@Test

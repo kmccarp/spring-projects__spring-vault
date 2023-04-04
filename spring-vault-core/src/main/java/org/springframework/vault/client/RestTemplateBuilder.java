@@ -53,7 +53,7 @@ import org.springframework.web.client.RestTemplate;
  * @see ClientHttpRequestFactoryFactory
  * @see RestTemplateCustomizer
  */
-public class RestTemplateBuilder {
+public final class RestTemplateBuilder {
 
 	private @Nullable VaultEndpointProvider endpointProvider;
 

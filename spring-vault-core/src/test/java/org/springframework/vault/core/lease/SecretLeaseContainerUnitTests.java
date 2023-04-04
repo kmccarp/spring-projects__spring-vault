@@ -301,7 +301,7 @@ class SecretLeaseContainerUnitTests {
 	@Test
 	void shouldRotateNonRenewableLease() {
 
-		final List<SecretLeaseEvent> events = new ArrayList<SecretLeaseEvent>();
+		final List<SecretLeaseEvent> events = new ArrayList<>();
 		when(this.taskScheduler.schedule(any(Runnable.class), any(Trigger.class))).thenReturn(this.scheduledFuture);
 
 		when(this.vaultOperations.read(this.requestedSecret.getPath())).thenReturn(createSecrets("key", "value", false),
