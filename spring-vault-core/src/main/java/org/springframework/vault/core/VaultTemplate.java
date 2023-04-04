@@ -283,10 +283,10 @@ public class VaultTemplate implements InitializingBean, VaultOperations, Disposa
 	@Override
 	public VaultKeyValueOperations opsForKeyValue(String path, KeyValueBackend apiVersion) {
 
-		switch (apiVersion) {
-		case KV_1:
+		if (apiVersion == VaultKeyValueOperationsSupport.KeyValueBackend.KV_1) {
 			return new VaultKeyValue1Template(this, path);
-		case KV_2:
+		}
+		else if (apiVersion == VaultKeyValueOperationsSupport.KeyValueBackend.KV_2) {
 			return new VaultKeyValue2Template(this, path);
 		}
 

@@ -32,7 +32,7 @@ class AppRoleTokens {
 	 */
 	enum AbsentSecretId implements SecretId {
 
-		ABSENT_SECRET_ID;
+		ABSENT_SECRET_ID
 
 	}
 

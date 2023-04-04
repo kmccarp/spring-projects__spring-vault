@@ -33,7 +33,7 @@ public abstract class VaultSimpleTypes {
 
 	static {
 
-		Set<Class<?>> simpleTypes = new HashSet<Class<?>>();
+		Set<Class<?>> simpleTypes = new HashSet<>();
 		simpleTypes.add(SecretDocument.class);
 
 		VAULT_SIMPLE_TYPES = Collections.unmodifiableSet(simpleTypes);

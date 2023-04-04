@@ -97,7 +97,7 @@ class VaultTemplateGenericIntegrationTests extends IntegrationTestSupport {
 	@Test
 	void readObjectShouldReadDomainClass() {
 
-		Map<String, String> data = new HashMap<String, String>();
+		Map<String, String> data = new HashMap<>();
 		data.put("firstname", "Walter");
 		data.put("password", "Secret");
 

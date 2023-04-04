@@ -84,7 +84,7 @@ class ClientCertificateAuthenticationUnitTests {
 				.andRespond(withServerError());
 
 		assertThatExceptionOfType(VaultException.class)
-				.isThrownBy(() -> new ClientCertificateAuthentication(this.restTemplate).login());
+				.isThrownBy(new ClientCertificateAuthentication(this.restTemplate)::login);
 	}
 
 }

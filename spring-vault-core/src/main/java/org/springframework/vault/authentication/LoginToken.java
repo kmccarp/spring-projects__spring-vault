@@ -30,7 +30,7 @@ import org.springframework.vault.support.VaultToken;
  *
  * @author Mark Paluch
  */
-public class LoginToken extends VaultToken {
+public final class LoginToken extends VaultToken {
 
 	private final boolean renewable;
 
@@ -205,7 +205,7 @@ public class LoginToken extends VaultToken {
 	 *
 	 * @since 3.0.2
 	 */
-	public static class LoginTokenBuilder {
+	public static final class LoginTokenBuilder {
 
 		@Nullable
 		private char[] token;
