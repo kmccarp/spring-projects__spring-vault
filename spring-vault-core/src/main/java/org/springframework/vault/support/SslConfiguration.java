@@ -596,7 +596,7 @@ public class SslConfiguration {
 	 * @author Mark Paluch
 	 * @since 2.2
 	 */
-	public static class KeyConfiguration {
+	public static final class KeyConfiguration {
 
 		private static final KeyConfiguration UNCONFIGURED = new KeyConfiguration(null, null);
 
@@ -655,7 +655,7 @@ public class SslConfiguration {
 
 	}
 
-	static class AbsentResource extends AbstractResource {
+	static final class AbsentResource extends AbstractResource {
 
 		static final AbsentResource INSTANCE = new AbsentResource();
 

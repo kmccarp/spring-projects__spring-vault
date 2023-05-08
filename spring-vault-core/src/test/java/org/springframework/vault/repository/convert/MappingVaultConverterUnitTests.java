@@ -541,10 +541,12 @@ class MappingVaultConverterUnitTests {
 
 		@Override
 		public boolean equals(Object o) {
-			if (this == o)
+			if (this == o) {
 				return true;
-			if (!(o instanceof NestedType))
+			}
+			if (!(o instanceof NestedType)) {
 				return false;
+			}
 			NestedType that = (NestedType) o;
 			return Objects.equals(this.username, that.username) && Objects.equals(this.password, that.password);
 		}

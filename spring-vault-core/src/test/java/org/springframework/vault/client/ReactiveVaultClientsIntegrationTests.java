@@ -41,13 +41,10 @@ class ReactiveVaultClientsIntegrationTests extends IntegrationTestSupport {
 
 		AtomicReference<Thread> resolver = new AtomicReference<>();
 
-		WebClient client = ReactiveVaultClients.createWebClient(() -> {
-
-			return Mono.fromSupplier(() -> {
+		WebClient client = ReactiveVaultClients.createWebClient(() -> Mono.fromSupplier(() -> {
 				resolver.set(Thread.currentThread());
 				return TestRestTemplateFactory.TEST_VAULT_ENDPOINT;
-			});
-		}, ClientHttpConnectorFactory.create(new ClientOptions(), Settings.createSslConfiguration()));
+			}), ClientHttpConnectorFactory.create(new ClientOptions(), Settings.createSslConfiguration()));
 
 		client.get()
 			.uri("/sys/health")

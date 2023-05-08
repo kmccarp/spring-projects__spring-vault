@@ -31,7 +31,7 @@ import org.springframework.util.Assert;
  * @see ClientCertificateAuthenticationOptions
  * @see #builder()
  */
-public class ClientCertificateAuthenticationOptions {
+public final class ClientCertificateAuthenticationOptions {
 
 	public static final String DEFAULT_CERT_PATH = "cert";
 

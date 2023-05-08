@@ -149,14 +149,9 @@ public class MappingVaultConverter extends AbstractVaultConverter {
 		PersistentEntityParameterValueProvider<VaultPersistentProperty> parameterProvider = new PersistentEntityParameterValueProvider<>(
 				entity, provider, source);
 
-		return new ParameterValueProvider<VaultPersistentProperty>() {
-
-			@Nullable
-			@Override
-			public <T> T getParameterValue(Parameter<T, VaultPersistentProperty> parameter) {
-				Object value = parameterProvider.getParameterValue(parameter);
-				return value != null ? readValue(value, parameter.getType()) : null;
-			}
+		return parameter -> {
+			Object value = parameterProvider.getParameterValue(parameter);
+			return value != null ? readValue(value, parameter.getType()) : null;
 		};
 	}
 

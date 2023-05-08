@@ -33,7 +33,7 @@ import org.springframework.util.Assert;
  * @see AwsEc2Authentication
  * @see #builder()
  */
-public class AwsEc2AuthenticationOptions {
+public final class AwsEc2AuthenticationOptions {
 
 	public static final URI DEFAULT_PKCS7_IDENTITY_DOCUMENT_URI = URI
 		.create("http://169.254.169.254/latest/dynamic/instance-identity/pkcs7");

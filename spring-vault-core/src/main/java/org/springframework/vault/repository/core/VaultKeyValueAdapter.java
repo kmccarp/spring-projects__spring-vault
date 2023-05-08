@@ -276,7 +276,7 @@ public class VaultKeyValueAdapter extends AbstractKeyValueAdapter {
 		return this.vaultOperations;
 	}
 
-	static abstract class VaultKeyValueKeyspaceAccessor {
+	abstract static class VaultKeyValueKeyspaceAccessor {
 
 		private final KeyValueDelegate.MountInfo mountInfo;
 
