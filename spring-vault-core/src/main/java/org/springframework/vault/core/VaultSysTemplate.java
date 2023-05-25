@@ -436,10 +436,12 @@ public class VaultSysTemplate implements VaultSysOperations {
 
 		@Override
 		public boolean equals(Object o) {
-			if (this == o)
+			if (this == o) {
 				return true;
-			if (!(o instanceof VaultInitializationResponseImpl))
+			}
+			if (!(o instanceof VaultInitializationResponseImpl)) {
 				return false;
+			}
 			VaultInitializationResponseImpl that = (VaultInitializationResponseImpl) o;
 			return this.keys.equals(that.keys) && this.rootToken.equals(that.rootToken);
 		}
@@ -500,10 +502,12 @@ public class VaultSysTemplate implements VaultSysOperations {
 
 		@Override
 		public boolean equals(Object o) {
-			if (this == o)
+			if (this == o) {
 				return true;
-			if (!(o instanceof VaultUnsealStatusImpl))
+			}
+			if (!(o instanceof VaultUnsealStatusImpl)) {
 				return false;
+			}
 			VaultUnsealStatusImpl that = (VaultUnsealStatusImpl) o;
 			return this.sealed == that.sealed && this.secretThreshold == that.secretThreshold
 					&& this.secretShares == that.secretShares && this.progress == that.progress;
@@ -581,10 +585,12 @@ public class VaultSysTemplate implements VaultSysOperations {
 
 		@Override
 		public boolean equals(Object o) {
-			if (this == o)
+			if (this == o) {
 				return true;
-			if (!(o instanceof VaultHealthImpl))
+			}
+			if (!(o instanceof VaultHealthImpl)) {
 				return false;
+			}
 			VaultHealthImpl that = (VaultHealthImpl) o;
 			return this.initialized == that.initialized && this.sealed == that.sealed && this.standby == that.standby
 					&& this.performanceStandby == that.performanceStandby

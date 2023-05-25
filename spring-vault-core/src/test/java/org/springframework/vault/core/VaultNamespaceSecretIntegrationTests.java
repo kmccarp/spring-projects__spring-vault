@@ -209,13 +209,11 @@ class VaultNamespaceSecretIntegrationTests extends IntegrationTestSupport {
 		ReactiveVaultTemplate reactiveMarketing = new ReactiveVaultTemplate(this.marketingWebClientBuilder,
 				() -> Mono.just(VaultToken.of(this.marketingToken)));
 
-		reactiveMarketing.doWithSession(webClient -> {
-			return webClient.get()
+		reactiveMarketing.doWithSession(webClient -> webClient.get()
 				.uri("sys/init")
 				.header(VaultHttpHeaders.VAULT_NAMESPACE, "")
 				.exchange()
-				.flatMap(it -> it.bodyToMono(Map.class));
-		})
+				.flatMap(it -> it.bodyToMono(Map.class)))
 			.as(StepVerifier::create)
 			.assertNext(actual -> assertThat(actual).containsEntry("initialized", true))
 			.verifyComplete();

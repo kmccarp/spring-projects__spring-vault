@@ -166,7 +166,7 @@ class AwsEc2AuthenticationUnitTests {
 			.andRespond(withServerError());
 
 		assertThatExceptionOfType(VaultException.class)
-			.isThrownBy(() -> new AwsEc2Authentication(this.restTemplate).login());
+			.isThrownBy(new AwsEc2Authentication(this.restTemplate)::login);
 	}
 
 	@Test
@@ -175,12 +175,12 @@ class AwsEc2AuthenticationUnitTests {
 		this.mockRest.expect(requestTo("/auth/aws-ec2/login")) //
 			.andRespond(withServerError());
 
-		assertThatExceptionOfType(VaultException.class).isThrownBy(() -> new AwsEc2Authentication(this.restTemplate) {
+		assertThatExceptionOfType(VaultException.class).isThrownBy(new AwsEc2Authentication(this.restTemplate) {
 			@Override
 			protected Map<String, String> getEc2Login() {
 				return Collections.singletonMap("pkcs7", "value");
 			}
-		}.login());
+		}::login);
 	}
 
 }

@@ -26,7 +26,7 @@ import org.springframework.util.Assert;
  * @author Mark Paluch
  * @since 2.0
  */
-public class Hmac {
+public final class Hmac {
 
 	private final String hmac;
 
@@ -52,10 +52,12 @@ public class Hmac {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof Hmac))
+		}
+		if (!(o instanceof Hmac)) {
 			return false;
+		}
 		Hmac other = (Hmac) o;
 		return this.hmac.equals(other.hmac);
 	}
