@@ -100,14 +100,14 @@ public class VaultTokenTemplate implements VaultTokenOperations {
 	}
 
 	private <T extends VaultResponseSupport<?>> T writeAndReturn(String path, @Nullable Object body,
-			Class<T> responseType) {
+Class<T> responseType) {
 
 		Assert.hasText(path, "Path must not be empty");
 
 		T response = this.vaultOperations.doWithSession(restOperations -> {
 			try {
 				ResponseEntity<T> exchange = restOperations.exchange(path, HttpMethod.POST,
-						body == null ? HttpEntity.EMPTY : new HttpEntity<>(body), responseType);
+			body == null ? HttpEntity.EMPTY : new HttpEntity<>(body), responseType);
 
 				return exchange.getBody();
 			}
@@ -130,7 +130,7 @@ public class VaultTokenTemplate implements VaultTokenOperations {
 
 			try {
 				restOperations.exchange(path, HttpMethod.POST,
-						new HttpEntity<>(Collections.singletonMap("token", token.getToken())), responseType);
+			new HttpEntity<>(Collections.singletonMap("token", token.getToken())), responseType);
 
 				return null;
 			}

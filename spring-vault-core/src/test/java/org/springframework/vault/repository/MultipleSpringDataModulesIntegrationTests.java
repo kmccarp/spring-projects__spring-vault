@@ -49,9 +49,9 @@ class MultipleSpringDataModulesIntegrationTests extends IntegrationTestSupport {
 
 	@Configuration
 	@EnableMapRepositories(considerNestedRepositories = true, //
-			excludeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, value = VaultRepository.class))
+excludeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, value = VaultRepository.class))
 	@EnableVaultRepositories(considerNestedRepositories = true, //
-			excludeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, value = MapRepository.class))
+excludeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, value = MapRepository.class))
 	static class MultipleModulesActiveTestConfiguration extends VaultIntegrationTestConfiguration {
 
 	}

@@ -28,8 +28,7 @@ import org.springframework.vault.repository.mapping.VaultPersistentEntity;
  * @author Mark Paluch
  * @since 2.0
  */
-public class MappingVaultEntityInformation<T, ID> extends PersistentEntityInformation<T, ID>
-		implements VaultEntityInformation<T, ID> {
+public class MappingVaultEntityInformation<T, ID> extends PersistentEntityInformation<T, ID>implements VaultEntityInformation<T, ID> {
 
 	/**
 	 * @param entity
@@ -41,8 +40,8 @@ public class MappingVaultEntityInformation<T, ID> extends PersistentEntityInform
 		if (!entity.hasIdProperty()) {
 
 			throw new MappingException(String.format(
-					"Entity %s requires to have an explicit id field. Did you forget to provide one using @Id?",
-					entity.getName()));
+		"Entity %s requires to have an explicit id field. Did you forget to provide one using @Id?",
+		entity.getName()));
 		}
 	}
 

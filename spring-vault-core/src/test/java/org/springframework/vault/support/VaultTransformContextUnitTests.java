@@ -51,7 +51,7 @@ class VaultTransformContextUnitTests {
 	@Test
 	void createsFromTweak() {
 
-		byte[] bytes = new byte[] { 1 };
+		byte[] bytes = new byte[]{1};
 
 		VaultTransformContext context = VaultTransformContext.fromTweak(bytes);
 

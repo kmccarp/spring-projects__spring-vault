@@ -41,14 +41,14 @@ class KubernetesAuthenticationStepsIntegrationTests extends KubernetesAuthentica
 		File tokenFile = new File(findWorkDir(), "minikube/hello-minikube-token");
 
 		KubernetesAuthenticationOptions options = KubernetesAuthenticationOptions.builder()
-			.role("my-role")
-			.jwtSupplier(new KubernetesServiceAccountTokenFile(tokenFile))
-			.build();
+	.role("my-role")
+	.jwtSupplier(new KubernetesServiceAccountTokenFile(tokenFile))
+	.build();
 
 		RestTemplate restTemplate = TestRestTemplateFactory.create(Settings.createSslConfiguration());
 
 		AuthenticationStepsExecutor executor = new AuthenticationStepsExecutor(
-				KubernetesAuthentication.createAuthenticationSteps(options), restTemplate);
+	KubernetesAuthentication.createAuthenticationSteps(options), restTemplate);
 
 		VaultToken login = executor.login();
 		assertThat(login.getToken()).doesNotContain(Settings.token().getToken());

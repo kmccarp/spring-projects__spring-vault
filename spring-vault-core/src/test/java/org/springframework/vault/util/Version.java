@@ -205,7 +205,7 @@ public class Version implements Comparable<Version> {
 			return false;
 		Version version = (Version) o;
 		return this.major == version.major && this.minor == version.minor && this.bugfix == version.bugfix
-				&& this.build == version.build && this.enterprise == version.enterprise;
+	&& this.build == version.build && this.enterprise == version.enterprise;
 	}
 
 	@Override

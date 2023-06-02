@@ -48,7 +48,7 @@ public class Certificate {
 	private final String issuingCaCertificate;
 
 	Certificate(@JsonProperty("serial_number") String serialNumber, @JsonProperty("certificate") String certificate,
-			@JsonProperty("issuing_ca") String issuingCaCertificate) {
+@JsonProperty("issuing_ca") String issuingCaCertificate) {
 
 		this.serialNumber = serialNumber;
 		this.certificate = certificate;

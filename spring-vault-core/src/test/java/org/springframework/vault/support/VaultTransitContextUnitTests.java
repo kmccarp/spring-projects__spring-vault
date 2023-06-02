@@ -35,7 +35,7 @@ class VaultTransitContextUnitTests {
 	@Test
 	void createsFromContext() {
 
-		byte[] bytes = new byte[] { 1 };
+		byte[] bytes = new byte[]{1};
 
 		VaultTransitContext context = VaultTransitContext.fromContext(bytes);
 
@@ -51,7 +51,7 @@ class VaultTransitContextUnitTests {
 	@Test
 	void createsFromNonce() {
 
-		byte[] bytes = new byte[] { 1 };
+		byte[] bytes = new byte[]{1};
 
 		VaultTransitContext context = VaultTransitContext.fromNonce(bytes);
 

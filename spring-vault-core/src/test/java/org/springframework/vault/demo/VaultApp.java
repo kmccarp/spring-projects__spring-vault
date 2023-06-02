@@ -28,7 +28,7 @@ public class VaultApp {
 	public static void main(String[] args) {
 
 		VaultTemplate vaultTemplate = new VaultTemplate(new VaultEndpoint(),
-				new TokenAuthentication("00000000-0000-0000-0000-000000000000"));
+	new TokenAuthentication("00000000-0000-0000-0000-000000000000"));
 
 		Secrets secrets = new Secrets();
 		secrets.username = "hello";

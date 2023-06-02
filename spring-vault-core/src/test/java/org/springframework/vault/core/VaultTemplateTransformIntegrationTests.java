@@ -52,7 +52,7 @@ class VaultTemplateTransformIntegrationTests extends IntegrationTestSupport {
 	void before() {
 
 		Assumptions.assumeTrue(prepare().getVersion().isEnterprise(),
-				"Transform Secrets Engine requires enterprise version");
+	"Transform Secrets Engine requires enterprise version");
 
 		VaultSysOperations adminOperations = this.vaultOperations.opsForSys();
 
@@ -64,7 +64,7 @@ class VaultTemplateTransformIntegrationTests extends IntegrationTestSupport {
 
 		// Write a transformation/role
 		this.vaultOperations.write("transform/transformation/myssn",
-				"{\"type\": \"fpe\", \"template\": \"builtin/socialsecuritynumber\", \"allowed_roles\": [\"myrole\"]}");
+	"{\"type\": \"fpe\", \"template\": \"builtin/socialsecuritynumber\", \"allowed_roles\": [\"myrole\"]}");
 		this.vaultOperations.write("transform/role/myrole", "{\"transformations\": [\"myssn\"]}");
 	}
 
@@ -78,7 +78,7 @@ class VaultTemplateTransformIntegrationTests extends IntegrationTestSupport {
 	void shouldEncode() {
 
 		VaultResponse response = this.vaultOperations.write("transform/encode/myrole", String.format(
-				"{\"value\": \"123-45-6789\", \"tweak\": \"%s\"}", Base64Utils.encodeToString("somenum".getBytes())));
+	"{\"value\": \"123-45-6789\", \"tweak\": \"%s\"}", Base64Utils.encodeToString("somenum".getBytes())));
 
 		assertThat((String) response.getRequiredData().get("encoded_value")).isNotEmpty();
 	}
@@ -88,11 +88,11 @@ class VaultTemplateTransformIntegrationTests extends IntegrationTestSupport {
 
 		String value = "123-45-6789";
 		VaultResponse response = this.vaultOperations.write("transform/encode/myrole", String
-			.format("{\"value\": \"%s\", \"tweak\": \"%s\"}", value, Base64Utils.encodeToString("somenum".getBytes())));
+	.format("{\"value\": \"%s\", \"tweak\": \"%s\"}", value, Base64Utils.encodeToString("somenum".getBytes())));
 
 		String encoded = (String) response.getRequiredData().get("encoded_value");
 		VaultResponse decoded = this.vaultOperations.write("transform/decode/myrole", String.format(
-				"{\"value\": \"%s\", \"tweak\": \"%s\"}", encoded, Base64Utils.encodeToString("somenum".getBytes())));
+	"{\"value\": \"%s\", \"tweak\": \"%s\"}", encoded, Base64Utils.encodeToString("somenum".getBytes())));
 
 		assertThat((String) decoded.getRequiredData().get("decoded_value")).isEqualTo(value);
 	}

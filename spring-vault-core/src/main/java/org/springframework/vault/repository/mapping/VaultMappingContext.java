@@ -50,7 +50,7 @@ public class VaultMappingContext extends KeyValueMappingContext<VaultPersistentE
 
 	@Override
 	protected VaultPersistentProperty createPersistentProperty(Property property, VaultPersistentEntity<?> owner,
-			SimpleTypeHolder simpleTypeHolder) {
+SimpleTypeHolder simpleTypeHolder) {
 		return new VaultPersistentProperty(property, owner, simpleTypeHolder);
 	}
 

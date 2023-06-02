@@ -40,7 +40,7 @@ public class VaultSignatureVerificationRequest {
 	private final @Nullable String signatureAlgorithm;
 
 	private VaultSignatureVerificationRequest(Plaintext plaintext, @Nullable Signature signature, @Nullable Hmac hmac,
-			@Nullable String hashAlgorithm, @Nullable String signatureAlgorithm) {
+@Nullable String hashAlgorithm, @Nullable String signatureAlgorithm) {
 
 		this.plaintext = plaintext;
 		this.signature = signature;
@@ -255,7 +255,7 @@ public class VaultSignatureVerificationRequest {
 			Assert.isTrue(this.hmac != null || this.signature != null, "Either Signature or Hmac must not be null");
 
 			return new VaultSignatureVerificationRequest(this.input, this.signature, this.hmac, this.hashAlgorithm,
-					this.signatureAlgorithm);
+		this.signatureAlgorithm);
 		}
 
 	}

@@ -46,12 +46,12 @@ class VaultRuntimeHints implements RuntimeHintsRegistrar {
 		PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(classLoader);
 
 		ReflectionHints reflection = hints.reflection();
-		MemberCategory[] dataObjectCategories = new MemberCategory[] { MemberCategory.DECLARED_FIELDS,
-				MemberCategory.INVOKE_DECLARED_METHODS, MemberCategory.INVOKE_DECLARED_CONSTRUCTORS,
-				MemberCategory.INTROSPECT_DECLARED_CONSTRUCTORS, MemberCategory.INTROSPECT_DECLARED_METHODS };
+		MemberCategory[] dataObjectCategories = new MemberCategory[]{MemberCategory.DECLARED_FIELDS,
+	MemberCategory.INVOKE_DECLARED_METHODS, MemberCategory.INVOKE_DECLARED_CONSTRUCTORS,
+	MemberCategory.INTROSPECT_DECLARED_CONSTRUCTORS, MemberCategory.INTROSPECT_DECLARED_METHODS};
 		try {
 			Resource[] resources = resolver.getResources(ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX
-					+ ClassUtils.convertClassNameToResourcePath("org.springframework.vault.support") + "/*.class");
+		+ ClassUtils.convertClassNameToResourcePath("org.springframework.vault.support") + "/*.class");
 
 			for (Resource resource : resources) {
 
@@ -70,30 +70,30 @@ class VaultRuntimeHints implements RuntimeHintsRegistrar {
 		}
 
 		Stream
-			.of("org.springframework.vault.core.VaultSysTemplate$GetMounts$VaultMountsResponse",
-					"org.springframework.vault.core.VaultVersionedKeyValueTemplate$VersionedResponse",
-					"org.springframework.vault.core.ReactiveVaultTemplate$VaultListResponse",
-					"org.springframework.vault.core.VaultListResponse",
+	.of("org.springframework.vault.core.VaultSysTemplate$GetMounts$VaultMountsResponse",
+"org.springframework.vault.core.VaultVersionedKeyValueTemplate$VersionedResponse",
+"org.springframework.vault.core.ReactiveVaultTemplate$VaultListResponse",
+"org.springframework.vault.core.VaultListResponse",
 
-					"org.springframework.vault.core.VaultTransitTemplate$RawTransitKeyImpl",
-					"org.springframework.vault.core.VaultTransitTemplate$VaultTransitKeyImpl",
+"org.springframework.vault.core.VaultTransitTemplate$RawTransitKeyImpl",
+"org.springframework.vault.core.VaultTransitTemplate$VaultTransitKeyImpl",
 
-					"org.springframework.vault.core.VaultSysTemplate$GetMounts",
-					"org.springframework.vault.core.VaultSysTemplate$GetUnsealStatus",
-					"org.springframework.vault.core.VaultSysTemplate$Health",
-					"org.springframework.vault.core.VaultSysTemplate$Seal",
-					"org.springframework.vault.core.VaultSysTemplate$VaultHealthImpl",
-					"org.springframework.vault.core.VaultSysTemplate$VaultInitializationResponseImpl",
-					"org.springframework.vault.core.VaultSysTemplate$VaultUnsealStatusImpl",
+"org.springframework.vault.core.VaultSysTemplate$GetMounts",
+"org.springframework.vault.core.VaultSysTemplate$GetUnsealStatus",
+"org.springframework.vault.core.VaultSysTemplate$Health",
+"org.springframework.vault.core.VaultSysTemplate$Seal",
+"org.springframework.vault.core.VaultSysTemplate$VaultHealthImpl",
+"org.springframework.vault.core.VaultSysTemplate$VaultInitializationResponseImpl",
+"org.springframework.vault.core.VaultSysTemplate$VaultUnsealStatusImpl",
 
-					"org.springframework.vault.core.VaultVersionedKeyValueTemplate$VersionedResponse")
-			.forEach(cls -> reflection.registerType(TypeReference.of(cls), dataObjectCategories));
+"org.springframework.vault.core.VaultVersionedKeyValueTemplate$VersionedResponse")
+	.forEach(cls -> reflection.registerType(TypeReference.of(cls), dataObjectCategories));
 
 		reflection.registerTypeIfPresent(classLoader, "com.google.api.client.json.jackson2.JacksonFactory",
-				MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS);
+	MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS);
 
 		reflection.registerTypeIfPresent(classLoader, "com.google.api.client.json.gson.GsonFactory",
-				MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS);
+	MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS);
 
 	}
 

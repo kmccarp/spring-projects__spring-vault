@@ -89,14 +89,14 @@ public abstract class AbstractVaultConfiguration implements ApplicationContextAw
 	 * @since 2.3
 	 */
 	protected RestTemplateBuilder restTemplateBuilder(VaultEndpointProvider endpointProvider,
-			ClientHttpRequestFactory requestFactory) {
+ClientHttpRequestFactory requestFactory) {
 
 		ObjectProvider<RestTemplateCustomizer> customizers = getBeanFactory()
-			.getBeanProvider(RestTemplateCustomizer.class);
+	.getBeanProvider(RestTemplateCustomizer.class);
 
 		RestTemplateBuilder builder = RestTemplateBuilder.builder()
-			.endpointProvider(endpointProvider)
-			.requestFactory(requestFactory);
+	.endpointProvider(endpointProvider)
+	.requestFactory(requestFactory);
 
 		builder.customizers(customizers.stream().toArray(RestTemplateCustomizer[]::new));
 
@@ -129,8 +129,8 @@ public abstract class AbstractVaultConfiguration implements ApplicationContextAw
 	@Bean
 	public VaultTemplate vaultTemplate() {
 		return new VaultTemplate(
-				restTemplateBuilder(vaultEndpointProvider(), getClientFactoryWrapper().getClientHttpRequestFactory()),
-				getBeanFactory().getBean("sessionManager", SessionManager.class));
+	restTemplateBuilder(vaultEndpointProvider(), getClientFactoryWrapper().getClientHttpRequestFactory()),
+	getBeanFactory().getBean("sessionManager", SessionManager.class));
 	}
 
 	/**
@@ -152,7 +152,7 @@ public abstract class AbstractVaultConfiguration implements ApplicationContextAw
 		Assert.notNull(clientAuthentication, "ClientAuthentication must not be null");
 
 		return new LifecycleAwareSessionManager(clientAuthentication, getVaultThreadPoolTaskScheduler(),
-				restOperations());
+	restOperations());
 	}
 
 	/**
@@ -167,7 +167,7 @@ public abstract class AbstractVaultConfiguration implements ApplicationContextAw
 	public SecretLeaseContainer secretLeaseContainer() throws Exception {
 
 		SecretLeaseContainer secretLeaseContainer = new SecretLeaseContainer(
-				getBeanFactory().getBean("vaultTemplate", VaultTemplate.class), getVaultThreadPoolTaskScheduler());
+	getBeanFactory().getBean("vaultTemplate", VaultTemplate.class), getVaultThreadPoolTaskScheduler());
 
 		secretLeaseContainer.afterPropertiesSet();
 		secretLeaseContainer.start();
@@ -249,7 +249,7 @@ public abstract class AbstractVaultConfiguration implements ApplicationContextAw
 	protected Environment getEnvironment() {
 
 		Assert.state(this.applicationContext != null,
-				"ApplicationContext must be set before accessing getEnvironment()");
+	"ApplicationContext must be set before accessing getEnvironment()");
 
 		return this.applicationContext.getEnvironment();
 	}
@@ -275,7 +275,7 @@ public abstract class AbstractVaultConfiguration implements ApplicationContextAw
 	protected BeanFactory getBeanFactory() {
 
 		Assert.state(this.applicationContext != null,
-				"ApplicationContext must be set before accessing getBeanFactory()");
+	"ApplicationContext must be set before accessing getBeanFactory()");
 
 		return this.applicationContext;
 	}
@@ -335,7 +335,7 @@ public abstract class AbstractVaultConfiguration implements ApplicationContextAw
 		}
 
 		protected TaskSchedulerWrapper(ThreadPoolTaskScheduler taskScheduler, boolean acceptAfterPropertiesSet,
-				boolean acceptDestroy) {
+	boolean acceptDestroy) {
 
 			Assert.notNull(taskScheduler, "ThreadPoolTaskScheduler must not be null");
 

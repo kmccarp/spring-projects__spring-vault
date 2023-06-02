@@ -55,7 +55,7 @@ public class UsernamePasswordAuthentication implements ClientAuthentication, Aut
 	private final RestOperations restOperations;
 
 	public UsernamePasswordAuthentication(UsernamePasswordAuthenticationOptions options,
-			RestOperations restOperations) {
+RestOperations restOperations) {
 
 		Assert.notNull(options, "UsernamePasswordAuthenticationOptions must not be null");
 		Assert.notNull(restOperations, "RestOperations must not be null");
@@ -77,7 +77,7 @@ public class UsernamePasswordAuthentication implements ClientAuthentication, Aut
 		Map<String, Object> body = createLoginBody(options);
 
 		return AuthenticationSteps.fromSupplier(() -> body)
-			.login(String.format("%s/%s", getLoginPath(options.getPath()), options.getUsername()));
+	.login(String.format("%s/%s", getLoginPath(options.getPath()), options.getUsername()));
 	}
 
 	@Override
@@ -94,8 +94,8 @@ public class UsernamePasswordAuthentication implements ClientAuthentication, Aut
 
 		try {
 			VaultResponse response = restOperations.postForObject(
-					String.format("%s/%s", getLoginPath(options.getPath()), options.getUsername()),
-					createLoginBody(options), VaultResponse.class);
+		String.format("%s/%s", getLoginPath(options.getPath()), options.getUsername()),
+		createLoginBody(options), VaultResponse.class);
 
 			logger.debug("Login successful using username and password credentials");
 
@@ -103,7 +103,7 @@ public class UsernamePasswordAuthentication implements ClientAuthentication, Aut
 		}
 		catch (HttpStatusCodeException e) {
 			throw new VaultException(String.format("Cannot login using username and password: %s",
-					VaultResponses.getError(e.getResponseBodyAsString())), e);
+		VaultResponses.getError(e.getResponseBodyAsString())), e);
 		}
 	}
 

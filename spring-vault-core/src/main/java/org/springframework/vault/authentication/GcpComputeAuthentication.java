@@ -49,11 +49,10 @@ import static org.springframework.vault.authentication.AuthenticationSteps.HttpR
  * "https://cloud.google.com/compute/docs/instances/verifying-instance-identity">Google
  * Compute Engine: Verifying the Identity of Instances</a>
  */
-public class GcpComputeAuthentication extends GcpJwtAuthenticationSupport
-		implements ClientAuthentication, AuthenticationStepsFactory {
+public class GcpComputeAuthentication extends GcpJwtAuthenticationSupportimplements ClientAuthentication, AuthenticationStepsFactory {
 
 	public static final String COMPUTE_METADATA_URL_TEMPLATE = "http://metadata/computeMetadata/v1/instance/service-accounts/{serviceAccount}/identity"
-			+ "?audience={audience}&format={format}";
++ "?audience={audience}&format={format}";
 
 	private final GcpComputeAuthenticationOptions options;
 
@@ -79,7 +78,7 @@ public class GcpComputeAuthentication extends GcpJwtAuthenticationSupport
 	 * @param googleMetadataRestOperations must not be {@literal null}.
 	 */
 	public GcpComputeAuthentication(GcpComputeAuthenticationOptions options, RestOperations vaultRestOperations,
-			RestOperations googleMetadataRestOperations) {
+RestOperations googleMetadataRestOperations) {
 
 		super(vaultRestOperations);
 
@@ -104,13 +103,13 @@ public class GcpComputeAuthentication extends GcpJwtAuthenticationSupport
 		String audience = getAudience(options.getRole());
 
 		HttpRequest<String> jwtRequest = get(COMPUTE_METADATA_URL_TEMPLATE, serviceAccount, audience, "full") //
-			.with(getMetadataHttpHeaders()) //
-			.as(String.class);
+	.with(getMetadataHttpHeaders()) //
+	.as(String.class);
 
 		return AuthenticationSteps.fromHttpRequest(jwtRequest)
-			//
-			.map(jwt -> createRequestBody(options.getRole(), jwt))
-			.login(AuthenticationUtil.getLoginPath(options.getPath()));
+	//
+	.map(jwt -> createRequestBody(options.getRole(), jwt))
+	.login(AuthenticationUtil.getLoginPath(options.getPath()));
 	}
 
 	@Override
@@ -138,7 +137,7 @@ public class GcpComputeAuthentication extends GcpJwtAuthenticationSupport
 			HttpEntity<Object> entity = new HttpEntity<>(headers);
 
 			ResponseEntity<String> response = this.googleMetadataRestOperations.exchange(COMPUTE_METADATA_URL_TEMPLATE,
-					HttpMethod.GET, entity, String.class, urlParameters);
+		HttpMethod.GET, entity, String.class, urlParameters);
 
 			return response.getBody();
 		}

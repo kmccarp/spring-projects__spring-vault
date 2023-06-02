@@ -41,7 +41,7 @@ import org.springframework.vault.util.Settings;
 class ReactiveVaultTemplateAgentIntegrationTests extends IntegrationTestSupport {
 
 	ClientHttpConnector connector = ClientHttpConnectorFactory.create(new ClientOptions(),
-			Settings.createSslConfiguration());
+Settings.createSslConfiguration());
 
 	VaultEndpoint endpoint = VaultEndpoint.create("localhost", 8202);
 
@@ -51,7 +51,7 @@ class ReactiveVaultTemplateAgentIntegrationTests extends IntegrationTestSupport 
 		try (Socket socket = new Socket()) {
 
 			socket.connect(new InetSocketAddress(this.endpoint.getHost(), this.endpoint.getPort()),
-					(int) new ClientOptions().getConnectionTimeout().toMillis());
+		(int) new ClientOptions().getConnectionTimeout().toMillis());
 		}
 		catch (IOException e) {
 			throw new TestAbortedException("Vault Agent not available: " + e.getMessage());
@@ -64,8 +64,8 @@ class ReactiveVaultTemplateAgentIntegrationTests extends IntegrationTestSupport 
 		ReactiveVaultTemplate vaultTemplate = new ReactiveVaultTemplate(this.endpoint, this.connector);
 
 		vaultTemplate.write("secret/foo", Collections.singletonMap("key", "value"))
-			.as(StepVerifier::create)
-			.verifyComplete();
+	.as(StepVerifier::create)
+	.verifyComplete();
 	}
 
 	@Test
@@ -76,8 +76,8 @@ class ReactiveVaultTemplateAgentIntegrationTests extends IntegrationTestSupport 
 		ReactiveVaultTemplate vaultTemplate = new ReactiveVaultTemplate(builder);
 
 		vaultTemplate.write("secret/foo", Collections.singletonMap("key", "value"))
-			.as(StepVerifier::create)
-			.verifyComplete();
+	.as(StepVerifier::create)
+	.verifyComplete();
 	}
 
 }

@@ -63,8 +63,8 @@ class LeaseAwareVaultPropertySourceUnitTests {
 		when(this.leaseContainer.addRequestedSecret(any())).then(invocation -> {
 
 			listeners.forEach(
-					leaseListener -> leaseListener.onLeaseEvent(new SecretLeaseCreatedEvent(invocation.getArgument(0),
-							Lease.none(), Collections.singletonMap("key", "value"))));
+		leaseListener -> leaseListener.onLeaseEvent(new SecretLeaseCreatedEvent(invocation.getArgument(0),
+	Lease.none(), Collections.singletonMap("key", "value"))));
 			return invocation.getArgument(0);
 		});
 
@@ -86,15 +86,15 @@ class LeaseAwareVaultPropertySourceUnitTests {
 		when(this.leaseContainer.addRequestedSecret(any())).then(invocation -> {
 
 			listeners.forEach(
-					leaseListener -> leaseListener.onLeaseEvent(new SecretLeaseCreatedEvent(invocation.getArgument(0),
-							Lease.none(), Collections.singletonMap("key", "value"))));
+		leaseListener -> leaseListener.onLeaseEvent(new SecretLeaseCreatedEvent(invocation.getArgument(0),
+	Lease.none(), Collections.singletonMap("key", "value"))));
 			return invocation.getArgument(0);
 		});
 
 		LeaseAwareVaultPropertySource propertySource = new LeaseAwareVaultPropertySource(this.leaseContainer, secret);
 
 		listeners.forEach(it -> it.onLeaseEvent(new SecretLeaseRotatedEvent(secret, Lease.none(), Lease.none(),
-				Collections.singletonMap("new-key", "value"))));
+	Collections.singletonMap("new-key", "value"))));
 
 		assertThat(propertySource.getPropertyNames()).containsOnly("new-key");
 	}
@@ -112,7 +112,7 @@ class LeaseAwareVaultPropertySourceUnitTests {
 		when(this.leaseContainer.addRequestedSecret(any())).then(invocation -> {
 
 			listeners.forEach(leaseListener -> leaseListener
-				.onLeaseEvent(new SecretNotFoundEvent(invocation.getArgument(0), Lease.none())));
+		.onLeaseEvent(new SecretNotFoundEvent(invocation.getArgument(0), Lease.none())));
 			return invocation.getArgument(0);
 		});
 
@@ -165,9 +165,9 @@ class LeaseAwareVaultPropertySourceUnitTests {
 		});
 
 		assertThatThrownBy(() -> new LeaseAwareVaultPropertySource("name", this.leaseContainer, secret,
-				PropertyTransformers.noop(), false))
-			.isInstanceOf(VaultPropertySourceNotFoundException.class)
-			.hasRootCauseExactlyInstanceOf(RuntimeException.class);
+	PropertyTransformers.noop(), false))
+	.isInstanceOf(VaultPropertySourceNotFoundException.class)
+	.hasRootCauseExactlyInstanceOf(RuntimeException.class);
 	}
 
 }

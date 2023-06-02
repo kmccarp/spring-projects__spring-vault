@@ -95,7 +95,7 @@ public abstract class JsonMapFlattener {
 	}
 
 	private static void doFlatten(String propertyPrefix, Iterator<? extends Entry<String, ?>> inputMap,
-			Map<String, ? extends Object> resultMap, Function<Object, Object> valueTransformer) {
+Map<String, ? extends Object> resultMap, Function<Object, Object> valueTransformer) {
 
 		if (StringUtils.hasText(propertyPrefix)) {
 			propertyPrefix = propertyPrefix + ".";
@@ -110,7 +110,7 @@ public abstract class JsonMapFlattener {
 
 	@SuppressWarnings("unchecked")
 	private static void flattenElement(String propertyPrefix, @Nullable Object source, Map<String, ?> resultMap,
-			Function<Object, Object> valueTransformer) {
+Function<Object, Object> valueTransformer) {
 
 		if (source instanceof Iterable) {
 			flattenCollection(propertyPrefix, (Iterable<Object>) source, resultMap, valueTransformer);
@@ -126,7 +126,7 @@ public abstract class JsonMapFlattener {
 	}
 
 	private static void flattenCollection(String propertyPrefix, Iterable<Object> iterable, Map<String, ?> resultMap,
-			Function<Object, Object> valueTransformer) {
+Function<Object, Object> valueTransformer) {
 
 		int counter = 0;
 

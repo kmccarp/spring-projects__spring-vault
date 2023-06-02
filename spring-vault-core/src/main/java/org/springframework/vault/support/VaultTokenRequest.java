@@ -64,8 +64,8 @@ public class VaultTokenRequest {
 	private final int numUses;
 
 	VaultTokenRequest(@Nullable String id, List<String> policies, Map<String, String> meta, boolean noParent,
-			boolean noDefaultPolicy, boolean renewable, @Nullable String ttl, @Nullable String explicitMaxTtl,
-			String displayName, int numUses) {
+boolean noDefaultPolicy, boolean renewable, @Nullable String ttl, @Nullable String explicitMaxTtl,
+String displayName, int numUses) {
 
 		this.id = id;
 		this.policies = policies;
@@ -426,7 +426,7 @@ public class VaultTokenRequest {
 			}
 
 			return new VaultTokenRequest(this.id, policies, meta, this.noParent, this.noDefaultPolicy, this.renewable,
-					this.ttl, this.explicitMaxTtl, this.displayName, this.numUses);
+		this.ttl, this.explicitMaxTtl, this.displayName, this.numUses);
 		}
 
 		private static <E> List<E> toList(Iterable<E> iter) {

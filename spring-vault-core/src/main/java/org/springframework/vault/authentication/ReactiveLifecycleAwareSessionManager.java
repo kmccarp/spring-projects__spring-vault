@@ -69,8 +69,7 @@ import org.springframework.web.reactive.function.client.WebClientResponseExcepti
  * @see TaskScheduler
  * @see AuthenticationEventPublisher
  */
-public class ReactiveLifecycleAwareSessionManager extends LifecycleAwareSessionManagerSupport
-		implements ReactiveSessionManager, DisposableBean {
+public class ReactiveLifecycleAwareSessionManager extends LifecycleAwareSessionManagerSupportimplements ReactiveSessionManager, DisposableBean {
 
 	private static final Mono<TokenWrapper> EMPTY = Mono.empty();
 
@@ -101,7 +100,7 @@ public class ReactiveLifecycleAwareSessionManager extends LifecycleAwareSessionM
 	 * @param webClient must not be {@literal null}.
 	 */
 	public ReactiveLifecycleAwareSessionManager(VaultTokenSupplier clientAuthentication, TaskScheduler taskScheduler,
-			WebClient webClient) {
+WebClient webClient) {
 
 		super(taskScheduler);
 
@@ -122,7 +121,7 @@ public class ReactiveLifecycleAwareSessionManager extends LifecycleAwareSessionM
 	 * @param refreshTrigger must not be {@literal null}.
 	 */
 	public ReactiveLifecycleAwareSessionManager(VaultTokenSupplier clientAuthentication, TaskScheduler taskScheduler,
-			WebClient webClient, RefreshTrigger refreshTrigger) {
+WebClient webClient, RefreshTrigger refreshTrigger) {
 
 		super(taskScheduler, refreshTrigger);
 
@@ -183,20 +182,20 @@ public class ReactiveLifecycleAwareSessionManager extends LifecycleAwareSessionM
 		return this.webClient.post().uri("auth/token/revoke-self").headers(httpHeaders -> {
 			httpHeaders.addAll(VaultHttpHeaders.from(token));
 		})
-			.retrieve()
-			.bodyToMono(String.class)
-			.doOnSubscribe(ignore -> dispatch(new BeforeLoginTokenRevocationEvent(token)))
-			.doOnNext(ignore -> dispatch(new AfterLoginTokenRevocationEvent(token)))
-			.onErrorResume(WebClientResponseException.class, e -> onRevokeFailed(token, e))
-			.onErrorResume(Exception.class, e -> onRevokeFailed(token, e))
-			.then();
+	.retrieve()
+	.bodyToMono(String.class)
+	.doOnSubscribe(ignore -> dispatch(new BeforeLoginTokenRevocationEvent(token)))
+	.doOnNext(ignore -> dispatch(new AfterLoginTokenRevocationEvent(token)))
+	.onErrorResume(WebClientResponseException.class, e -> onRevokeFailed(token, e))
+	.onErrorResume(Exception.class, e -> onRevokeFailed(token, e))
+	.then();
 	}
 
 	private Mono<String> onRevokeFailed(VaultToken token, Throwable e) {
 
 		if (LoginToken.hasAccessor(token)) {
 			this.logger.warn(
-					String.format("Cannot revoke VaultToken with accessor: %s", ((LoginToken) token).getAccessor()), e);
+		String.format("Cannot revoke VaultToken with accessor: %s", ((LoginToken) token).getAccessor()), e);
 		}
 		else {
 			this.logger.warn("Cannot revoke VaultToken", e);
@@ -259,36 +258,36 @@ public class ReactiveLifecycleAwareSessionManager extends LifecycleAwareSessionM
 	private Mono<TokenWrapper> doRenew(TokenWrapper tokenWrapper) {
 
 		Mono<VaultResponse> exchange = this.webClient.post()
-			.uri("auth/token/renew-self")
-			.headers(httpHeaders -> httpHeaders.putAll(VaultHttpHeaders.from(tokenWrapper.token)))
-			.retrieve()
-			.bodyToMono(VaultResponse.class);
+	.uri("auth/token/renew-self")
+	.headers(httpHeaders -> httpHeaders.putAll(VaultHttpHeaders.from(tokenWrapper.token)))
+	.retrieve()
+	.bodyToMono(VaultResponse.class);
 
 		return exchange.doOnSubscribe(ignore -> dispatch(new BeforeLoginTokenRenewedEvent(tokenWrapper.getToken())))
-			.handle((response, sink) -> {
+	.handle((response, sink) -> {
 
-				LoginToken renewed = LoginTokenUtil.from(response.getRequiredAuth());
+		LoginToken renewed = LoginTokenUtil.from(response.getRequiredAuth());
 
-				if (!isExpired(renewed)) {
-					sink.next(new TokenWrapper(renewed, tokenWrapper.revocable));
-					dispatch(new AfterLoginTokenRenewedEvent(renewed));
-					return;
-				}
+		if (!isExpired(renewed)) {
+			sink.next(new TokenWrapper(renewed, tokenWrapper.revocable));
+			dispatch(new AfterLoginTokenRenewedEvent(renewed));
+			return;
+		}
 
-				if (this.logger.isDebugEnabled()) {
+		if (this.logger.isDebugEnabled()) {
 
-					Duration validTtlThreshold = getRefreshTrigger().getValidTtlThreshold(renewed);
-					this.logger
-						.info(String.format("Token TTL (%s) exceeded validity TTL threshold (%s). Dropping token.",
-								renewed.getLeaseDuration(), validTtlThreshold));
-				}
-				else {
-					this.logger.info("Token TTL exceeded validity TTL threshold. Dropping token.");
-				}
+			Duration validTtlThreshold = getRefreshTrigger().getValidTtlThreshold(renewed);
+			this.logger
+		.info(String.format("Token TTL (%s) exceeded validity TTL threshold (%s). Dropping token.",
+	renewed.getLeaseDuration(), validTtlThreshold));
+		}
+		else {
+			this.logger.info("Token TTL exceeded validity TTL threshold. Dropping token.");
+		}
 
-				dropCurrentToken();
-				dispatch(new LoginTokenExpiredEvent(renewed));
-			});
+		dropCurrentToken();
+		dispatch(new LoginTokenExpiredEvent(renewed));
+	});
 	}
 
 	private void dropCurrentToken() {
@@ -308,19 +307,19 @@ public class ReactiveLifecycleAwareSessionManager extends LifecycleAwareSessionM
 		if (tokenWrapper == EMPTY) {
 
 			Mono<TokenWrapper> obtainToken = this.clientAuthentication.getVaultToken()
-				.flatMap(this::doSelfLookup) //
-				.onErrorMap(it -> {
-					dispatch(new LoginFailedEvent(this.clientAuthentication, it));
-					return it;
-				})
-				.doOnNext(it -> {
+		.flatMap(this::doSelfLookup) //
+		.onErrorMap(it -> {
+			dispatch(new LoginFailedEvent(this.clientAuthentication, it));
+			return it;
+		})
+		.doOnNext(it -> {
 
-					if (isTokenRenewable(it.getToken())) {
-						scheduleRenewal(it.getToken());
-					}
+			if (isTokenRenewable(it.getToken())) {
+				scheduleRenewal(it.getToken());
+			}
 
-					dispatch(new AfterLoginEvent(it.getToken()));
-				});
+			dispatch(new AfterLoginEvent(it.getToken()));
+		});
 
 			this.token.compareAndSet(tokenWrapper, obtainToken.cache());
 		}
@@ -353,14 +352,14 @@ public class ReactiveLifecycleAwareSessionManager extends LifecycleAwareSessionM
 	protected boolean isTokenRenewable(VaultToken token) {
 
 		return Optional.of(token)
-			.filter(LoginToken.class::isInstance)
-			//
-			.filter(it -> {
+	.filter(LoginToken.class::isInstance)
+	//
+	.filter(it -> {
 
-				LoginToken loginToken = (LoginToken) it;
-				return !loginToken.getLeaseDuration().isZero() && loginToken.isRenewable();
-			})
-			.isPresent();
+		LoginToken loginToken = (LoginToken) it;
+		return !loginToken.getLeaseDuration().isZero() && loginToken.isRenewable();
+	})
+	.isPresent();
 	}
 
 	private void scheduleRenewal(VaultToken token) {
@@ -407,18 +406,18 @@ public class ReactiveLifecycleAwareSessionManager extends LifecycleAwareSessionM
 	private static Mono<Map<String, Object>> lookupSelf(WebClient webClient, VaultToken token) {
 
 		return webClient.get()
-			.uri("auth/token/lookup-self")
-			.headers(httpHeaders -> httpHeaders.putAll(VaultHttpHeaders.from(token)))
-			.retrieve()
-			.bodyToMono(VaultResponse.class)
-			.map(it -> {
+	.uri("auth/token/lookup-self")
+	.headers(httpHeaders -> httpHeaders.putAll(VaultHttpHeaders.from(token)))
+	.retrieve()
+	.bodyToMono(VaultResponse.class)
+	.map(it -> {
 
-				Assert.state(it.getData() != null, "Token response is null");
-				return it.getRequiredData();
-			})
-			.onErrorMap(WebClientResponseException.class, e -> {
-				return new VaultTokenLookupException(format("Token self-lookup", e), e);
-			});
+		Assert.state(it.getData() != null, "Token response is null");
+		return it.getRequiredData();
+	})
+	.onErrorMap(WebClientResponseException.class, e -> {
+		return new VaultTokenLookupException(format("Token self-lookup", e), e);
+	});
 	}
 
 	private static String format(String message, RuntimeException e) {
@@ -427,7 +426,7 @@ public class ReactiveLifecycleAwareSessionManager extends LifecycleAwareSessionM
 
 			WebClientResponseException wce = (WebClientResponseException) e;
 			return String.format("%s: Status %s %s %s", message, wce.getStatusCode().value(), wce.getStatusText(),
-					VaultResponses.getError(wce.getResponseBodyAsString()));
+		VaultResponses.getError(wce.getResponseBodyAsString()));
 		}
 
 		return message;

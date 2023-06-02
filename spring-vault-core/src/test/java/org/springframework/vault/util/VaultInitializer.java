@@ -73,12 +73,12 @@ public class VaultInitializer {
 		WebClient webClient = TestWebClientFactory.create(sslConfiguration);
 
 		VaultTemplate vaultTemplate = new VaultTemplate(TestRestTemplateFactory.TEST_VAULT_ENDPOINT,
-				restTemplate.getRequestFactory(), new PreparingSessionManager());
+	restTemplate.getRequestFactory(), new PreparingSessionManager());
 
 		this.token = Settings.token();
 
 		this.prepareVault = new PrepareVault(webClient, TestRestTemplateFactory.create(sslConfiguration),
-				vaultTemplate);
+	vaultTemplate);
 		this.vaultEndpoint = vaultEndpoint;
 	}
 
@@ -105,8 +105,8 @@ public class VaultInitializer {
 		}
 		catch (Exception ex) {
 			throw new IllegalStateException(
-					String.format("Vault is not running on localhost:%d which is required to run a test using @Rule %s",
-							this.vaultEndpoint.getPort(), getClass().getSimpleName()));
+		String.format("Vault is not running on localhost:%d which is required to run a test using @Rule %s",
+	this.vaultEndpoint.getPort(), getClass().getSimpleName()));
 		}
 	}
 

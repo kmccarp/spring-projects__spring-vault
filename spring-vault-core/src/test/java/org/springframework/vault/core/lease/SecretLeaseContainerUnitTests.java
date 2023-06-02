@@ -213,7 +213,7 @@ class SecretLeaseContainerUnitTests {
 		prepareRenewal();
 
 		when(this.vaultOperations.doWithSession(any(RestOperationsCallback.class)))
-			.thenReturn(Lease.of("new_lease", Duration.ofSeconds(70), true));
+	.thenReturn(Lease.of("new_lease", Duration.ofSeconds(70), true));
 
 		this.secretLeaseContainer.start();
 
@@ -232,7 +232,7 @@ class SecretLeaseContainerUnitTests {
 		prepareRenewal();
 
 		when(this.vaultOperations.doWithSession(any(RestOperationsCallback.class)))
-			.thenReturn(Lease.of("new_lease", Duration.ofSeconds(70), true));
+	.thenReturn(Lease.of("new_lease", Duration.ofSeconds(70), true));
 
 		this.secretLeaseContainer.start();
 
@@ -283,7 +283,7 @@ class SecretLeaseContainerUnitTests {
 
 		prepareRenewal();
 		when(this.vaultOperations.doWithSession(any(RestOperationsCallback.class)))
-			.thenThrow(new VaultException("Renewal failure"));
+	.thenThrow(new VaultException("Renewal failure"));
 
 		this.secretLeaseContainer.setLeaseStrategy(LeaseStrategy.retainOnError());
 		this.secretLeaseContainer.start();
@@ -305,7 +305,7 @@ class SecretLeaseContainerUnitTests {
 		when(this.taskScheduler.schedule(any(Runnable.class), any(Trigger.class))).thenReturn(this.scheduledFuture);
 
 		when(this.vaultOperations.read(this.requestedSecret.getPath())).thenReturn(createSecrets("key", "value", false),
-				createSecrets("key", "value2", false));
+	createSecrets("key", "value2", false));
 
 		this.secretLeaseContainer.addRequestedSecret(RequestedSecret.rotating(this.requestedSecret.getPath()));
 		this.secretLeaseContainer.addLeaseListener(new LeaseListenerAdapter() {
@@ -337,8 +337,8 @@ class SecretLeaseContainerUnitTests {
 		when(this.taskScheduler.schedule(any(Runnable.class), any(Trigger.class))).thenReturn(this.scheduledFuture);
 
 		when(this.vaultOperations.read(this.rotatingGenericSecret.getPath())).thenReturn(
-				createGenericSecrets(Collections.singletonMap("key", (Object) "value")),
-				createGenericSecrets(Collections.singletonMap("foo", (Object) "bar")));
+	createGenericSecrets(Collections.singletonMap("key", (Object) "value")),
+	createGenericSecrets(Collections.singletonMap("foo", (Object) "bar")));
 
 		this.secretLeaseContainer.addRequestedSecret(this.rotatingGenericSecret);
 
@@ -370,8 +370,8 @@ class SecretLeaseContainerUnitTests {
 		when(this.taskScheduler.schedule(any(Runnable.class), any(Trigger.class))).thenReturn(this.scheduledFuture);
 
 		when(this.vaultOperations.read(this.rotatingGenericSecret.getPath()))
-				.thenReturn(createGenericSecrets(Collections.singletonMap("key", "value")))
-				.thenThrow(new HttpClientErrorException(HttpStatus.I_AM_A_TEAPOT));
+	.thenReturn(createGenericSecrets(Collections.singletonMap("key", "value")))
+	.thenThrow(new HttpClientErrorException(HttpStatus.I_AM_A_TEAPOT));
 
 		this.secretLeaseContainer.addRequestedSecret(this.rotatingGenericSecret);
 
@@ -406,8 +406,8 @@ class SecretLeaseContainerUnitTests {
 		when(this.taskScheduler.schedule(any(Runnable.class), any(Trigger.class))).thenReturn(this.scheduledFuture);
 
 		when(this.vaultOperations.read(this.rotatingGenericSecret.getPath())).thenReturn(
-				createGenericSecrets(Collections.singletonMap("key", "value")),
-				createGenericSecrets(Collections.singletonMap("foo", "bar")));
+	createGenericSecrets(Collections.singletonMap("key", "value")),
+	createGenericSecrets(Collections.singletonMap("foo", "bar")));
 
 		this.secretLeaseContainer.addRequestedSecret(this.rotatingGenericSecret);
 		this.secretLeaseContainer.start();
@@ -428,7 +428,7 @@ class SecretLeaseContainerUnitTests {
 
 		prepareRenewal();
 		when(this.vaultOperations.doWithSession(any(RestOperationsCallback.class)))
-			.thenReturn(Lease.of("new_lease", Duration.ofSeconds(5), true));
+	.thenReturn(Lease.of("new_lease", Duration.ofSeconds(5), true));
 
 		this.secretLeaseContainer.start();
 
@@ -453,7 +453,7 @@ class SecretLeaseContainerUnitTests {
 
 		when(this.vaultOperations.read(this.requestedSecret.getPath())).thenReturn(first, second);
 		when(this.vaultOperations.doWithSession(any(RestOperationsCallback.class)))
-				.thenReturn(Lease.of("new_lease", Duration.ofSeconds(5), true));
+	.thenReturn(Lease.of("new_lease", Duration.ofSeconds(5), true));
 
 		this.secretLeaseContainer.requestRotatingSecret("my-secret");
 
@@ -490,7 +490,7 @@ class SecretLeaseContainerUnitTests {
 
 		Date nextExecutionTime = captor.getValue().nextExecutionTime(null);
 		assertThat(nextExecutionTime).isBetween(new Date(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(35)),
-				new Date(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(41)));
+	new Date(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(41)));
 	}
 
 	@Test
@@ -498,7 +498,7 @@ class SecretLeaseContainerUnitTests {
 
 		prepareRenewal();
 		when(this.vaultOperations.doWithSession(any(RestOperationsCallback.class)))
-			.thenThrow(new HttpClientErrorException(HttpStatus.I_AM_A_TEAPOT));
+	.thenThrow(new HttpClientErrorException(HttpStatus.I_AM_A_TEAPOT));
 
 		this.secretLeaseContainer.start();
 
@@ -524,7 +524,7 @@ class SecretLeaseContainerUnitTests {
 		prepareRenewal();
 
 		when(this.vaultOperations.doWithSession(any(RestOperationsCallback.class)))
-			.thenReturn(Lease.of("new_lease", Duration.ofSeconds(70), true));
+	.thenReturn(Lease.of("new_lease", Duration.ofSeconds(70), true));
 
 		this.secretLeaseContainer.start();
 
@@ -537,12 +537,12 @@ class SecretLeaseContainerUnitTests {
 		verify(this.taskScheduler, times(2)).schedule(any(Runnable.class), captor.capture());
 
 		assertThat(captor.getAllValues().get(0).nextExecutionTime(null)).isBetween(
-				new Date(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(35)),
-				new Date(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(41)));
+	new Date(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(35)),
+	new Date(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(41)));
 
 		assertThat(captor.getAllValues().get(1).nextExecutionTime(null)).isBetween(
-				new Date(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(9)),
-				new Date(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(11)));
+	new Date(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(9)),
+	new Date(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(11)));
 	}
 
 	@Test

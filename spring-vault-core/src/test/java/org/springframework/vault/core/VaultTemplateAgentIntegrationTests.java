@@ -40,7 +40,7 @@ import org.springframework.vault.util.Settings;
 class VaultTemplateAgentIntegrationTests extends IntegrationTestSupport {
 
 	ClientHttpRequestFactory requestFactory = ClientHttpRequestFactoryFactory.create(new ClientOptions(),
-			Settings.createSslConfiguration());
+Settings.createSslConfiguration());
 
 	VaultEndpoint endpoint = VaultEndpoint.create("localhost", 8202);
 
@@ -50,7 +50,7 @@ class VaultTemplateAgentIntegrationTests extends IntegrationTestSupport {
 		try (Socket socket = new Socket()) {
 
 			socket.connect(new InetSocketAddress(this.endpoint.getHost(), this.endpoint.getPort()),
-					(int) new ClientOptions().getConnectionTimeout().toMillis());
+		(int) new ClientOptions().getConnectionTimeout().toMillis());
 		}
 		catch (IOException e) {
 			throw new TestAbortedException("Vault Agent not available: " + e.getMessage());
@@ -69,8 +69,8 @@ class VaultTemplateAgentIntegrationTests extends IntegrationTestSupport {
 	void shouldUseAgentAuthenticationWithBuilder() {
 
 		RestTemplateBuilder builder = RestTemplateBuilder.builder()
-			.endpoint(this.endpoint)
-			.requestFactory(this.requestFactory);
+	.endpoint(this.endpoint)
+	.requestFactory(this.requestFactory);
 
 		VaultTemplate vaultTemplate = new VaultTemplate(builder);
 

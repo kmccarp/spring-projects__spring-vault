@@ -69,8 +69,8 @@ class PropertySourceAotProcessor implements BeanRegistrationAotProcessor {
 
 		@Override
 		public CodeBlock generateSetBeanDefinitionPropertiesCode(GenerationContext generationContext,
-				BeanRegistrationCode beanRegistrationCode, RootBeanDefinition beanDefinition,
-				Predicate<String> attributeFilter) {
+	BeanRegistrationCode beanRegistrationCode, RootBeanDefinition beanDefinition,
+	Predicate<String> attributeFilter) {
 
 			CodeBlock.Builder code = CodeBlock.builder();
 
@@ -80,7 +80,7 @@ class PropertySourceAotProcessor implements BeanRegistrationAotProcessor {
 
 				CodeBlock renderedValue = render(entry.getValue().getValue());
 				code.addStatement("$N.getConstructorArgumentValues().addIndexedArgumentValue($L, $L)",
-						BeanRegistrationCodeFragments.BEAN_DEFINITION_VARIABLE, entry.getKey(), renderedValue);
+			BeanRegistrationCodeFragments.BEAN_DEFINITION_VARIABLE, entry.getKey(), renderedValue);
 			}
 
 			return code.build();
@@ -89,7 +89,7 @@ class PropertySourceAotProcessor implements BeanRegistrationAotProcessor {
 		private static CodeBlock render(@Nullable Object value) {
 
 			if (value instanceof RuntimeBeanReference runtimeBeanReference
-					&& runtimeBeanReference.getBeanType() != null) {
+		&& runtimeBeanReference.getBeanType() != null) {
 				return CodeBlock.of("new $T($T.class)", RuntimeBeanReference.class, runtimeBeanReference.getBeanType());
 			}
 
@@ -111,12 +111,12 @@ class PropertySourceAotProcessor implements BeanRegistrationAotProcessor {
 
 			if (value instanceof KeyPrefixPropertyTransformer kpt) {
 				return CodeBlock.of("$T.$N($S)", PropertyTransformers.class, "propertyNamePrefix",
-						kpt.getPropertyNamePrefix());
+			kpt.getPropertyNamePrefix());
 			}
 
 			if (value instanceof RequestedSecret rs) {
 				return CodeBlock.of("$T.$N($S)", RequestedSecret.class,
-						rs.getMode() == Mode.ROTATE ? "rotating" : "renewable", rs.getPath());
+			rs.getMode() == Mode.ROTATE ? "rotating" : "renewable", rs.getPath());
 
 			}
 

@@ -24,7 +24,6 @@ import org.springframework.vault.repository.mapping.VaultPersistentProperty;
  *
  * @since 2.0
  */
-public interface VaultConverter
-		extends EntityConverter<VaultPersistentEntity<?>, VaultPersistentProperty, Object, SecretDocument> {
+public interface VaultConverterextends EntityConverter<VaultPersistentEntity<?>, VaultPersistentProperty, Object, SecretDocument> {
 
 }

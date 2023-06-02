@@ -48,7 +48,7 @@ class AbstractVaultConfigurationUnitTests {
 	void shouldApplyCustomizerToRestTemplateFactory() {
 
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
-				RestTemplateCustomizerConfiguration.class);
+	RestTemplateCustomizerConfiguration.class);
 
 		RestTemplateFactory factory = context.getBean(RestTemplateFactory.class);
 		RestTemplate restTemplate = factory.create();
@@ -60,7 +60,7 @@ class AbstractVaultConfigurationUnitTests {
 	void shouldApplyCustomizerToTemplate() {
 
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
-				RestTemplateCustomizerConfiguration.class);
+	RestTemplateCustomizerConfiguration.class);
 
 		VaultOperations operations = context.getBean(VaultOperations.class);
 

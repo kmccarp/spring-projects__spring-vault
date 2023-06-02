@@ -89,13 +89,13 @@ class KeystoreUtil {
 	 * {@code IOException} should be an {@code UnrecoverableKeyException}
 	 */
 	static KeyStore createKeyStore(String keyAlias, KeySpec privateKeySpec, char[] keyPassword,
-			X509Certificate... certificates) throws GeneralSecurityException, IOException {
+X509Certificate... certificates) throws GeneralSecurityException, IOException {
 
 		Assert.notNull(keyPassword, "keyPassword must not be null");
 
 		PrivateKey privateKey = (privateKeySpec instanceof RSAPrivateKeySpec
-				|| privateKeySpec instanceof PKCS8EncodedKeySpec) ? RSA_KEY_FACTORY.generatePrivate(privateKeySpec)
-						: EC_KEY_FACTORY.generatePrivate(privateKeySpec);
+	|| privateKeySpec instanceof PKCS8EncodedKeySpec) ? RSA_KEY_FACTORY.generatePrivate(privateKeySpec)
+	: EC_KEY_FACTORY.generatePrivate(privateKeySpec);
 
 		KeyStore keyStore = createKeyStore();
 
@@ -103,7 +103,7 @@ class KeystoreUtil {
 		Collections.addAll(certChain, certificates);
 
 		keyStore.setKeyEntry(keyAlias, privateKey, keyPassword,
-				certChain.toArray(new java.security.cert.Certificate[certChain.size()]));
+	certChain.toArray(new java.security.cert.Certificate[certChain.size()]));
 
 		return keyStore;
 	}
@@ -138,8 +138,8 @@ class KeystoreUtil {
 		List<X509Certificate> certificates = getCertificates(CERTIFICATE_FACTORY, source);
 
 		return certificates.stream()
-			.findFirst()
-			.orElseThrow(() -> new IllegalArgumentException("No X509Certificate found"));
+	.findFirst()
+	.orElseThrow(() -> new IllegalArgumentException("No X509Certificate found"));
 	}
 
 	static List<X509Certificate> getCertificates(byte[] source) throws CertificateException {
@@ -165,7 +165,7 @@ class KeystoreUtil {
 	}
 
 	private static List<X509Certificate> getCertificates(CertificateFactory cf, byte[] source)
-			throws CertificateException {
+throws CertificateException {
 
 		List<X509Certificate> x509Certificates = new ArrayList<>();
 

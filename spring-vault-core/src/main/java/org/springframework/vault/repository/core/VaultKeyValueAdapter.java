@@ -259,11 +259,11 @@ public class VaultKeyValueAdapter extends AbstractKeyValueAdapter {
 
 			if (keyValueDelegate.isVersioned(it)) {
 				return new VaultKeyValue2KeyspaceAccessor(mountInfo, it,
-						this.vaultOperations.opsForVersionedKeyValue(mountInfo.getPath()));
+			this.vaultOperations.opsForVersionedKeyValue(mountInfo.getPath()));
 			}
 
 			return new VaultKeyValue1KeyspaceAccessor(mountInfo, it, this.vaultOperations
-				.opsForKeyValue(mountInfo.getPath(), VaultKeyValueOperationsSupport.KeyValueBackend.KV_1));
+		.opsForKeyValue(mountInfo.getPath(), VaultKeyValueOperationsSupport.KeyValueBackend.KV_1));
 		});
 
 	}
@@ -322,7 +322,7 @@ public class VaultKeyValueAdapter extends AbstractKeyValueAdapter {
 		private final VaultKeyValueOperations operations;
 
 		public VaultKeyValue1KeyspaceAccessor(KeyValueDelegate.MountInfo mountInfo, String keyspace,
-				VaultKeyValueOperations operations) {
+	VaultKeyValueOperations operations) {
 			super(mountInfo, keyspace);
 			this.operations = operations;
 		}
@@ -371,7 +371,7 @@ public class VaultKeyValueAdapter extends AbstractKeyValueAdapter {
 		private final VaultVersionedKeyValueOperations operations;
 
 		public VaultKeyValue2KeyspaceAccessor(KeyValueDelegate.MountInfo mountInfo, String keyspace,
-				VaultVersionedKeyValueOperations operations) {
+	VaultVersionedKeyValueOperations operations) {
 			super(mountInfo, keyspace);
 			this.operations = operations;
 		}
@@ -402,18 +402,18 @@ public class VaultKeyValueAdapter extends AbstractKeyValueAdapter {
 				Versioned.Metadata metadata;
 				if (secretDocument.getVersion() != null) {
 					metadata = operations.put(createPath(secretDocument.getRequiredId()), Versioned
-						.create(secretDocument.getBody(), Versioned.Version.from(secretDocument.getVersion())));
+				.create(secretDocument.getBody(), Versioned.Version.from(secretDocument.getVersion())));
 				}
 				else {
 					metadata = operations.put(createPath(secretDocument.getRequiredId()), secretDocument.getBody());
 				}
 
 				return new SecretDocument(secretDocument.getRequiredId(), metadata.getVersion().getVersion(),
-						secretDocument.getBody());
+			secretDocument.getBody());
 			}
 			catch (VaultException e) {
 				if (e.getMessage() != null
-						&& e.getMessage().contains("check-and-set parameter did not match the current version")) {
+			&& e.getMessage().contains("check-and-set parameter did not match the current version")) {
 					throw new OptimisticLockingFailureException(e.getMessage(), e);
 				}
 

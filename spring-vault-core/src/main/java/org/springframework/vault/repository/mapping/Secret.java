@@ -35,7 +35,7 @@ import org.springframework.data.keyvalue.annotation.KeySpace;
 @Documented
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
-@Target(value = { ElementType.TYPE })
+@Target(value = {ElementType.TYPE})
 @KeySpace
 public @interface Secret {
 

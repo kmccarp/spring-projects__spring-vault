@@ -119,7 +119,7 @@ public class SecretLeaseEventPublisher implements InitializingBean {
 	 * @see SecretLeaseRotatedEvent
 	 */
 	protected void onSecretsRotated(RequestedSecret requestedSecret, Lease previousLease, Lease lease,
-			Map<String, Object> body) {
+Map<String, Object> body) {
 		dispatch(new SecretLeaseRotatedEvent(requestedSecret, previousLease, lease, body));
 	}
 
@@ -230,8 +230,8 @@ public class SecretLeaseEventPublisher implements InitializingBean {
 		@Override
 		public void onLeaseError(SecretLeaseEvent leaseEvent, Exception exception) {
 			logger.warn(
-					String.format("[%s] %s %s", leaseEvent.getSource(), leaseEvent.getLease(), exception.getMessage()),
-					exception);
+		String.format("[%s] %s %s", leaseEvent.getSource(), leaseEvent.getLease(), exception.getMessage()),
+		exception);
 		}
 
 	}

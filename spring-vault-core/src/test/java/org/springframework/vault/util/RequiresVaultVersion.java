@@ -40,7 +40,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
  * @author Mark Paluch
  * @see VaultVersionExtension
  */
-@Target({ ElementType.TYPE, ElementType.METHOD })
+@Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited

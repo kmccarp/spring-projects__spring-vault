@@ -45,29 +45,29 @@ public class VaultPartTreeQuery extends KeyValuePartTreeQuery {
 	 * @param keyValueOperations must not be {@literal null}.
 	 * @param queryCreator must not be {@literal null}.
 	 */
-	@SuppressWarnings({ "unchecked", "RedundantCast", "rawtypes" })
+	@SuppressWarnings({"unchecked", "RedundantCast", "rawtypes"})
 	public VaultPartTreeQuery(QueryMethod queryMethod, QueryMethodEvaluationContextProvider evaluationContextProvider,
-			KeyValueOperations keyValueOperations, Class<? extends AbstractQueryCreator<?, ?>> queryCreator) {
+KeyValueOperations keyValueOperations, Class<? extends AbstractQueryCreator<?, ?>> queryCreator) {
 
 		super(queryMethod, evaluationContextProvider, keyValueOperations,
-				(QueryCreatorFactory) new VaultQueryCreatorFactory(
-						(MappingContext) keyValueOperations.getMappingContext()));
+	(QueryCreatorFactory) new VaultQueryCreatorFactory(
+(MappingContext) keyValueOperations.getMappingContext()));
 	}
 
 	static class VaultQueryCreatorFactory
-			implements KeyValuePartTreeQuery.QueryCreatorFactory<AbstractQueryCreator<KeyValueQuery<?>, ?>> {
+implements KeyValuePartTreeQuery.QueryCreatorFactory<AbstractQueryCreator<KeyValueQuery<?>, ?>> {
 
 		private final MappingContext<VaultPersistentEntity<?>, VaultPersistentProperty> mappingContext;
 
 		public VaultQueryCreatorFactory(
-				MappingContext<VaultPersistentEntity<?>, VaultPersistentProperty> mappingContext) {
+	MappingContext<VaultPersistentEntity<?>, VaultPersistentProperty> mappingContext) {
 			this.mappingContext = mappingContext;
 		}
 
 		@Override
-		@SuppressWarnings({ "unchecked", "rawtypes" })
+		@SuppressWarnings({"unchecked", "rawtypes"})
 		public AbstractQueryCreator<KeyValueQuery<?>, ?> queryCreatorFor(PartTree partTree,
-				ParameterAccessor accessor) {
+	ParameterAccessor accessor) {
 			return (AbstractQueryCreator) new VaultQueryCreator(partTree, accessor, this.mappingContext);
 		}
 

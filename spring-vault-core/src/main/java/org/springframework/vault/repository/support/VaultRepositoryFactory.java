@@ -47,13 +47,13 @@ public class VaultRepositoryFactory extends KeyValueRepositoryFactory {
 	}
 
 	public VaultRepositoryFactory(KeyValueOperations keyValueOperations,
-			Class<? extends AbstractQueryCreator<?, ?>> queryCreator) {
+Class<? extends AbstractQueryCreator<?, ?>> queryCreator) {
 		this(keyValueOperations, queryCreator, KeyValuePartTreeQuery.class);
 	}
 
 	public VaultRepositoryFactory(KeyValueOperations keyValueOperations,
-			Class<? extends AbstractQueryCreator<?, ?>> queryCreator,
-			Class<? extends RepositoryQuery> repositoryQueryType) {
+Class<? extends AbstractQueryCreator<?, ?>> queryCreator,
+Class<? extends RepositoryQuery> repositoryQueryType) {
 		super(keyValueOperations, queryCreator, repositoryQueryType);
 
 		this.operations = keyValueOperations;
@@ -61,20 +61,20 @@ public class VaultRepositoryFactory extends KeyValueRepositoryFactory {
 
 	@Override
 	protected RepositoryComposition.RepositoryFragments getRepositoryFragments(RepositoryMetadata metadata,
-			KeyValueOperations operations) {
+KeyValueOperations operations) {
 
 		RepositoryComposition.RepositoryFragments fragments = super.getRepositoryFragments(metadata, operations);
 
 		if (RevisionRepository.class.isAssignableFrom(metadata.getRepositoryInterface())
-				&& operations instanceof VaultKeyValueTemplate) {
+	&& operations instanceof VaultKeyValueTemplate) {
 
 			VaultKeyValueTemplate template = (VaultKeyValueTemplate) operations;
 
 			VaultPersistentEntity<?> entity = (VaultPersistentEntity<?>) this.operations.getMappingContext()
-				.getRequiredPersistentEntity(metadata.getDomainType());
+		.getRequiredPersistentEntity(metadata.getDomainType());
 			EntityInformation<?, String> entityInformation = getEntityInformation(metadata.getDomainType());
 			VaultRevisionRepository<?> repository = new VaultRevisionRepository<>(entityInformation,
-					entity.getKeySpace(), template);
+		entity.getKeySpace(), template);
 
 			return fragments.append(RepositoryFragment.implemented(repository));
 		}
@@ -87,7 +87,7 @@ public class VaultRepositoryFactory extends KeyValueRepositoryFactory {
 	public <T, ID> EntityInformation<T, ID> getEntityInformation(Class<T> domainClass) {
 
 		VaultPersistentEntity<T> entity = (VaultPersistentEntity<T>) this.operations.getMappingContext()
-			.getRequiredPersistentEntity(domainClass);
+	.getRequiredPersistentEntity(domainClass);
 
 		return new MappingVaultEntityInformation<>(entity);
 	}

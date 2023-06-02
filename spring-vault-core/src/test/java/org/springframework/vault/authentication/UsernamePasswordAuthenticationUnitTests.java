@@ -56,21 +56,20 @@ class UsernamePasswordAuthenticationUnitTests {
 	void shouldLoginWithTotp() {
 
 		UsernamePasswordAuthenticationOptions options = UsernamePasswordAuthenticationOptions.builder()
-			.path("okta")
-			.username("walter")
-			.password("heisenberg")
-			.totp("123456")
-			.build();
+	.path("okta")
+	.username("walter")
+	.password("heisenberg")
+	.totp("123456")
+	.build();
 
 		UsernamePasswordAuthentication sut = new UsernamePasswordAuthentication(options, this.restTemplate);
 
 		this.mockRest.expect(requestTo("/auth/okta/login/walter"))
-			.andExpect(method(HttpMethod.POST))
-			.andExpect(jsonPath("$.password").value("heisenberg"))
-			.andExpect(jsonPath("$.totp").value("123456"))
-			.andRespond(withSuccess().contentType(MediaType.APPLICATION_JSON)
-				.body("{" + "\"auth\":{\"client_token\":\"my-token\", \"renewable\": true, \"lease_duration\": 10}"
-						+ "}"));
+	.andExpect(method(HttpMethod.POST))
+	.andExpect(jsonPath("$.password").value("heisenberg"))
+	.andExpect(jsonPath("$.totp").value("123456"))
+	.andRespond(withSuccess().contentType(MediaType.APPLICATION_JSON)
+.body("{" + "\"auth\":{\"client_token\":\"my-token\", \"renewable\": true, \"lease_duration\": 10}"+ "}"));
 
 		VaultToken login = sut.login();
 

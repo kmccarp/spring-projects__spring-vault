@@ -80,9 +80,9 @@ public class PemObject {
 	public static PemObject fromKey(String content) {
 
 		return parse(content).stream()
-			.filter(PemObject::isPrivateKey)
-			.findFirst()
-			.orElseThrow(() -> new IllegalArgumentException("Could not find a PKCS #8 private key"));
+	.filter(PemObject::isPrivateKey)
+	.findFirst()
+	.orElseThrow(() -> new IllegalArgumentException("Could not find a PKCS #8 private key"));
 	}
 
 	/**
@@ -162,7 +162,7 @@ public class PemObject {
 
 					if (!endTitle.equals(title)) {
 						throw new IllegalArgumentException(
-								String.format("end tag (%s) doesn't match begin tag (%s)", endTitle, title));
+					String.format("end tag (%s) doesn't match begin tag (%s)", endTitle, title));
 					}
 					return new PemObject(PemObjectType.of(title), keyBuilder.toString());
 				}
@@ -177,7 +177,7 @@ public class PemObject {
 	 */
 	public boolean isCertificate() {
 		return PemObjectType.CERTIFICATE == this.objectType || PemObjectType.X509_CERTIFICATE == this.objectType
-				|| PemObjectType.TRUSTED_CERTIFICATE == this.objectType;
+	|| PemObjectType.TRUSTED_CERTIFICATE == this.objectType;
 	}
 
 	/**
@@ -186,7 +186,7 @@ public class PemObject {
 	 */
 	public boolean isPrivateKey() {
 		return PemObjectType.PRIVATE_KEY == this.objectType || PemObjectType.EC_PRIVATE_KEY == this.objectType
-				|| PemObjectType.RSA_PRIVATE_KEY == this.objectType;
+	|| PemObjectType.RSA_PRIVATE_KEY == this.objectType;
 	}
 
 	/**

@@ -66,7 +66,7 @@ class VersionedKeyValueBackendIntegrationTests extends IntegrationTestSupport {
 		PrepareVault prepare = initializer.prepare();
 
 		VaultKeyValueOperations versionedKv = prepare.getVaultOperations()
-			.opsForKeyValue("versioned", VaultKeyValueOperationsSupport.KeyValueBackend.versioned());
+	.opsForKeyValue("versioned", VaultKeyValueOperationsSupport.KeyValueBackend.versioned());
 
 		versionedKv.put("my/path", Collections.singletonMap("my-key", "my-value"));
 	}
@@ -75,7 +75,7 @@ class VersionedKeyValueBackendIntegrationTests extends IntegrationTestSupport {
 	void shouldRetrieveNonLeasedSecret() {
 
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
-				VaultIntegrationTestConfiguration.class, NonRotatingSecret.class);
+	VaultIntegrationTestConfiguration.class, NonRotatingSecret.class);
 		context.registerShutdownHook();
 
 		assertThat(context.getEnvironment().getProperty("my-key")).isEqualTo("my-value");
@@ -87,7 +87,7 @@ class VersionedKeyValueBackendIntegrationTests extends IntegrationTestSupport {
 	void shouldRetrieveRotatingSecret() {
 
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
-				VaultIntegrationTestConfiguration.class, RotatingSecret.class);
+	VaultIntegrationTestConfiguration.class, RotatingSecret.class);
 		context.registerShutdownHook();
 
 		assertThat(context.getEnvironment().getProperty("my-key")).isEqualTo("my-value");

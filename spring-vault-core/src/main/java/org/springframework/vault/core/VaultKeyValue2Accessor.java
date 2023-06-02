@@ -57,7 +57,7 @@ abstract class VaultKeyValue2Accessor extends VaultKeyValueAccessor {
 
 		VaultListResponse read = doRead(restOperations -> {
 			return restOperations.exchange(String.format("%s?list=true", createBackendPath("metadata", pathToUse)),
-					HttpMethod.GET, null, VaultListResponse.class);
+		HttpMethod.GET, null, VaultListResponse.class);
 		});
 
 		if (read == null) {

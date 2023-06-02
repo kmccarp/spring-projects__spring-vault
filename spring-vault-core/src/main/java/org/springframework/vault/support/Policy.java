@@ -226,12 +226,12 @@ public class Policy {
 
 		@JsonCreator
 		private Rule(@JsonProperty("capabilities") List<Capability> capabilities,
-				@JsonProperty("min_wrapping_ttl") @JsonDeserialize(
-						converter = StringToDurationConverter.class) Duration minWrappingTtl,
-				@JsonProperty("max_wrapping_ttl") @JsonDeserialize(
-						converter = StringToDurationConverter.class) Duration maxWrappingTtl,
-				@JsonProperty("allowed_parameters") Map<String, List<String>> allowedParameters,
-				@JsonProperty("denied_parameters") Map<String, List<String>> deniedParameters) {
+	@JsonProperty("min_wrapping_ttl") @JsonDeserialize(
+converter = StringToDurationConverter.class) Duration minWrappingTtl,
+	@JsonProperty("max_wrapping_ttl") @JsonDeserialize(
+converter = StringToDurationConverter.class) Duration maxWrappingTtl,
+	@JsonProperty("allowed_parameters") Map<String, List<String>> allowedParameters,
+	@JsonProperty("denied_parameters") Map<String, List<String>> deniedParameters) {
 
 			this.path = "";
 			this.capabilities = capabilities;
@@ -242,8 +242,8 @@ public class Policy {
 		}
 
 		private Rule(String path, List<Capability> capabilities, @Nullable Duration minWrappingTtl,
-				@Nullable Duration maxWrappingTtl, Map<String, List<String>> allowedParameters,
-				Map<String, List<String>> deniedParameters) {
+	@Nullable Duration maxWrappingTtl, Map<String, List<String>> allowedParameters,
+	Map<String, List<String>> deniedParameters) {
 
 			this.path = path;
 			this.capabilities = capabilities;
@@ -263,7 +263,7 @@ public class Policy {
 
 		private Rule withPath(String path) {
 			return new Rule(path, this.capabilities, this.minWrappingTtl, this.maxWrappingTtl, this.allowedParameters,
-					this.deniedParameters);
+		this.deniedParameters);
 		}
 
 		public String getPath() {
@@ -326,7 +326,6 @@ public class Policy {
 
 			private Map<String, List<String>> deniedParameters = new LinkedHashMap<String, List<String>>();
 
-			;
 
 			/**
 			 * Associate a {@code path} with the rule.
@@ -492,7 +491,7 @@ public class Policy {
 				}
 
 				return new Rule(this.path, capabilities, this.minWrappingTtl, this.maxWrappingTtl,
-						createMap(this.allowedParameters), createMap(this.deniedParameters));
+			createMap(this.allowedParameters), createMap(this.deniedParameters));
 			}
 
 			private Map<String, List<String>> createMap(Map<String, List<String>> source) {
@@ -643,7 +642,7 @@ public class Policy {
 		public Policy deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
 
 			Assert.isTrue(p.getCurrentToken() == JsonToken.START_OBJECT,
-					"Expected START_OBJECT, got: " + p.getCurrentToken());
+		"Expected START_OBJECT, got: " + p.getCurrentToken());
 
 			String fieldName = p.nextFieldName();
 
@@ -653,7 +652,7 @@ public class Policy {
 
 				p.nextToken();
 				Assert.isTrue(p.getCurrentToken() == JsonToken.START_OBJECT,
-						"Expected START_OBJECT, got: " + p.getCurrentToken());
+			"Expected START_OBJECT, got: " + p.getCurrentToken());
 
 				p.nextToken();
 
@@ -663,7 +662,7 @@ public class Policy {
 					p.nextToken();
 
 					Assert.isTrue(p.getCurrentToken() == JsonToken.START_OBJECT,
-							"Expected START_OBJECT, got: " + p.getCurrentToken());
+				"Expected START_OBJECT, got: " + p.getCurrentToken());
 
 					Rule rule = p.getCodec().readValue(p, Rule.class);
 					rules.add(rule.withPath(path));
@@ -675,12 +674,12 @@ public class Policy {
 				}
 
 				Assert.isTrue(p.getCurrentToken() == JsonToken.END_OBJECT,
-						"Expected END_OBJECT, got: " + p.getCurrentToken());
+			"Expected END_OBJECT, got: " + p.getCurrentToken());
 				p.nextToken();
 			}
 
 			Assert.isTrue(p.getCurrentToken() == JsonToken.END_OBJECT,
-					"Expected END_OBJECT, got: " + p.getCurrentToken());
+		"Expected END_OBJECT, got: " + p.getCurrentToken());
 			return Policy.of(rules);
 		}
 

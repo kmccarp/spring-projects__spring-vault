@@ -101,7 +101,7 @@ public class VaultPropertySource extends EnumerablePropertySource<VaultOperation
 	 * @see PropertyTransformers
 	 */
 	public VaultPropertySource(String name, VaultOperations vaultOperations, String path,
-			PropertyTransformer propertyTransformer) {
+PropertyTransformer propertyTransformer) {
 		this(name, vaultOperations, path, propertyTransformer, true);
 	}
 
@@ -121,7 +121,7 @@ public class VaultPropertySource extends EnumerablePropertySource<VaultOperation
 	 * @see PropertyTransformers
 	 */
 	public VaultPropertySource(String name, VaultOperations vaultOperations, String path,
-			PropertyTransformer propertyTransformer, boolean ignoreSecretNotFound) {
+PropertyTransformer propertyTransformer, boolean ignoreSecretNotFound) {
 
 		super(name, vaultOperations);
 

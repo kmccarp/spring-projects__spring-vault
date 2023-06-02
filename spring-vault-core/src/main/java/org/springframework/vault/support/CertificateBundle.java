@@ -70,9 +70,9 @@ public class CertificateBundle extends Certificate {
 	 * @param privateKeyType the private key type.
 	 */
 	CertificateBundle(@JsonProperty("serial_number") String serialNumber,
-			@JsonProperty("certificate") String certificate, @JsonProperty("issuing_ca") String issuingCaCertificate,
-			@JsonProperty("ca_chain") List<String> caChain, @JsonProperty("private_key") String privateKey,
-			@Nullable @JsonProperty("private_key_type") String privateKeyType) {
+@JsonProperty("certificate") String certificate, @JsonProperty("issuing_ca") String issuingCaCertificate,
+@JsonProperty("ca_chain") List<String> caChain, @JsonProperty("private_key") String privateKey,
+@Nullable @JsonProperty("private_key_type") String privateKeyType) {
 
 		super(serialNumber, certificate, issuingCaCertificate);
 		this.privateKey = privateKey;
@@ -90,7 +90,7 @@ public class CertificateBundle extends Certificate {
 	 * @return the {@link CertificateBundle} instead.
 	 */
 	public static CertificateBundle of(String serialNumber, String certificate, String issuingCaCertificate,
-			String privateKey) {
+String privateKey) {
 
 		Assert.hasText(serialNumber, "Serial number must not be empty");
 		Assert.hasText(certificate, "Certificate must not be empty");
@@ -98,7 +98,7 @@ public class CertificateBundle extends Certificate {
 		Assert.hasText(privateKey, "Private key must not be empty");
 
 		return new CertificateBundle(serialNumber, certificate, issuingCaCertificate,
-				Collections.singletonList(issuingCaCertificate), privateKey, null);
+	Collections.singletonList(issuingCaCertificate), privateKey, null);
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class CertificateBundle extends Certificate {
 	 * @since 2.4
 	 */
 	public static CertificateBundle of(String serialNumber, String certificate, String issuingCaCertificate,
-			String privateKey, @Nullable String privateKeyType) {
+String privateKey, @Nullable String privateKeyType) {
 
 		Assert.hasText(serialNumber, "Serial number must not be empty");
 		Assert.hasText(certificate, "Certificate must not be empty");
@@ -122,7 +122,7 @@ public class CertificateBundle extends Certificate {
 		Assert.hasText(privateKeyType, "Private key type must not be empty");
 
 		return new CertificateBundle(serialNumber, certificate, issuingCaCertificate,
-				Collections.singletonList(issuingCaCertificate), privateKey, privateKeyType);
+	Collections.singletonList(issuingCaCertificate), privateKey, privateKeyType);
 	}
 
 	/**
@@ -269,7 +269,7 @@ public class CertificateBundle extends Certificate {
 			}
 
 			return KeystoreUtil.createKeyStore(keyAlias, getPrivateKeySpec(), password,
-					certificates.toArray(new X509Certificate[0]));
+		certificates.toArray(new X509Certificate[0]));
 		}
 		catch (GeneralSecurityException | IOException e) {
 			throw new VaultException("Cannot create KeyStore", e);
@@ -298,7 +298,7 @@ public class CertificateBundle extends Certificate {
 	}
 
 	private static KeySpec getPrivateKey(String privateKey, String keyType)
-			throws GeneralSecurityException, IOException {
+throws GeneralSecurityException, IOException {
 
 		Assert.hasText(privateKey, "Private key must not be empty");
 		Assert.hasText(keyType, "Private key type must not be empty");
@@ -321,7 +321,7 @@ public class CertificateBundle extends Certificate {
 	}
 
 	private static KeySpec getPrivateKey(byte[] privateKey, String keyType)
-			throws GeneralSecurityException, IOException {
+throws GeneralSecurityException, IOException {
 
 		switch (keyType.toLowerCase(Locale.ROOT)) {
 			case "rsa":
@@ -331,7 +331,7 @@ public class CertificateBundle extends Certificate {
 		}
 
 		throw new IllegalArgumentException(
-				String.format("Key type %s not supported. Supported types are: rsa, ec.", keyType));
+	String.format("Key type %s not supported. Supported types are: rsa, ec.", keyType));
 	}
 
 }

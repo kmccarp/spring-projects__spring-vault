@@ -43,15 +43,15 @@ class TokenAuthenticationStepsIntegrationTests extends TokenAuthenticationIntegr
 	void shouldSelfLookup() {
 
 		VaultTokenRequest tokenRequest = VaultTokenRequest.builder()
-			.ttl(Duration.ofSeconds(60))
-			.renewable()
-			.numUses(1)
-			.build();
+	.ttl(Duration.ofSeconds(60))
+	.renewable()
+	.numUses(1)
+	.build();
 
 		VaultToken token = prepare().getVaultOperations().opsForToken().create(tokenRequest).getToken();
 
 		AuthenticationStepsExecutor operator = new AuthenticationStepsExecutor(
-				TokenAuthentication.createAuthenticationSteps(token, true), this.restTemplate);
+	TokenAuthentication.createAuthenticationSteps(token, true), this.restTemplate);
 
 		VaultToken login = operator.login();
 		assertThat(login).isInstanceOf(LoginToken.class);
@@ -66,15 +66,15 @@ class TokenAuthenticationStepsIntegrationTests extends TokenAuthenticationIntegr
 	void shouldFailDuringSelfLookup() {
 
 		VaultTokenRequest tokenRequest = VaultTokenRequest.builder()
-			.ttl(Duration.ofSeconds(60))
-			.renewable()
-			.numUses(1)
-			.build();
+	.ttl(Duration.ofSeconds(60))
+	.renewable()
+	.numUses(1)
+	.build();
 
 		VaultToken token = prepare().getVaultOperations().opsForToken().create(tokenRequest).getToken();
 
 		AuthenticationStepsExecutor operator = new AuthenticationStepsExecutor(
-				TokenAuthentication.createAuthenticationSteps(token, true), this.restTemplate);
+	TokenAuthentication.createAuthenticationSteps(token, true), this.restTemplate);
 
 		operator.login();
 		assertThatExceptionOfType(VaultException.class).isThrownBy(operator::login);

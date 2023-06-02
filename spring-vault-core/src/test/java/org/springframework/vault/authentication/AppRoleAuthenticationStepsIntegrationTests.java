@@ -43,11 +43,11 @@ class AppRoleAuthenticationStepsIntegrationTests extends AppRoleAuthenticationIn
 
 		String roleId = getRoleId("no-secret-id");
 		AppRoleAuthenticationOptions options = AppRoleAuthenticationOptions.builder()
-			.roleId(RoleId.provided(roleId))
-			.build();
+	.roleId(RoleId.provided(roleId))
+	.build();
 
 		AuthenticationStepsExecutor executor = new AuthenticationStepsExecutor(
-				AppRoleAuthentication.createAuthenticationSteps(options), prepare().getRestTemplate());
+	AppRoleAuthentication.createAuthenticationSteps(options), prepare().getRestTemplate());
 
 		assertThat(executor.login()).isNotNull();
 	}
@@ -59,13 +59,13 @@ class AppRoleAuthenticationStepsIntegrationTests extends AppRoleAuthenticationIn
 		VaultToken unwrappingToken = generateWrappedSecretIdResponse();
 
 		AppRoleAuthenticationOptions options = AppRoleAuthenticationOptions.builder()
-			.secretId(SecretId.wrapped(unwrappingToken))
-			.roleId(RoleId.provided(roleId))
-			.unwrappingEndpoints(getUnwrappingEndpoints())
-			.build();
+	.secretId(SecretId.wrapped(unwrappingToken))
+	.roleId(RoleId.provided(roleId))
+	.unwrappingEndpoints(getUnwrappingEndpoints())
+	.build();
 
 		AuthenticationStepsExecutor executor = new AuthenticationStepsExecutor(
-				AppRoleAuthentication.createAuthenticationSteps(options), prepare().getRestTemplate());
+	AppRoleAuthentication.createAuthenticationSteps(options), prepare().getRestTemplate());
 
 		assertThat(executor.login()).isNotNull();
 	}
@@ -74,20 +74,20 @@ class AppRoleAuthenticationStepsIntegrationTests extends AppRoleAuthenticationIn
 	void authenticationStepsShouldAuthenticateWithWrappedRoleId() {
 
 		String secretId = (String) getVaultOperations()
-			.write(String.format("auth/approle/role/%s/secret-id", "with-secret-id"), null)
-			.getRequiredData()
-			.get("secret_id");
+	.write(String.format("auth/approle/role/%s/secret-id", "with-secret-id"), null)
+	.getRequiredData()
+	.get("secret_id");
 
 		VaultToken roleIdToken = generateWrappedRoleIdResponse();
 
 		AppRoleAuthenticationOptions options = AppRoleAuthenticationOptions.builder()
-			.secretId(SecretId.provided(secretId))
-			.roleId(RoleId.wrapped(roleIdToken))
-			.unwrappingEndpoints(getUnwrappingEndpoints())
-			.build();
+	.secretId(SecretId.provided(secretId))
+	.roleId(RoleId.wrapped(roleIdToken))
+	.unwrappingEndpoints(getUnwrappingEndpoints())
+	.build();
 
 		AuthenticationStepsExecutor executor = new AuthenticationStepsExecutor(
-				AppRoleAuthentication.createAuthenticationSteps(options), prepare().getRestTemplate());
+	AppRoleAuthentication.createAuthenticationSteps(options), prepare().getRestTemplate());
 
 		assertThat(executor.login()).isNotNull();
 	}
@@ -96,13 +96,13 @@ class AppRoleAuthenticationStepsIntegrationTests extends AppRoleAuthenticationIn
 	void shouldAuthenticateWithFullPullMode() {
 
 		AppRoleAuthenticationOptions options = AppRoleAuthenticationOptions.builder()
-			.appRole("with-secret-id")
-			.roleId(RoleId.pull(Settings.token()))
-			.secretId(SecretId.pull(Settings.token()))
-			.build();
+	.appRole("with-secret-id")
+	.roleId(RoleId.pull(Settings.token()))
+	.secretId(SecretId.pull(Settings.token()))
+	.build();
 
 		AuthenticationStepsExecutor executor = new AuthenticationStepsExecutor(
-				AppRoleAuthentication.createAuthenticationSteps(options), prepare().getRestTemplate());
+	AppRoleAuthentication.createAuthenticationSteps(options), prepare().getRestTemplate());
 
 		assertThat(executor.login()).isNotNull();
 	}
@@ -113,13 +113,13 @@ class AppRoleAuthenticationStepsIntegrationTests extends AppRoleAuthenticationIn
 		String roleId = getRoleId("with-secret-id");
 
 		AppRoleAuthenticationOptions options = AppRoleAuthenticationOptions.builder()
-			.appRole("with-secret-id")
-			.secretId(SecretId.pull(Settings.token()))
-			.roleId(RoleId.provided(roleId))
-			.build();
+	.appRole("with-secret-id")
+	.secretId(SecretId.pull(Settings.token()))
+	.roleId(RoleId.provided(roleId))
+	.build();
 
 		AuthenticationStepsExecutor executor = new AuthenticationStepsExecutor(
-				AppRoleAuthentication.createAuthenticationSteps(options), prepare().getRestTemplate());
+	AppRoleAuthentication.createAuthenticationSteps(options), prepare().getRestTemplate());
 
 		assertThat(executor.login()).isNotNull();
 	}
@@ -128,18 +128,18 @@ class AppRoleAuthenticationStepsIntegrationTests extends AppRoleAuthenticationIn
 	void authenticationStepsShouldAuthenticateWithPullRoleId() {
 
 		String secretId = (String) getVaultOperations()
-			.write(String.format("auth/approle/role/%s/secret-id", "with-secret-id"), null)
-			.getRequiredData()
-			.get("secret_id");
+	.write(String.format("auth/approle/role/%s/secret-id", "with-secret-id"), null)
+	.getRequiredData()
+	.get("secret_id");
 
 		AppRoleAuthenticationOptions options = AppRoleAuthenticationOptions.builder()
-			.secretId(SecretId.provided(secretId))
-			.appRole("with-secret-id")
-			.roleId(RoleId.pull(Settings.token()))
-			.build();
+	.secretId(SecretId.provided(secretId))
+	.appRole("with-secret-id")
+	.roleId(RoleId.pull(Settings.token()))
+	.build();
 
 		AuthenticationStepsExecutor executor = new AuthenticationStepsExecutor(
-				AppRoleAuthentication.createAuthenticationSteps(options), prepare().getRestTemplate());
+	AppRoleAuthentication.createAuthenticationSteps(options), prepare().getRestTemplate());
 
 		assertThat(executor.login()).isNotNull();
 	}
@@ -150,12 +150,12 @@ class AppRoleAuthenticationStepsIntegrationTests extends AppRoleAuthenticationIn
 		String roleId = getRoleId("with-secret-id");
 
 		AppRoleAuthenticationOptions options = AppRoleAuthenticationOptions.builder()
-			.roleId(RoleId.provided(roleId))
-			.secretId(SecretId.provided("this-is-a-wrong-secret-id"))
-			.build();
+	.roleId(RoleId.provided(roleId))
+	.secretId(SecretId.provided("this-is-a-wrong-secret-id"))
+	.build();
 
 		AuthenticationStepsExecutor executor = new AuthenticationStepsExecutor(
-				AppRoleAuthentication.createAuthenticationSteps(options), prepare().getRestTemplate());
+	AppRoleAuthentication.createAuthenticationSteps(options), prepare().getRestTemplate());
 
 		assertThatExceptionOfType(VaultException.class).isThrownBy(executor::login);
 	}
@@ -167,20 +167,20 @@ class AppRoleAuthenticationStepsIntegrationTests extends AppRoleAuthenticationIn
 		String secretId = "hello_world_two";
 
 		VaultResponse customSecretIdResponse = getVaultOperations().write(
-				"auth/approle/role/with-secret-id/custom-secret-id", Collections.singletonMap("secret_id", secretId));
+	"auth/approle/role/with-secret-id/custom-secret-id", Collections.singletonMap("secret_id", secretId));
 
 		AppRoleAuthenticationOptions options = AppRoleAuthenticationOptions.builder()
-			.roleId(RoleId.provided(roleId))
-			.secretId(SecretId.provided(secretId))
-			.build();
+	.roleId(RoleId.provided(roleId))
+	.secretId(SecretId.provided(secretId))
+	.build();
 
 		AuthenticationStepsExecutor executor = new AuthenticationStepsExecutor(
-				AppRoleAuthentication.createAuthenticationSteps(options), prepare().getRestTemplate());
+	AppRoleAuthentication.createAuthenticationSteps(options), prepare().getRestTemplate());
 
 		assertThat(executor.login()).isNotNull();
 
 		getVaultOperations().write("auth/approle/role/with-secret-id/secret-id-accessor/destroy",
-				customSecretIdResponse.getRequiredData());
+	customSecretIdResponse.getRequiredData());
 	}
 
 	@Test
@@ -189,13 +189,13 @@ class AppRoleAuthenticationStepsIntegrationTests extends AppRoleAuthenticationIn
 		String roleId = getRoleId("with-secret-id");
 
 		AppRoleAuthenticationOptions options = AppRoleAuthenticationOptions.builder()
-			.roleId(RoleId.provided(roleId))
-			.appRole("with-secret-id")
-			.secretId(SecretId.pull(Settings.token()))
-			.build();
+	.roleId(RoleId.provided(roleId))
+	.appRole("with-secret-id")
+	.secretId(SecretId.pull(Settings.token()))
+	.build();
 
 		AuthenticationStepsExecutor executor = new AuthenticationStepsExecutor(
-				AppRoleAuthentication.createAuthenticationSteps(options), prepare().getRestTemplate());
+	AppRoleAuthentication.createAuthenticationSteps(options), prepare().getRestTemplate());
 
 		assertThat(executor.login()).isNotNull();
 	}

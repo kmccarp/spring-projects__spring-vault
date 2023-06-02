@@ -51,10 +51,10 @@ public class ReactiveVaultSysTemplate implements ReactiveVaultSysOperations {
 
 		return this.vaultOperations.doWithSession(webClient -> {
 			return webClient.get()
-				.uri("sys/init")
-				.header(VaultHttpHeaders.VAULT_NAMESPACE, "")
-				.exchangeToMono(clientResponse -> clientResponse.toEntity(Map.class))
-				.map(it -> (Boolean) it.getBody().get("initialized"));
+		.uri("sys/init")
+		.header(VaultHttpHeaders.VAULT_NAMESPACE, "")
+		.exchangeToMono(clientResponse -> clientResponse.toEntity(Map.class))
+		.map(it -> (Boolean) it.getBody().get("initialized"));
 		});
 	}
 
@@ -64,11 +64,11 @@ public class ReactiveVaultSysTemplate implements ReactiveVaultSysOperations {
 		return this.vaultOperations.doWithVault(webClient -> {
 
 			return webClient.get()
-				.uri("sys/health")
-				.header(VaultHttpHeaders.VAULT_NAMESPACE, "")
-				.exchangeToMono(clientResponse -> {
-					return clientResponse.toEntity(VaultSysTemplate.VaultHealthImpl.class).map(HttpEntity::getBody);
-				});
+		.uri("sys/health")
+		.header(VaultHttpHeaders.VAULT_NAMESPACE, "")
+		.exchangeToMono(clientResponse -> {
+			return clientResponse.toEntity(VaultSysTemplate.VaultHealthImpl.class).map(HttpEntity::getBody);
+		});
 		});
 	}
 

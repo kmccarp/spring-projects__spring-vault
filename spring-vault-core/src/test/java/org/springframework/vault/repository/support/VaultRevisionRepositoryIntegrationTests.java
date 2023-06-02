@@ -75,7 +75,7 @@ class VaultRevisionRepositoryIntegrationTests extends IntegrationTestSupport {
 		}
 
 		vaultSysOperations.mount("versioned",
-				VaultMount.builder().type("kv").options(Collections.singletonMap("version", "2")).build());
+	VaultMount.builder().type("kv").options(Collections.singletonMap("version", "2")).build());
 	}
 
 	@Test
@@ -138,7 +138,7 @@ class VaultRevisionRepositoryIntegrationTests extends IntegrationTestSupport {
 		prepareVersions();
 
 		Page<Revision<Integer, VersionedPerson>> page1 = repository.findRevisions("foo",
-				Pageable.ofSize(3).withPage(0));
+	Pageable.ofSize(3).withPage(0));
 
 		Page<Revision<Integer, VersionedPerson>> page2 = repository.findRevisions("foo", page1.nextPageable());
 
@@ -193,11 +193,11 @@ class VaultRevisionRepositoryIntegrationTests extends IntegrationTestSupport {
 	private VaultRevisionRepository<VersionedPerson> getRepository() {
 
 		VaultPersistentEntity<?> entity = keyValueTemplate.getConverter()
-			.getMappingContext()
-			.getRequiredPersistentEntity(VersionedPerson.class);
+	.getMappingContext()
+	.getRequiredPersistentEntity(VersionedPerson.class);
 
 		return new VaultRevisionRepository<>(new MappingVaultEntityInformation(entity), "versioned/versionedPerson",
-				keyValueTemplate);
+	keyValueTemplate);
 	}
 
 	private void prepareVersions() {

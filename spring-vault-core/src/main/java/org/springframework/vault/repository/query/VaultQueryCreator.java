@@ -56,7 +56,7 @@ public class VaultQueryCreator extends AbstractQueryCreator<KeyValueQuery<VaultQ
 	 * @param mappingContext must not be {@literal null}.
 	 */
 	public VaultQueryCreator(PartTree tree, ParameterAccessor parameters,
-			MappingContext<VaultPersistentEntity<?>, VaultPersistentProperty> mappingContext) {
+MappingContext<VaultPersistentEntity<?>, VaultPersistentProperty> mappingContext) {
 
 		super(tree, parameters);
 		this.mappingContext = mappingContext;
@@ -75,11 +75,11 @@ public class VaultQueryCreator extends AbstractQueryCreator<KeyValueQuery<VaultQ
 	private Predicate<String> createPredicate(Part part, Iterator<Object> parameters) {
 
 		PersistentPropertyPath<VaultPersistentProperty> propertyPath = this.mappingContext
-			.getPersistentPropertyPath(part.getProperty());
+	.getPersistentPropertyPath(part.getProperty());
 
 		if (propertyPath.getLeafProperty() != null && !propertyPath.getLeafProperty().isIdProperty()) {
 			throw new InvalidDataAccessApiUsageException(
-					String.format("Cannot create criteria for non-@Id property %s", propertyPath.getLeafProperty()));
+		String.format("Cannot create criteria for non-@Id property %s", propertyPath.getLeafProperty()));
 		}
 
 		VariableAccessor accessor = getVariableAccessor(part);
@@ -118,10 +118,10 @@ public class VaultQueryCreator extends AbstractQueryCreator<KeyValueQuery<VaultQ
 				return it -> it.compareTo(from) >= 0 && it.compareTo(to) <= 0;
 			case NOT_IN:
 				return new Criteria<>(accessor.nextAsArray(parameters),
-						(value, it) -> Arrays.binarySearch(value, it) < 0);
+			(value, it) -> Arrays.binarySearch(value, it) < 0);
 			case IN:
 				return new Criteria<>(accessor.nextAsArray(parameters),
-						(value, it) -> Arrays.binarySearch(value, it) >= 0);
+			(value, it) -> Arrays.binarySearch(value, it) >= 0);
 			case STARTING_WITH:
 				return new Criteria<>(accessor.nextString(parameters), (value, it) -> it.startsWith(value));
 			case ENDING_WITH:
@@ -132,7 +132,7 @@ public class VaultQueryCreator extends AbstractQueryCreator<KeyValueQuery<VaultQ
 				return new Criteria<>(accessor.nextString(parameters), (value, it) -> !it.contains(value));
 			case REGEX:
 				return Pattern.compile((String) parameters.next(), isIgnoreCase(part) ? Pattern.CASE_INSENSITIVE : 0)
-					.asPredicate();
+			.asPredicate();
 			case TRUE:
 				return it -> it.equalsIgnoreCase("true");
 			case FALSE:
@@ -255,7 +255,7 @@ public class VaultQueryCreator extends AbstractQueryCreator<KeyValueQuery<VaultQ
 					return (String[]) next;
 				}
 
-				return new String[] { (String) next };
+				return new String[]{(String) next};
 			}
 
 			@Override

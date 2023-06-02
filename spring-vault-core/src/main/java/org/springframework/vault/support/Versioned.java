@@ -201,7 +201,7 @@ public class Versioned<T> {
 			return false;
 		Versioned<?> versioned = (Versioned<?>) o;
 		return Objects.equals(this.data, versioned.data) && Objects.equals(this.version, versioned.version)
-				&& Objects.equals(this.metadata, versioned.metadata);
+	&& Objects.equals(this.metadata, versioned.metadata);
 	}
 
 	@Override
@@ -279,7 +279,7 @@ public class Versioned<T> {
 		public String toString() {
 
 			return getClass().getSimpleName() + " [createdAt=" + this.createdAt + ", deletedAt=" + this.deletedAt
-					+ ", destroyed=" + this.destroyed + ", version=" + this.version + ']';
+		+ ", destroyed=" + this.destroyed + ", version=" + this.version + ']';
 		}
 
 		/**

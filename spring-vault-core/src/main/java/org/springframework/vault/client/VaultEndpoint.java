@@ -213,7 +213,7 @@ public class VaultEndpoint implements Serializable {
 			return false;
 		VaultEndpoint that = (VaultEndpoint) o;
 		return this.port == that.port && this.host.equals(that.host) && this.scheme.equals(that.scheme)
-				&& this.path.equals(that.path);
+	&& this.path.equals(that.path);
 	}
 
 	@Override

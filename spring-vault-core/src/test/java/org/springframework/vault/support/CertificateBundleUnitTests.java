@@ -115,9 +115,9 @@ class CertificateBundleUnitTests {
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "certificate-response-rsa-pem.json", "certificate-response-rsa-der.json",
-			"certificate-response-rsa-pembundle.json", "certificate-response-ec-pem.json",
-			"certificate-response-ec-der.json", "certificate-response-ec-pembundle.json" })
+	@ValueSource(strings = {"certificate-response-rsa-pem.json", "certificate-response-rsa-der.json",
+"certificate-response-rsa-pembundle.json", "certificate-response-ec-pem.json",
+"certificate-response-ec-der.json", "certificate-response-ec-pembundle.json"})
 	void createKeystore(String path) {
 
 		CertificateBundle bundle = loadCertificateBundle(path);
@@ -132,7 +132,7 @@ class CertificateBundleUnitTests {
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "certificate-response-rsa-pem-pkcs8.json", "certificate-response-ec-pem-pkcs8.json" })
+	@ValueSource(strings = {"certificate-response-rsa-pem-pkcs8.json", "certificate-response-ec-pem-pkcs8.json"})
 	void shouldCreateKeystore(String path) {
 
 		CertificateBundle bundle = loadCertificateBundle(path);

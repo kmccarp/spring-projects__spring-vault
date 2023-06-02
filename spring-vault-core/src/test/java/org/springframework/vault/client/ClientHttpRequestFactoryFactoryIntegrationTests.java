@@ -54,7 +54,7 @@ class ClientHttpRequestFactoryFactoryIntegrationTests {
 	void httpComponentsClientShouldWork() throws Exception {
 
 		ClientHttpRequestFactory factory = HttpComponents.usingHttpComponents(new ClientOptions(),
-				Settings.createSslConfiguration());
+	Settings.createSslConfiguration());
 		RestTemplate template = new RestTemplate(factory);
 
 		String response = request(template);
@@ -70,8 +70,8 @@ class ClientHttpRequestFactoryFactoryIntegrationTests {
 
 		File caCertificate = new File(Settings.findWorkDir(), "ca/certs/ca.cert.pem");
 		SslConfiguration sslConfiguration = SslConfiguration
-			.forTrustStore(SslConfiguration.KeyStoreConfiguration.of(new FileSystemResource(caCertificate))
-				.withStoreType(SslConfiguration.PEM_KEYSTORE_TYPE));
+	.forTrustStore(SslConfiguration.KeyStoreConfiguration.of(new FileSystemResource(caCertificate))
+.withStoreType(SslConfiguration.PEM_KEYSTORE_TYPE));
 
 		ClientHttpRequestFactory factory = HttpComponents.usingHttpComponents(new ClientOptions(), sslConfiguration);
 		RestTemplate template = new RestTemplate(factory);
@@ -92,7 +92,7 @@ class ClientHttpRequestFactoryFactoryIntegrationTests {
 		enabledCipherSuites.add("TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256");
 
 		ClientHttpRequestFactory factory = HttpComponents.usingHttpComponents(new ClientOptions(),
-				Settings.createSslConfiguration().withEnabledCipherSuites(enabledCipherSuites));
+	Settings.createSslConfiguration().withEnabledCipherSuites(enabledCipherSuites));
 		RestTemplate template = new RestTemplate(factory);
 
 		String response = request(template);
@@ -110,7 +110,7 @@ class ClientHttpRequestFactoryFactoryIntegrationTests {
 		enabledProtocols.add("TLSv1.2");
 
 		ClientHttpRequestFactory factory = HttpComponents.usingHttpComponents(new ClientOptions(),
-				Settings.createSslConfiguration().withEnabledProtocols(enabledProtocols));
+	Settings.createSslConfiguration().withEnabledProtocols(enabledProtocols));
 		RestTemplate template = new RestTemplate(factory);
 
 		String response = request(template);
@@ -143,7 +143,7 @@ class ClientHttpRequestFactoryFactoryIntegrationTests {
 		enabledCipherSuites.add("TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256");
 
 		ClientHttpRequestFactory factory = OkHttp3.usingOkHttp3(new ClientOptions(),
-				Settings.createSslConfiguration().withEnabledCipherSuites(enabledCipherSuites));
+	Settings.createSslConfiguration().withEnabledCipherSuites(enabledCipherSuites));
 		RestTemplate template = new RestTemplate(factory);
 
 		String response = request(template);
@@ -161,7 +161,7 @@ class ClientHttpRequestFactoryFactoryIntegrationTests {
 		enabledProtocols.add("TLSv1.2");
 
 		ClientHttpRequestFactory factory = OkHttp3.usingOkHttp3(new ClientOptions(),
-				Settings.createSslConfiguration().withEnabledProtocols(enabledProtocols));
+	Settings.createSslConfiguration().withEnabledProtocols(enabledProtocols));
 		RestTemplate template = new RestTemplate(factory);
 
 		String response = request(template);

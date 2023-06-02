@@ -36,7 +36,7 @@ class DefaultRestTemplateFactory implements RestTemplateFactory {
 	private final Function<ClientHttpRequestFactory, RestTemplateBuilder> builderFunction;
 
 	DefaultRestTemplateFactory(ClientHttpRequestFactory requestFactory,
-			Function<ClientHttpRequestFactory, RestTemplateBuilder> builderFunction) {
+Function<ClientHttpRequestFactory, RestTemplateBuilder> builderFunction) {
 		this.requestFactory = requestFactory;
 		this.builderFunction = builderFunction;
 	}

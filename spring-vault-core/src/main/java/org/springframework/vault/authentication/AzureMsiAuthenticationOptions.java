@@ -38,10 +38,10 @@ public class AzureMsiAuthenticationOptions {
 	public static final String DEFAULT_AZURE_AUTHENTICATION_PATH = "azure";
 
 	public static final URI DEFAULT_INSTANCE_METADATA_SERVICE_URI = URI
-		.create("http://169.254.169.254/metadata/instance?api-version=2017-12-01");
+.create("http://169.254.169.254/metadata/instance?api-version=2017-12-01");
 
 	public static final URI DEFAULT_IDENTITY_TOKEN_SERVICE_URI = URI.create(
-			"http://169.254.169.254/metadata/identity/oauth2/token?resource=https://vault.hashicorp.com&api-version=2018-02-01");
+"http://169.254.169.254/metadata/identity/oauth2/token?resource=https://vault.hashicorp.com&api-version=2018-02-01");
 
 	/**
 	 * Path of the azure authentication backend mount.
@@ -70,7 +70,7 @@ public class AzureMsiAuthenticationOptions {
 	private final AzureVmEnvironment vmEnvironment;
 
 	private AzureMsiAuthenticationOptions(String path, String role, URI instanceMetadataServiceUri,
-			URI identityTokenServiceUri, @Nullable AzureVmEnvironment vmEnvironment) {
+URI identityTokenServiceUri, @Nullable AzureVmEnvironment vmEnvironment) {
 
 		this.path = path;
 		this.role = role;
@@ -223,7 +223,7 @@ public class AzureMsiAuthenticationOptions {
 			Assert.hasText(this.role, "Role must not be null or empty");
 
 			return new AzureMsiAuthenticationOptions(this.path, this.role, this.instanceMetadataServiceUri,
-					this.identityTokenServiceUri, this.vmEnvironment);
+		this.identityTokenServiceUri, this.vmEnvironment);
 		}
 
 	}

@@ -89,10 +89,10 @@ public class AuthenticationStepsExecutor implements ClientAuthentication {
 		}
 
 		throw new IllegalStateException(
-				String.format("Cannot retrieve VaultToken from authentication chain. Got instead %s", state));
+	String.format("Cannot retrieve VaultToken from authentication chain. Got instead %s", state));
 	}
 
-	@SuppressWarnings({ "unchecked", "ConstantConditions" })
+	@SuppressWarnings({"unchecked", "ConstantConditions"})
 	private Object evaluate(Iterable<Node<?>> steps) {
 
 		Object state = null;
@@ -134,9 +134,9 @@ public class AuthenticationStepsExecutor implements ClientAuthentication {
 			}
 			catch (HttpStatusCodeException e) {
 				throw new VaultLoginException(
-						String.format("HTTP request %s in state %s failed with Status %s and body %s", o, state,
-								e.getStatusCode().value(), VaultResponses.getError(e.getResponseBodyAsString())),
-						e);
+			String.format("HTTP request %s in state %s failed with Status %s and body %s", o, state,
+		e.getStatusCode().value(), VaultResponses.getError(e.getResponseBodyAsString())),
+			e);
 			}
 			catch (RuntimeException e) {
 				throw new VaultLoginException(String.format("Authentication execution failed in %s", o), e);
@@ -154,13 +154,13 @@ public class AuthenticationStepsExecutor implements ClientAuthentication {
 		if (definition.getUri() == null) {
 
 			ResponseEntity<?> exchange = this.restOperations.exchange(definition.getUriTemplate(),
-					definition.getMethod(), getEntity(definition.getEntity(), state), definition.getResponseType(),
-					(Object[]) definition.getUrlVariables());
+		definition.getMethod(), getEntity(definition.getEntity(), state), definition.getResponseType(),
+		(Object[]) definition.getUrlVariables());
 
 			return exchange.getBody();
 		}
 		ResponseEntity<?> exchange = this.restOperations.exchange(definition.getUri(), definition.getMethod(),
-				getEntity(definition.getEntity(), state), definition.getResponseType());
+	getEntity(definition.getEntity(), state), definition.getResponseType());
 
 		return exchange.getBody();
 

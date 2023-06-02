@@ -48,16 +48,14 @@ import org.springframework.vault.util.IntegrationTestSupport;
 public abstract class ClientCertificateAuthenticationIntegrationTestBase extends IntegrationTestSupport {
 
 	static final Policy DEFAULT_POLICY = Policy.of(Policy.Rule.builder()
-		.path("/default/*")
-		.capabilities(Policy.BuiltinCapabilities.READ, Policy.BuiltinCapabilities.CREATE,
-				Policy.BuiltinCapabilities.UPDATE)
-		.build());
+.path("/default/*")
+.capabilities(Policy.BuiltinCapabilities.READ, Policy.BuiltinCapabilities.CREATE,Policy.BuiltinCapabilities.UPDATE)
+.build());
 
 	static final Policy ALTERNATE_POLICY = Policy.of(Policy.Rule.builder()
-		.path("/alternate/*")
-		.capabilities(Policy.BuiltinCapabilities.READ, Policy.BuiltinCapabilities.CREATE,
-				Policy.BuiltinCapabilities.UPDATE)
-		.build());
+.path("/alternate/*")
+.capabilities(Policy.BuiltinCapabilities.READ, Policy.BuiltinCapabilities.CREATE,Policy.BuiltinCapabilities.UPDATE)
+.build());
 
 	VaultOperations vaultOperations;
 
@@ -77,7 +75,7 @@ public abstract class ClientCertificateAuthenticationIntegrationTestBase extends
 			File workDir = findWorkDir();
 
 			String certificate = Files.contentOf(new File(workDir, "ca/certs/client.cert.pem"),
-					StandardCharsets.US_ASCII);
+		StandardCharsets.US_ASCII);
 
 			Map<String, Object> role = new LinkedHashMap<>();
 			role.put("token_policies", "cert-auth1");
@@ -93,10 +91,10 @@ public abstract class ClientCertificateAuthenticationIntegrationTestBase extends
 
 	ListAssert<String> assertThatPolicies(VaultToken token) {
 		return assertThat(lookupSelf(token).getBody()).isNotNull()
-			.extracting("data", as(InstanceOfAssertFactories.map(String.class, Object.class)))
-			.isNotNull()
-			.extracting("policies", as(InstanceOfAssertFactories.list(String.class)))
-			.isNotNull();
+	.extracting("data", as(InstanceOfAssertFactories.map(String.class, Object.class)))
+	.isNotNull()
+	.extracting("policies", as(InstanceOfAssertFactories.list(String.class)))
+	.isNotNull();
 	}
 
 	ResponseEntity<Map<String, Object>> lookupSelf(VaultToken token) {
@@ -106,8 +104,8 @@ public abstract class ClientCertificateAuthenticationIntegrationTestBase extends
 			headers.add(VaultHttpHeaders.VAULT_TOKEN, token.getToken());
 
 			return restOperations.exchange("auth/token/lookup-self", HttpMethod.GET, new HttpEntity<>(headers),
-					new ParameterizedTypeReference<Map<String, Object>>() {
-					});
+		new ParameterizedTypeReference<Map<String, Object>>() {
+		});
 		});
 	}
 
@@ -120,8 +118,8 @@ public abstract class ClientCertificateAuthenticationIntegrationTestBase extends
 		SslConfiguration original = createSslConfiguration();
 
 		return new SslConfiguration(KeyStoreConfiguration
-			.of(new FileSystemResource(new File(findWorkDir(), "client-cert.jks")), "changeit".toCharArray()),
-				keyConfiguration, original.getTrustStoreConfiguration());
+.of(new FileSystemResource(new File(findWorkDir(), "client-cert.jks")), "changeit".toCharArray()),
+	keyConfiguration, original.getTrustStoreConfiguration());
 	}
 
 }

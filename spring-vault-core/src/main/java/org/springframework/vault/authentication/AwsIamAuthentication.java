@@ -122,10 +122,10 @@ public class AwsIamAuthentication implements ClientAuthentication, Authenticatio
 	}
 
 	protected static AuthenticationSteps createAuthenticationSteps(AwsIamAuthenticationOptions options,
-			AwsCredentials credentials, Region region) {
+AwsCredentials credentials, Region region) {
 
 		return AuthenticationSteps.fromSupplier(() -> createRequestBody(options, credentials, region)) //
-			.login(AuthenticationUtil.getLoginPath(options.getPath()));
+	.login(AuthenticationUtil.getLoginPath(options.getPath()));
 	}
 
 	@Override
@@ -136,7 +136,7 @@ public class AwsIamAuthentication implements ClientAuthentication, Authenticatio
 	@Override
 	public AuthenticationSteps getAuthenticationSteps() {
 		return createAuthenticationSteps(this.options, this.options.getCredentialsProvider().resolveCredentials(),
-				this.options.getRegionProvider().getRegion());
+	this.options.getRegionProvider().getRegion());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -147,7 +147,7 @@ public class AwsIamAuthentication implements ClientAuthentication, Authenticatio
 		try {
 
 			VaultResponse response = this.vaultRestOperations
-				.postForObject(AuthenticationUtil.getLoginPath(this.options.getPath()), login, VaultResponse.class);
+		.postForObject(AuthenticationUtil.getLoginPath(this.options.getPath()), login, VaultResponse.class);
 
 			Assert.state(response != null && response.getAuth() != null, "Auth field must not be null");
 
@@ -156,7 +156,7 @@ public class AwsIamAuthentication implements ClientAuthentication, Authenticatio
 				if (response.getAuth().get("metadata") instanceof Map) {
 					Map<Object, Object> metadata = (Map<Object, Object>) response.getAuth().get("metadata");
 					logger.debug(String.format("Login successful using AWS-IAM authentication for user id %s, ARN %s",
-							metadata.get("client_user_id"), metadata.get("canonical_arn")));
+				metadata.get("client_user_id"), metadata.get("canonical_arn")));
 				}
 				else {
 					logger.debug("Login successful using AWS-IAM authentication");
@@ -178,7 +178,7 @@ public class AwsIamAuthentication implements ClientAuthentication, Authenticatio
 	 */
 	protected static Map<String, String> createRequestBody(AwsIamAuthenticationOptions options) {
 		return createRequestBody(options, options.getCredentialsProvider().resolveCredentials(),
-				options.getRegionProvider().getRegion());
+	options.getRegionProvider().getRegion());
 	}
 
 	/**
@@ -190,7 +190,7 @@ public class AwsIamAuthentication implements ClientAuthentication, Authenticatio
 	 * @return the map containing body key-value pairs.
 	 */
 	private static Map<String, String> createRequestBody(AwsIamAuthenticationOptions options,
-			AwsCredentials credentials, Region region) {
+AwsCredentials credentials, Region region) {
 
 		Map<String, String> login = new HashMap<>();
 
@@ -209,23 +209,23 @@ public class AwsIamAuthentication implements ClientAuthentication, Authenticatio
 	}
 
 	private static String getSignedHeaders(AwsIamAuthenticationOptions options, AwsCredentials credentials,
-			Region region) {
+Region region) {
 
 		Map<String, List<String>> headers = createIamRequestHeaders(options);
 
 		SdkHttpFullRequest.Builder builder = SdkHttpFullRequest.builder()
-			.contentStreamProvider(() -> new ByteArrayInputStream(REQUEST_BODY.getBytes()))
-			.headers(headers)
-			.method(SdkHttpMethod.POST)
-			.uri(options.getEndpointUri());
+	.contentStreamProvider(() -> new ByteArrayInputStream(REQUEST_BODY.getBytes()))
+	.headers(headers)
+	.method(SdkHttpMethod.POST)
+	.uri(options.getEndpointUri());
 		SdkHttpFullRequest request = builder.build();
 
 		Aws4Signer signer = Aws4Signer.create();
 		Aws4SignerParams signerParams = Aws4SignerParams.builder()
-			.awsCredentials(credentials)
-			.signingName("sts")
-			.signingRegion(region)
-			.build();
+	.awsCredentials(credentials)
+	.signingName("sts")
+	.signingRegion(region)
+	.build();
 		SdkHttpFullRequest signedRequest = signer.sign(request, signerParams);
 
 		Map<String, Object> map = new LinkedHashMap<>();

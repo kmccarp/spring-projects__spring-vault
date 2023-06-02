@@ -39,7 +39,7 @@ public class VaultTransitKeyConfiguration {
 	private final Integer minEncryptionVersion;
 
 	private VaultTransitKeyConfiguration(@Nullable Boolean deletionAllowed, @Nullable Integer minDecryptionVersion,
-			@Nullable Integer minEncryptionVersion) {
+@Nullable Integer minEncryptionVersion) {
 
 		this.deletionAllowed = deletionAllowed;
 		this.minDecryptionVersion = minDecryptionVersion;
@@ -142,7 +142,7 @@ public class VaultTransitKeyConfiguration {
 		 */
 		public VaultTransitKeyConfiguration build() {
 			return new VaultTransitKeyConfiguration(this.deletionAllowed, this.minDecryptionVersion,
-					this.minEncryptionVersion);
+		this.minEncryptionVersion);
 		}
 
 	}

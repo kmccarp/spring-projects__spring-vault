@@ -61,7 +61,7 @@ class LifecycleAwareSessionManagerIntegrationTests extends IntegrationTestSuppor
 		TokenAuthentication tokenAuthentication = new TokenAuthentication(loginToken);
 
 		LifecycleAwareSessionManager sessionManager = new LifecycleAwareSessionManager(tokenAuthentication,
-				this.taskScheduler, prepare().getRestTemplate());
+	this.taskScheduler, prepare().getRestTemplate());
 
 		assertThat(sessionManager.getSessionToken()).isSameAs(loginToken);
 	}
@@ -73,19 +73,19 @@ class LifecycleAwareSessionManagerIntegrationTests extends IntegrationTestSuppor
 		VaultTokenOperations tokenOperations = prepare().getVaultOperations().opsForToken();
 
 		VaultTokenRequest tokenRequest = VaultTokenRequest.builder() //
-			.renewable()
-			.ttl(1, TimeUnit.HOURS) //
-			.explicitMaxTtl(10, TimeUnit.HOURS) //
-			.build();
+	.renewable()
+	.ttl(1, TimeUnit.HOURS) //
+	.explicitMaxTtl(10, TimeUnit.HOURS) //
+	.build();
 
 		VaultToken token = tokenOperations.create(tokenRequest).getToken();
 
 		TokenAuthentication tokenAuthentication = new TokenAuthentication(
-				LoginToken.renewable(token.getToken().toCharArray(), Duration.ZERO));
+	LoginToken.renewable(token.getToken().toCharArray(), Duration.ZERO));
 
 		final AtomicInteger counter = new AtomicInteger();
 		LifecycleAwareSessionManager sessionManager = new LifecycleAwareSessionManager(tokenAuthentication,
-				this.taskScheduler, prepare().getRestTemplate()) {
+	this.taskScheduler, prepare().getRestTemplate()) {
 			@Override
 			public VaultToken getSessionToken() {
 
@@ -107,7 +107,7 @@ class LifecycleAwareSessionManagerIntegrationTests extends IntegrationTestSuppor
 		TokenAuthentication tokenAuthentication = new TokenAuthentication(loginToken);
 
 		LifecycleAwareSessionManager sessionManager = new LifecycleAwareSessionManager(tokenAuthentication,
-				this.taskScheduler, prepare().getRestTemplate());
+	this.taskScheduler, prepare().getRestTemplate());
 
 		sessionManager.getSessionToken();
 		sessionManager.revoke();
@@ -134,7 +134,7 @@ class LifecycleAwareSessionManagerIntegrationTests extends IntegrationTestSuppor
 		TokenAuthentication tokenAuthentication = new TokenAuthentication(loginToken);
 
 		LifecycleAwareSessionManager sessionManager = new LifecycleAwareSessionManager(tokenAuthentication,
-				this.taskScheduler, prepare().getRestTemplate());
+	this.taskScheduler, prepare().getRestTemplate());
 
 		sessionManager.getSessionToken();
 		sessionManager.destroy();

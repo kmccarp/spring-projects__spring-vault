@@ -79,7 +79,7 @@ public class GcpIamCredentialsAuthentication extends GcpJwtAuthenticationSupport
 	 * @param restOperations HTTP client for Vault login, must not be {@literal null}.
 	 */
 	public GcpIamCredentialsAuthentication(GcpIamCredentialsAuthenticationOptions options,
-			RestOperations restOperations) {
+RestOperations restOperations) {
 		this(options, restOperations, IamCredentialsStubSettings.defaultGrpcTransportProviderBuilder().build());
 	}
 
@@ -93,7 +93,7 @@ public class GcpIamCredentialsAuthentication extends GcpJwtAuthenticationSupport
 	 * not be {@literal null}.
 	 */
 	public GcpIamCredentialsAuthentication(GcpIamCredentialsAuthenticationOptions options,
-			RestOperations restOperations, TransportChannelProvider transportChannelProvider) {
+RestOperations restOperations, TransportChannelProvider transportChannelProvider) {
 
 		super(restOperations);
 
@@ -121,14 +121,14 @@ public class GcpIamCredentialsAuthentication extends GcpJwtAuthenticationSupport
 
 		try {
 			IamCredentialsSettings credentialsSettings = IamCredentialsSettings.newBuilder()
-				.setCredentialsProvider(() -> this.credentials)
-				.setTransportChannelProvider(this.transportChannelProvider)
-				.build();
+		.setCredentialsProvider(() -> this.credentials)
+		.setTransportChannelProvider(this.transportChannelProvider)
+		.build();
 			try (IamCredentialsClient iamCredentialsClient = IamCredentialsClient.create(credentialsSettings)) {
 				String payload = GoogleJsonUtil.JSON_FACTORY.toString(jwtPayload);
 				ServiceAccountName serviceAccountName = ServiceAccountName.of("-", serviceAccount);
 				SignJwtResponse response = iamCredentialsClient.signJwt(serviceAccountName, Collections.emptyList(),
-						payload);
+			payload);
 				return response.getSignedJwt();
 			}
 		}
@@ -142,7 +142,7 @@ public class GcpIamCredentialsAuthentication extends GcpJwtAuthenticationSupport
 	}
 
 	private static Map<String, Object> getJwtPayload(GcpIamCredentialsAuthenticationOptions options,
-			String serviceAccount) {
+String serviceAccount) {
 
 		Instant validUntil = options.getClock().instant().plus(options.getJwtValidity());
 

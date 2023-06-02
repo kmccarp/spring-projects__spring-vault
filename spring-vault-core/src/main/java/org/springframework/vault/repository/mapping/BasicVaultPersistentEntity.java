@@ -31,8 +31,7 @@ import org.springframework.util.StringUtils;
  * @author Mark Paluch
  * @since 2.0
  */
-public class BasicVaultPersistentEntity<T> extends BasicKeyValuePersistentEntity<T, VaultPersistentProperty>
-		implements VaultPersistentEntity<T> {
+public class BasicVaultPersistentEntity<T> extends BasicKeyValuePersistentEntity<T, VaultPersistentProperty>implements VaultPersistentEntity<T> {
 
 	private static final SpelExpressionParser PARSER = new SpelExpressionParser();
 
@@ -85,8 +84,8 @@ public class BasicVaultPersistentEntity<T> extends BasicKeyValuePersistentEntity
 	public String getSecretBackend() {
 
 		return this.backendExpression == null //
-				? this.backend //
-				: this.backendExpression.getValue(getEvaluationContext(null), String.class);
+	? this.backend //
+	: this.backendExpression.getValue(getEvaluationContext(null), String.class);
 	}
 
 }

@@ -123,7 +123,7 @@ public class VaultTransitTemplate implements VaultTransitOperations {
 		Assert.notNull(type, "Key type must not be null");
 
 		VaultResponseSupport<RawTransitKeyImpl> result = this.vaultOperations
-			.read(String.format("%s/export/%s/%s", this.path, type.getValue(), keyName), RawTransitKeyImpl.class);
+	.read(String.format("%s/export/%s/%s", this.path, type.getValue(), keyName), RawTransitKeyImpl.class);
 
 		return result != null ? result.getRequiredData() : null;
 	}
@@ -135,7 +135,7 @@ public class VaultTransitTemplate implements VaultTransitOperations {
 		Assert.hasText(keyName, "Key name must not be empty");
 
 		VaultResponseSupport<VaultTransitKeyImpl> result = this.vaultOperations
-			.read(String.format("%s/keys/%s", this.path, keyName), VaultTransitKeyImpl.class);
+	.read(String.format("%s/keys/%s", this.path, keyName), VaultTransitKeyImpl.class);
 
 		if (result != null) {
 			return result.getRequiredData();
@@ -171,8 +171,8 @@ public class VaultTransitTemplate implements VaultTransitOperations {
 		request.put("plaintext", Base64.getEncoder().encodeToString(plaintext.getBytes()));
 
 		return (String) this.vaultOperations.write(String.format("%s/encrypt/%s", this.path, keyName), request)
-			.getRequiredData()
-			.get("ciphertext");
+	.getRequiredData()
+	.get("ciphertext");
 	}
 
 	@Override
@@ -200,8 +200,8 @@ public class VaultTransitTemplate implements VaultTransitOperations {
 		applyTransitOptions(transitContext, request);
 
 		return (String) this.vaultOperations.write(String.format("%s/encrypt/%s", this.path, keyName), request)
-			.getRequiredData()
-			.get("ciphertext");
+	.getRequiredData()
+	.get("ciphertext");
 	}
 
 	@Override
@@ -226,7 +226,7 @@ public class VaultTransitTemplate implements VaultTransitOperations {
 		}
 
 		VaultResponse vaultResponse = this.vaultOperations.write(String.format("%s/encrypt/%s", this.path, keyName),
-				Collections.singletonMap("batch_input", batch));
+	Collections.singletonMap("batch_input", batch));
 
 		return toEncryptionResults(vaultResponse, batchRequest);
 	}
@@ -242,9 +242,9 @@ public class VaultTransitTemplate implements VaultTransitOperations {
 		request.put("ciphertext", ciphertext);
 
 		String plaintext = (String) this.vaultOperations
-			.write(String.format("%s/decrypt/%s", this.path, keyName), request)
-			.getRequiredData()
-			.get("plaintext");
+	.write(String.format("%s/decrypt/%s", this.path, keyName), request)
+	.getRequiredData()
+	.get("plaintext");
 
 		return new String(Base64.getDecoder().decode(plaintext));
 	}
@@ -274,9 +274,9 @@ public class VaultTransitTemplate implements VaultTransitOperations {
 		applyTransitOptions(transitContext, request);
 
 		String plaintext = (String) this.vaultOperations
-			.write(String.format("%s/decrypt/%s", this.path, keyName), request)
-			.getRequiredData()
-			.get("plaintext");
+	.write(String.format("%s/decrypt/%s", this.path, keyName), request)
+	.getRequiredData()
+	.get("plaintext");
 
 		return Base64.getDecoder().decode(plaintext);
 	}
@@ -303,7 +303,7 @@ public class VaultTransitTemplate implements VaultTransitOperations {
 		}
 
 		VaultResponse vaultResponse = this.vaultOperations.write(String.format("%s/decrypt/%s", this.path, keyName),
-				Collections.singletonMap("batch_input", batch));
+	Collections.singletonMap("batch_input", batch));
 
 		return toDecryptionResults(vaultResponse, batchRequest);
 	}
@@ -318,8 +318,8 @@ public class VaultTransitTemplate implements VaultTransitOperations {
 		request.put("ciphertext", ciphertext);
 
 		return (String) this.vaultOperations.write(String.format("%s/rewrap/%s", this.path, keyName), request)
-			.getRequiredData()
-			.get("ciphertext");
+	.getRequiredData()
+	.get("ciphertext");
 	}
 
 	@Override
@@ -336,8 +336,8 @@ public class VaultTransitTemplate implements VaultTransitOperations {
 		applyTransitOptions(transitContext, request);
 
 		return (String) this.vaultOperations.write(String.format("%s/rewrap/%s", this.path, keyName), request)
-			.getRequiredData()
-			.get("ciphertext");
+	.getRequiredData()
+	.get("ciphertext");
 	}
 
 	@Override
@@ -360,8 +360,8 @@ public class VaultTransitTemplate implements VaultTransitOperations {
 		Map<String, Object> request = toRequestBody(hmacRequest);
 
 		String hmac = (String) this.vaultOperations.write(String.format("%s/hmac/%s", this.path, keyName), request)
-			.getRequiredData()
-			.get("hmac");
+	.getRequiredData()
+	.get("hmac");
 
 		return Hmac.of(hmac);
 	}
@@ -372,8 +372,8 @@ public class VaultTransitTemplate implements VaultTransitOperations {
 		PropertyMapper mapper = PropertyMapper.get();
 
 		mapper.from(hmacRequest.getPlaintext()::getPlaintext)
-			.as(Base64.getEncoder()::encodeToString)
-			.to("input", request);
+	.as(Base64.getEncoder()::encodeToString)
+	.to("input", request);
 		mapper.from(hmacRequest::getAlgorithm).whenHasText().to("algorithm", request);
 		mapper.from(hmacRequest::getKeyVersion).whenNonNull().to("key_version", request);
 
@@ -400,8 +400,8 @@ public class VaultTransitTemplate implements VaultTransitOperations {
 		Map<String, Object> request = toRequestBody(signRequest);
 
 		String signature = (String) this.vaultOperations.write(String.format("%s/sign/%s", this.path, keyName), request)
-			.getRequiredData()
-			.get("signature");
+	.getRequiredData()
+	.get("signature");
 
 		return Signature.of(signature);
 	}
@@ -412,8 +412,8 @@ public class VaultTransitTemplate implements VaultTransitOperations {
 		PropertyMapper mapper = PropertyMapper.get();
 
 		mapper.from(signRequest.getPlaintext()::getPlaintext)
-			.as(Base64.getEncoder()::encodeToString)
-			.to("input", request);
+	.as(Base64.getEncoder()::encodeToString)
+	.to("input", request);
 		mapper.from(signRequest::getHashAlgorithm).whenHasText().to("hash_algorithm", request);
 		mapper.from(signRequest::getSignatureAlgorithm).whenHasText().to("signature_algorithm", request);
 
@@ -440,8 +440,8 @@ public class VaultTransitTemplate implements VaultTransitOperations {
 		Map<String, Object> request = toRequestBody(verificationRequest);
 
 		Map<String, Object> response = this.vaultOperations
-			.write(String.format("%s/verify/%s", this.path, keyName), request)
-			.getRequiredData();
+	.write(String.format("%s/verify/%s", this.path, keyName), request)
+	.getRequiredData();
 
 		if (response.containsKey("valid") && Boolean.valueOf("" + response.get("valid"))) {
 			return SignatureValidation.valid();
@@ -456,13 +456,13 @@ public class VaultTransitTemplate implements VaultTransitOperations {
 		PropertyMapper mapper = PropertyMapper.get();
 
 		mapper.from(verificationRequest.getPlaintext()::getPlaintext)
-			.as(Base64.getEncoder()::encodeToString)
-			.to("input", request);
+	.as(Base64.getEncoder()::encodeToString)
+	.to("input", request);
 		mapper.from(verificationRequest::getHmac).whenNonNull().as(Hmac::getHmac).to("hmac", request);
 		mapper.from(verificationRequest::getSignature)
-			.whenNonNull()
-			.as(Signature::getSignature)
-			.to("signature", request);
+	.whenNonNull()
+	.as(Signature::getSignature)
+	.to("signature", request);
 		mapper.from(verificationRequest::getHashAlgorithm).whenHasText().to("hash_algorithm", request);
 		mapper.from(verificationRequest::getSignatureAlgorithm).whenHasText().to("signature_algorithm", request);
 
@@ -748,23 +748,23 @@ public class VaultTransitTemplate implements VaultTransitOperations {
 				return false;
 			VaultTransitKeyImpl that = (VaultTransitKeyImpl) o;
 			return this.deletionAllowed == that.deletionAllowed && this.derived == that.derived
-					&& this.exportable == that.exportable && this.latestVersion == that.latestVersion
-					&& this.minDecryptionVersion == that.minDecryptionVersion
-					&& this.minEncryptionVersion == that.minEncryptionVersion
-					&& this.supportsDecryption == that.supportsDecryption
-					&& this.supportsEncryption == that.supportsEncryption
-					&& this.supportsDerivation == that.supportsDerivation
-					&& this.supportsSigning == that.supportsSigning && Objects.equals(this.name, that.name)
-					&& this.cipherMode.equals(that.cipherMode) && Objects.equals(this.type, that.type)
-					&& this.keys.equals(that.keys);
+		&& this.exportable == that.exportable && this.latestVersion == that.latestVersion
+		&& this.minDecryptionVersion == that.minDecryptionVersion
+		&& this.minEncryptionVersion == that.minEncryptionVersion
+		&& this.supportsDecryption == that.supportsDecryption
+		&& this.supportsEncryption == that.supportsEncryption
+		&& this.supportsDerivation == that.supportsDerivation
+		&& this.supportsSigning == that.supportsSigning && Objects.equals(this.name, that.name)
+		&& this.cipherMode.equals(that.cipherMode) && Objects.equals(this.type, that.type)
+		&& this.keys.equals(that.keys);
 		}
 
 		@Override
 		public int hashCode() {
 			return Objects.hash(this.name, this.cipherMode, this.type, this.deletionAllowed, this.derived,
-					this.exportable, this.keys, this.latestVersion, this.minDecryptionVersion,
-					this.minEncryptionVersion, this.supportsDecryption, this.supportsEncryption,
-					this.supportsDerivation, this.supportsSigning);
+		this.exportable, this.keys, this.latestVersion, this.minDecryptionVersion,
+		this.minEncryptionVersion, this.supportsDecryption, this.supportsEncryption,
+		this.supportsDerivation, this.supportsSigning);
 		}
 
 	}

@@ -77,7 +77,7 @@ public class SslConfiguration {
 	 * @since 1.1
 	 */
 	public SslConfiguration(KeyStoreConfiguration keyStoreConfiguration,
-			KeyStoreConfiguration trustStoreConfiguration) {
+KeyStoreConfiguration trustStoreConfiguration) {
 		this(keyStoreConfiguration, KeyConfiguration.unconfigured(), trustStoreConfiguration);
 	}
 
@@ -98,8 +98,8 @@ public class SslConfiguration {
 	 * @since 2.3.2
 	 */
 	public SslConfiguration(KeyStoreConfiguration keyStoreConfiguration, KeyConfiguration keyConfiguration,
-			KeyStoreConfiguration trustStoreConfiguration, List<String> enabledProtocols,
-			List<String> enabledCipherSuites) {
+KeyStoreConfiguration trustStoreConfiguration, List<String> enabledProtocols,
+List<String> enabledCipherSuites) {
 
 		Assert.notNull(keyStoreConfiguration, "KeyStore configuration must not be null");
 		Assert.notNull(keyConfiguration, "KeyConfiguration must not be null");
@@ -123,9 +123,9 @@ public class SslConfiguration {
 	 * @since 2.2
 	 */
 	public SslConfiguration(KeyStoreConfiguration keyStoreConfiguration, KeyConfiguration keyConfiguration,
-			KeyStoreConfiguration trustStoreConfiguration) {
+KeyStoreConfiguration trustStoreConfiguration) {
 		this(keyStoreConfiguration, keyConfiguration, trustStoreConfiguration, Collections.emptyList(),
-				Collections.emptyList());
+	Collections.emptyList());
 	}
 
 	/**
@@ -145,10 +145,10 @@ public class SslConfiguration {
 	 * @since 2.3.2
 	 */
 	public SslConfiguration(KeyStoreConfiguration keyStoreConfiguration, KeyStoreConfiguration trustStoreConfiguration,
-			List<String> enabledProtocols, List<String> enabledCipherSuites) {
+List<String> enabledProtocols, List<String> enabledCipherSuites) {
 
 		this(keyStoreConfiguration, KeyConfiguration.unconfigured(), trustStoreConfiguration, enabledProtocols,
-				enabledCipherSuites);
+	enabledCipherSuites);
 	}
 
 	/**
@@ -166,7 +166,7 @@ public class SslConfiguration {
 		Assert.isTrue(trustStore.exists(), () -> String.format("TrustStore %s does not exist", trustStore));
 
 		return new SslConfiguration(KeyStoreConfiguration.unconfigured(), KeyConfiguration.unconfigured(),
-				new KeyStoreConfiguration(trustStore, trustStorePassword, DEFAULT_KEYSTORE_TYPE));
+	new KeyStoreConfiguration(trustStore, trustStorePassword, DEFAULT_KEYSTORE_TYPE));
 	}
 
 	/**
@@ -193,7 +193,7 @@ public class SslConfiguration {
 	 */
 	public static SslConfiguration forKeyStore(Resource keyStore, @Nullable char[] keyStorePassword) {
 		return forKeyStore(new KeyStoreConfiguration(keyStore, keyStorePassword, DEFAULT_KEYSTORE_TYPE),
-				KeyConfiguration.unconfigured());
+	KeyConfiguration.unconfigured());
 	}
 
 	/**
@@ -237,14 +237,14 @@ public class SslConfiguration {
 	 * @see java.security.KeyStore
 	 */
 	public static SslConfiguration forKeyStore(Resource keyStore, @Nullable char[] keyStorePassword,
-			KeyConfiguration keyConfiguration) {
+KeyConfiguration keyConfiguration) {
 
 		Assert.notNull(keyStore, "KeyStore must not be null");
 		Assert.isTrue(keyStore.exists(), () -> String.format("KeyStore %s does not exist", keyStore));
 		Assert.notNull(keyConfiguration, "KeyConfiguration must not be null");
 
 		return new SslConfiguration(new KeyStoreConfiguration(keyStore, keyStorePassword, DEFAULT_KEYSTORE_TYPE),
-				keyConfiguration, KeyStoreConfiguration.unconfigured());
+	keyConfiguration, KeyStoreConfiguration.unconfigured());
 	}
 
 	/**
@@ -260,7 +260,7 @@ public class SslConfiguration {
 	 * @see java.security.KeyStore
 	 */
 	public static SslConfiguration create(Resource keyStore, @Nullable char[] keyStorePassword, Resource trustStore,
-			@Nullable char[] trustStorePassword) {
+@Nullable char[] trustStorePassword) {
 
 		Assert.notNull(keyStore, "KeyStore must not be null");
 		Assert.isTrue(keyStore.exists(), () -> String.format("KeyStore %s does not exist", keyStore));
@@ -269,7 +269,7 @@ public class SslConfiguration {
 		Assert.isTrue(trustStore.exists(), String.format("TrustStore %s does not exist", trustStore));
 
 		return new SslConfiguration(new KeyStoreConfiguration(keyStore, keyStorePassword, DEFAULT_KEYSTORE_TYPE),
-				new KeyStoreConfiguration(trustStore, trustStorePassword, DEFAULT_KEYSTORE_TYPE));
+	new KeyStoreConfiguration(trustStore, trustStorePassword, DEFAULT_KEYSTORE_TYPE));
 	}
 
 	/**
@@ -317,7 +317,7 @@ public class SslConfiguration {
 
 		Assert.notNull(enabledProtocols, "Enabled protocols must not be null");
 		return new SslConfiguration(this.keyStoreConfiguration, this.keyConfiguration, this.trustStoreConfiguration,
-				enabledProtocols, this.enabledCipherSuites);
+	enabledProtocols, this.enabledCipherSuites);
 	}
 
 	/**
@@ -357,7 +357,7 @@ public class SslConfiguration {
 		Assert.notNull(enabledProtocols, "Enabled cipher suites must not be null");
 
 		return new SslConfiguration(this.keyStoreConfiguration, this.keyConfiguration, this.trustStoreConfiguration,
-				this.enabledProtocols, enabledCipherSuites);
+	this.enabledProtocols, enabledCipherSuites);
 	}
 
 	/**
@@ -457,7 +457,7 @@ public class SslConfiguration {
 	public static class KeyStoreConfiguration {
 
 		private static final KeyStoreConfiguration UNCONFIGURED = new KeyStoreConfiguration(AbsentResource.INSTANCE,
-				null, DEFAULT_KEYSTORE_TYPE);
+	null, DEFAULT_KEYSTORE_TYPE);
 
 		/**
 		 * Store that holds certificates, private keys.
@@ -482,7 +482,7 @@ public class SslConfiguration {
 
 			Assert.notNull(resource, "Resource must not be null");
 			Assert.isTrue(resource instanceof AbsentResource || resource.exists(),
-					() -> String.format("Resource %s does not exist", resource));
+		() -> String.format("Resource %s does not exist", resource));
 			Assert.notNull(storeType, "Keystore type must not be null");
 
 			this.resource = resource;

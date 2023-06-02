@@ -98,7 +98,7 @@ public class LeaseAwareVaultPropertySource extends EnumerablePropertySource<Vaul
 	 * @param requestedSecret must not be {@literal null}.
 	 */
 	public LeaseAwareVaultPropertySource(String name, SecretLeaseContainer secretLeaseContainer,
-			RequestedSecret requestedSecret) {
+RequestedSecret requestedSecret) {
 		this(name, secretLeaseContainer, requestedSecret, PropertyTransformers.noop());
 	}
 
@@ -114,7 +114,7 @@ public class LeaseAwareVaultPropertySource extends EnumerablePropertySource<Vaul
 	 * @see PropertyTransformers
 	 */
 	public LeaseAwareVaultPropertySource(String name, SecretLeaseContainer secretLeaseContainer,
-			RequestedSecret requestedSecret, PropertyTransformer propertyTransformer) {
+RequestedSecret requestedSecret, PropertyTransformer propertyTransformer) {
 
 		this(name, secretLeaseContainer, requestedSecret, propertyTransformer, true);
 	}
@@ -134,7 +134,7 @@ public class LeaseAwareVaultPropertySource extends EnumerablePropertySource<Vaul
 	 * @see PropertyTransformers
 	 */
 	public LeaseAwareVaultPropertySource(String name, SecretLeaseContainer secretLeaseContainer,
-			RequestedSecret requestedSecret, PropertyTransformer propertyTransformer, boolean ignoreSecretNotFound) {
+RequestedSecret requestedSecret, PropertyTransformer propertyTransformer, boolean ignoreSecretNotFound) {
 
 		super(name);
 
@@ -168,7 +168,7 @@ public class LeaseAwareVaultPropertySource extends EnumerablePropertySource<Vaul
 
 		if (logger.isDebugEnabled()) {
 			logger.debug(String.format("Requesting secrets from Vault at %s using %s", this.requestedSecret.getPath(),
-					this.requestedSecret.getMode()));
+		this.requestedSecret.getMode()));
 		}
 
 		this.secretLeaseContainer.addLeaseListener(this.leaseListener);
@@ -230,7 +230,7 @@ public class LeaseAwareVaultPropertySource extends EnumerablePropertySource<Vaul
 		}
 
 		if (leaseEvent instanceof SecretLeaseExpiredEvent || leaseEvent instanceof BeforeSecretLeaseRevocationEvent
-				|| leaseEvent instanceof SecretLeaseCreatedEvent) {
+	|| leaseEvent instanceof SecretLeaseCreatedEvent) {
 			properties.clear();
 		}
 

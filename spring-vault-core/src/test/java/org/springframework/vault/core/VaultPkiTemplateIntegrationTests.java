@@ -172,17 +172,17 @@ class VaultPkiTemplateIntegrationTests extends IntegrationTestSupport {
 	void issueCertificateUsingFormat(KeyFixture keyFixture) throws Exception {
 
 		VaultCertificateRequest request = VaultCertificateRequest.builder()
-			.commonName(keyFixture.format.replace('_', '-') + ".hello.example.com")
-			.privateKeyFormat(keyFixture.privateKeyFormat)
-			.format(keyFixture.format)
-			.build();
+	.commonName(keyFixture.format.replace('_', '-') + ".hello.example.com")
+	.privateKeyFormat(keyFixture.privateKeyFormat)
+	.format(keyFixture.format)
+	.build();
 
 		VaultCertificateResponse certificateResponse = this.pkiOperations
-			.issueCertificate("testrole-" + keyFixture.keyType.name(), request);
+	.issueCertificate("testrole-" + keyFixture.keyType.name(), request);
 
 		CertificateBundle data = certificateResponse.getRequiredData();
 		assertThat(data.getX509Certificate().getSubjectX500Principal().getName())
-			.isEqualTo("CN=" + request.getCommonName());
+	.isEqualTo("CN=" + request.getCommonName());
 		assertThat(data.getX509IssuerCertificates()).hasSize(2);
 
 		assertThat(data.getPrivateKeySpec()).isNotNull();
@@ -251,9 +251,9 @@ class VaultPkiTemplateIntegrationTests extends IntegrationTestSupport {
 	void issueCertificateWithTtlShouldCreateCertificate() {
 
 		VaultCertificateRequest request = VaultCertificateRequest.builder()
-			.ttl(Duration.ofHours(48))
-			.commonName("hello.example.com")
-			.build();
+	.ttl(Duration.ofHours(48))
+	.commonName("hello.example.com")
+	.build();
 
 		VaultCertificateResponse certificateResponse = this.pkiOperations.issueCertificate("testrole", request);
 
@@ -261,34 +261,34 @@ class VaultPkiTemplateIntegrationTests extends IntegrationTestSupport {
 
 		Instant now = Instant.now();
 		assertThat(certificate.getNotAfter()).isAfter(Date.from(now.plus(40, ChronoUnit.HOURS)))
-			.isBefore(Date.from(now.plus(50, ChronoUnit.HOURS)));
+	.isBefore(Date.from(now.plus(50, ChronoUnit.HOURS)));
 	}
 
 	@Test
 	void signShouldSignCsr() {
 
 		String csr = "-----BEGIN CERTIFICATE REQUEST-----\n"
-				+ "MIICzTCCAbUCAQAwgYcxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpTb21lLVN0YXRl\n"
-				+ "MRUwEwYDVQQHEwxTYW4gVmF1bHRpbm8xFTATBgNVBAoTDFNwcmluZyBWYXVsdDEY\n"
-				+ "MBYGA1UEAxMPY3NyLmV4YW1wbGUuY29tMRswGQYJKoZIhvcNAQkBFgxzcHJpbmdA\n"
-				+ "dmF1bHQwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDVlDBT1gAONIp4\n"
-				+ "GQQ7BWDeqNzlscWqu5oQyfvw6oNFZzYWGVTgX/n72biv8d1Wx30MWpVYhbL0mk9m\n"
-				+ "Uu15elMZHPb4F4bk8VDSiB9527SwAd/QpkNC1RsPp2h6g2LvGPJ2eidHSlLtF2To\n"
-				+ "A4i6z0K0++nvYKSf9Af0sod2Z51xc9uPj/oN5z/8BQuGoCBpxJqgl7N/csMICixY\n"
-				+ "2fQcCUbdPPqE9INIInUHe3mPE/yvxko9aYGZ5jnrdZyiQaRRKBdWpvbRLKXQ78Fz\n"
-				+ "vXR3G33yn9JAN6wl1A916DiXzy2xHT19vyAn1hBUj2M6KFXChQ30oxTyTOqHCMLP\n"
-				+ "m/BSEOsPAgMBAAGgADANBgkqhkiG9w0BAQsFAAOCAQEAYFssueiUh3YGxnXcQ4dp\n"
-				+ "ZqVWeVyOuGGaFJ4BA0drwJ9Mt/iNmPUTGE2oBNnh2R7e7HwGcNysFHZZOZBEQ0Hh\n"
-				+ "Vn93GO7cfaTOetK0VtDqis1VFQD0eVPWf5s6UqT/+XGrFRhwJ9hM+2FQSrUDFecs\n"
-				+ "+/605n1rD7qOj3vkGrtwvEUrxyRaQaKpPLHmVHENqV6F1NsO3Z27f2FWWAZF2VKN\n"
-				+ "cCQQJNc//DbIN3J3JSElpIDBDHctoBoQVnMiwpCbSA+CaAtlWYJKnAfhTKeqnNMy\n"
-				+ "qf3ACZ+1sBIuqSP7dEJ2KfIezaCPQ88+PAloRB52LFa+iq3yI7F5VzkwAvQFnTi+\n" + "cQ==\n"
-				+ "-----END CERTIFICATE REQUEST-----";
+	+ "MIICzTCCAbUCAQAwgYcxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpTb21lLVN0YXRl\n"
+	+ "MRUwEwYDVQQHEwxTYW4gVmF1bHRpbm8xFTATBgNVBAoTDFNwcmluZyBWYXVsdDEY\n"
+	+ "MBYGA1UEAxMPY3NyLmV4YW1wbGUuY29tMRswGQYJKoZIhvcNAQkBFgxzcHJpbmdA\n"
+	+ "dmF1bHQwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDVlDBT1gAONIp4\n"
+	+ "GQQ7BWDeqNzlscWqu5oQyfvw6oNFZzYWGVTgX/n72biv8d1Wx30MWpVYhbL0mk9m\n"
+	+ "Uu15elMZHPb4F4bk8VDSiB9527SwAd/QpkNC1RsPp2h6g2LvGPJ2eidHSlLtF2To\n"
+	+ "A4i6z0K0++nvYKSf9Af0sod2Z51xc9uPj/oN5z/8BQuGoCBpxJqgl7N/csMICixY\n"
+	+ "2fQcCUbdPPqE9INIInUHe3mPE/yvxko9aYGZ5jnrdZyiQaRRKBdWpvbRLKXQ78Fz\n"
+	+ "vXR3G33yn9JAN6wl1A916DiXzy2xHT19vyAn1hBUj2M6KFXChQ30oxTyTOqHCMLP\n"
+	+ "m/BSEOsPAgMBAAGgADANBgkqhkiG9w0BAQsFAAOCAQEAYFssueiUh3YGxnXcQ4dp\n"
+	+ "ZqVWeVyOuGGaFJ4BA0drwJ9Mt/iNmPUTGE2oBNnh2R7e7HwGcNysFHZZOZBEQ0Hh\n"
+	+ "Vn93GO7cfaTOetK0VtDqis1VFQD0eVPWf5s6UqT/+XGrFRhwJ9hM+2FQSrUDFecs\n"
+	+ "+/605n1rD7qOj3vkGrtwvEUrxyRaQaKpPLHmVHENqV6F1NsO3Z27f2FWWAZF2VKN\n"
+	+ "cCQQJNc//DbIN3J3JSElpIDBDHctoBoQVnMiwpCbSA+CaAtlWYJKnAfhTKeqnNMy\n"
+	+ "qf3ACZ+1sBIuqSP7dEJ2KfIezaCPQ88+PAloRB52LFa+iq3yI7F5VzkwAvQFnTi+\n" + "cQ==\n"
+	+ "-----END CERTIFICATE REQUEST-----";
 
 		VaultCertificateRequest request = VaultCertificateRequest.create("hello.example.com");
 
 		VaultSignCertificateRequestResponse certificateResponse = this.pkiOperations.signCertificateRequest("testrole",
-				csr, request);
+	csr, request);
 
 		Certificate data = certificateResponse.getRequiredData();
 
@@ -305,7 +305,7 @@ class VaultPkiTemplateIntegrationTests extends IntegrationTestSupport {
 		VaultCertificateRequest request = VaultCertificateRequest.create("not.supported");
 
 		assertThatExceptionOfType(VaultException.class)
-			.isThrownBy(() -> this.pkiOperations.issueCertificate("testrole", request));
+	.isThrownBy(() -> this.pkiOperations.issueCertificate("testrole", request));
 	}
 
 	@Test
@@ -316,7 +316,7 @@ class VaultPkiTemplateIntegrationTests extends IntegrationTestSupport {
 		VaultCertificateResponse certificateResponse = this.pkiOperations.issueCertificate("testrole", request);
 
 		BigInteger serial = new BigInteger(
-				certificateResponse.getRequiredData().getSerialNumber().replaceAll("\\:", ""), 16);
+	certificateResponse.getRequiredData().getSerialNumber().replaceAll("\\:", ""), 16);
 		this.pkiOperations.revoke(certificateResponse.getRequiredData().getSerialNumber());
 
 		try (InputStream in = this.pkiOperations.getCrl(Encoding.DER)) {

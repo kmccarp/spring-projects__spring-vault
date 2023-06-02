@@ -155,7 +155,7 @@ public class KubernetesAuthenticationOptions {
 			Assert.notNull(this.role, "Role must not be null");
 
 			return new KubernetesAuthenticationOptions(this.path, this.role,
-					this.jwtSupplier == null ? new KubernetesServiceAccountTokenFile() : this.jwtSupplier);
+		this.jwtSupplier == null ? new KubernetesServiceAccountTokenFile() : this.jwtSupplier);
 		}
 
 	}

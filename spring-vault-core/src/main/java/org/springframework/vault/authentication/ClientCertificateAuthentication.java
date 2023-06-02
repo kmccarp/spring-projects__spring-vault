@@ -67,7 +67,7 @@ public class ClientCertificateAuthentication implements ClientAuthentication, Au
 	 * @since 2.3
 	 */
 	public ClientCertificateAuthentication(ClientCertificateAuthenticationOptions options,
-			RestOperations restOperations) {
+RestOperations restOperations) {
 
 		Assert.notNull(options, "ClientCertificateAuthenticationOptions must not be null");
 		Assert.notNull(restOperations, "RestOperations must not be null");
@@ -97,7 +97,7 @@ public class ClientCertificateAuthentication implements ClientAuthentication, Au
 		Map<String, Object> body = getRequestBody(options);
 
 		return AuthenticationSteps.fromSupplier(() -> body)
-			.login(post(AuthenticationUtil.getLoginPath(options.getPath())).as(VaultResponse.class));
+	.login(post(AuthenticationUtil.getLoginPath(options.getPath())).as(VaultResponse.class));
 	}
 
 	@Override
@@ -115,7 +115,7 @@ public class ClientCertificateAuthentication implements ClientAuthentication, Au
 		try {
 			Map<String, Object> request = getRequestBody(this.options);
 			VaultResponse response = this.restOperations
-				.postForObject(AuthenticationUtil.getLoginPath(this.options.getPath()), request, VaultResponse.class);
+		.postForObject(AuthenticationUtil.getLoginPath(this.options.getPath()), request, VaultResponse.class);
 
 			Assert.state(response.getAuth() != null, "Auth field must not be null");
 

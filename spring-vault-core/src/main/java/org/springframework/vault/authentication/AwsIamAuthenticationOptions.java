@@ -80,7 +80,7 @@ public class AwsIamAuthenticationOptions {
 	private final URI endpointUri;
 
 	private AwsIamAuthenticationOptions(String path, AwsCredentialsProvider credentialsProvider,
-			AwsRegionProvider regionProvider, @Nullable String role, @Nullable String serverId, URI endpointUri) {
+AwsRegionProvider regionProvider, @Nullable String role, @Nullable String serverId, URI endpointUri) {
 
 		this.path = path;
 		this.credentialsProvider = credentialsProvider;
@@ -305,7 +305,7 @@ public class AwsIamAuthenticationOptions {
 			Assert.state(this.credentialsProvider != null, "Credentials or CredentialProvider must not be null");
 
 			return new AwsIamAuthenticationOptions(this.path, this.credentialsProvider, this.regionProvider, this.role,
-					this.serverId, this.endpointUri);
+		this.serverId, this.endpointUri);
 		}
 
 	}

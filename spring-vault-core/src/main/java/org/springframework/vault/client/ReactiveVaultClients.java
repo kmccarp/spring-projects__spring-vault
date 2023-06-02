@@ -87,7 +87,7 @@ public class ReactiveVaultClients {
 	 * @since 2.3
 	 */
 	public static WebClient createWebClient(ReactiveVaultEndpointProvider endpointProvider,
-			ClientHttpConnector connector) {
+ClientHttpConnector connector) {
 		return createWebClientBuilder(endpointProvider, connector).build();
 	}
 
@@ -102,7 +102,7 @@ public class ReactiveVaultClients {
 	 * @return the prepared {@link WebClient.Builder}.
 	 */
 	static WebClient.Builder createWebClientBuilder(ReactiveVaultEndpointProvider endpointProvider,
-			ClientHttpConnector connector) {
+ClientHttpConnector connector) {
 
 		Assert.notNull(endpointProvider, "ReactiveVaultEndpointProvider must not be null");
 		Assert.notNull(connector, "ClientHttpConnector must not be null");
@@ -129,7 +129,7 @@ public class ReactiveVaultClients {
 				simpleSource = true;
 
 				UriBuilderFactory uriBuilderFactory = VaultClients
-					.createUriBuilderFactory(((VaultEndpointProviderAdapter) endpointProvider).source);
+			.createUriBuilderFactory(((VaultEndpointProviderAdapter) endpointProvider).source);
 				builder.uriBuilderFactory(uriBuilderFactory);
 			}
 		}
@@ -144,12 +144,12 @@ public class ReactiveVaultClients {
 					return endpointProvider.getVaultEndpoint().flatMap(endpoint -> {
 
 						UriComponents uriComponents = UriComponentsBuilder.fromUri(uri)
-							.scheme(endpoint.getScheme())
-							.host(endpoint.getHost())
-							.port(endpoint.getPort())
-							.replacePath(endpoint.getPath())
-							.path(VaultClients.normalizePath(endpoint.getPath(), uri.getPath()))
-							.build();
+					.scheme(endpoint.getScheme())
+					.host(endpoint.getHost())
+					.port(endpoint.getPort())
+					.replacePath(endpoint.getPath())
+					.path(VaultClients.normalizePath(endpoint.getPath(), uri.getPath()))
+					.build();
 
 						ClientRequest requestToSend = ClientRequest.from(request).url(uriComponents.toUri()).build();
 

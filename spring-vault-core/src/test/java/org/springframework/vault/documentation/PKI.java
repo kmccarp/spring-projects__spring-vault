@@ -42,11 +42,11 @@ public class PKI {
 		VaultPkiOperations pkiOperations = operations.opsForPki("pki");
 
 		VaultCertificateRequest request = VaultCertificateRequest.builder()								// <1>
-					.ttl(Duration.ofHours(48))
-					.altNames(Arrays.asList("prod.dc-1.example.com", "prod.dc-2.example.com"))
-					.withIpSubjectAltName("1.2.3.4")
-					.commonName("hello.example.com")
-					.build();
+	.ttl(Duration.ofHours(48))
+	.altNames(Arrays.asList("prod.dc-1.example.com", "prod.dc-2.example.com"))
+	.withIpSubjectAltName("1.2.3.4")
+	.commonName("hello.example.com")
+	.build();
 
 		VaultCertificateResponse response = pkiOperations.issueCertificate("production", request); 		// <2>
 		CertificateBundle certificateBundle = response.getRequiredData();

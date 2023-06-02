@@ -71,9 +71,9 @@ public class DefaultVaultTypeMapper extends DefaultTypeMapper<Map<String, Object
 	 * @param mappingContext must not be {@literal null} or empty.
 	 */
 	public DefaultVaultTypeMapper(@Nullable String typeKey,
-			MappingContext<? extends PersistentEntity<?, ?>, ?> mappingContext) {
+MappingContext<? extends PersistentEntity<?, ?>, ?> mappingContext) {
 		this(typeKey, new SecretDocumentTypeAliasAccessor(typeKey), mappingContext,
-				Collections.singletonList(new SimpleTypeInformationMapper()));
+	Collections.singletonList(new SimpleTypeInformationMapper()));
 	}
 
 	public DefaultVaultTypeMapper(@Nullable String typeKey, List<? extends TypeInformationMapper> mappers) {
@@ -81,8 +81,8 @@ public class DefaultVaultTypeMapper extends DefaultTypeMapper<Map<String, Object
 	}
 
 	private DefaultVaultTypeMapper(@Nullable String typeKey, TypeAliasAccessor<Map<String, Object>> accessor,
-			MappingContext<? extends PersistentEntity<?, ?>, ?> mappingContext,
-			List<? extends TypeInformationMapper> mappers) {
+MappingContext<? extends PersistentEntity<?, ?>, ?> mappingContext,
+List<? extends TypeInformationMapper> mappers) {
 
 		super(accessor, mappingContext, mappers);
 

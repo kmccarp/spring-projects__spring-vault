@@ -41,8 +41,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @ExtendWith(SpringExtension.class)
 @ExtendWith(VaultExtension.class)
-@TestPropertySource(properties = { "vault.uri=https://localhost:8123", "vault.authentication=kubernetes",
-		"vault.kubernetes.role=my-role", "vault.kubernetes.service-account-token-file=target/token" })
+@TestPropertySource(properties = {"vault.uri=https://localhost:8123", "vault.authentication=kubernetes","vault.kubernetes.role=my-role", "vault.kubernetes.service-account-token-file=target/token"})
 class EnvironmentVaultConfigurationKubernetesAuthenticationIntegrationTests {
 
 	@Configuration

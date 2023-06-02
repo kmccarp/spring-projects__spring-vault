@@ -45,7 +45,7 @@ public class VaultPersistentProperty extends KeyValuePersistentProperty<VaultPer
 	 * @param simpleTypeHolder must not be {@literal null}.
 	 */
 	public VaultPersistentProperty(Property property, PersistentEntity<?, VaultPersistentProperty> owner,
-			SimpleTypeHolder simpleTypeHolder) {
+SimpleTypeHolder simpleTypeHolder) {
 
 		super(property, owner, simpleTypeHolder);
 	}

@@ -56,8 +56,8 @@ public class GcpIamAuthenticationOptions extends GcpIamAuthenticationSupport {
 	private final GcpProjectIdAccessor projectIdAccessor;
 
 	private GcpIamAuthenticationOptions(String path, GcpCredentialSupplier credentialSupplier, String role,
-			Duration jwtValidity, Clock clock, GcpServiceAccountIdAccessor serviceAccountIdSupplier,
-			GcpProjectIdAccessor projectIdAccessor) {
+Duration jwtValidity, Clock clock, GcpServiceAccountIdAccessor serviceAccountIdSupplier,
+GcpProjectIdAccessor projectIdAccessor) {
 
 		super(path, role, jwtValidity, clock);
 
@@ -188,7 +188,7 @@ public class GcpIamAuthenticationOptions extends GcpIamAuthenticationSupport {
 		 * @since 2.1
 		 */
 		GcpIamAuthenticationOptionsBuilder serviceAccountIdAccessor(
-				GcpServiceAccountIdAccessor serviceAccountIdAccessor) {
+	GcpServiceAccountIdAccessor serviceAccountIdAccessor) {
 
 			Assert.notNull(serviceAccountIdAccessor, "GcpServiceAccountIdAccessor must not be null");
 
@@ -279,7 +279,7 @@ public class GcpIamAuthenticationOptions extends GcpIamAuthenticationSupport {
 			Assert.notNull(this.role, "Role must not be null");
 
 			return new GcpIamAuthenticationOptions(this.path, this.credentialSupplier, this.role, this.jwtValidity,
-					this.clock, this.serviceAccountIdAccessor, this.projectIdAccessor);
+		this.clock, this.serviceAccountIdAccessor, this.projectIdAccessor);
 		}
 
 	}

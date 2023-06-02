@@ -47,8 +47,8 @@ public class VaultMetadataResponse {
 	private final List<Versioned.Metadata> versions;
 
 	private VaultMetadataResponse(boolean casRequired, Instant createdTime, int currentVersion,
-			Duration deleteVersionAfter, int maxVersions, int oldestVersion, Instant updatedTime,
-			List<Versioned.Metadata> versions) {
+Duration deleteVersionAfter, int maxVersions, int oldestVersion, Instant updatedTime,
+List<Versioned.Metadata> versions) {
 		this.casRequired = casRequired;
 		this.createdTime = createdTime;
 		this.currentVersion = currentVersion;
@@ -187,7 +187,7 @@ public class VaultMetadataResponse {
 
 		public VaultMetadataResponse build() {
 			return new VaultMetadataResponse(this.casRequired, this.createdTime, this.currentVersion,
-					this.deleteVersionAfter, this.maxVersions, this.oldestVersion, this.updatedTime, this.versions);
+		this.deleteVersionAfter, this.maxVersions, this.oldestVersion, this.updatedTime, this.versions);
 		}
 
 	}

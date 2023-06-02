@@ -60,7 +60,7 @@ public class VaultRevisionRepository<T> implements RevisionRepository<T, String,
 	private final VaultConverter converter;
 
 	public VaultRevisionRepository(EntityInformation<T, String> metadata, String keyspace,
-			VaultKeyValueTemplate keyValueTemplate) {
+VaultKeyValueTemplate keyValueTemplate) {
 
 		Assert.notNull(metadata, "EntityInformation must not be null");
 		Assert.notNull(keyValueTemplate, "VaultKeyValueTemplate must not be null");
@@ -119,7 +119,7 @@ public class VaultRevisionRepository<T> implements RevisionRepository<T, String,
 			}
 
 			T entity = versioned.hasData() ? converter.read(this.metadata.getJavaType(), createDocument(id, versioned))
-					: null;
+		: null;
 			revisions.add(Revision.of(new VaultRevisionMetadata(versioned), entity));
 		}
 		return revisions;

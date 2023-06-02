@@ -58,7 +58,7 @@ public class RestTemplateBuilder {
 	private @Nullable VaultEndpointProvider endpointProvider;
 
 	private Supplier<ClientHttpRequestFactory> requestFactory = () -> ClientHttpRequestFactoryFactory
-		.create(new ClientOptions(), SslConfiguration.unconfigured());
+.create(new ClientOptions(), SslConfiguration.unconfigured());
 
 	private @Nullable ResponseErrorHandler errorHandler;
 
@@ -222,10 +222,10 @@ public class RestTemplateBuilder {
 
 		LinkedHashMap<String, String> defaultHeaders = new LinkedHashMap<>(this.defaultHeaders);
 		LinkedHashSet<RestTemplateRequestCustomizer<ClientHttpRequest>> requestCustomizers = new LinkedHashSet<>(
-				this.requestCustomizers);
+	this.requestCustomizers);
 
 		RestTemplate restTemplate = VaultClients.createRestTemplate(this.endpointProvider,
-				new RestTemplateBuilderClientHttpRequestFactoryWrapper(requestFactory, requestCustomizers));
+	new RestTemplateBuilderClientHttpRequestFactoryWrapper(requestFactory, requestCustomizers));
 
 		restTemplate.getInterceptors().add((httpRequest, bytes, clientHttpRequestExecution) -> {
 
@@ -247,7 +247,7 @@ public class RestTemplateBuilder {
 		private final Set<RestTemplateRequestCustomizer<ClientHttpRequest>> requestCustomizers;
 
 		RestTemplateBuilderClientHttpRequestFactoryWrapper(ClientHttpRequestFactory requestFactory,
-				Set<RestTemplateRequestCustomizer<ClientHttpRequest>> requestCustomizers) {
+	Set<RestTemplateRequestCustomizer<ClientHttpRequest>> requestCustomizers) {
 
 			super(requestFactory);
 			this.requestCustomizers = requestCustomizers;
@@ -255,7 +255,7 @@ public class RestTemplateBuilder {
 
 		@Override
 		protected ClientHttpRequest createRequest(URI uri, HttpMethod httpMethod,
-				ClientHttpRequestFactory requestFactory) throws IOException {
+	ClientHttpRequestFactory requestFactory) throws IOException {
 
 			ClientHttpRequest request = requestFactory.createRequest(uri, httpMethod);
 

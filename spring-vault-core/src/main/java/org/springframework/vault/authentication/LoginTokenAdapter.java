@@ -82,7 +82,7 @@ public class LoginTokenAdapter implements ClientAuthentication {
 
 		try {
 			ResponseEntity<VaultResponse> entity = restOperations.exchange("auth/token/lookup-self", HttpMethod.GET,
-					new HttpEntity<>(VaultHttpHeaders.from(token)), VaultResponse.class);
+		new HttpEntity<>(VaultHttpHeaders.from(token)), VaultResponse.class);
 
 			Assert.state(entity.getBody() != null && entity.getBody().getData() != null, "Token response is null");
 
@@ -90,7 +90,7 @@ public class LoginTokenAdapter implements ClientAuthentication {
 		}
 		catch (HttpStatusCodeException e) {
 			throw new VaultTokenLookupException(String.format("Token self-lookup failed: %s %s", e.getStatusCode(),
-					VaultResponses.getError(e.getResponseBodyAsString())), e);
+		VaultResponses.getError(e.getResponseBodyAsString())), e);
 		}
 		catch (RestClientException e) {
 			throw new VaultTokenLookupException("Token self-lookup failed", e);

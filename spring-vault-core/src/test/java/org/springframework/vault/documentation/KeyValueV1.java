@@ -47,7 +47,7 @@ public class KeyValueV1 {
 		// tag::keyValueApi[]
 		VaultOperations operations = new VaultTemplate(new VaultEndpoint());
 		VaultKeyValueOperations keyValueOperations = operations.opsForKeyValue("secret",
-									VaultKeyValueOperationsSupport.KeyValueBackend.KV_1);
+	VaultKeyValueOperationsSupport.KeyValueBackend.KV_1);
 
 		keyValueOperations.put("elvis", Collections.singletonMap("password", "409-52-2002"));
 

@@ -123,7 +123,7 @@ import org.springframework.web.client.HttpStatusCodeException;
 public class SecretLeaseContainer extends SecretLeaseEventPublisher implements InitializingBean, DisposableBean {
 
 	private static final AtomicIntegerFieldUpdater<SecretLeaseContainer> UPDATER = AtomicIntegerFieldUpdater
-		.newUpdater(SecretLeaseContainer.class, "status");
+.newUpdater(SecretLeaseContainer.class, "status");
 
 	private static final AtomicInteger poolId = new AtomicInteger();
 
@@ -360,8 +360,8 @@ public class SecretLeaseContainer extends SecretLeaseEventPublisher implements I
 	}
 
 	private void doStart(RequestedSecret requestedSecret, LeaseRenewalScheduler renewalScheduler,
-			BiConsumer<VaultResponseSupport<Map<String, Object>>, Lease> callback,
-			Runnable cannotObtainSecretsCallback) {
+BiConsumer<VaultResponseSupport<Map<String, Object>>, Lease> callback,
+Runnable cannotObtainSecretsCallback) {
 
 		VaultResponseSupport<Map<String, Object>> secrets = doGetSecrets(requestedSecret);
 
@@ -371,7 +371,7 @@ public class SecretLeaseContainer extends SecretLeaseEventPublisher implements I
 
 			if (StringUtils.hasText(secrets.getLeaseId())) {
 				lease = Lease.of(secrets.getLeaseId(), Duration.ofSeconds(secrets.getLeaseDuration()),
-						secrets.isRenewable());
+			secrets.isRenewable());
 			}
 			else if (isRotatingGenericSecret(requestedSecret, secrets)) {
 				lease = Lease.fromTimeToLive(Duration.ofSeconds(secrets.getLeaseDuration()));
@@ -395,10 +395,10 @@ public class SecretLeaseContainer extends SecretLeaseEventPublisher implements I
 	}
 
 	private static boolean isRotatingGenericSecret(RequestedSecret requestedSecret,
-			VaultResponseSupport<Map<String, Object>> secrets) {
+VaultResponseSupport<Map<String, Object>> secrets) {
 
 		return Mode.ROTATE.equals(requestedSecret.getMode()) && !secrets.isRenewable()
-				&& secrets.getLeaseDuration() > 0;
+	&& secrets.getLeaseDuration() > 0;
 	}
 
 	/**
@@ -433,7 +433,7 @@ public class SecretLeaseContainer extends SecretLeaseEventPublisher implements I
 				ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
 				scheduler.setDaemon(true);
 				scheduler
-					.setThreadNamePrefix(String.format("%s-%d-", getClass().getSimpleName(), poolId.incrementAndGet()));
+			.setThreadNamePrefix(String.format("%s-%d-", getClass().getSimpleName(), poolId.incrementAndGet()));
 				scheduler.afterPropertiesSet();
 
 				this.taskScheduler = scheduler;
@@ -536,7 +536,7 @@ public class SecretLeaseContainer extends SecretLeaseEventPublisher implements I
 	}
 
 	private void scheduleLeaseRenewal(RequestedSecret requestedSecret, Lease lease,
-			LeaseRenewalScheduler leaseRenewal) {
+LeaseRenewalScheduler leaseRenewal) {
 
 		logRenewalCandidate(requestedSecret, lease, "renewal");
 
@@ -548,7 +548,7 @@ public class SecretLeaseContainer extends SecretLeaseEventPublisher implements I
 	}
 
 	private Lease renewAndSchedule(RequestedSecret requestedSecret, LeaseRenewalScheduler leaseRenewal,
-			Lease leaseToRenew) {
+Lease leaseToRenew) {
 
 		Lease newLease = doRenewLease(requestedSecret, leaseToRenew);
 
@@ -589,11 +589,11 @@ public class SecretLeaseContainer extends SecretLeaseEventPublisher implements I
 
 			if (lease.hasLeaseId()) {
 				logger.debug(String.format("Secret %s with Lease %s qualified for %s", requestedSecret.getPath(),
-						lease.getLeaseId(), action));
+			lease.getLeaseId(), action));
 			}
 			else {
 				logger.debug(String.format("Secret %s with cache hint is qualified for %s", requestedSecret.getPath(),
-						action));
+			action));
 			}
 		}
 	}
@@ -646,7 +646,7 @@ public class SecretLeaseContainer extends SecretLeaseEventPublisher implements I
 			Lease renewed = lease.hasLeaseId() ? doRenew(lease) : lease;
 
 			if (!renewed.hasLeaseId() || renewed.getLeaseDuration().isZero()
-					|| renewed.getLeaseDuration().getSeconds() < this.minRenewal.getSeconds()) {
+		|| renewed.getLeaseDuration().getSeconds() < this.minRenewal.getSeconds()) {
 
 				onLeaseExpired(requestedSecret, lease);
 				return Lease.none();
@@ -668,8 +668,8 @@ public class SecretLeaseContainer extends SecretLeaseEventPublisher implements I
 				}
 
 				exceptionToUse = new VaultException(String.format("Cannot renew lease: Status %s %s %s",
-						httpException.getStatusCode().value(), httpException.getStatusText(),
-						VaultResponses.getError(httpException.getResponseBodyAsString())), e);
+			httpException.getStatusCode().value(), httpException.getStatusText(),
+			VaultResponses.getError(httpException.getResponseBodyAsString())), e);
 			}
 			else {
 				exceptionToUse = new VaultException("Cannot renew lease", e);
@@ -745,7 +745,7 @@ public class SecretLeaseContainer extends SecretLeaseEventPublisher implements I
 		}
 		catch (HttpStatusCodeException e) {
 			onError(requestedSecret, lease, new VaultException(
-					String.format("Cannot revoke lease: %s", VaultResponses.getError(e.getResponseBodyAsString()))));
+		String.format("Cannot revoke lease: %s", VaultResponses.getError(e.getResponseBodyAsString()))));
 		}
 		catch (RuntimeException e) {
 			onError(requestedSecret, lease, e);
@@ -788,16 +788,16 @@ public class SecretLeaseContainer extends SecretLeaseEventPublisher implements I
 		 * @param expiryThreshold duration to renew before {@link Lease}.
 		 */
 		void scheduleRenewal(RequestedSecret requestedSecret, RenewLease renewLease, Lease lease, Duration minRenewal,
-				Duration expiryThreshold) {
+	Duration expiryThreshold) {
 
 			if (logger.isDebugEnabled()) {
 				if (lease.hasLeaseId()) {
 					logger.debug(String.format("Scheduling renewal for secret %s with lease %s, lease duration %d",
-							requestedSecret.getPath(), lease.getLeaseId(), lease.getLeaseDuration().getSeconds()));
+				requestedSecret.getPath(), lease.getLeaseId(), lease.getLeaseDuration().getSeconds()));
 				}
 				else {
 					logger.debug(String.format("Scheduling renewal for secret %s, with cache hint duration %d",
-							requestedSecret.getPath(), lease.getLeaseDuration().getSeconds()));
+				requestedSecret.getPath(), lease.getLeaseDuration().getSeconds()));
 				}
 			}
 
@@ -823,7 +823,7 @@ public class SecretLeaseContainer extends SecretLeaseEventPublisher implements I
 					if (logger.isDebugEnabled()) {
 						if (lease.hasLeaseId()) {
 							logger.debug(String.format("Renewing lease %s for secret %s", lease.getLeaseId(),
-									requestedSecret.getPath()));
+						requestedSecret.getPath()));
 						}
 						else {
 							logger.debug(String.format("Renewing secret without lease %s", requestedSecret.getPath()));
@@ -844,7 +844,7 @@ public class SecretLeaseContainer extends SecretLeaseEventPublisher implements I
 			};
 
 			ScheduledFuture<?> scheduledFuture = this.taskScheduler.schedule(task,
-					new OneShotTrigger(getRenewalSeconds(lease, minRenewal, expiryThreshold)));
+		new OneShotTrigger(getRenewalSeconds(lease, minRenewal, expiryThreshold)));
 
 			this.schedules.put(lease, scheduledFuture);
 		}
@@ -856,7 +856,7 @@ public class SecretLeaseContainer extends SecretLeaseEventPublisher implements I
 
 				if (logger.isDebugEnabled()) {
 					logger.debug(
-							String.format("Canceling previously registered schedule for lease %s", lease.getLeaseId()));
+				String.format("Canceling previously registered schedule for lease %s", lease.getLeaseId()));
 				}
 
 				scheduledFuture.cancel(false);
@@ -879,7 +879,7 @@ public class SecretLeaseContainer extends SecretLeaseEventPublisher implements I
 
 		private long getRenewalSeconds(Lease lease, Duration minRenewal, Duration expiryThreshold) {
 			return Math.max(minRenewal.getSeconds(),
-					lease.getLeaseDuration().getSeconds() - expiryThreshold.getSeconds());
+		lease.getLeaseDuration().getSeconds() - expiryThreshold.getSeconds());
 		}
 
 		private boolean isLeaseRenewable(@Nullable Lease lease, RequestedSecret requestedSecret) {
@@ -911,7 +911,7 @@ public class SecretLeaseContainer extends SecretLeaseEventPublisher implements I
 			}
 
 			return lease.hasLeaseId() && !lease.getLeaseDuration().isZero() && !lease.isRenewable()
-					&& requestedSecret.getMode() == Mode.ROTATE;
+		&& requestedSecret.getMode() == Mode.ROTATE;
 		}
 
 	}
@@ -923,7 +923,7 @@ public class SecretLeaseContainer extends SecretLeaseEventPublisher implements I
 	static class OneShotTrigger implements Trigger {
 
 		private static final AtomicIntegerFieldUpdater<OneShotTrigger> UPDATER = AtomicIntegerFieldUpdater
-			.newUpdater(OneShotTrigger.class, "status");
+	.newUpdater(OneShotTrigger.class, "status");
 
 		private static final int STATUS_ARMED = 0;
 

@@ -46,7 +46,7 @@ public abstract class VaultResponses {
 	private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
 	private static final MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter(
-			OBJECT_MAPPER);
+OBJECT_MAPPER);
 
 	/**
 	 * Build a {@link VaultException} given {@link HttpStatusCodeException}.
@@ -61,7 +61,7 @@ public abstract class VaultResponses {
 
 		if (StringUtils.hasText(message)) {
 			return new VaultException(
-					String.format("Status %s %s: %s", renderStatus(e.getStatusCode()), e.getStatusText(), message), e);
+		String.format("Status %s %s: %s", renderStatus(e.getStatusCode()), e.getStatusText(), message), e);
 		}
 
 		return new VaultException(String.format("Status %s %s", renderStatus(e.getStatusCode()), e.getStatusText()), e);
@@ -82,11 +82,11 @@ public abstract class VaultResponses {
 
 		if (StringUtils.hasText(message)) {
 			return new VaultException(String.format("Status %s %s [%s]: %s", renderStatus(e.getStatusCode()),
-					e.getStatusText(), path, message), e);
+		e.getStatusText(), path, message), e);
 		}
 
 		return new VaultException(
-				String.format("Status %s %s [%s]", renderStatus(e.getStatusCode()), e.getStatusText(), path), e);
+	String.format("Status %s %s [%s]", renderStatus(e.getStatusCode()), e.getStatusText(), path), e);
 	}
 
 	public static VaultException buildException(HttpStatusCode statusCode, String path, String message) {
@@ -104,7 +104,7 @@ public abstract class VaultResponses {
 	 * @return the {@link ParameterizedTypeReference} for {@code responseType}.
 	 */
 	public static <T> ParameterizedTypeReference<VaultResponseSupport<T>> getTypeReference(
-			final Class<T> responseType) {
+final Class<T> responseType) {
 
 		Assert.notNull(responseType, "Response type must not be null");
 
@@ -112,7 +112,7 @@ public abstract class VaultResponses {
 
 			@Override
 			public Type[] getActualTypeArguments() {
-				return new Type[] { responseType };
+				return new Type[]{responseType};
 			}
 
 			@Override

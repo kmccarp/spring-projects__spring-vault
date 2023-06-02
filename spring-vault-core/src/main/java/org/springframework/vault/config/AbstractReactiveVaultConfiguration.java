@@ -88,7 +88,7 @@ public abstract class AbstractReactiveVaultConfiguration extends AbstractVaultCo
 	 * @since 2.2
 	 */
 	protected WebClientBuilder webClientBuilder(VaultEndpointProvider endpointProvider,
-			ClientHttpConnector httpConnector) {
+ClientHttpConnector httpConnector) {
 		return webClientBuilder(ReactiveVaultClients.wrap(endpointProvider), httpConnector);
 	}
 
@@ -101,13 +101,13 @@ public abstract class AbstractReactiveVaultConfiguration extends AbstractVaultCo
 	 * @since 2.3
 	 */
 	protected WebClientBuilder webClientBuilder(ReactiveVaultEndpointProvider endpointProvider,
-			ClientHttpConnector httpConnector) {
+ClientHttpConnector httpConnector) {
 
 		ObjectProvider<WebClientCustomizer> customizers = getBeanFactory().getBeanProvider(WebClientCustomizer.class);
 
 		WebClientBuilder builder = WebClientBuilder.builder()
-			.endpointProvider(endpointProvider)
-			.httpConnector(httpConnector);
+	.endpointProvider(endpointProvider)
+	.httpConnector(httpConnector);
 
 		builder.customizers(customizers.stream().toArray(WebClientCustomizer[]::new));
 
@@ -142,7 +142,7 @@ public abstract class AbstractReactiveVaultConfiguration extends AbstractVaultCo
 	public ReactiveVaultTemplate reactiveVaultTemplate() {
 
 		return new ReactiveVaultTemplate(webClientBuilder(reactiveVaultEndpointProvider(), clientHttpConnector()),
-				getReactiveSessionManager());
+	getReactiveSessionManager());
 	}
 
 	/**
@@ -170,7 +170,7 @@ public abstract class AbstractReactiveVaultConfiguration extends AbstractVaultCo
 		WebClient webClient = getWebClientFactory().create();
 
 		return new ReactiveLifecycleAwareSessionManager(vaultTokenSupplier(), getVaultThreadPoolTaskScheduler(),
-				webClient);
+	webClient);
 	}
 
 	/**
@@ -197,15 +197,15 @@ public abstract class AbstractReactiveVaultConfiguration extends AbstractVaultCo
 
 			WebClient webClient = getWebClientFactory().create();
 			AuthenticationStepsOperator stepsOperator = new AuthenticationStepsOperator(
-					factory.getAuthenticationSteps(), webClient);
+		factory.getAuthenticationSteps(), webClient);
 
 			return CachingVaultTokenSupplier.of(stepsOperator);
 		}
 
 		throw new IllegalStateException(String.format(
-				"Cannot construct VaultTokenSupplier from %s. "
-						+ "ClientAuthentication must implement AuthenticationStepsFactory or be TokenAuthentication",
-				clientAuthentication));
+	"Cannot construct VaultTokenSupplier from %s. "
++ "ClientAuthentication must implement AuthenticationStepsFactory or be TokenAuthentication",
+	clientAuthentication));
 	}
 
 	/**

@@ -89,7 +89,7 @@ public class AzureMsiAuthentication implements ClientAuthentication, Authenticat
 	 * @param azureMetadataRestOperations must not be {@literal null}.
 	 */
 	public AzureMsiAuthentication(AzureMsiAuthenticationOptions options, RestOperations vaultRestOperations,
-			RestOperations azureMetadataRestOperations) {
+RestOperations azureMetadataRestOperations) {
 
 		Assert.notNull(options, "AzureAuthenticationOptions must not be null");
 		Assert.notNull(vaultRestOperations, "Vault RestOperations must not be null");
@@ -114,30 +114,30 @@ public class AzureMsiAuthentication implements ClientAuthentication, Authenticat
 	}
 
 	protected static AuthenticationSteps createAuthenticationSteps(AzureMsiAuthenticationOptions options,
-			@Nullable AzureVmEnvironment environment) {
+@Nullable AzureVmEnvironment environment) {
 
 		Node<String> msiToken = AuthenticationSteps
-			.fromHttpRequest(
-					HttpRequestBuilder.get(options.getIdentityTokenServiceUri()).with(METADATA_HEADERS).as(Map.class)) //
-			.map(token -> (String) token.get("access_token"));
+	.fromHttpRequest(
+HttpRequestBuilder.get(options.getIdentityTokenServiceUri()).with(METADATA_HEADERS).as(Map.class)) //
+	.map(token -> (String) token.get("access_token"));
 
 		Node<AzureVmEnvironment> environmentSteps;
 
 		if (environment == null) {
 
 			environmentSteps = AuthenticationSteps
-				.fromHttpRequest(HttpRequestBuilder.get(options.getInstanceMetadataServiceUri())
-					.with(METADATA_HEADERS)
-					.as(Map.class)) //
-				.map(AzureMsiAuthentication::toAzureVmEnvironment);
+		.fromHttpRequest(HttpRequestBuilder.get(options.getInstanceMetadataServiceUri())
+	.with(METADATA_HEADERS)
+	.as(Map.class)) //
+		.map(AzureMsiAuthentication::toAzureVmEnvironment);
 		}
 		else {
 			environmentSteps = AuthenticationSteps.fromValue(environment);
 		}
 
 		return environmentSteps.zipWith(msiToken)
-			.map(tuple -> getAzureLogin(options.getRole(), tuple.getLeft(), tuple.getRight())) //
-			.login(AuthenticationUtil.getLoginPath(options.getPath()));
+	.map(tuple -> getAzureLogin(options.getRole(), tuple.getLeft(), tuple.getRight())) //
+	.login(AuthenticationUtil.getLoginPath(options.getPath()));
 	}
 
 	@Override
@@ -157,7 +157,7 @@ public class AzureMsiAuthentication implements ClientAuthentication, Authenticat
 		try {
 
 			VaultResponse response = this.vaultRestOperations
-				.postForObject(AuthenticationUtil.getLoginPath(this.options.getPath()), login, VaultResponse.class);
+		.postForObject(AuthenticationUtil.getLoginPath(this.options.getPath()), login, VaultResponse.class);
 
 			Assert.state(response != null && response.getAuth() != null, "Auth field must not be null");
 
@@ -188,7 +188,7 @@ public class AzureMsiAuthentication implements ClientAuthentication, Authenticat
 	private String getAccessToken() {
 
 		ResponseEntity<Map> response = this.azureMetadataRestOperations
-			.exchange(this.options.getIdentityTokenServiceUri(), HttpMethod.GET, METADATA_HEADERS, Map.class);
+	.exchange(this.options.getIdentityTokenServiceUri(), HttpMethod.GET, METADATA_HEADERS, Map.class);
 
 		return (String) response.getBody().get("access_token");
 	}
@@ -203,7 +203,7 @@ public class AzureMsiAuthentication implements ClientAuthentication, Authenticat
 	private AzureVmEnvironment fetchAzureVmEnvironment() {
 
 		ResponseEntity<Map> response = this.azureMetadataRestOperations
-			.exchange(this.options.getInstanceMetadataServiceUri(), HttpMethod.GET, METADATA_HEADERS, Map.class);
+	.exchange(this.options.getInstanceMetadataServiceUri(), HttpMethod.GET, METADATA_HEADERS, Map.class);
 
 		return toAzureVmEnvironment(response.getBody());
 	}

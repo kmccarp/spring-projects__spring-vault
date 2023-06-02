@@ -72,8 +72,8 @@ public class VaultTransformTemplate implements VaultTransformOperations {
 		request.put("value", plaintext);
 
 		return (String) this.vaultOperations.write(String.format("%s/encode/%s", this.path, roleName), request)
-			.getRequiredData()
-			.get("encoded_value");
+	.getRequiredData()
+	.get("encoded_value");
 	}
 
 	@Override
@@ -89,8 +89,8 @@ public class VaultTransformTemplate implements VaultTransformOperations {
 		applyTransformOptions(plaintext.getContext(), request);
 
 		Map<String, Object> data = this.vaultOperations
-			.write(String.format("%s/encode/%s", this.path, roleName), request)
-			.getRequiredData();
+	.write(String.format("%s/encode/%s", this.path, roleName), request)
+	.getRequiredData();
 
 		return toCiphertext(data, plaintext.getContext());
 	}
@@ -115,7 +115,7 @@ public class VaultTransformTemplate implements VaultTransformOperations {
 		}
 
 		VaultResponse vaultResponse = this.vaultOperations.write(String.format("%s/encode/%s", this.path, roleName),
-				Collections.singletonMap("batch_input", batch));
+	Collections.singletonMap("batch_input", batch));
 
 		return toEncodedResults(vaultResponse, batchRequest);
 	}
@@ -145,8 +145,8 @@ public class VaultTransformTemplate implements VaultTransformOperations {
 		applyTransformOptions(transformContext, request);
 
 		return (String) this.vaultOperations.write(String.format("%s/decode/%s", this.path, roleName), request)
-			.getRequiredData()
-			.get("decoded_value");
+	.getRequiredData()
+	.get("decoded_value");
 	}
 
 	@Override
@@ -168,7 +168,7 @@ public class VaultTransformTemplate implements VaultTransformOperations {
 		}
 
 		VaultResponse vaultResponse = this.vaultOperations.write(String.format("%s/decode/%s", this.path, roleName),
-				Collections.singletonMap("batch_input", batch));
+	Collections.singletonMap("batch_input", batch));
 
 		return toDecryptionResults(vaultResponse, batchRequest);
 	}
@@ -185,7 +185,7 @@ public class VaultTransformTemplate implements VaultTransformOperations {
 	}
 
 	private static List<VaultTransformEncodeResult> toEncodedResults(VaultResponse vaultResponse,
-			List<TransformPlaintext> batchRequest) {
+List<TransformPlaintext> batchRequest) {
 
 		List<VaultTransformEncodeResult> result = new ArrayList<>(batchRequest.size());
 		List<Map<String, String>> batchData = getBatchData(vaultResponse);
@@ -215,7 +215,7 @@ public class VaultTransformTemplate implements VaultTransformOperations {
 	}
 
 	private static List<VaultTransformDecodeResult> toDecryptionResults(VaultResponse vaultResponse,
-			List<TransformCiphertext> batchRequest) {
+List<TransformCiphertext> batchRequest) {
 
 		List<VaultTransformDecodeResult> result = new ArrayList<>(batchRequest.size());
 		List<Map<String, String>> batchData = getBatchData(vaultResponse);
@@ -239,7 +239,7 @@ public class VaultTransformTemplate implements VaultTransformOperations {
 	}
 
 	private static VaultTransformDecodeResult getDecryptionResult(Map<String, String> data,
-			TransformCiphertext ciphertext) {
+TransformCiphertext ciphertext) {
 
 		if (StringUtils.hasText(data.get("error"))) {
 			return new VaultTransformDecodeResult(new VaultException(data.get("error")));
@@ -248,7 +248,7 @@ public class VaultTransformTemplate implements VaultTransformOperations {
 		if (StringUtils.hasText(data.get("decoded_value"))) {
 
 			return new VaultTransformDecodeResult(
-					TransformPlaintext.of(data.get("decoded_value")).with(ciphertext.getContext()));
+		TransformPlaintext.of(data.get("decoded_value")).with(ciphertext.getContext()));
 		}
 
 		return new VaultTransformDecodeResult(TransformPlaintext.empty().with(ciphertext.getContext()));
@@ -262,13 +262,13 @@ public class VaultTransformTemplate implements VaultTransformOperations {
 		if (data.containsKey("tweak")) {
 			byte[] tweak = Base64Utils.decodeFromString((String) data.get("tweak"));
 			contextToUse = VaultTransformContext.builder()
-				.transformation(context.getTransformation())
-				.tweak(tweak)
-				.build();
+		.transformation(context.getTransformation())
+		.tweak(tweak)
+		.build();
 		}
 
 		return contextToUse.isEmpty() ? TransformCiphertext.of(ciphertext)
-				: TransformCiphertext.of(ciphertext).with(contextToUse);
+	: TransformCiphertext.of(ciphertext).with(contextToUse);
 	}
 
 	@SuppressWarnings("unchecked")

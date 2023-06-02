@@ -47,8 +47,8 @@ class GoogleJsonUtil {
 		}
 		catch (ClassNotFoundException e) {
 			throw new IllegalStateException(String.format(
-					"No com.google.api.client.json.JsonFactory implementation available. Make sure to include either %s or %s on your classpath.",
-					JACKSON, GSON), e);
+		"No com.google.api.client.json.JsonFactory implementation available. Make sure to include either %s or %s on your classpath.",
+		JACKSON, GSON), e);
 		}
 	}
 

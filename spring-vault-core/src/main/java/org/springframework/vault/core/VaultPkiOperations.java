@@ -54,7 +54,7 @@ public interface VaultPkiOperations {
 	 * /pki/issue/[role name]</a>
 	 */
 	VaultCertificateResponse issueCertificate(String roleName, VaultCertificateRequest certificateRequest)
-			throws VaultException;
+throws VaultException;
 
 	/**
 	 * Signs a CSR using Vault's PKI backend given a {@code roleName}, {@code csr} and
@@ -71,7 +71,7 @@ public interface VaultPkiOperations {
 	 * /pki/sign/[role name]</a>
 	 */
 	VaultSignCertificateRequestResponse signCertificateRequest(String roleName, String csr,
-			VaultCertificateRequest certificateRequest) throws VaultException;
+VaultCertificateRequest certificateRequest) throws VaultException;
 
 	/**
 	 * Revokes a certificate using its serial number. This is an alternative option to the

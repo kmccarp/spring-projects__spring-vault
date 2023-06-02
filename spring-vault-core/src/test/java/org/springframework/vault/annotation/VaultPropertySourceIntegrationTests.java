@@ -45,12 +45,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ContextConfiguration
 class VaultPropertySourceIntegrationTests {
 
-	@Import({ Partial1.class, Partial2.class })
+	@Import({Partial1.class, Partial2.class})
 	static class Config extends VaultIntegrationTestConfiguration {
 
 	}
 
-	@VaultPropertySource({ "secret/myapp", "secret/myapp/profile" })
+	@VaultPropertySource({"secret/myapp", "secret/myapp/profile"})
 	static class Partial1 {
 
 	}

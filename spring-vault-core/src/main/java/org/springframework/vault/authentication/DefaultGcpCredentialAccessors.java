@@ -43,7 +43,7 @@ enum DefaultGcpCredentialAccessors implements GcpProjectIdAccessor, GcpServiceAc
 
 		Assert.notNull(credential, "GoogleCredential must not be null");
 		Assert.notNull(credential.getServiceAccountId(),
-				"The configured GoogleCredential does not represent a service account. Configure the service account id with GcpIamAuthenticationOptionsBuilder#serviceAccountId(String).");
+	"The configured GoogleCredential does not represent a service account. Configure the service account id with GcpIamAuthenticationOptionsBuilder#serviceAccountId(String).");
 
 		return credential.getServiceAccountId();
 	}
@@ -59,7 +59,7 @@ enum DefaultGcpCredentialAccessors implements GcpProjectIdAccessor, GcpServiceAc
 		Assert.notNull(credential, "GoogleCredential must not be null");
 
 		return StringUtils.isEmpty(credential.getServiceAccountProjectId()) ? "-"
-				: credential.getServiceAccountProjectId();
+	: credential.getServiceAccountProjectId();
 	}
 
 }

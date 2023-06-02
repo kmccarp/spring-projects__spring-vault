@@ -62,19 +62,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 class VaultNamespaceSecretIntegrationTests extends IntegrationTestSupport {
 
 	static final Policy POLICY = Policy.of(Policy.Rule.builder()
-		.path("/*")
-		.capabilities(Policy.BuiltinCapabilities.READ, Policy.BuiltinCapabilities.CREATE,
-				Policy.BuiltinCapabilities.UPDATE)
-		.build());
+.path("/*")
+.capabilities(Policy.BuiltinCapabilities.READ, Policy.BuiltinCapabilities.CREATE,Policy.BuiltinCapabilities.UPDATE)
+.build());
 
 	RestTemplateBuilder devRestTemplate;
 
 	RestTemplateBuilder marketingRestTemplate;
 
 	WebClientBuilder marketingWebClientBuilder = WebClientBuilder.builder()
-		.httpConnector(ClientHttpConnectorFactory.create(new ClientOptions(), Settings.createSslConfiguration()))
-		.endpoint(TestRestTemplateFactory.TEST_VAULT_ENDPOINT)
-		.defaultHeader(VaultHttpHeaders.VAULT_NAMESPACE, "marketing");
+.httpConnector(ClientHttpConnectorFactory.create(new ClientOptions(), Settings.createSslConfiguration()))
+.endpoint(TestRestTemplateFactory.TEST_VAULT_ENDPOINT)
+.defaultHeader(VaultHttpHeaders.VAULT_NAMESPACE, "marketing");
 
 	String devToken;
 
@@ -94,37 +93,37 @@ class VaultNamespaceSecretIntegrationTests extends IntegrationTestSupport {
 		}
 
 		this.devRestTemplate = RestTemplateBuilder.builder()
-			.requestFactory(
-					ClientHttpRequestFactoryFactory.create(new ClientOptions(), Settings.createSslConfiguration()))
-			.endpoint(TestRestTemplateFactory.TEST_VAULT_ENDPOINT)
-			.customizers(
-					restTemplate -> restTemplate.getInterceptors().add(VaultClients.createNamespaceInterceptor("dev")));
+	.requestFactory(
+ClientHttpRequestFactoryFactory.create(new ClientOptions(), Settings.createSslConfiguration()))
+	.endpoint(TestRestTemplateFactory.TEST_VAULT_ENDPOINT)
+	.customizers(
+restTemplate -> restTemplate.getInterceptors().add(VaultClients.createNamespaceInterceptor("dev")));
 
 		this.marketingRestTemplate = RestTemplateBuilder.builder()
-			.requestFactory(
-					ClientHttpRequestFactoryFactory.create(new ClientOptions(), Settings.createSslConfiguration()))
-			.endpoint(TestRestTemplateFactory.TEST_VAULT_ENDPOINT)
-			.defaultHeader(VaultHttpHeaders.VAULT_NAMESPACE, "marketing");
+	.requestFactory(
+ClientHttpRequestFactoryFactory.create(new ClientOptions(), Settings.createSslConfiguration()))
+	.endpoint(TestRestTemplateFactory.TEST_VAULT_ENDPOINT)
+	.defaultHeader(VaultHttpHeaders.VAULT_NAMESPACE, "marketing");
 
 		VaultTemplate dev = new VaultTemplate(this.devRestTemplate,
-				new SimpleSessionManager(new TokenAuthentication(Settings.token())));
+	new SimpleSessionManager(new TokenAuthentication(Settings.token())));
 
 		mountKv(dev, "dev-secrets");
 		dev.opsForSys().createOrUpdatePolicy("relaxed", POLICY);
 		this.devToken = dev.opsForToken()
-			.create(VaultTokenRequest.builder().withPolicy("relaxed").build())
-			.getToken()
-			.getToken();
+	.create(VaultTokenRequest.builder().withPolicy("relaxed").build())
+	.getToken()
+	.getToken();
 
 		VaultTemplate marketing = new VaultTemplate(this.marketingRestTemplate,
-				new SimpleSessionManager(new TokenAuthentication(Settings.token())));
+	new SimpleSessionManager(new TokenAuthentication(Settings.token())));
 
 		mountKv(marketing, "marketing-secrets");
 		marketing.opsForSys().createOrUpdatePolicy("relaxed", POLICY);
 		this.marketingToken = marketing.opsForToken()
-			.create(VaultTokenRequest.builder().withPolicy("relaxed").build())
-			.getToken()
-			.getToken();
+	.create(VaultTokenRequest.builder().withPolicy("relaxed").build())
+	.getToken()
+	.getToken();
 	}
 
 	private void mountKv(VaultTemplate template, String path) {
@@ -135,7 +134,7 @@ class VaultNamespaceSecretIntegrationTests extends IntegrationTestSupport {
 
 		if (!mounts.containsKey(path + "/")) {
 			vaultSysOperations.mount(path,
-					VaultMount.builder().type("kv").options(Collections.singletonMap("version", "1")).build());
+		VaultMount.builder().type("kv").options(Collections.singletonMap("version", "1")).build());
 		}
 	}
 
@@ -143,9 +142,9 @@ class VaultNamespaceSecretIntegrationTests extends IntegrationTestSupport {
 	void namespaceSecretsAreIsolated() {
 
 		VaultTemplate dev = new VaultTemplate(this.devRestTemplate,
-				new SimpleSessionManager(new TokenAuthentication(this.devToken)));
+	new SimpleSessionManager(new TokenAuthentication(this.devToken)));
 		VaultTemplate marketing = new VaultTemplate(this.marketingRestTemplate,
-				new SimpleSessionManager(new TokenAuthentication(this.marketingToken)));
+	new SimpleSessionManager(new TokenAuthentication(this.marketingToken)));
 
 		dev.write("dev-secrets/my-secret", Collections.singletonMap("key", "dev"));
 		marketing.write("marketing-secrets/my-secret", Collections.singletonMap("key", "marketing"));
@@ -160,7 +159,7 @@ class VaultNamespaceSecretIntegrationTests extends IntegrationTestSupport {
 		namespaceSecretsAreIsolated();
 
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
-				NamespaceConfiguration.class);
+	NamespaceConfiguration.class);
 		VaultOperations operations = context.getBean(VaultOperations.class);
 		assertThat(operations.read("marketing-secrets/my-secret")).isNotNull();
 
@@ -171,10 +170,10 @@ class VaultNamespaceSecretIntegrationTests extends IntegrationTestSupport {
 	void reactiveNamespaceSecretsAreIsolated() {
 
 		VaultTemplate marketing = new VaultTemplate(this.marketingRestTemplate,
-				new SimpleSessionManager(new TokenAuthentication(this.marketingToken)));
+	new SimpleSessionManager(new TokenAuthentication(this.marketingToken)));
 
 		ReactiveVaultTemplate reactiveMarketing = new ReactiveVaultTemplate(this.marketingWebClientBuilder,
-				() -> Mono.just(VaultToken.of(this.marketingToken)));
+	() -> Mono.just(VaultToken.of(this.marketingToken)));
 
 		marketing.write("marketing-secrets/my-secret", Collections.singletonMap("key", "marketing"));
 
@@ -189,7 +188,7 @@ class VaultNamespaceSecretIntegrationTests extends IntegrationTestSupport {
 	void shouldReportInitialized() {
 
 		VaultTemplate marketing = new VaultTemplate(this.marketingRestTemplate,
-				new SimpleSessionManager(new TokenAuthentication(this.marketingToken)));
+	new SimpleSessionManager(new TokenAuthentication(this.marketingToken)));
 
 		assertThat(marketing.opsForSys().isInitialized()).isTrue();
 	}
@@ -198,7 +197,7 @@ class VaultNamespaceSecretIntegrationTests extends IntegrationTestSupport {
 	void shouldReportHealth() {
 
 		VaultTemplate marketing = new VaultTemplate(this.marketingRestTemplate,
-				new SimpleSessionManager(new TokenAuthentication(this.marketingToken)));
+	new SimpleSessionManager(new TokenAuthentication(this.marketingToken)));
 
 		assertThat(marketing.opsForSys().health().isInitialized()).isTrue();
 	}
@@ -207,18 +206,18 @@ class VaultNamespaceSecretIntegrationTests extends IntegrationTestSupport {
 	void shouldReportReactiveInitialized() {
 
 		ReactiveVaultTemplate reactiveMarketing = new ReactiveVaultTemplate(this.marketingWebClientBuilder,
-				() -> Mono.just(VaultToken.of(this.marketingToken)));
+	() -> Mono.just(VaultToken.of(this.marketingToken)));
 
 		reactiveMarketing.doWithSession(webClient -> {
 			return webClient.get()
-				.uri("sys/init")
-				.header(VaultHttpHeaders.VAULT_NAMESPACE, "")
-				.exchange()
-				.flatMap(it -> it.bodyToMono(Map.class));
+		.uri("sys/init")
+		.header(VaultHttpHeaders.VAULT_NAMESPACE, "")
+		.exchange()
+		.flatMap(it -> it.bodyToMono(Map.class));
 		})
-			.as(StepVerifier::create)
-			.assertNext(actual -> assertThat(actual).containsEntry("initialized", true))
-			.verifyComplete();
+	.as(StepVerifier::create)
+	.assertNext(actual -> assertThat(actual).containsEntry("initialized", true))
+	.verifyComplete();
 	}
 
 	@Configuration
@@ -241,9 +240,9 @@ class VaultNamespaceSecretIntegrationTests extends IntegrationTestSupport {
 
 		@Override
 		protected RestTemplateBuilder restTemplateBuilder(VaultEndpointProvider endpointProvider,
-				ClientHttpRequestFactory requestFactory) {
+	ClientHttpRequestFactory requestFactory) {
 			return super.restTemplateBuilder(endpointProvider, requestFactory)
-				.defaultHeader(VaultHttpHeaders.VAULT_NAMESPACE, "marketing");
+		.defaultHeader(VaultHttpHeaders.VAULT_NAMESPACE, "marketing");
 		}
 
 	}

@@ -101,7 +101,7 @@ public class VaultKeyValueTemplate extends KeyValueTemplate {
 
 			if (adapter.contains(id, keyspace)) {
 				throw new DuplicateKeyException(
-						String.format("Cannot insert existing object with id %s!. Please use update.", id));
+			String.format("Cannot insert existing object with id %s!. Please use update.", id));
 			}
 
 			return (T) adapter.put(id, objectToInsert, keyspace);
@@ -126,7 +126,7 @@ public class VaultKeyValueTemplate extends KeyValueTemplate {
 		T updated = execute(adapter -> (T) adapter.put(id, objectToUpdate, keyspace));
 
 		potentiallyPublishEvent(
-				KeyValueEvent.afterUpdate(id, keyspace, objectToUpdate.getClass(), objectToUpdate, updated));
+	KeyValueEvent.afterUpdate(id, keyspace, objectToUpdate.getClass(), objectToUpdate, updated));
 
 		return updated;
 	}

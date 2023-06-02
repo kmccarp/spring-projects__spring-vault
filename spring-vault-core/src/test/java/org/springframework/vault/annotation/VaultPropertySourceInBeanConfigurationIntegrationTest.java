@@ -43,7 +43,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ContextConfiguration
 class VaultPropertySourceInBeanConfigurationIntegrationTest {
 
-	@VaultPropertySource({ "secret/myapp" })
+	@VaultPropertySource({"secret/myapp"})
 	static class Config extends VaultIntegrationTestConfiguration {
 
 		@Bean

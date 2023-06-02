@@ -57,8 +57,8 @@ public class VaultMount {
 	private final Map<String, String> options;
 
 	VaultMount(@JsonProperty("type") String type, @Nullable @JsonProperty("description") String description,
-			@Nullable @JsonProperty("config") Map<String, Object> config,
-			@Nullable @JsonProperty("options") Map<String, String> options) {
+@Nullable @JsonProperty("config") Map<String, Object> config,
+@Nullable @JsonProperty("options") Map<String, String> options) {
 
 		this.type = type;
 		this.description = description;

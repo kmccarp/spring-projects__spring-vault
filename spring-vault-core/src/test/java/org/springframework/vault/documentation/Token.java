@@ -46,10 +46,10 @@ public class Token {
 		VaultToken justAToken = tokenResponse.getToken();
 
 		VaultTokenRequest tokenRequest = VaultTokenRequest.builder().withPolicy("policy-for-myapp")
-											.displayName("Access tokens for myapp")
-											.renewable()
-											.ttl(Duration.ofHours(1))
-											.build();
+	.displayName("Access tokens for myapp")
+	.renewable()
+	.ttl(Duration.ofHours(1))
+	.build();
 
 		VaultTokenResponse appTokenResponse = tokenOperations.create(tokenRequest);          // <2>
 		VaultToken appToken = appTokenResponse.getToken();

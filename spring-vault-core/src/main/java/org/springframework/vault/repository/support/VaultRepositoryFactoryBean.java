@@ -33,8 +33,7 @@ import org.springframework.data.repository.query.parser.AbstractQueryCreator;
  * @param <ID> The repository id type.
  * @since 2.0
  */
-public class VaultRepositoryFactoryBean<T extends Repository<S, ID>, S, ID extends Serializable>
-		extends KeyValueRepositoryFactoryBean<T, S, ID> {
+public class VaultRepositoryFactoryBean<T extends Repository<S, ID>, S, ID extends Serializable>extends KeyValueRepositoryFactoryBean<T, S, ID> {
 
 	/**
 	 * Creates a new {@link VaultRepositoryFactoryBean} for the given repository
@@ -47,8 +46,8 @@ public class VaultRepositoryFactoryBean<T extends Repository<S, ID>, S, ID exten
 
 	@Override
 	protected VaultRepositoryFactory createRepositoryFactory(KeyValueOperations operations,
-			Class<? extends AbstractQueryCreator<?, ?>> queryCreator,
-			Class<? extends RepositoryQuery> repositoryQueryType) {
+Class<? extends AbstractQueryCreator<?, ?>> queryCreator,
+Class<? extends RepositoryQuery> repositoryQueryType) {
 
 		return new VaultRepositoryFactory(operations, queryCreator, repositoryQueryType);
 	}

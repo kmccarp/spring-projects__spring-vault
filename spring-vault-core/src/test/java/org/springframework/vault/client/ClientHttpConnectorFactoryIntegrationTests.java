@@ -43,7 +43,7 @@ class ClientHttpConnectorFactoryIntegrationTests {
 	void reactorNettyClientShouldWork() {
 
 		ClientHttpConnector factory = ReactorNetty.usingReactorNetty(new ClientOptions(),
-				Settings.createSslConfiguration());
+	Settings.createSslConfiguration());
 
 		WebClient webClient = WebClient.builder().clientConnector(factory).build();
 
@@ -60,7 +60,7 @@ class ClientHttpConnectorFactoryIntegrationTests {
 		enabledCipherSuites.add("TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256");
 
 		ClientHttpConnector factory = ReactorNetty.usingReactorNetty(new ClientOptions(),
-				Settings.createSslConfiguration().withEnabledCipherSuites(enabledCipherSuites));
+	Settings.createSslConfiguration().withEnabledCipherSuites(enabledCipherSuites));
 
 		WebClient webClient = WebClient.builder().clientConnector(factory).build();
 
@@ -76,7 +76,7 @@ class ClientHttpConnectorFactoryIntegrationTests {
 		enabledProtocols.add("TLSv1.2");
 
 		ClientHttpConnector factory = ReactorNetty.usingReactorNetty(new ClientOptions(),
-				Settings.createSslConfiguration().withEnabledProtocols(enabledProtocols));
+	Settings.createSslConfiguration().withEnabledProtocols(enabledProtocols));
 
 		WebClient webClient = WebClient.builder().clientConnector(factory).build();
 
@@ -89,7 +89,7 @@ class ClientHttpConnectorFactoryIntegrationTests {
 	void httpAsyncClientShouldWork() throws Exception {
 
 		ClientHttpConnector factory = HttpComponents.usingHttpComponents(new ClientOptions(),
-				Settings.createSslConfiguration());
+	Settings.createSslConfiguration());
 
 		WebClient webClient = WebClient.builder().clientConnector(factory).build();
 
@@ -106,7 +106,7 @@ class ClientHttpConnectorFactoryIntegrationTests {
 		enabledCipherSuites.add("TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256");
 
 		ClientHttpConnector factory = HttpComponents.usingHttpComponents(new ClientOptions(),
-				Settings.createSslConfiguration().withEnabledCipherSuites(enabledCipherSuites));
+	Settings.createSslConfiguration().withEnabledCipherSuites(enabledCipherSuites));
 
 		WebClient webClient = WebClient.builder().clientConnector(factory).build();
 
@@ -135,7 +135,7 @@ class ClientHttpConnectorFactoryIntegrationTests {
 		enabledCipherSuites.add("TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256");
 
 		ClientHttpConnector factory = JettyClient.usingJetty(new ClientOptions(),
-				Settings.createSslConfiguration().withEnabledCipherSuites(enabledCipherSuites));
+	Settings.createSslConfiguration().withEnabledCipherSuites(enabledCipherSuites));
 
 		WebClient webClient = WebClient.builder().clientConnector(factory).build();
 
@@ -151,7 +151,7 @@ class ClientHttpConnectorFactoryIntegrationTests {
 		enabledProtocols.add("TLSv1.2");
 
 		ClientHttpConnector factory = JettyClient.usingJetty(new ClientOptions(),
-				Settings.createSslConfiguration().withEnabledProtocols(enabledProtocols));
+	Settings.createSslConfiguration().withEnabledProtocols(enabledProtocols));
 
 		WebClient webClient = WebClient.builder().clientConnector(factory).build();
 
@@ -164,7 +164,7 @@ class ClientHttpConnectorFactoryIntegrationTests {
 	void jdkHttpClientShouldWork() throws Exception {
 
 		ClientHttpConnector factory = JdkHttpClient.usingJdkHttpClient(new ClientOptions(),
-				Settings.createSslConfiguration());
+	Settings.createSslConfiguration());
 
 		WebClient webClient = WebClient.builder().clientConnector(factory).build();
 

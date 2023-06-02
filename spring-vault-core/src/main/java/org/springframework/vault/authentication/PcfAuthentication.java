@@ -94,20 +94,20 @@ public class PcfAuthentication implements ClientAuthentication, AuthenticationSt
 		AuthenticationSteps.Node<String> key = AuthenticationSteps.fromSupplier(options.getInstanceKeySupplier());
 
 		return cert.zipWith(key)
-			.map(credentials -> getPcfLogin(options.getRole(), options.getClock(), credentials.getLeft(),
-					credentials.getRight()))
-			.login(AuthenticationUtil.getLoginPath(options.getPath()));
+	.map(credentials -> getPcfLogin(options.getRole(), options.getClock(), credentials.getLeft(),
+credentials.getRight()))
+	.login(AuthenticationUtil.getLoginPath(options.getPath()));
 	}
 
 	@Override
 	public VaultToken login() throws VaultException {
 
 		Map<String, String> login = getPcfLogin(this.options.getRole(), this.options.getClock(),
-				this.options.getInstanceCertSupplier().get(), this.options.getInstanceKeySupplier().get());
+	this.options.getInstanceCertSupplier().get(), this.options.getInstanceKeySupplier().get());
 
 		try {
 			VaultResponse response = this.restOperations
-				.postForObject(AuthenticationUtil.getLoginPath(this.options.getPath()), login, VaultResponse.class);
+		.postForObject(AuthenticationUtil.getLoginPath(this.options.getPath()), login, VaultResponse.class);
 
 			Assert.state(response != null && response.getAuth() != null, "Auth field must not be null");
 

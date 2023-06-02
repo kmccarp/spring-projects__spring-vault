@@ -43,16 +43,16 @@ class PemObjectUnitTests {
 	@BeforeEach
 	void setUp() {
 		assertThat(this.privateDir).exists()
-			.isDirectoryContaining(file -> file.getName().equalsIgnoreCase("localhost.public.key.pem"));
+	.isDirectoryContaining(file -> file.getName().equalsIgnoreCase("localhost.public.key.pem"));
 		assertThat(this.privateDir).exists()
-			.isDirectoryContaining(file -> file.getName().equalsIgnoreCase("localhost.decrypted.key.pem"));
+	.isDirectoryContaining(file -> file.getName().equalsIgnoreCase("localhost.decrypted.key.pem"));
 	}
 
 	@Test
 	void shouldDecodePublicKey() throws IOException {
 
 		String content = new String(
-				FileCopyUtils.copyToByteArray(new File(this.privateDir, "localhost.public.key.pem")));
+	FileCopyUtils.copyToByteArray(new File(this.privateDir, "localhost.public.key.pem")));
 
 		PemObject pemObject = PemObject.parseFirst(content);
 		assertThat(pemObject.isPrivateKey()).isFalse();
@@ -64,7 +64,7 @@ class PemObjectUnitTests {
 	void shouldDecodePrivateKey() throws IOException {
 
 		String content = new String(
-				FileCopyUtils.copyToByteArray(new File(this.privateDir, "localhost.decrypted.key.pem")));
+	FileCopyUtils.copyToByteArray(new File(this.privateDir, "localhost.decrypted.key.pem")));
 
 		PemObject pemObject = PemObject.parseFirst(content);
 		assertThat(pemObject.isPrivateKey()).isTrue();
@@ -76,9 +76,9 @@ class PemObjectUnitTests {
 	void shouldDecodeConcatenatedPEMContent() throws IOException {
 
 		String content1 = new String(
-				FileCopyUtils.copyToByteArray(new File(this.privateDir, "localhost.public.key.pem")));
+	FileCopyUtils.copyToByteArray(new File(this.privateDir, "localhost.public.key.pem")));
 		String content2 = new String(
-				FileCopyUtils.copyToByteArray(new File(this.privateDir, "localhost.decrypted.key.pem")));
+	FileCopyUtils.copyToByteArray(new File(this.privateDir, "localhost.decrypted.key.pem")));
 
 		List<PemObject> pemObjects = PemObject.parse(content1 + content2);
 
@@ -91,10 +91,10 @@ class PemObjectUnitTests {
 	void keysShouldMatch() throws IOException {
 
 		PemObject publicKey = PemObject.parseFirst(
-				new String(FileCopyUtils.copyToByteArray(new File(this.privateDir, "localhost.public.key.pem"))));
+	new String(FileCopyUtils.copyToByteArray(new File(this.privateDir, "localhost.public.key.pem"))));
 
 		PemObject privateKey = PemObject.parseFirst(
-				new String(FileCopyUtils.copyToByteArray(new File(this.privateDir, "localhost.decrypted.key.pem"))));
+	new String(FileCopyUtils.copyToByteArray(new File(this.privateDir, "localhost.decrypted.key.pem"))));
 
 		RSAPublicKeySpec publicSpec = publicKey.getRSAPublicKeySpec();
 		RSAPrivateCrtKeySpec privateKeySpec = privateKey.getRSAPrivateKeySpec();

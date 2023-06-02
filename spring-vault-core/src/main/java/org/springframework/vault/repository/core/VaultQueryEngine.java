@@ -51,14 +51,14 @@ class VaultQueryEngine extends QueryEngine<VaultKeyValueAdapter, VaultQuery, Com
 	@Override
 	@SuppressWarnings("unchecked")
 	public Collection<?> execute(@Nullable VaultQuery vaultQuery, @Nullable Comparator<?> comparator, long offset,
-			int rows, String keyspace) {
+int rows, String keyspace) {
 		return execute(vaultQuery, comparator, offset, rows, keyspace, Object.class);
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
 	public <T> Collection<T> execute(@Nullable VaultQuery vaultQuery, @Nullable Comparator<?> comparator, long offset,
-			int rows, String keyspace, Class<T> type) {
+int rows, String keyspace, Class<T> type) {
 
 		Stream<String> stream = getRequiredAdapter().doList(keyspace).stream();
 

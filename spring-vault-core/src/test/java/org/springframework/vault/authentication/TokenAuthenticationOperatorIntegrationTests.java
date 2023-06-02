@@ -43,15 +43,15 @@ class TokenAuthenticationOperatorIntegrationTests extends TokenAuthenticationInt
 	void shouldSelfLookup() {
 
 		VaultTokenRequest tokenRequest = VaultTokenRequest.builder()
-			.ttl(Duration.ofSeconds(60))
-			.renewable()
-			.numUses(1)
-			.build();
+	.ttl(Duration.ofSeconds(60))
+	.renewable()
+	.numUses(1)
+	.build();
 
 		VaultToken token = prepare().getVaultOperations().opsForToken().create(tokenRequest).getToken();
 
 		AuthenticationStepsOperator operator = new AuthenticationStepsOperator(
-				TokenAuthentication.createAuthenticationSteps(token, true), this.webClient);
+	TokenAuthentication.createAuthenticationSteps(token, true), this.webClient);
 
 		operator.getVaultToken().as(StepVerifier::create).consumeNextWith(actual -> {
 
@@ -69,26 +69,26 @@ class TokenAuthenticationOperatorIntegrationTests extends TokenAuthenticationInt
 	void shouldFailDuringSelfLookup() {
 
 		VaultTokenRequest tokenRequest = VaultTokenRequest.builder()
-			.ttl(Duration.ofSeconds(60))
-			.renewable()
-			.numUses(1)
-			.build();
+	.ttl(Duration.ofSeconds(60))
+	.renewable()
+	.numUses(1)
+	.build();
 
 		VaultToken token = prepare().getVaultOperations().opsForToken().create(tokenRequest).getToken();
 
 		AuthenticationStepsOperator operator = new AuthenticationStepsOperator(
-				TokenAuthentication.createAuthenticationSteps(token, true), this.webClient);
+	TokenAuthentication.createAuthenticationSteps(token, true), this.webClient);
 
 		// first usage
 		operator.getVaultToken() //
-			.as(StepVerifier::create) //
-			.expectNextCount(1) //
-			.verifyComplete();
+	.as(StepVerifier::create) //
+	.expectNextCount(1) //
+	.verifyComplete();
 
 		operator.getVaultToken() //
-			.as(StepVerifier::create) //
-			.expectError(VaultException.class) //
-			.verify();
+	.as(StepVerifier::create) //
+	.expectError(VaultException.class) //
+	.verify();
 	}
 
 }

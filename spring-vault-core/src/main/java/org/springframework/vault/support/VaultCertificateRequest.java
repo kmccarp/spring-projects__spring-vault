@@ -96,8 +96,8 @@ public class VaultCertificateRequest {
 	private final boolean excludeCommonNameFromSubjectAltNames;
 
 	private VaultCertificateRequest(String commonName, List<String> altNames, List<String> ipSubjectAltNames,
-			List<String> uriSubjectAltNames, List<String> otherSans, @Nullable Duration ttl, String format,
-			@Nullable String privateKeyFormat, boolean excludeCommonNameFromSubjectAltNames) {
+List<String> uriSubjectAltNames, List<String> otherSans, @Nullable Duration ttl, String format,
+@Nullable String privateKeyFormat, boolean excludeCommonNameFromSubjectAltNames) {
 
 		this.commonName = commonName;
 		this.altNames = altNames;
@@ -430,7 +430,7 @@ public class VaultCertificateRequest {
 					break;
 				default:
 					uriSubjectAltNames = java.util.Collections
-						.unmodifiableList(new ArrayList<>(this.uriSubjectAltNames));
+				.unmodifiableList(new ArrayList<>(this.uriSubjectAltNames));
 			}
 
 			List<String> otherSans;
@@ -446,7 +446,7 @@ public class VaultCertificateRequest {
 			}
 
 			return new VaultCertificateRequest(this.commonName, altNames, ipSubjectAltNames, uriSubjectAltNames,
-					otherSans, this.ttl, this.format, this.privateKeyFormat, this.excludeCommonNameFromSubjectAltNames);
+		otherSans, this.ttl, this.format, this.privateKeyFormat, this.excludeCommonNameFromSubjectAltNames);
 		}
 
 		private static <E> List<E> toList(Iterable<E> iter) {

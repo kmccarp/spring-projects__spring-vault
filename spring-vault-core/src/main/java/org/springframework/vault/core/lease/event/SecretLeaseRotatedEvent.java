@@ -38,7 +38,7 @@ public class SecretLeaseRotatedEvent extends SecretLeaseCreatedEvent {
 	 * @param currentLease must not be {@literal null}.
 	 */
 	public SecretLeaseRotatedEvent(RequestedSecret requestedSecret, Lease previousLease, Lease currentLease,
-			Map<String, Object> secrets) {
+Map<String, Object> secrets) {
 
 		super(requestedSecret, currentLease, secrets);
 		this.previousLease = previousLease;

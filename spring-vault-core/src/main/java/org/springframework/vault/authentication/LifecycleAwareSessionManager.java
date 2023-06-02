@@ -68,8 +68,7 @@ import org.springframework.web.client.RestOperations;
  * @see TaskScheduler
  * @see AuthenticationEventPublisher
  */
-public class LifecycleAwareSessionManager extends LifecycleAwareSessionManagerSupport
-		implements SessionManager, DisposableBean {
+public class LifecycleAwareSessionManager extends LifecycleAwareSessionManagerSupportimplements SessionManager, DisposableBean {
 
 	/**
 	 * Client authentication mechanism. Used to obtain a {@link VaultToken} or
@@ -99,7 +98,7 @@ public class LifecycleAwareSessionManager extends LifecycleAwareSessionManagerSu
 	 * @since 1.0.1
 	 */
 	public LifecycleAwareSessionManager(ClientAuthentication clientAuthentication, TaskScheduler taskScheduler,
-			RestOperations restOperations) {
+RestOperations restOperations) {
 
 		super(taskScheduler);
 
@@ -121,7 +120,7 @@ public class LifecycleAwareSessionManager extends LifecycleAwareSessionManagerSu
 	 * @since 1.0.1
 	 */
 	public LifecycleAwareSessionManager(ClientAuthentication clientAuthentication, TaskScheduler taskScheduler,
-			RestOperations restOperations, RefreshTrigger refreshTrigger) {
+RestOperations restOperations, RefreshTrigger refreshTrigger) {
 
 		super(taskScheduler, refreshTrigger);
 
@@ -171,14 +170,14 @@ public class LifecycleAwareSessionManager extends LifecycleAwareSessionManagerSu
 		try {
 			dispatch(new BeforeLoginTokenRevocationEvent(token));
 			this.restOperations.postForObject("auth/token/revoke-self", new HttpEntity<>(VaultHttpHeaders.from(token)),
-					Map.class);
+		Map.class);
 			dispatch(new AfterLoginTokenRevocationEvent(token));
 		}
 		catch (RuntimeException e) {
 			if (LoginToken.hasAccessor(token)) {
 				this.logger.warn(
-						String.format("Cannot revoke VaultToken with accessor: %s", ((LoginToken) token).getAccessor()),
-						e);
+			String.format("Cannot revoke VaultToken with accessor: %s", ((LoginToken) token).getAccessor()),
+			e);
 			}
 			else {
 				this.logger.warn("Cannot revoke VaultToken", e);
@@ -238,7 +237,7 @@ public class LifecycleAwareSessionManager extends LifecycleAwareSessionManagerSu
 
 		dispatch(new BeforeLoginTokenRenewedEvent(wrapper.getToken()));
 		VaultResponse vaultResponse = this.restOperations.postForObject("auth/token/renew-self",
-				new HttpEntity<>(VaultHttpHeaders.from(wrapper.token)), VaultResponse.class);
+	new HttpEntity<>(VaultHttpHeaders.from(wrapper.token)), VaultResponse.class);
 
 		LoginToken renewed = LoginTokenUtil.from(vaultResponse.getRequiredAuth());
 
@@ -247,7 +246,7 @@ public class LifecycleAwareSessionManager extends LifecycleAwareSessionManagerSu
 			if (this.logger.isDebugEnabled()) {
 				Duration validTtlThreshold = getRefreshTrigger().getValidTtlThreshold(renewed);
 				this.logger.info(String.format("Token TTL (%s) exceeded validity TTL threshold (%s). Dropping token.",
-						renewed.getLeaseDuration(), validTtlThreshold));
+			renewed.getLeaseDuration(), validTtlThreshold));
 			}
 			else {
 				this.logger.info("Token TTL exceeded validity TTL threshold. Dropping token.");
@@ -281,7 +280,7 @@ public class LifecycleAwareSessionManager extends LifecycleAwareSessionManagerSu
 		}
 
 		return getToken().map(TokenWrapper::getToken)
-			.orElseThrow(() -> new IllegalStateException("Cannot obtain VaultToken"));
+	.orElseThrow(() -> new IllegalStateException("Cannot obtain VaultToken"));
 	}
 
 	private void doGetSessionToken() {
@@ -376,7 +375,7 @@ public class LifecycleAwareSessionManager extends LifecycleAwareSessionManagerSu
 
 			HttpStatusCodeException hsce = (HttpStatusCodeException) e;
 			return String.format("%s: Status %s %s %s", message, hsce.getStatusCode().value(), hsce.getStatusText(),
-					VaultResponses.getError(hsce.getResponseBodyAsString()));
+		VaultResponses.getError(hsce.getResponseBodyAsString()));
 		}
 
 		return message;

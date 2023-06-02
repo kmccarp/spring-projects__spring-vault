@@ -52,8 +52,8 @@ public class GcpIamCredentialsAuthenticationOptions extends GcpIamAuthentication
 	private final GoogleCredentialsAccountIdAccessor serviceAccountIdAccessor;
 
 	private GcpIamCredentialsAuthenticationOptions(String path, GoogleCredentialsSupplier credentialSupplier,
-			String role, Duration jwtValidity, Clock clock,
-			GoogleCredentialsAccountIdAccessor serviceAccountIdAccessor) {
+String role, Duration jwtValidity, Clock clock,
+GoogleCredentialsAccountIdAccessor serviceAccountIdAccessor) {
 
 		super(path, role, jwtValidity, clock);
 		this.credentialSupplier = credentialSupplier;
@@ -140,7 +140,7 @@ public class GcpIamCredentialsAuthenticationOptions extends GcpIamAuthentication
 		 * @see #credentials(GoogleCredentials)
 		 */
 		public GcpIamCredentialsAuthenticationOptionsBuilder credentialsSupplier(
-				GoogleCredentialsSupplier credentialsSupplier) {
+	GoogleCredentialsSupplier credentialsSupplier) {
 
 			Assert.notNull(credentialsSupplier, "GcpServiceAccountCredentialsSupplier must not be null");
 
@@ -171,7 +171,7 @@ public class GcpIamCredentialsAuthenticationOptions extends GcpIamAuthentication
 		 * @see GoogleCredentialsAccountIdAccessor
 		 */
 		GcpIamCredentialsAuthenticationOptionsBuilder serviceAccountIdAccessor(
-				GoogleCredentialsAccountIdAccessor serviceAccountIdAccessor) {
+	GoogleCredentialsAccountIdAccessor serviceAccountIdAccessor) {
 
 			Assert.notNull(serviceAccountIdAccessor, "GcpServiceAccountIdAccessor must not be null");
 
@@ -230,7 +230,7 @@ public class GcpIamCredentialsAuthenticationOptions extends GcpIamAuthentication
 			Assert.notNull(this.role, "Role must not be null");
 
 			return new GcpIamCredentialsAuthenticationOptions(this.path, this.credentialsSupplier, this.role,
-					this.jwtValidity, this.clock, this.serviceAccountIdAccessor);
+		this.jwtValidity, this.clock, this.serviceAccountIdAccessor);
 		}
 
 	}

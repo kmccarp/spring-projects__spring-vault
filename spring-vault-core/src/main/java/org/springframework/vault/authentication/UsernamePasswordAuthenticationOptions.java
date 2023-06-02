@@ -53,7 +53,7 @@ public class UsernamePasswordAuthenticationOptions {
 	private final CharSequence totp;
 
 	private UsernamePasswordAuthenticationOptions(String path, String username, CharSequence password,
-			@Nullable CharSequence totp) {
+@Nullable CharSequence totp) {
 		this.username = username;
 		this.password = password;
 		this.path = path;

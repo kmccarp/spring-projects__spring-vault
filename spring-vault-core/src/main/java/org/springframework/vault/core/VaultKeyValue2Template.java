@@ -71,7 +71,7 @@ class VaultKeyValue2Template extends VaultKeyValue2Accessor implements VaultKeyV
 
 	@Nullable
 	@Override
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public <T> VaultResponseSupport<T> get(String path, Class<T> responseType) {
 
 		Assert.hasText(path, "Path must not be empty");
@@ -95,8 +95,8 @@ class VaultKeyValue2Template extends VaultKeyValue2Accessor implements VaultKeyV
 		VaultResponse readResponse = get(path);
 		if (readResponse == null || readResponse.getData() == null) {
 			throw new SecretNotFoundException(
-					String.format("No data found at %s; patch only works on existing data", createDataPath(path)),
-					String.format("%s/%s", this.path, path));
+		String.format("No data found at %s; patch only works on existing data", createDataPath(path)),
+		String.format("%s/%s", this.path, path));
 		}
 
 		if (readResponse.getMetadata() == null) {
@@ -118,7 +118,7 @@ class VaultKeyValue2Template extends VaultKeyValue2Accessor implements VaultKeyV
 		catch (VaultException e) {
 
 			if (e.getMessage() != null && (e.getMessage().contains("check-and-set")
-					|| e.getMessage().contains("did not match the current version"))) {
+		|| e.getMessage().contains("did not match the current version"))) {
 				return false;
 			}
 

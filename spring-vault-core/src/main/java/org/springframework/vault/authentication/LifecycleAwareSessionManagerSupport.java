@@ -50,7 +50,7 @@ public abstract class LifecycleAwareSessionManagerSupport extends Authentication
 	public static final int REFRESH_PERIOD_BEFORE_EXPIRY = 5;
 
 	private static final RefreshTrigger DEFAULT_TRIGGER = new FixedTimeoutRefreshTrigger(REFRESH_PERIOD_BEFORE_EXPIRY,
-			TimeUnit.SECONDS);
+TimeUnit.SECONDS);
 
 	/**
 	 * Logger available to subclasses.
@@ -280,7 +280,7 @@ public abstract class LifecycleAwareSessionManagerSupport extends Authentication
 		public FixedTimeoutRefreshTrigger(Duration refreshBeforeExpiry, Duration expiryThreshold) {
 
 			Assert.isTrue(refreshBeforeExpiry.toMillis() >= 0,
-					"Refresh before expiry timeout must be greater or equal to zero");
+		"Refresh before expiry timeout must be greater or equal to zero");
 
 			Assert.notNull(expiryThreshold, "Expiry threshold must not be null");
 
@@ -292,7 +292,7 @@ public abstract class LifecycleAwareSessionManagerSupport extends Authentication
 		public Date nextExecutionTime(LoginToken loginToken) {
 
 			long milliseconds = Math.max(ONE_SECOND.toMillis(),
-					loginToken.getLeaseDuration().toMillis() - this.duration.toMillis());
+		loginToken.getLeaseDuration().toMillis() - this.duration.toMillis());
 
 			return new Date(System.currentTimeMillis() + milliseconds);
 		}

@@ -46,7 +46,7 @@ public enum LeaseEndpoints {
 		public void revoke(Lease lease, RestOperations operations) {
 
 			operations.exchange("sys/revoke", HttpMethod.PUT, LeaseEndpoints.getLeaseRevocationBody(lease), Map.class,
-					lease.getLeaseId());
+		lease.getLeaseId());
 		}
 
 		@Override
@@ -72,7 +72,7 @@ public enum LeaseEndpoints {
 		public void revoke(Lease lease, RestOperations operations) {
 
 			operations.exchange("sys/leases/revoke", HttpMethod.PUT, LeaseEndpoints.getLeaseRevocationBody(lease),
-					Map.class, lease.getLeaseId());
+		Map.class, lease.getLeaseId());
 		}
 
 		@Override
@@ -155,9 +155,9 @@ public enum LeaseEndpoints {
 		return new HttpEntity<>(leaseRenewalData);
 	}
 
-	@SuppressWarnings({ "unchecked", "RedundantClassCall" })
+	@SuppressWarnings({"unchecked", "RedundantClassCall"})
 	private static ResponseEntity<Map<String, Object>> put(RestOperations operations, HttpEntity<Object> entity,
-			String url) {
+String url) {
 		return ResponseEntity.class.cast(operations.exchange(url, HttpMethod.PUT, entity, Map.class));
 	}
 

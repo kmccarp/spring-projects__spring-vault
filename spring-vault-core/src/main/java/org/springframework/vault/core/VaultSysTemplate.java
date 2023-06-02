@@ -104,7 +104,7 @@ public class VaultSysTemplate implements VaultSysOperations {
 
 			try {
 				ResponseEntity<Map<String, Boolean>> body = (ResponseEntity) restOperations.exchange("sys/init",
-						HttpMethod.GET, emptyNamespace(null), Map.class);
+			HttpMethod.GET, emptyNamespace(null), Map.class);
 
 				Assert.state(body.getBody() != null, "Initialization response must not be null");
 
@@ -125,8 +125,8 @@ public class VaultSysTemplate implements VaultSysOperations {
 
 			try {
 				ResponseEntity<VaultInitializationResponseImpl> exchange = restOperations.exchange("sys/init",
-						HttpMethod.PUT, emptyNamespace(vaultInitializationRequest),
-						VaultInitializationResponseImpl.class);
+			HttpMethod.PUT, emptyNamespace(vaultInitializationRequest),
+			VaultInitializationResponseImpl.class);
 
 				Assert.state(exchange.getBody() != null, "Initialization response must not be null");
 
@@ -149,7 +149,7 @@ public class VaultSysTemplate implements VaultSysOperations {
 		return requireResponse(this.vaultOperations.doWithVault(restOperations -> {
 
 			ResponseEntity<VaultUnsealStatusImpl> response = restOperations.exchange("sys/unseal", HttpMethod.PUT,
-					new HttpEntity<Object>(Collections.singletonMap("key", keyShare)), VaultUnsealStatusImpl.class);
+		new HttpEntity<Object>(Collections.singletonMap("key", keyShare)), VaultUnsealStatusImpl.class);
 
 			Assert.state(response.getBody() != null, "Unseal response must not be null");
 
@@ -210,7 +210,7 @@ public class VaultSysTemplate implements VaultSysOperations {
 	@SuppressWarnings("unchecked")
 	public List<String> getPolicyNames() throws VaultException {
 		return requireResponse(
-				(List<String>) this.vaultOperations.read("sys/policy").getRequiredData().get("policies"));
+	(List<String>) this.vaultOperations.read("sys/policy").getRequiredData().get("policies"));
 	}
 
 	@Nullable
@@ -267,7 +267,7 @@ public class VaultSysTemplate implements VaultSysOperations {
 		this.vaultOperations.doWithSession(restOperations -> {
 
 			restOperations.exchange("sys/policy/{name}", HttpMethod.PUT,
-					new HttpEntity<>(Collections.singletonMap("rules", rules)), VaultResponse.class, name);
+		new HttpEntity<>(Collections.singletonMap("rules", rules)), VaultResponse.class, name);
 
 			return null;
 		});
@@ -327,7 +327,7 @@ public class VaultSysTemplate implements VaultSysOperations {
 		public Map<String, VaultMount> doWithRestOperations(RestOperations restOperations) {
 
 			ResponseEntity<VaultMountsResponse> exchange = restOperations.exchange(this.path, HttpMethod.GET, null,
-					MOUNT_TYPE_REF, Collections.emptyMap());
+		MOUNT_TYPE_REF, Collections.emptyMap());
 
 			VaultMountsResponse body = exchange.getBody();
 
@@ -362,8 +362,8 @@ public class VaultSysTemplate implements VaultSysOperations {
 				if (map.containsKey("type")) {
 
 					VaultMountBuilder builder = VaultMount.builder() //
-						.type((String) map.get("type")) //
-						.description((String) map.get("description"));// ;
+				.type((String) map.get("type")) //
+				.description((String) map.get("description"));// ;
 
 					if (map.containsKey("config")) {
 						builder.config((Map) map.get("config"));
@@ -392,7 +392,7 @@ public class VaultSysTemplate implements VaultSysOperations {
 
 			try {
 				ResponseEntity<VaultHealthImpl> healthResponse = restOperations.exchange("sys/health", HttpMethod.GET,
-						emptyNamespace(null), VaultHealthImpl.class);
+			emptyNamespace(null), VaultHealthImpl.class);
 				return healthResponse.getBody();
 			}
 			catch (RestClientResponseException responseError) {
@@ -506,7 +506,7 @@ public class VaultSysTemplate implements VaultSysOperations {
 				return false;
 			VaultUnsealStatusImpl that = (VaultUnsealStatusImpl) o;
 			return this.sealed == that.sealed && this.secretThreshold == that.secretThreshold
-					&& this.secretShares == that.secretShares && this.progress == that.progress;
+		&& this.secretShares == that.secretShares && this.progress == that.progress;
 		}
 
 		@Override
@@ -535,17 +535,17 @@ public class VaultSysTemplate implements VaultSysOperations {
 		private final String version;
 
 		VaultHealthImpl(@JsonProperty("initialized") boolean initialized, @JsonProperty("sealed") boolean sealed,
-				@JsonProperty("standby") boolean standby,
-				@JsonProperty("performance_standby") boolean performanceStandby,
-				@Nullable @JsonProperty("replication_dr_mode") String replicationRecoverySecondary,
-				@JsonProperty("server_time_utc") int serverTimeUtc, @Nullable @JsonProperty("version") String version) {
+	@JsonProperty("standby") boolean standby,
+	@JsonProperty("performance_standby") boolean performanceStandby,
+	@Nullable @JsonProperty("replication_dr_mode") String replicationRecoverySecondary,
+	@JsonProperty("server_time_utc") int serverTimeUtc, @Nullable @JsonProperty("version") String version) {
 
 			this.initialized = initialized;
 			this.sealed = sealed;
 			this.standby = standby;
 			this.performanceStandby = performanceStandby;
 			this.replicationRecoverySecondary = replicationRecoverySecondary != null
-					&& !"disabled".equalsIgnoreCase(replicationRecoverySecondary);
+		&& !"disabled".equalsIgnoreCase(replicationRecoverySecondary);
 			this.serverTimeUtc = serverTimeUtc;
 			this.version = version;
 		}
@@ -587,15 +587,15 @@ public class VaultSysTemplate implements VaultSysOperations {
 				return false;
 			VaultHealthImpl that = (VaultHealthImpl) o;
 			return this.initialized == that.initialized && this.sealed == that.sealed && this.standby == that.standby
-					&& this.performanceStandby == that.performanceStandby
-					&& this.replicationRecoverySecondary == that.replicationRecoverySecondary
-					&& this.serverTimeUtc == that.serverTimeUtc && Objects.equals(this.version, that.version);
+		&& this.performanceStandby == that.performanceStandby
+		&& this.replicationRecoverySecondary == that.replicationRecoverySecondary
+		&& this.serverTimeUtc == that.serverTimeUtc && Objects.equals(this.version, that.version);
 		}
 
 		@Override
 		public int hashCode() {
 			return Objects.hash(this.initialized, this.sealed, this.standby, this.performanceStandby,
-					this.replicationRecoverySecondary, this.serverTimeUtc, this.version);
+		this.replicationRecoverySecondary, this.serverTimeUtc, this.version);
 		}
 
 	}

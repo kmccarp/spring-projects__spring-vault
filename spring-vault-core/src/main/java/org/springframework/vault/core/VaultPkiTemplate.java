@@ -62,18 +62,18 @@ public class VaultPkiTemplate implements VaultPkiOperations {
 
 	@Override
 	public VaultCertificateResponse issueCertificate(String roleName, VaultCertificateRequest certificateRequest)
-			throws VaultException {
+throws VaultException {
 
 		Assert.hasText(roleName, "Role name must not be empty");
 		Assert.notNull(certificateRequest, "Certificate request must not be null");
 
 		return requestCertificate(roleName, "{path}/issue/{roleName}", createIssueRequest(certificateRequest),
-				VaultCertificateResponse.class);
+	VaultCertificateResponse.class);
 	}
 
 	@Override
 	public VaultSignCertificateRequestResponse signCertificateRequest(String roleName, String csr,
-			VaultCertificateRequest certificateRequest) throws VaultException {
+VaultCertificateRequest certificateRequest) throws VaultException {
 
 		Assert.hasText(roleName, "Role name must not be empty");
 		Assert.hasText(csr, "CSR name must not be empty");
@@ -86,7 +86,7 @@ public class VaultPkiTemplate implements VaultPkiOperations {
 	}
 
 	private <T> T requestCertificate(String roleName, String requestPath, Map<String, Object> request,
-			Class<T> responseType) {
+Class<T> responseType) {
 
 		request.putIfAbsent("format", "der");
 
@@ -114,7 +114,7 @@ public class VaultPkiTemplate implements VaultPkiOperations {
 
 			try {
 				restOperations.postForObject("{path}/revoke", Collections.singletonMap("serial_number", serialNumber),
-						Map.class, this.path);
+			Map.class, this.path);
 
 				return null;
 			}
@@ -163,25 +163,25 @@ public class VaultPkiTemplate implements VaultPkiOperations {
 
 		mapper.from(certificateRequest::getCommonName).to("common_name", request);
 		mapper.from(certificateRequest::getAltNames)
-			.whenNotEmpty()
-			.as(i -> StringUtils.collectionToDelimitedString(i, ","))
-			.to("alt_names", request);
+	.whenNotEmpty()
+	.as(i -> StringUtils.collectionToDelimitedString(i, ","))
+	.to("alt_names", request);
 		mapper.from(certificateRequest::getIpSubjectAltNames)
-			.whenNotEmpty()
-			.as(i -> StringUtils.collectionToDelimitedString(i, ","))
-			.to("ip_sans", request);
+	.whenNotEmpty()
+	.as(i -> StringUtils.collectionToDelimitedString(i, ","))
+	.to("ip_sans", request);
 		mapper.from(certificateRequest::getUriSubjectAltNames)
-			.whenNotEmpty()
-			.as(i -> StringUtils.collectionToDelimitedString(i, ","))
-			.to("uri_sans", request);
+	.whenNotEmpty()
+	.as(i -> StringUtils.collectionToDelimitedString(i, ","))
+	.to("uri_sans", request);
 		mapper.from(certificateRequest::getOtherSans)
-			.whenNotEmpty()
-			.as(i -> StringUtils.collectionToDelimitedString(i, ","))
-			.to("other_sans", request);
+	.whenNotEmpty()
+	.as(i -> StringUtils.collectionToDelimitedString(i, ","))
+	.to("other_sans", request);
 		mapper.from(certificateRequest::getTtl).whenNonNull().as(i -> i.get(ChronoUnit.SECONDS)).to("ttl", request);
 		mapper.from(certificateRequest::isExcludeCommonNameFromSubjectAltNames)
-			.whenTrue()
-			.to("exclude_cn_from_sans", request);
+	.whenTrue()
+	.to("exclude_cn_from_sans", request);
 		mapper.from(certificateRequest::getFormat).whenHasText().to("format", request);
 		mapper.from(certificateRequest::getPrivateKeyFormat).whenHasText().to("private_key_format", request);
 

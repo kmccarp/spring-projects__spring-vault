@@ -48,7 +48,7 @@ class MappingVaultConverterUnitTests {
 	void before() {
 
 		VaultCustomConversions conversions = new VaultCustomConversions(
-				Arrays.asList(DocumentToPersonConverter.INSTANCE, PersonToDocumentConverter.INSTANCE));
+	Arrays.asList(DocumentToPersonConverter.INSTANCE, PersonToDocumentConverter.INSTANCE));
 		this.converter.setCustomConversions(conversions);
 		this.converter.afterPropertiesSet();
 	}
@@ -125,7 +125,7 @@ class MappingVaultConverterUnitTests {
 	void shouldReadEntityWithList() {
 
 		SecretDocument document = new SecretDocument(
-				Collections.singletonMap("usernames", Arrays.asList("walter", "heisenberg")));
+	Collections.singletonMap("usernames", Arrays.asList("walter", "heisenberg")));
 
 		EntityWithListOfStrings entity = this.converter.read(EntityWithListOfStrings.class, document);
 

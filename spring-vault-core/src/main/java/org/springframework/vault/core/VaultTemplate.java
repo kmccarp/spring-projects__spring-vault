@@ -119,7 +119,7 @@ public class VaultTemplate implements InitializingBean, VaultOperations, Disposa
 	 * @param sessionManager must not be {@literal null}.
 	 */
 	public VaultTemplate(VaultEndpoint vaultEndpoint, ClientHttpRequestFactory clientHttpRequestFactory,
-			SessionManager sessionManager) {
+SessionManager sessionManager) {
 		this(SimpleVaultEndpointProvider.of(vaultEndpoint), clientHttpRequestFactory, sessionManager);
 	}
 
@@ -155,7 +155,7 @@ public class VaultTemplate implements InitializingBean, VaultOperations, Disposa
 	 * @since 1.1
 	 */
 	public VaultTemplate(VaultEndpointProvider endpointProvider, ClientHttpRequestFactory requestFactory,
-			SessionManager sessionManager) {
+SessionManager sessionManager) {
 
 		Assert.notNull(endpointProvider, "VaultEndpointProvider must not be null");
 		Assert.notNull(requestFactory, "ClientHttpRequestFactory must not be null");
@@ -220,7 +220,7 @@ public class VaultTemplate implements InitializingBean, VaultOperations, Disposa
 	 * @since 2.1
 	 */
 	protected RestTemplate doCreateRestTemplate(VaultEndpointProvider endpointProvider,
-			ClientHttpRequestFactory requestFactory) {
+ClientHttpRequestFactory requestFactory) {
 
 		return RestTemplateBuilder.builder().endpointProvider(endpointProvider).requestFactory(requestFactory).build();
 	}
@@ -238,13 +238,13 @@ public class VaultTemplate implements InitializingBean, VaultOperations, Disposa
 	 * @since 2.1
 	 */
 	protected RestTemplate doCreateSessionTemplate(VaultEndpointProvider endpointProvider,
-			ClientHttpRequestFactory requestFactory) {
+ClientHttpRequestFactory requestFactory) {
 
 		return RestTemplateBuilder.builder()
-			.endpointProvider(endpointProvider)
-			.requestFactory(requestFactory)
-			.customizers(restTemplate -> restTemplate.getInterceptors().add(getSessionInterceptor()))
-			.build();
+	.endpointProvider(endpointProvider)
+	.requestFactory(requestFactory)
+	.customizers(restTemplate -> restTemplate.getInterceptors().add(getSessionInterceptor()))
+	.build();
 	}
 
 	private ClientHttpRequestInterceptor getSessionInterceptor() {
@@ -294,7 +294,7 @@ public class VaultTemplate implements InitializingBean, VaultOperations, Disposa
 		}
 
 		throw new UnsupportedOperationException(
-				String.format("Key/Value backend version %s not supported", apiVersion));
+	String.format("Key/Value backend version %s not supported", apiVersion));
 
 	}
 
@@ -366,7 +366,7 @@ public class VaultTemplate implements InitializingBean, VaultOperations, Disposa
 
 			try {
 				ResponseEntity<VaultResponseSupport<T>> exchange = restOperations.exchange(path, HttpMethod.GET, null,
-						ref);
+			ref);
 
 				return exchange.getBody();
 			}
@@ -389,7 +389,7 @@ public class VaultTemplate implements InitializingBean, VaultOperations, Disposa
 		Assert.hasText(path, "Path must not be empty");
 
 		VaultListResponse read = doRead(String.format("%s?list=true", path.endsWith("/") ? path : (path + "/")),
-				VaultListResponse.class);
+	VaultListResponse.class);
 		if (read == null) {
 			return Collections.emptyList();
 		}

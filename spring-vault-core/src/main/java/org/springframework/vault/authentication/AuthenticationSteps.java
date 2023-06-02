@@ -365,7 +365,7 @@ public class AuthenticationSteps {
 		}
 
 		private HttpRequestBuilder(HttpMethod method, @Nullable URI uri, @Nullable String uriTemplate,
-				@Nullable String[] urlVariables, @Nullable HttpEntity<?> entity) {
+	@Nullable String[] urlVariables, @Nullable HttpEntity<?> entity) {
 			this.method = method;
 			this.uri = uri;
 			this.uriTemplate = uriTemplate;
@@ -395,7 +395,7 @@ public class AuthenticationSteps {
 			Assert.notNull(headers, "HttpHeaders must not be null");
 
 			return new HttpRequestBuilder(this.method, this.uri, this.uriTemplate, this.urlVariables,
-					new HttpEntity<>(headers));
+		new HttpEntity<>(headers));
 		}
 
 		/**
@@ -447,7 +447,7 @@ public class AuthenticationSteps {
 		@Override
 		public String toString() {
 			return String.format("%s %s AS %s", getMethod(), getUri() != null ? getUri() : getUriTemplate(),
-					getResponseType());
+		getResponseType());
 		}
 
 		HttpMethod getMethod() {

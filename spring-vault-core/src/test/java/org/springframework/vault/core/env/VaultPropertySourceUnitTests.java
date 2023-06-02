@@ -48,23 +48,23 @@ class VaultPropertySourceUnitTests {
 	@Test
 	void shouldRejectEmptyPath() {
 		assertThatIllegalArgumentException()
-			.isThrownBy(() -> new VaultPropertySource("hello", this.vaultTemplate, "", PropertyTransformers.noop()));
+	.isThrownBy(() -> new VaultPropertySource("hello", this.vaultTemplate, "", PropertyTransformers.noop()));
 
 	}
 
 	@Test
 	void shouldRejectPathStartingWithSlash() {
 		assertThatIllegalArgumentException().isThrownBy(
-				() -> new VaultPropertySource("hello", this.vaultTemplate, "/secret", PropertyTransformers.noop()));
+	() -> new VaultPropertySource("hello", this.vaultTemplate, "/secret", PropertyTransformers.noop()));
 	}
 
 	@Test
 	void propertiesNotFoundShouldFailOnIgnoreSecretNotFoundDisabled() {
 
 		assertThatThrownBy(() -> new VaultPropertySource("hello", this.vaultTemplate, "secret/myapp",
-				PropertyTransformers.noop(), false))
-			.isInstanceOf(VaultPropertySourceNotFoundException.class)
-			.hasNoCause();
+	PropertyTransformers.noop(), false))
+	.isInstanceOf(VaultPropertySourceNotFoundException.class)
+	.hasNoCause();
 	}
 
 	@Test
@@ -72,15 +72,15 @@ class VaultPropertySourceUnitTests {
 
 		when(this.vaultTemplate.read("secret/myapp")).thenThrow(new VaultException("HTTP error"));
 		assertThatThrownBy(() -> new VaultPropertySource("hello", this.vaultTemplate, "secret/myapp",
-				PropertyTransformers.noop(), false)).isInstanceOf(VaultPropertySourceNotFoundException.class)
-						.hasRootCauseExactlyInstanceOf(VaultException.class);
+	PropertyTransformers.noop(), false)).isInstanceOf(VaultPropertySourceNotFoundException.class)
+	.hasRootCauseExactlyInstanceOf(VaultException.class);
 	}
 
 	@Test
 	void propertiesNotFoundShouldBeIgnoredByDefault() {
 
 		VaultPropertySource source = new VaultPropertySource("hello", this.vaultTemplate, "secret/myapp",
-				PropertyTransformers.noop());
+	PropertyTransformers.noop());
 
 		assertThat(source.getPropertyNames()).isEmpty();
 	}
@@ -91,7 +91,7 @@ class VaultPropertySourceUnitTests {
 		when(this.vaultTemplate.read("secret/myapp")).thenThrow(new VaultException("HTTP error"));
 
 		VaultPropertySource source = new VaultPropertySource("hello", this.vaultTemplate, "secret/myapp",
-				PropertyTransformers.noop());
+	PropertyTransformers.noop());
 
 		assertThat(source.getPropertyNames()).isEmpty();
 	}
@@ -102,7 +102,7 @@ class VaultPropertySourceUnitTests {
 		prepareResponse();
 
 		VaultPropertySource vaultPropertySource = new VaultPropertySource("hello", this.vaultTemplate, "secret/myapp",
-				PropertyTransformers.noop());
+	PropertyTransformers.noop());
 
 		assertThat(vaultPropertySource.getProperty("key")).isEqualTo("value");
 		assertThat(vaultPropertySource.getProperty("integer")).isEqualTo(1);
@@ -117,7 +117,7 @@ class VaultPropertySourceUnitTests {
 		prepareResponse();
 
 		VaultPropertySource vaultPropertySource = new VaultPropertySource("hello", this.vaultTemplate, "secret/myapp",
-				PropertyTransformers.propertyNamePrefix("database."));
+	PropertyTransformers.propertyNamePrefix("database."));
 
 		assertThat(vaultPropertySource.containsProperty("database.key")).isTrue();
 		assertThat(vaultPropertySource.containsProperty("key")).isFalse();
@@ -133,7 +133,7 @@ class VaultPropertySourceUnitTests {
 		prepareResponse();
 
 		VaultPropertySource vaultPropertySource = new VaultPropertySource("hello", this.vaultTemplate, "secret/myapp",
-				PropertyTransformers.noop());
+	PropertyTransformers.noop());
 
 		assertThat(vaultPropertySource.getPropertyNames()).contains("key", "integer", "complex.key");
 	}

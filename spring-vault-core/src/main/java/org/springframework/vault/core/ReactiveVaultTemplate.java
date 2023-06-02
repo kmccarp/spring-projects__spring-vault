@@ -90,7 +90,7 @@ public class ReactiveVaultTemplate implements ReactiveVaultOperations {
 	 * @param vaultTokenSupplier must not be {@literal null}.
 	 */
 	public ReactiveVaultTemplate(VaultEndpoint vaultEndpoint, ClientHttpConnector connector,
-			VaultTokenSupplier vaultTokenSupplier) {
+VaultTokenSupplier vaultTokenSupplier) {
 		this(SimpleVaultEndpointProvider.of(vaultEndpoint), connector, vaultTokenSupplier);
 	}
 
@@ -124,7 +124,7 @@ public class ReactiveVaultTemplate implements ReactiveVaultOperations {
 	 * @param vaultTokenSupplier must not be {@literal null}.
 	 */
 	public ReactiveVaultTemplate(VaultEndpointProvider endpointProvider, ClientHttpConnector connector,
-			VaultTokenSupplier vaultTokenSupplier) {
+VaultTokenSupplier vaultTokenSupplier) {
 
 		Assert.notNull(endpointProvider, "VaultEndpointProvider must not be null");
 		Assert.notNull(connector, "ClientHttpConnector must not be null");
@@ -203,7 +203,7 @@ public class ReactiveVaultTemplate implements ReactiveVaultOperations {
 	 * @since 2.1
 	 */
 	protected WebClient doCreateSessionWebClient(VaultEndpointProvider endpointProvider,
-			ClientHttpConnector connector) {
+ClientHttpConnector connector) {
 
 		Assert.notNull(endpointProvider, "VaultEndpointProvider must not be null");
 		Assert.notNull(connector, "ClientHttpConnector must not be null");
@@ -211,10 +211,10 @@ public class ReactiveVaultTemplate implements ReactiveVaultOperations {
 		ExchangeFilterFunction filter = getSessionFilter();
 
 		return WebClientBuilder.builder()
-			.httpConnector(connector)
-			.endpointProvider(endpointProvider)
-			.filter(filter)
-			.build();
+	.httpConnector(connector)
+	.endpointProvider(endpointProvider)
+	.filter(filter)
+	.build();
 	}
 
 	private ExchangeFilterFunction getSessionFilter() {
@@ -268,10 +268,10 @@ public class ReactiveVaultTemplate implements ReactiveVaultOperations {
 		Assert.hasText(path, "Path must not be empty");
 
 		Mono<VaultListResponse> read = doRead(String.format("%s?list=true", path.endsWith("/") ? path : (path + "/")),
-				VaultListResponse.class);
+	VaultListResponse.class);
 
 		return read.filter(response -> response.getData() != null && response.getData().containsKey("keys"))
-			.flatMapIterable(response -> (List<String>) response.getRequiredData().get("keys"));
+	.flatMapIterable(response -> (List<String>) response.getRequiredData().get("keys"));
 	}
 
 	@Override
@@ -297,13 +297,13 @@ public class ReactiveVaultTemplate implements ReactiveVaultOperations {
 		Assert.hasText(path, "Path must not be empty");
 
 		return doWithSession(webClient -> webClient.delete()
-			.uri(path)
-			.exchangeToMono(mapResponse(String.class, path, HttpMethod.DELETE))).then();
+	.uri(path)
+	.exchangeToMono(mapResponse(String.class, path, HttpMethod.DELETE))).then();
 	}
 
 	@Override
 	public <V, T extends Publisher<V>> T doWithVault(Function<WebClient, ? extends T> clientCallback)
-			throws VaultException, WebClientException {
+throws VaultException, WebClientException {
 
 		Assert.notNull(clientCallback, "Client callback must not be null");
 
@@ -317,7 +317,7 @@ public class ReactiveVaultTemplate implements ReactiveVaultOperations {
 
 	@Override
 	public <V, T extends Publisher<V>> T doWithSession(Function<WebClient, ? extends T> sessionCallback)
-			throws VaultException, WebClientException {
+throws VaultException, WebClientException {
 
 		Assert.notNull(sessionCallback, "Session callback must not be null");
 
@@ -332,20 +332,20 @@ public class ReactiveVaultTemplate implements ReactiveVaultOperations {
 	private <T> Mono<T> doRead(String path, Class<T> responseType) {
 
 		return doWithSession(client -> client.get() //
-			.uri(path)
-			.exchangeToMono(mapResponse(responseType, path, HttpMethod.GET)));
+	.uri(path)
+	.exchangeToMono(mapResponse(responseType, path, HttpMethod.GET)));
 	}
 
 	private static <T> Function<ClientResponse, Mono<T>> mapResponse(Class<T> bodyType, String path,
-			HttpMethod method) {
+HttpMethod method) {
 		return response -> isSuccess(response) ? response.bodyToMono(bodyType) : mapOtherwise(response, path, method);
 	}
 
 	private static <T> Function<ClientResponse, Mono<T>> mapResponse(ParameterizedTypeReference<T> typeReference,
-			String path, HttpMethod method) {
+String path, HttpMethod method) {
 
 		return response -> isSuccess(response) ? response.body(BodyExtractors.toMono(typeReference))
-				: mapOtherwise(response, path, method);
+	: mapOtherwise(response, path, method);
 	}
 
 	private static boolean isSuccess(ClientResponse response) {

@@ -55,17 +55,16 @@ class GcpComputeAuthenticationUnitTests {
 	private void setupMocks() {
 
 		this.mockRest.expect(requestTo(
-				"http://metadata/computeMetadata/v1/instance/service-accounts/default/identity?audience=https://localhost:8200/vault/dev-role&format=full"))
-			.andExpect(method(HttpMethod.GET))
-			.andRespond(withSuccess().contentType(MediaType.TEXT_PLAIN).body("my-jwt"));
+	"http://metadata/computeMetadata/v1/instance/service-accounts/default/identity?audience=https://localhost:8200/vault/dev-role&format=full"))
+	.andExpect(method(HttpMethod.GET))
+	.andRespond(withSuccess().contentType(MediaType.TEXT_PLAIN).body("my-jwt"));
 
 		this.mockRest.expect(requestTo("/auth/gcp/login"))
-			.andExpect(method(HttpMethod.POST))
-			.andExpect(jsonPath("$.role").value("dev-role"))
-			.andExpect(jsonPath("$.jwt").value("my-jwt"))
-			.andRespond(withSuccess().contentType(MediaType.APPLICATION_JSON)
-				.body("{" + "\"auth\":{\"client_token\":\"my-token\", \"renewable\": true, \"lease_duration\": 10}"
-						+ "}"));
+	.andExpect(method(HttpMethod.POST))
+	.andExpect(jsonPath("$.role").value("dev-role"))
+	.andExpect(jsonPath("$.jwt").value("my-jwt"))
+	.andRespond(withSuccess().contentType(MediaType.APPLICATION_JSON)
+.body("{" + "\"auth\":{\"client_token\":\"my-token\", \"renewable\": true, \"lease_duration\": 10}"+ "}"));
 	}
 
 	@Test
@@ -97,7 +96,7 @@ class GcpComputeAuthenticationUnitTests {
 		GcpComputeAuthentication authentication = new GcpComputeAuthentication(options, this.restTemplate);
 
 		AuthenticationStepsExecutor executor = new AuthenticationStepsExecutor(authentication.getAuthenticationSteps(),
-				this.restTemplate);
+	this.restTemplate);
 
 		VaultToken login = executor.login();
 

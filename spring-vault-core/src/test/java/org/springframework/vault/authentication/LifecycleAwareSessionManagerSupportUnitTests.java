@@ -39,7 +39,7 @@ class LifecycleAwareSessionManagerSupportUnitTests {
 
 		Date nextExecutionTime = trigger.nextExecutionTime(LoginToken.of("foo".toCharArray(), Duration.ofMinutes(1)));
 		assertThat(nextExecutionTime).isBetween(new Date(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(52)),
-				new Date(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(56)));
+	new Date(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(56)));
 	}
 
 	@Test
@@ -49,7 +49,7 @@ class LifecycleAwareSessionManagerSupportUnitTests {
 
 		Date nextExecutionTime = trigger.nextExecutionTime(LoginToken.of("foo".toCharArray(), Duration.ofSeconds(2)));
 		assertThat(nextExecutionTime).isBetween(new Date(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(0)),
-				new Date(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(2)));
+	new Date(System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(2)));
 	}
 
 }

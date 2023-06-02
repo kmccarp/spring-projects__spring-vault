@@ -94,7 +94,7 @@ public class VaultVersionedKeyValueTemplate extends VaultKeyValue2Accessor imple
 	private <T> Versioned<T> doRead(String path, Version version, Class<T> responseType) {
 
 		String secretPath = version.isVersioned()
-				? String.format("%s?version=%d", createDataPath(path), version.getVersion()) : createDataPath(path);
+	? String.format("%s?version=%d", createDataPath(path), version.getVersion()) : createDataPath(path);
 
 		VersionedResponse response = this.vaultOperations.doWithSession(restOperations -> {
 
@@ -153,7 +153,7 @@ public class VaultVersionedKeyValueTemplate extends VaultKeyValue2Accessor imple
 
 		if (response == null) {
 			throw new IllegalStateException(
-					"VaultVersionedKeyValueOperations cannot be used with a Key-Value version 1 mount");
+		"VaultVersionedKeyValueOperations cannot be used with a Key-Value version 1 mount");
 		}
 
 		return getMetadata(response.getRequiredData());
@@ -209,9 +209,9 @@ public class VaultVersionedKeyValueTemplate extends VaultKeyValue2Accessor imple
 
 	private static List<Integer> toVersionList(Version[] versionsToDelete) {
 		return Arrays.stream(versionsToDelete)
-			.filter(Version::isVersioned)
-			.map(Version::getVersion)
-			.collect(Collectors.toList());
+	.filter(Version::isVersioned)
+	.map(Version::getVersion)
+	.collect(Collectors.toList());
 	}
 
 	@Override

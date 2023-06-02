@@ -34,8 +34,7 @@ import org.springframework.vault.authentication.ClientAuthentication;
  * @author Nick Tan
  */
 @ExtendWith(SpringExtension.class)
-@TestPropertySource(
-		properties = { "vault.uri=https://localhost:8123", "vault.authentication=aws-iam", "vault.aws-iam.role=role" })
+@TestPropertySource(properties = {"vault.uri=https://localhost:8123", "vault.authentication=aws-iam", "vault.aws-iam.role=role"})
 class EnvironmentVaultConfigurationAwsIamAuthenticationUnitTests {
 
 	@Configuration

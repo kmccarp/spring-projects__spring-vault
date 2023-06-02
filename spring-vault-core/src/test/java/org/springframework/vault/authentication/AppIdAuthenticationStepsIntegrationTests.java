@@ -38,14 +38,14 @@ class AppIdAuthenticationStepsIntegrationTests extends AppIdAuthenticationIntegr
 	void authenticationStepsShouldLoginSuccessfully() {
 
 		AppIdAuthenticationOptions options = AppIdAuthenticationOptions.builder()
-			.appId("myapp") //
-			.userIdMechanism(new StaticUserId("static-userid-value")) //
-			.build();
+	.appId("myapp") //
+	.userIdMechanism(new StaticUserId("static-userid-value")) //
+	.build();
 
 		RestTemplate restTemplate = TestRestTemplateFactory.create(Settings.createSslConfiguration());
 
 		AuthenticationStepsExecutor executor = new AuthenticationStepsExecutor(
-				AppIdAuthentication.createAuthenticationSteps(options), restTemplate);
+	AppIdAuthentication.createAuthenticationSteps(options), restTemplate);
 
 		VaultToken login = executor.login();
 
@@ -56,14 +56,14 @@ class AppIdAuthenticationStepsIntegrationTests extends AppIdAuthenticationIntegr
 	void authenticationStepsLoginShouldFail() {
 
 		AppIdAuthenticationOptions options = AppIdAuthenticationOptions.builder()
-			.appId("wrong") //
-			.userIdMechanism(new StaticUserId("wrong")) //
-			.build();
+	.appId("wrong") //
+	.userIdMechanism(new StaticUserId("wrong")) //
+	.build();
 
 		RestTemplate restTemplate = TestRestTemplateFactory.create(Settings.createSslConfiguration());
 
 		AuthenticationStepsExecutor executor = new AuthenticationStepsExecutor(
-				AppIdAuthentication.createAuthenticationSteps(options), restTemplate);
+	AppIdAuthentication.createAuthenticationSteps(options), restTemplate);
 
 		assertThatExceptionOfType(VaultException.class).isThrownBy(executor::login);
 	}

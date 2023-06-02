@@ -61,7 +61,7 @@ public abstract class GcpJwtAuthenticationSupport {
 		try {
 
 			VaultResponse response = this.restOperations.postForObject(AuthenticationUtil.getLoginPath(path), login,
-					VaultResponse.class);
+		VaultResponse.class);
 
 			Assert.state(response != null && response.getAuth() != null, "Auth field must not be null");
 
@@ -71,7 +71,7 @@ public abstract class GcpJwtAuthenticationSupport {
 
 					Map<Object, Object> metadata = (Map<Object, Object>) response.getAuth().get("metadata");
 					logger.debug(String.format("Login successful using %s authentication for user id %s",
-							authenticationName, metadata.get("service_account_email")));
+				authenticationName, metadata.get("service_account_email")));
 				}
 				else {
 					logger.debug("Login successful using " + authenticationName + " authentication");

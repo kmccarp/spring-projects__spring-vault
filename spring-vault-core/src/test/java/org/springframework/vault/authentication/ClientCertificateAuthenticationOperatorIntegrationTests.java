@@ -30,8 +30,7 @@ import reactor.test.StepVerifier;
  *
  * @author Mark Paluch
  */
-class ClientCertificateAuthenticationOperatorIntegrationTests
-		extends ClientCertificateAuthenticationIntegrationTestBase {
+class ClientCertificateAuthenticationOperatorIntegrationTestsextends ClientCertificateAuthenticationIntegrationTestBase {
 
 	@Test
 	void authenticationStepsShouldLoginSuccessfully() {
@@ -39,41 +38,41 @@ class ClientCertificateAuthenticationOperatorIntegrationTests
 		WebClient webClient = TestWebClientFactory.create(prepareCertAuthenticationMethod());
 
 		AuthenticationStepsOperator operator = new AuthenticationStepsOperator(
-				ClientCertificateAuthentication.createAuthenticationSteps(), webClient);
+	ClientCertificateAuthentication.createAuthenticationSteps(), webClient);
 
 		operator.getVaultToken() //
-			.as(StepVerifier::create) //
-			.expectNextCount(1) //
-			.verifyComplete();
+	.as(StepVerifier::create) //
+	.expectNextCount(1) //
+	.verifyComplete();
 	}
 
 	@Test
 	void shouldSelectKey() {
 
 		WebClient webClient = TestWebClientFactory.create(
-				prepareCertAuthenticationMethod(SslConfiguration.KeyConfiguration.of("changeit".toCharArray(), "1")));
+	prepareCertAuthenticationMethod(SslConfiguration.KeyConfiguration.of("changeit".toCharArray(), "1")));
 
 		AuthenticationStepsOperator operator = new AuthenticationStepsOperator(
-				ClientCertificateAuthentication.createAuthenticationSteps(), webClient);
+	ClientCertificateAuthentication.createAuthenticationSteps(), webClient);
 
 		operator.getVaultToken() //
-			.as(StepVerifier::create) //
-			.expectNextCount(1) //
-			.verifyComplete();
+	.as(StepVerifier::create) //
+	.expectNextCount(1) //
+	.verifyComplete();
 	}
 
 	@Test
 	void shouldSelectInvalidKey() {
 
 		WebClient webClient = TestWebClientFactory.create(
-				prepareCertAuthenticationMethod(SslConfiguration.KeyConfiguration.of("changeit".toCharArray(), "2")));
+	prepareCertAuthenticationMethod(SslConfiguration.KeyConfiguration.of("changeit".toCharArray(), "2")));
 
 		AuthenticationStepsOperator operator = new AuthenticationStepsOperator(
-				ClientCertificateAuthentication.createAuthenticationSteps(), webClient);
+	ClientCertificateAuthentication.createAuthenticationSteps(), webClient);
 
 		operator.getVaultToken() //
-			.as(StepVerifier::create) //
-			.verifyError(VaultLoginException.class);
+	.as(StepVerifier::create) //
+	.verifyError(VaultLoginException.class);
 	}
 
 	@Test
@@ -82,15 +81,15 @@ class ClientCertificateAuthenticationOperatorIntegrationTests
 		WebClient webClient = TestWebClientFactory.create(prepareCertAuthenticationMethod());
 
 		AuthenticationStepsOperator operator = new AuthenticationStepsOperator(
-				ClientCertificateAuthentication.createAuthenticationSteps(
-						ClientCertificateAuthenticationOptions.builder().role("my-default-role").build()),
-				webClient);
+	ClientCertificateAuthentication.createAuthenticationSteps(
+ClientCertificateAuthenticationOptions.builder().role("my-default-role").build()),
+	webClient);
 
 		operator.getVaultToken() //
-			.as(StepVerifier::create) //
-			.assertNext(token -> assertThatPolicies(token).contains("cert-auth1") //
-				.doesNotContain("cert-auth2")) //
-			.verifyComplete();
+	.as(StepVerifier::create) //
+	.assertNext(token -> assertThatPolicies(token).contains("cert-auth1") //
+.doesNotContain("cert-auth2")) //
+	.verifyComplete();
 	}
 
 	@Test
@@ -99,21 +98,21 @@ class ClientCertificateAuthenticationOperatorIntegrationTests
 		WebClient webClient = TestWebClientFactory.create(prepareCertAuthenticationMethod());
 
 		AuthenticationStepsOperator operator = new AuthenticationStepsOperator(
-				ClientCertificateAuthentication.createAuthenticationSteps(
-						ClientCertificateAuthenticationOptions.builder().role("my-alternate-role").build()),
-				webClient);
+	ClientCertificateAuthentication.createAuthenticationSteps(
+ClientCertificateAuthenticationOptions.builder().role("my-alternate-role").build()),
+	webClient);
 
 		operator.getVaultToken() //
-			.as(StepVerifier::create) //
-			.assertNext(token -> assertThatPolicies(token).contains("cert-auth2") //
-				.doesNotContain("cert-auth1")) //
-			.verifyComplete();
+	.as(StepVerifier::create) //
+	.assertNext(token -> assertThatPolicies(token).contains("cert-auth2") //
+.doesNotContain("cert-auth1")) //
+	.verifyComplete();
 	}
 
 	@Test
 	void shouldProvideInvalidKeyPassword() {
 		assertThatIllegalStateException().isThrownBy(() -> TestWebClientFactory
-			.create(prepareCertAuthenticationMethod(SslConfiguration.KeyConfiguration.of("wrong".toCharArray(), "1"))));
+	.create(prepareCertAuthenticationMethod(SslConfiguration.KeyConfiguration.of("wrong".toCharArray(), "1"))));
 	}
 
 }

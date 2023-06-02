@@ -60,8 +60,7 @@ class VaultKv2RepositoryIntegrationTests extends IntegrationTestSupport {
 
 	@Configuration
 	@EnableVaultRepositories(considerNestedRepositories = true,
-			includeFilters = @ComponentScan.Filter(classes = { VersionedRepository.class, SimpleRepository.class },
-					type = FilterType.ASSIGNABLE_TYPE))
+includeFilters = @ComponentScan.Filter(classes = {VersionedRepository.class, SimpleRepository.class},type = FilterType.ASSIGNABLE_TYPE))
 	static class VaultRepositoryTestConfiguration extends VaultIntegrationTestConfiguration {
 
 	}
@@ -87,7 +86,7 @@ class VaultKv2RepositoryIntegrationTests extends IntegrationTestSupport {
 		}
 
 		vaultSysOperations.mount("versioned",
-				VaultMount.builder().type("kv").options(Collections.singletonMap("version", "2")).build());
+	VaultMount.builder().type("kv").options(Collections.singletonMap("version", "2")).build());
 	}
 
 	@Test
@@ -179,7 +178,7 @@ class VaultKv2RepositoryIntegrationTests extends IntegrationTestSupport {
 		person.setVersion(2);
 
 		assertThatExceptionOfType(OptimisticLockingFailureException.class)
-			.isThrownBy(() -> this.versionedRepository.save(person));
+	.isThrownBy(() -> this.versionedRepository.save(person));
 	}
 
 	@Test
@@ -194,7 +193,7 @@ class VaultKv2RepositoryIntegrationTests extends IntegrationTestSupport {
 		saved.setFirstname("baz");
 
 		assertThatExceptionOfType(OptimisticLockingFailureException.class)
-			.isThrownBy(() -> this.versionedRepository.save(saved));
+	.isThrownBy(() -> this.versionedRepository.save(saved));
 	}
 
 	@Test
@@ -248,7 +247,7 @@ class VaultKv2RepositoryIntegrationTests extends IntegrationTestSupport {
 	}
 
 	interface VersionedRepository
-			extends CrudRepository<VersionedPerson, String>, RevisionRepository<VersionedPerson, String, Integer> {
+extends CrudRepository<VersionedPerson, String>, RevisionRepository<VersionedPerson, String, Integer> {
 
 		List<VersionedPerson> findByIdStartsWith(String prefix);
 

@@ -77,7 +77,7 @@ public class AwsEc2Authentication implements ClientAuthentication, Authenticatio
 	 * @param awsMetadataRestOperations must not be {@literal null}.
 	 */
 	public AwsEc2Authentication(AwsEc2AuthenticationOptions options, RestOperations vaultRestOperations,
-			RestOperations awsMetadataRestOperations) {
+RestOperations awsMetadataRestOperations) {
 
 		Assert.notNull(options, "AwsEc2AuthenticationOptions must not be null");
 		Assert.notNull(vaultRestOperations, "Vault RestOperations must not be null");
@@ -105,30 +105,30 @@ public class AwsEc2Authentication implements ClientAuthentication, Authenticatio
 	}
 
 	protected static AuthenticationSteps createAuthenticationSteps(AwsEc2AuthenticationOptions options,
-			AtomicReference<char[]> nonce, Supplier<char[]> nonceSupplier) {
+AtomicReference<char[]> nonce, Supplier<char[]> nonceSupplier) {
 
 		return AuthenticationSteps
-			.fromHttpRequest(HttpRequestBuilder.get(options.getIdentityDocumentUri().toString()).as(String.class)) //
-			.map(pkcs7 -> pkcs7.replaceAll("\\r", "")) //
-			.map(pkcs7 -> pkcs7.replaceAll("\\n", "")) //
-			.map(pkcs7 -> {
+	.fromHttpRequest(HttpRequestBuilder.get(options.getIdentityDocumentUri().toString()).as(String.class)) //
+	.map(pkcs7 -> pkcs7.replaceAll("\\r", "")) //
+	.map(pkcs7 -> pkcs7.replaceAll("\\n", "")) //
+	.map(pkcs7 -> {
 
-				Map<String, String> login = new HashMap<>();
+		Map<String, String> login = new HashMap<>();
 
-				if (StringUtils.hasText(options.getRole())) {
-					login.put("role", options.getRole());
-				}
+		if (StringUtils.hasText(options.getRole())) {
+			login.put("role", options.getRole());
+		}
 
-				if (Objects.equals(nonce.get(), EMPTY)) {
-					nonce.compareAndSet(EMPTY, nonceSupplier.get());
-				}
+		if (Objects.equals(nonce.get(), EMPTY)) {
+			nonce.compareAndSet(EMPTY, nonceSupplier.get());
+		}
 
-				login.put("nonce", new String(nonce.get()));
-				login.put("pkcs7", pkcs7);
+		login.put("nonce", new String(nonce.get()));
+		login.put("pkcs7", pkcs7);
 
-				return login;
-			})
-			.login(AuthenticationUtil.getLoginPath(options.getPath()));
+		return login;
+	})
+	.login(AuthenticationUtil.getLoginPath(options.getPath()));
 	}
 
 	@Override
@@ -149,7 +149,7 @@ public class AwsEc2Authentication implements ClientAuthentication, Authenticatio
 		try {
 
 			VaultResponse response = this.vaultRestOperations
-				.postForObject(AuthenticationUtil.getLoginPath(this.options.getPath()), login, VaultResponse.class);
+		.postForObject(AuthenticationUtil.getLoginPath(this.options.getPath()), login, VaultResponse.class);
 
 			Assert.state(response != null && response.getAuth() != null, "Auth field must not be null");
 
@@ -158,7 +158,7 @@ public class AwsEc2Authentication implements ClientAuthentication, Authenticatio
 				if (response.getAuth().get("metadata") instanceof Map) {
 					Map<Object, Object> metadata = (Map<Object, Object>) response.getAuth().get("metadata");
 					logger.debug(String.format("Login successful using AWS-EC2 authentication for instance %s, AMI %s",
-							metadata.get("instance_id"), metadata.get("instance_id")));
+				metadata.get("instance_id"), metadata.get("instance_id")));
 				}
 				else {
 					logger.debug("Login successful using AWS-EC2 authentication");
@@ -188,7 +188,7 @@ public class AwsEc2Authentication implements ClientAuthentication, Authenticatio
 
 		try {
 			String pkcs7 = this.awsMetadataRestOperations.getForObject(this.options.getIdentityDocumentUri(),
-					String.class);
+		String.class);
 			if (StringUtils.hasText(pkcs7)) {
 				login.put("pkcs7", pkcs7.replaceAll("\\r", "").replaceAll("\\n", ""));
 			}
@@ -197,7 +197,7 @@ public class AwsEc2Authentication implements ClientAuthentication, Authenticatio
 		}
 		catch (RestClientException e) {
 			throw new VaultLoginException(
-					String.format("Cannot obtain Identity Document from %s", this.options.getIdentityDocumentUri()), e);
+		String.format("Cannot obtain Identity Document from %s", this.options.getIdentityDocumentUri()), e);
 		}
 	}
 

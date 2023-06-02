@@ -37,7 +37,7 @@ class DefaultWebClientFactory implements WebClientFactory {
 	private final Function<ClientHttpConnector, WebClientBuilder> builderFunction;
 
 	DefaultWebClientFactory(ClientHttpConnector connector,
-			Function<ClientHttpConnector, WebClientBuilder> builderFunction) {
+Function<ClientHttpConnector, WebClientBuilder> builderFunction) {
 		this.connector = connector;
 		this.builderFunction = builderFunction;
 	}

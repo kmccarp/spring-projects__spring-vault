@@ -42,7 +42,7 @@ enum DefaultGoogleCredentialsAccessors implements GoogleCredentialsAccountIdAcce
 
 		Assert.notNull(credentials, "GoogleCredentials must not be null");
 		Assert.isInstanceOf(ServiceAccountCredentials.class, credentials,
-				"The configured GoogleCredentials does not represent a service account. Configure the service account id with GcpIamCredentialsAuthenticationOptionsBuilder#serviceAccountId(String).");
+	"The configured GoogleCredentials does not represent a service account. Configure the service account id with GcpIamCredentialsAuthenticationOptionsBuilder#serviceAccountId(String).");
 
 		return ((ServiceAccountCredentials) credentials).getAccount();
 	}

@@ -66,7 +66,7 @@ public class AppRoleAuthenticationOptions {
 	private final UnwrappingEndpoints unwrappingEndpoints;
 
 	private AppRoleAuthenticationOptions(String path, RoleId roleId, SecretId secretId, @Nullable String appRole,
-			UnwrappingEndpoints unwrappingEndpoints) {
+UnwrappingEndpoints unwrappingEndpoints) {
 
 		this.path = path;
 		this.roleId = roleId;
@@ -240,17 +240,17 @@ public class AppRoleAuthenticationOptions {
 			if (this.roleId == null) {
 
 				Assert.notNull(this.providedRoleId,
-						"AppRole authentication configured for pull mode. Role Identifier must be provided.");
+			"AppRole authentication configured for pull mode. Role Identifier must be provided.");
 				roleId(RoleId.provided(this.providedRoleId));
 			}
 
 			if (this.roleId instanceof Pull || this.secretId instanceof Pull) {
 				Assert.notNull(this.appRole,
-						"AppRole authentication configured for pull mode. AppRole must not be null.");
+			"AppRole authentication configured for pull mode. AppRole must not be null.");
 			}
 
 			return new AppRoleAuthenticationOptions(this.path, this.roleId, this.secretId, this.appRole,
-					this.unwrappingEndpoints);
+		this.unwrappingEndpoints);
 		}
 
 	}

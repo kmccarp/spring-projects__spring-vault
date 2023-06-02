@@ -64,7 +64,7 @@ public class PcfAuthenticationOptions {
 	private final Supplier<String> instanceKeySupplier;
 
 	private PcfAuthenticationOptions(String path, String role, Clock clock, Supplier<String> instanceCertSupplier,
-			Supplier<String> instanceKeySupplier) {
+Supplier<String> instanceKeySupplier) {
 		this.path = path;
 		this.role = role;
 		this.clock = clock;
@@ -232,7 +232,7 @@ public class PcfAuthenticationOptions {
 			}
 
 			return new PcfAuthenticationOptions(this.path, this.role, this.clock, instanceCertSupplier,
-					instanceKeySupplier);
+		instanceKeySupplier);
 		}
 
 		private static String resolveEnvVariable(String name) {

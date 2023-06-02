@@ -71,7 +71,7 @@ class ReactiveLifecycleAwareSessionManagerIntegrationTests extends IntegrationTe
 			File workDir = findWorkDir();
 
 			String certificate = Files.contentOf(new File(workDir, "ca/certs/client.cert.pem"),
-					StandardCharsets.US_ASCII);
+		StandardCharsets.US_ASCII);
 
 			Map<String, Object> body = new HashMap<>();
 			body.put("certificate", certificate);
@@ -93,12 +93,12 @@ class ReactiveLifecycleAwareSessionManagerIntegrationTests extends IntegrationTe
 		LoginToken loginToken = createLoginToken();
 
 		ReactiveLifecycleAwareSessionManager sessionManager = new ReactiveLifecycleAwareSessionManager(
-				() -> Mono.just(loginToken), this.taskScheduler, prepare().getWebClient());
+	() -> Mono.just(loginToken), this.taskScheduler, prepare().getWebClient());
 
 		sessionManager.getVaultToken() //
-			.as(StepVerifier::create) //
-			.expectNext(loginToken) //
-			.verifyComplete();
+	.as(StepVerifier::create) //
+	.expectNext(loginToken) //
+	.verifyComplete();
 	}
 
 	// Expect no exception to be thrown.
@@ -108,10 +108,10 @@ class ReactiveLifecycleAwareSessionManagerIntegrationTests extends IntegrationTe
 		VaultTokenOperations tokenOperations = prepare().getVaultOperations().opsForToken();
 
 		VaultTokenRequest tokenRequest = VaultTokenRequest.builder() //
-			.renewable()
-			.ttl(1, TimeUnit.HOURS) //
-			.explicitMaxTtl(10, TimeUnit.HOURS) //
-			.build();
+	.renewable()
+	.ttl(1, TimeUnit.HOURS) //
+	.explicitMaxTtl(10, TimeUnit.HOURS) //
+	.build();
 
 		VaultToken token = tokenOperations.create(tokenRequest).getToken();
 
@@ -119,8 +119,8 @@ class ReactiveLifecycleAwareSessionManagerIntegrationTests extends IntegrationTe
 
 		final AtomicInteger counter = new AtomicInteger();
 		ReactiveLifecycleAwareSessionManager sessionManager = new ReactiveLifecycleAwareSessionManager(
-				() -> Flux.fromStream(Stream.of((VaultToken) loginToken)).next(), this.taskScheduler,
-				prepare().getWebClient()) {
+	() -> Flux.fromStream(Stream.of((VaultToken) loginToken)).next(), this.taskScheduler,
+	prepare().getWebClient()) {
 
 			@Override
 			public Mono<VaultToken> getVaultToken() throws VaultException {
@@ -134,13 +134,13 @@ class ReactiveLifecycleAwareSessionManagerIntegrationTests extends IntegrationTe
 		};
 
 		sessionManager.getSessionToken() //
-			.as(StepVerifier::create) //
-			.expectNext(loginToken) //
-			.verifyComplete();
+	.as(StepVerifier::create) //
+	.expectNext(loginToken) //
+	.verifyComplete();
 		sessionManager.renewToken() //
-			.as(StepVerifier::create) //
-			.expectNext(loginToken) //
-			.verifyComplete();
+	.as(StepVerifier::create) //
+	.expectNext(loginToken) //
+	.verifyComplete();
 	}
 
 	@Test
@@ -149,13 +149,13 @@ class ReactiveLifecycleAwareSessionManagerIntegrationTests extends IntegrationTe
 		final LoginToken loginToken = createLoginToken();
 
 		ReactiveLifecycleAwareSessionManager sessionManager = new ReactiveLifecycleAwareSessionManager(
-				() -> Flux.fromStream(Stream.of((VaultToken) loginToken)).next(), this.taskScheduler,
-				prepare().getWebClient());
+	() -> Flux.fromStream(Stream.of((VaultToken) loginToken)).next(), this.taskScheduler,
+	prepare().getWebClient());
 
 		sessionManager.getSessionToken() //
-			.as(StepVerifier::create) //
-			.expectNext(loginToken) //
-			.verifyComplete();
+	.as(StepVerifier::create) //
+	.expectNext(loginToken) //
+	.verifyComplete();
 		sessionManager.destroy();
 
 		prepare().getVaultOperations().doWithSession(restOperations -> {
@@ -179,13 +179,13 @@ class ReactiveLifecycleAwareSessionManagerIntegrationTests extends IntegrationTe
 		LoginToken loginToken = createLoginToken();
 
 		ReactiveLifecycleAwareSessionManager sessionManager = new ReactiveLifecycleAwareSessionManager(
-				() -> Flux.fromStream(Stream.of((VaultToken) loginToken)).next(), this.taskScheduler,
-				prepare().getWebClient());
+	() -> Flux.fromStream(Stream.of((VaultToken) loginToken)).next(), this.taskScheduler,
+	prepare().getWebClient());
 
 		sessionManager.getSessionToken() //
-			.as(StepVerifier::create) //
-			.expectNext(loginToken) //
-			.verifyComplete();
+	.as(StepVerifier::create) //
+	.expectNext(loginToken) //
+	.verifyComplete();
 		sessionManager.revokeNow();
 
 		prepare().getVaultOperations().doWithSession(restOperations -> {

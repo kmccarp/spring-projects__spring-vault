@@ -83,7 +83,7 @@ class LifecycleAwareSessionManagerUnitTests {
 	@BeforeEach
 	void before() {
 		this.sessionManager = new LifecycleAwareSessionManager(this.clientAuthentication, this.taskScheduler,
-				this.restOperations);
+	this.restOperations);
 		this.sessionManager.addAuthenticationListener(this.listener);
 		this.sessionManager.addErrorListener(this.errorListener);
 	}
@@ -117,13 +117,13 @@ class LifecycleAwareSessionManagerUnitTests {
 		when(this.clientAuthentication.login()).thenReturn(VaultToken.of("login"));
 
 		when(this.restOperations.exchange(anyString(), any(), any(), ArgumentMatchers.<Class>any()))
-			.thenReturn(new ResponseEntity<>(vaultResponse, HttpStatus.OK));
+	.thenReturn(new ResponseEntity<>(vaultResponse, HttpStatus.OK));
 
 		LoginToken sessionToken = (LoginToken) this.sessionManager.getSessionToken();
 		assertThat(sessionToken.getLeaseDuration()).isEqualTo(Duration.ofSeconds(100));
 
 		verify(this.restOperations).exchange(eq("auth/token/lookup-self"), eq(HttpMethod.GET),
-				eq(new HttpEntity<>(VaultHttpHeaders.from(LoginToken.of("login")))), any(Class.class));
+	eq(new HttpEntity<>(VaultHttpHeaders.from(LoginToken.of("login")))), any(Class.class));
 
 		verify(this.listener).onAuthenticationEvent(this.captor.capture());
 		AfterLoginEvent event = (AfterLoginEvent) this.captor.getValue();
@@ -140,7 +140,7 @@ class LifecycleAwareSessionManagerUnitTests {
 		when(this.clientAuthentication.login()).thenReturn(VaultToken.of("login"));
 
 		when(this.restOperations.exchange(anyString(), any(), any(), ArgumentMatchers.<Class>any()))
-			.thenThrow(new HttpClientErrorException(HttpStatus.FORBIDDEN));
+	.thenThrow(new HttpClientErrorException(HttpStatus.FORBIDDEN));
 
 		VaultToken sessionToken = this.sessionManager.getSessionToken();
 		assertThat(sessionToken).isExactlyInstanceOf(VaultToken.class);
@@ -152,9 +152,9 @@ class LifecycleAwareSessionManagerUnitTests {
 	void shouldTranslateExceptionOnTokenRenewal() {
 
 		when(this.clientAuthentication.login())
-				.thenReturn(LoginToken.renewable("login".toCharArray(), Duration.ofMinutes(5)));
+	.thenReturn(LoginToken.renewable("login".toCharArray(), Duration.ofMinutes(5)));
 		when(this.restOperations.postForObject(anyString(), any(HttpEntity.class), any()))
-				.thenThrow(new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Some server error"));
+	.thenThrow(new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Some server error"));
 
 		AtomicReference<AuthenticationErrorEvent> listener = new AtomicReference<>();
 		this.sessionManager.addErrorListener(listener::set);
@@ -163,8 +163,8 @@ class LifecycleAwareSessionManagerUnitTests {
 		this.sessionManager.renewToken();
 
 		assertThat(listener.get().getException()).isInstanceOf(VaultTokenRenewalException.class)
-				.hasCauseInstanceOf(HttpServerErrorException.class)
-				.hasMessageContaining("Cannot renew token: Status 500 Some server error");
+	.hasCauseInstanceOf(HttpServerErrorException.class)
+	.hasMessageContaining("Cannot renew token: Status 500 Some server error");
 	}
 
 	@Test
@@ -177,7 +177,7 @@ class LifecycleAwareSessionManagerUnitTests {
 		this.sessionManager.destroy();
 
 		verify(this.restOperations).postForObject(eq("auth/token/revoke-self"),
-				eq(new HttpEntity<>(VaultHttpHeaders.from(LoginToken.of("login")))), any(Class.class));
+	eq(new HttpEntity<>(VaultHttpHeaders.from(LoginToken.of("login")))), any(Class.class));
 
 		verify(this.listener).onAuthenticationEvent(any(BeforeLoginTokenRevocationEvent.class));
 		verify(this.listener).onAuthenticationEvent(any(AfterLoginTokenRevocationEvent.class));
@@ -220,13 +220,13 @@ class LifecycleAwareSessionManagerUnitTests {
 		when(this.clientAuthentication.login()).thenReturn(LoginToken.of("login"));
 
 		when(this.restOperations.postForObject(anyString(), any(), ArgumentMatchers.<Class>any()))
-				.thenThrow(new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR));
+	.thenThrow(new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR));
 
 		this.sessionManager.renewToken();
 		this.sessionManager.destroy();
 
 		verify(this.restOperations).postForObject(eq("auth/token/revoke-self"),
-				eq(new HttpEntity<>(VaultHttpHeaders.from(LoginToken.of("login")))), any(Class.class));
+	eq(new HttpEntity<>(VaultHttpHeaders.from(LoginToken.of("login")))), any(Class.class));
 		verify(this.listener).onAuthenticationEvent(any(AfterLoginEvent.class));
 		verify(this.listener).onAuthenticationEvent(any(BeforeLoginTokenRevocationEvent.class));
 		verifyNoMoreInteractions(this.listener);
@@ -237,7 +237,7 @@ class LifecycleAwareSessionManagerUnitTests {
 	void shouldScheduleTokenRenewal() {
 
 		when(this.clientAuthentication.login())
-				.thenReturn(LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5)));
+	.thenReturn(LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5)));
 
 		this.sessionManager.getSessionToken();
 
@@ -249,9 +249,9 @@ class LifecycleAwareSessionManagerUnitTests {
 	void shouldRunTokenRenewal() {
 
 		when(this.clientAuthentication.login())
-				.thenReturn(LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5)));
+	.thenReturn(LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5)));
 		when(this.restOperations.postForObject(anyString(), any(), eq(VaultResponse.class)))
-				.thenReturn(fromToken(LoginToken.of("foo".toCharArray(), Duration.ofSeconds(10))));
+	.thenReturn(fromToken(LoginToken.of("foo".toCharArray(), Duration.ofSeconds(10))));
 
 		ArgumentCaptor<Runnable> runnableCaptor = ArgumentCaptor.forClass(Runnable.class);
 
@@ -261,9 +261,9 @@ class LifecycleAwareSessionManagerUnitTests {
 		runnableCaptor.getValue().run();
 
 		verify(this.restOperations).postForObject(eq("auth/token/renew-self"),
-				eq(new HttpEntity<>(
-						VaultHttpHeaders.from(LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5))))),
-				any(Class.class));
+	eq(new HttpEntity<>(
+VaultHttpHeaders.from(LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5))))),
+	any(Class.class));
 		verify(this.clientAuthentication, times(1)).login();
 		verify(this.listener).onAuthenticationEvent(any(BeforeLoginTokenRenewedEvent.class));
 		verify(this.listener).onAuthenticationEvent(any(AfterLoginTokenRenewedEvent.class));
@@ -273,9 +273,9 @@ class LifecycleAwareSessionManagerUnitTests {
 	void shouldReScheduleTokenRenewalAfterSuccessfulRenewal() {
 
 		when(this.clientAuthentication.login())
-				.thenReturn(LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5)));
+	.thenReturn(LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5)));
 		when(this.restOperations.postForObject(anyString(), any(), eq(VaultResponse.class)))
-				.thenReturn(fromToken(LoginToken.of("foo".toCharArray(), Duration.ofSeconds(10))));
+	.thenReturn(fromToken(LoginToken.of("foo".toCharArray(), Duration.ofSeconds(10))));
 
 		ArgumentCaptor<Runnable> runnableCaptor = ArgumentCaptor.forClass(Runnable.class);
 
@@ -291,9 +291,9 @@ class LifecycleAwareSessionManagerUnitTests {
 	void shouldNotScheduleRenewalIfRenewalTtlExceedsThreshold() {
 
 		when(this.clientAuthentication.login())
-				.thenReturn(LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5)));
+	.thenReturn(LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5)));
 		when(this.restOperations.postForObject(anyString(), any(), eq(VaultResponse.class)))
-				.thenReturn(fromToken(LoginToken.of("foo".toCharArray(), Duration.ofSeconds(2))));
+	.thenReturn(fromToken(LoginToken.of("foo".toCharArray(), Duration.ofSeconds(2))));
 
 		ArgumentCaptor<Runnable> runnableCaptor = ArgumentCaptor.forClass(Runnable.class);
 
@@ -309,10 +309,10 @@ class LifecycleAwareSessionManagerUnitTests {
 	void shouldReLoginIfRenewalTtlExceedsThreshold() {
 
 		when(this.clientAuthentication.login()).thenReturn(
-				LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5)),
-				LoginToken.renewable("bar".toCharArray(), Duration.ofSeconds(5)));
+	LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5)),
+	LoginToken.renewable("bar".toCharArray(), Duration.ofSeconds(5)));
 		when(this.restOperations.postForObject(anyString(), any(), eq(VaultResponse.class)))
-				.thenReturn(fromToken(LoginToken.of("foo".toCharArray(), Duration.ofSeconds(2))));
+	.thenReturn(fromToken(LoginToken.of("foo".toCharArray(), Duration.ofSeconds(2))));
 
 		ArgumentCaptor<Runnable> runnableCaptor = ArgumentCaptor.forClass(Runnable.class);
 		this.sessionManager.getSessionToken();
@@ -320,7 +320,7 @@ class LifecycleAwareSessionManagerUnitTests {
 		runnableCaptor.getValue().run();
 
 		assertThat(this.sessionManager.getSessionToken())
-				.isEqualTo(LoginToken.renewable("bar".toCharArray(), Duration.ofSeconds(5)));
+	.isEqualTo(LoginToken.renewable("bar".toCharArray(), Duration.ofSeconds(5)));
 
 		verify(this.clientAuthentication, times(2)).login();
 		verify(this.listener, times(2)).onAuthenticationEvent(any(AfterLoginEvent.class));
@@ -331,10 +331,10 @@ class LifecycleAwareSessionManagerUnitTests {
 	void shouldReLoginIfRenewalFails() {
 
 		when(this.clientAuthentication.login()).thenReturn(
-				LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5)),
-				LoginToken.renewable("bar".toCharArray(), Duration.ofSeconds(5)));
+	LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5)),
+	LoginToken.renewable("bar".toCharArray(), Duration.ofSeconds(5)));
 		when(this.restOperations.postForObject(anyString(), any(), eq(VaultResponse.class)))
-				.thenThrow(new ResourceAccessException("Connection refused"));
+	.thenThrow(new ResourceAccessException("Connection refused"));
 
 		ArgumentCaptor<Runnable> runnableCaptor = ArgumentCaptor.forClass(Runnable.class);
 		this.sessionManager.getSessionToken();
@@ -342,7 +342,7 @@ class LifecycleAwareSessionManagerUnitTests {
 		runnableCaptor.getValue().run();
 
 		assertThat(this.sessionManager.getSessionToken())
-				.isEqualTo(LoginToken.renewable("bar".toCharArray(), Duration.ofSeconds(5)));
+	.isEqualTo(LoginToken.renewable("bar".toCharArray(), Duration.ofSeconds(5)));
 
 		verify(this.clientAuthentication, times(2)).login();
 	}
@@ -351,10 +351,10 @@ class LifecycleAwareSessionManagerUnitTests {
 	void shouldRetainTokenAfterRenewalFailure() {
 
 		when(this.clientAuthentication.login()).thenReturn(
-				LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5)),
-				LoginToken.renewable("bar".toCharArray(), Duration.ofSeconds(5)));
+	LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5)),
+	LoginToken.renewable("bar".toCharArray(), Duration.ofSeconds(5)));
 		when(this.restOperations.postForObject(anyString(), any(), eq(VaultResponse.class)))
-				.thenThrow(new ResourceAccessException("Connection refused"));
+	.thenThrow(new ResourceAccessException("Connection refused"));
 		this.sessionManager.setLeaseStrategy(LeaseStrategy.retainOnError());
 
 		ArgumentCaptor<Runnable> runnableCaptor = ArgumentCaptor.forClass(Runnable.class);
@@ -363,7 +363,7 @@ class LifecycleAwareSessionManagerUnitTests {
 		runnableCaptor.getValue().run();
 
 		assertThat(this.sessionManager.getSessionToken())
-				.isEqualTo(LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5)));
+	.isEqualTo(LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5)));
 
 		verify(this.clientAuthentication).login();
 	}
@@ -372,10 +372,10 @@ class LifecycleAwareSessionManagerUnitTests {
 	void shouldUseTaskScheduler() {
 
 		this.sessionManager = new LifecycleAwareSessionManager(this.clientAuthentication, this.taskScheduler,
-				this.restOperations);
+	this.restOperations);
 
 		when(this.clientAuthentication.login())
-			.thenReturn(LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5)));
+	.thenReturn(LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5)));
 
 		ArgumentCaptor<Trigger> triggerCaptor = ArgumentCaptor.forClass(Trigger.class);
 
@@ -391,9 +391,9 @@ class LifecycleAwareSessionManagerUnitTests {
 	void shouldNotReScheduleTokenRenewalAfterFailedRenewal() {
 
 		when(this.clientAuthentication.login())
-				.thenReturn(LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5)));
+	.thenReturn(LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5)));
 		when(this.restOperations.postForObject(anyString(), any(), ArgumentMatchers.<Class>any()))
-				.thenThrow(new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR));
+	.thenThrow(new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR));
 
 		ArgumentCaptor<Runnable> runnableCaptor = ArgumentCaptor.forClass(Runnable.class);
 
@@ -409,12 +409,12 @@ class LifecycleAwareSessionManagerUnitTests {
 	void shouldObtainTokenIfNoTokenAvailable() {
 
 		when(this.clientAuthentication.login())
-				.thenReturn(LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5)));
+	.thenReturn(LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5)));
 
 		this.sessionManager.renewToken();
 
 		assertThat(this.sessionManager.getSessionToken())
-				.isEqualTo(LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5)));
+	.isEqualTo(LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5)));
 		verify(this.clientAuthentication, times(1)).login();
 	}
 
@@ -423,9 +423,9 @@ class LifecycleAwareSessionManagerUnitTests {
 	void renewShouldReportFalseIfTokenRenewalFails() {
 
 		when(this.clientAuthentication.login())
-				.thenReturn(LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5)));
+	.thenReturn(LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5)));
 		when(this.restOperations.postForObject(anyString(), ArgumentMatchers.any(), ArgumentMatchers.<Class>any()))
-				.thenThrow(new HttpServerErrorException(HttpStatus.BAD_REQUEST));
+	.thenThrow(new HttpServerErrorException(HttpStatus.BAD_REQUEST));
 
 		this.sessionManager.getSessionToken();
 
@@ -437,9 +437,9 @@ class LifecycleAwareSessionManagerUnitTests {
 	void renewShouldRetainTokenOnIoError() {
 
 		when(this.clientAuthentication.login())
-				.thenReturn(LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5)));
+	.thenReturn(LoginToken.renewable("login".toCharArray(), Duration.ofSeconds(5)));
 		when(this.restOperations.postForObject(anyString(), ArgumentMatchers.any(), ArgumentMatchers.<Class>any()))
-				.thenThrow(new ResourceAccessException("err", new SSLException("foo")));
+	.thenThrow(new ResourceAccessException("err", new SSLException("foo")));
 
 		this.sessionManager.setLeaseStrategy(LeaseStrategy.retainOnIoError());
 		this.sessionManager.getSessionToken();

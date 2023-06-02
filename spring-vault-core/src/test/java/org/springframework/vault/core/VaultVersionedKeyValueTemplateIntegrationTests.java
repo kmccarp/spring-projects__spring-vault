@@ -99,8 +99,8 @@ class VaultVersionedKeyValueTemplateIntegrationTests extends IntegrationTestSupp
 
 		// this should fail
 		assertThatThrownBy(() -> this.versionedOperations.put(key, Versioned.create(secret, Version.unversioned())))
-			.isExactlyInstanceOf(VaultException.class)
-			.hasMessageContaining("check-and-set parameter did not match the current version");
+	.isExactlyInstanceOf(VaultException.class)
+	.hasMessageContaining("check-and-set parameter did not match the current version");
 	}
 
 	@Test
@@ -139,9 +139,9 @@ class VaultVersionedKeyValueTemplateIntegrationTests extends IntegrationTestSupp
 		this.versionedOperations.put(key, Collections.singletonMap("key", "v2"));
 
 		assertThat(this.versionedOperations.get(key, Version.from(1)).getRequiredData())
-			.isEqualTo(Collections.singletonMap("key", "v1"));
+	.isEqualTo(Collections.singletonMap("key", "v1"));
 		assertThat(this.versionedOperations.get(key, Version.from(2)).getRequiredData())
-			.isEqualTo(Collections.singletonMap("key", "v2"));
+	.isEqualTo(Collections.singletonMap("key", "v2"));
 	}
 
 	@Test
@@ -160,7 +160,7 @@ class VaultVersionedKeyValueTemplateIntegrationTests extends IntegrationTestSupp
 		assertThat(versioned.getVersion()).isEqualTo(Version.from(2));
 		assertThat(versioned.getRequiredMetadata().isDestroyed()).isFalse();
 		assertThat(versioned.getRequiredMetadata().getDeletedAt()).isBetween(Instant.now().minusSeconds(60),
-				Instant.now().plusSeconds(60));
+	Instant.now().plusSeconds(60));
 	}
 
 	@Test
@@ -198,7 +198,7 @@ class VaultVersionedKeyValueTemplateIntegrationTests extends IntegrationTestSupp
 		assertThat(versioned.getVersion()).isEqualTo(Version.from(1));
 		assertThat(versioned.getRequiredMetadata().isDestroyed()).isFalse();
 		assertThat(versioned.getRequiredMetadata().getDeletedAt()).isBetween(Instant.now().minusSeconds(60),
-				Instant.now().plusSeconds(60));
+	Instant.now().plusSeconds(60));
 	}
 
 	@Test

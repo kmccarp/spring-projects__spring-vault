@@ -42,10 +42,10 @@ public class KeyValueV2 {
 		VaultOperations operations = new VaultTemplate(new VaultEndpoint());
 
 		operations.write("secret/data/elvis", Collections.singletonMap("data",
-					Collections.singletonMap("social-security-number", "409-52-2002")));
+	Collections.singletonMap("social-security-number", "409-52-2002")));
 
 		VaultResponse read = operations.read("secret/data/ykey");
-		Map<String,String> data = (Map<String, String>) read.getRequiredData().get("data");
+		Map<String, String> data = (Map<String, String>) read.getRequiredData().get("data");
 		data.get("social-security-number");
 		// end::vaultOperations[]
 	}
@@ -55,7 +55,7 @@ public class KeyValueV2 {
 		// tag::keyValueApi[]
 		VaultOperations operations = new VaultTemplate(new VaultEndpoint());
 		VaultKeyValueOperations keyValueOperations = operations.opsForKeyValue("secret",
-									VaultKeyValueOperationsSupport.KeyValueBackend.KV_2);
+	VaultKeyValueOperationsSupport.KeyValueBackend.KV_2);
 
 		keyValueOperations.put("elvis", Collections.singletonMap("social-security-number", "409-52-2002"));
 
@@ -71,24 +71,24 @@ public class KeyValueV2 {
 		VaultVersionedKeyValueOperations versionedOperations = operations.opsForVersionedKeyValue("secret");
 
 		Versioned.Metadata metadata = versionedOperations.put("elvis",							// <1>
-							Collections.singletonMap("social-security-number", "409-52-2002"));
+	Collections.singletonMap("social-security-number", "409-52-2002"));
 
 		Version version = metadata.getVersion();												// <2>
 
 		Versioned<Object> ssn = versionedOperations.get("elvis", Version.from(42));				// <3>
 
 		Versioned<SocialSecurityNumber> mappedSsn = versionedOperations.get("elvis",			// <4>
-													Version.from(42), SocialSecurityNumber.class);
+	Version.from(42), SocialSecurityNumber.class);
 
-		Versioned<Map<String,String>> versioned = Versioned.create(Collections					// <5>
-								.singletonMap("social-security-number", "409-52-2002"),
-								Version.from(42));
+		Versioned<Map<String, String>> versioned = Versioned.create(Collections					// <5>
+.singletonMap("social-security-number", "409-52-2002"),
+	Version.from(42));
 
 		versionedOperations.put("elvis", version);
 		// end::versionedApi[]
 	}
 
-	static class SocialSecurityNumber{
+	static class SocialSecurityNumber {
 
 		@JsonProperty("social-security-number")
 		String ssn;

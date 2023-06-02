@@ -62,7 +62,7 @@ public class VaultRepositoryConfigurationExtension extends KeyValueRepositoryCon
 
 	@Override
 	public void registerBeansForRoot(BeanDefinitionRegistry registry,
-			RepositoryConfigurationSource configurationSource) {
+RepositoryConfigurationSource configurationSource) {
 
 		Optional<String> vaultTemplateRef = configurationSource.getAttribute("vaultTemplateRef");
 
@@ -70,7 +70,7 @@ public class VaultRepositoryConfigurationExtension extends KeyValueRepositoryCon
 		mappingContextDefinition.setSource(configurationSource.getSource());
 
 		registerIfNotAlreadyRegistered(() -> mappingContextDefinition, registry, VAULT_MAPPING_CONTEXT_BEAN_NAME,
-				configurationSource);
+	configurationSource);
 
 		// register Adapter
 		RootBeanDefinition vaultKeyValueAdapterDefinition = new RootBeanDefinition(VaultKeyValueAdapter.class);
@@ -78,21 +78,21 @@ public class VaultRepositoryConfigurationExtension extends KeyValueRepositoryCon
 		ConstructorArgumentValues constructorArgumentValuesForVaultKeyValueAdapter = new ConstructorArgumentValues();
 
 		constructorArgumentValuesForVaultKeyValueAdapter.addIndexedArgumentValue(0,
-				new RuntimeBeanReference(vaultTemplateRef.orElse("vaultTemplate")));
+	new RuntimeBeanReference(vaultTemplateRef.orElse("vaultTemplate")));
 
 		vaultKeyValueAdapterDefinition.setConstructorArgumentValues(constructorArgumentValuesForVaultKeyValueAdapter);
 
 		registerIfNotAlreadyRegistered(() -> vaultKeyValueAdapterDefinition, registry, VAULT_ADAPTER_BEAN_NAME,
-				configurationSource);
+	configurationSource);
 
 		Optional<String> keyValueTemplateName = configurationSource.getAttribute(KEY_VALUE_TEMPLATE_BEAN_REF_ATTRIBUTE);
 
 		// No custom template reference configured and no matching bean definition found
 		if (keyValueTemplateName.isPresent() && getDefaultKeyValueTemplateRef().equals(keyValueTemplateName.get())
-				&& !registry.containsBeanDefinition(keyValueTemplateName.get())) {
+	&& !registry.containsBeanDefinition(keyValueTemplateName.get())) {
 
 			registerIfNotAlreadyRegistered(() -> getDefaultKeyValueTemplateBeanDefinition(configurationSource),
-					registry, keyValueTemplateName.get(), configurationSource.getSource());
+		registry, keyValueTemplateName.get(), configurationSource.getSource());
 		}
 
 		super.registerBeansForRoot(registry, configurationSource);
@@ -111,16 +111,16 @@ public class VaultRepositoryConfigurationExtension extends KeyValueRepositoryCon
 
 	@Override
 	protected AbstractBeanDefinition getDefaultKeyValueTemplateBeanDefinition(
-			RepositoryConfigurationSource configurationSource) {
+RepositoryConfigurationSource configurationSource) {
 
 		RootBeanDefinition keyValueTemplateDefinition = new RootBeanDefinition(VaultKeyValueTemplate.class);
 
 		ConstructorArgumentValues constructorArgumentValuesForKeyValueTemplate = new ConstructorArgumentValues();
 		constructorArgumentValuesForKeyValueTemplate.addIndexedArgumentValue(0,
-				new RuntimeBeanReference(VAULT_ADAPTER_BEAN_NAME));
+	new RuntimeBeanReference(VAULT_ADAPTER_BEAN_NAME));
 
 		constructorArgumentValuesForKeyValueTemplate.addIndexedArgumentValue(1,
-				new RuntimeBeanReference(VAULT_MAPPING_CONTEXT_BEAN_NAME));
+	new RuntimeBeanReference(VAULT_MAPPING_CONTEXT_BEAN_NAME));
 
 		keyValueTemplateDefinition.setConstructorArgumentValues(constructorArgumentValuesForKeyValueTemplate);
 

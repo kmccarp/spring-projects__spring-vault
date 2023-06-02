@@ -68,7 +68,7 @@ public class VaultWrappingTemplate implements VaultWrappingOperations {
 		VaultResponse response = null;
 		try {
 			response = this.vaultOperations.write("sys/wrapping/lookup",
-					Collections.singletonMap("token", token.getToken()));
+		Collections.singletonMap("token", token.getToken()));
 		}
 		catch (VaultException e) {
 
@@ -92,7 +92,7 @@ public class VaultWrappingTemplate implements VaultWrappingOperations {
 
 		return doUnwrap(token, (restOperations, entity) -> {
 			return restOperations.exchange("sys/wrapping/unwrap", HttpMethod.POST, entity, VaultResponse.class)
-				.getBody();
+		.getBody();
 		});
 	}
 
@@ -109,7 +109,7 @@ public class VaultWrappingTemplate implements VaultWrappingOperations {
 
 	@Nullable
 	private <T extends VaultResponseSupport<?>> T doUnwrap(VaultToken token,
-			BiFunction<RestOperations, HttpEntity<?>, T> requestFunction) {
+BiFunction<RestOperations, HttpEntity<?>, T> requestFunction) {
 
 		return this.vaultOperations.doWithVault(restOperations -> {
 
@@ -123,7 +123,7 @@ public class VaultWrappingTemplate implements VaultWrappingOperations {
 				}
 
 				if (HttpStatusUtil.isBadRequest(e.getStatusCode())
-						&& e.getResponseBodyAsString().contains("does not exist")) {
+			&& e.getResponseBodyAsString().contains("does not exist")) {
 					return null;
 				}
 
@@ -138,7 +138,7 @@ public class VaultWrappingTemplate implements VaultWrappingOperations {
 		Assert.notNull(token, "token VaultToken not be null");
 
 		VaultResponse response = this.vaultOperations.write("sys/wrapping/rewrap",
-				Collections.singletonMap("token", token.getToken()));
+	Collections.singletonMap("token", token.getToken()));
 
 		Map<String, String> wrapInfo = response.getWrapInfo();
 
@@ -157,8 +157,8 @@ public class VaultWrappingTemplate implements VaultWrappingOperations {
 			headers.add("X-Vault-Wrap-TTL", Long.toString(duration.getSeconds()));
 
 			return restOperations
-				.exchange("sys/wrapping/wrap", HttpMethod.POST, new HttpEntity<>(body, headers), VaultResponse.class)
-				.getBody();
+		.exchange("sys/wrapping/wrap", HttpMethod.POST, new HttpEntity<>(body, headers), VaultResponse.class)
+		.getBody();
 		});
 
 		Map<String, String> wrapInfo = response.getWrapInfo();

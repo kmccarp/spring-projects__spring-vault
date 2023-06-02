@@ -74,7 +74,7 @@ public class PrepareVault {
 		int requiredKeys = 2;
 
 		VaultInitializationResponse initialized = this.vaultOperations.opsForSys()
-			.initialize(VaultInitializationRequest.create(createKeys, requiredKeys));
+	.initialize(VaultInitializationRequest.create(createKeys, requiredKeys));
 
 		for (int i = 0; i < requiredKeys; i++) {
 
@@ -210,7 +210,7 @@ public class PrepareVault {
 
 		mountSecret("kv", "versioned", Collections.emptyMap());
 		this.vaultOperations.write("sys/mounts/versioned/tune",
-				Collections.singletonMap("options", Collections.singletonMap("version", "2")));
+	Collections.singletonMap("options", Collections.singletonMap("version", "2")));
 	}
 
 	public VaultOperations getVaultOperations() {

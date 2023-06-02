@@ -46,7 +46,7 @@ public class LoginToken extends VaultToken {
 	private final String type;
 
 	private LoginToken(char[] token, Duration duration, boolean renewable, @Nullable String accessor,
-			@Nullable String type) {
+@Nullable String type) {
 
 		super(token);
 
@@ -313,7 +313,7 @@ public class LoginToken extends VaultToken {
 			Assert.notNull(token, "Token must not be null");
 
 			return new LoginToken(Arrays.copyOf(this.token, this.token.length), this.leaseDuration, this.renewable,
-					this.accessor, this.type);
+		this.accessor, this.type);
 		}
 
 	}

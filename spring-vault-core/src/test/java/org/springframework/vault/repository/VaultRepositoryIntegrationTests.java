@@ -51,8 +51,7 @@ class VaultRepositoryIntegrationTests extends IntegrationTestSupport {
 
 	@Configuration
 	@EnableVaultRepositories(considerNestedRepositories = true,
-			includeFilters = @ComponentScan.Filter(classes = VaultRepositoryIntegrationTests.VaultRepository.class,
-					type = FilterType.ASSIGNABLE_TYPE))
+includeFilters = @ComponentScan.Filter(classes = VaultRepositoryIntegrationTests.VaultRepository.class,type = FilterType.ASSIGNABLE_TYPE))
 	static class VaultRepositoryTestConfiguration extends VaultIntegrationTestConfiguration {
 
 	}
@@ -143,7 +142,7 @@ class VaultRepositoryIntegrationTests extends IntegrationTestSupport {
 	@Test
 	void shouldFailForNonIdCriteria() {
 		assertThatExceptionOfType(InvalidDataAccessApiUsageException.class)
-			.isThrownBy(() -> this.vaultRepository.findInvalidByFirstname("foo"));
+	.isThrownBy(() -> this.vaultRepository.findInvalidByFirstname("foo"));
 	}
 
 	interface VaultRepository extends CrudRepository<Person, String> {

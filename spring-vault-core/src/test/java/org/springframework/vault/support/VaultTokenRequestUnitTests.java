@@ -42,8 +42,8 @@ class VaultTokenRequestUnitTests {
 	void shouldBuildRequestWithMeta() {
 
 		VaultTokenRequest tokenRequest = VaultTokenRequest.builder()
-			.meta(Collections.singletonMap("key", "value"))
-			.build();
+	.meta(Collections.singletonMap("key", "value"))
+	.build();
 
 		assertThat(tokenRequest.getMeta()).containsEntry("key", "value");
 	}
@@ -60,9 +60,9 @@ class VaultTokenRequestUnitTests {
 	void shouldRequestWithDuration() {
 
 		VaultTokenRequest tokenRequest = VaultTokenRequest.builder()
-			.ttl(Duration.ofSeconds(10))
-			.explicitMaxTtl(Duration.ofSeconds(20))
-			.build();
+	.ttl(Duration.ofSeconds(10))
+	.explicitMaxTtl(Duration.ofSeconds(20))
+	.build();
 
 		assertThat(tokenRequest.getTtl()).isEqualTo("10s");
 		assertThat(tokenRequest.getExplicitMaxTtl()).isEqualTo("20s");

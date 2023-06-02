@@ -41,13 +41,13 @@ public class VaultExtension implements BeforeAllCallback, ParameterResolver {
 
 	@Override
 	public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext)
-			throws ParameterResolutionException {
+throws ParameterResolutionException {
 		return parameterContext.getParameter().getType().isAssignableFrom(VaultInitializer.class);
 	}
 
 	@Override
 	public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext)
-			throws ParameterResolutionException {
+throws ParameterResolutionException {
 		return getInitializer(extensionContext);
 	}
 

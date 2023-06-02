@@ -83,7 +83,7 @@ public class VaultClients {
 	 * @since 1.1
 	 */
 	public static RestTemplate createRestTemplate(VaultEndpointProvider endpointProvider,
-			ClientHttpRequestFactory requestFactory) {
+ClientHttpRequestFactory requestFactory) {
 
 		RestTemplate restTemplate = createRestTemplate();
 
@@ -176,8 +176,8 @@ public class VaultClients {
 
 				String baseUri = toBaseUri(endpoint);
 				UriComponents uriComponents = UriComponentsBuilder
-					.fromUriString(prepareUriTemplate(baseUri, uriTemplate))
-					.build();
+			.fromUriString(prepareUriTemplate(baseUri, uriTemplate))
+			.build();
 
 				return UriComponentsBuilder.fromUriString(baseUri).uriComponents(uriComponents);
 			}
@@ -190,7 +190,7 @@ public class VaultClients {
 	private static String toBaseUri(VaultEndpoint endpoint) {
 
 		return String.format("%s://%s:%s/%s", endpoint.getScheme(), endpoint.getHost(), endpoint.getPort(),
-				endpoint.getPath());
+	endpoint.getPath());
 	}
 
 	/**

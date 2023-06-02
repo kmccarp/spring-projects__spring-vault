@@ -36,7 +36,7 @@ public class Settings {
 		File workDir = findWorkDir();
 
 		return SslConfiguration.forTrustStore(new FileSystemResource(new File(workDir, "keystore.jks")),
-				"changeit".toCharArray());
+	"changeit".toCharArray());
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class Settings {
 		}
 
 		throw new IllegalStateException(String.format("Cannot find work directory in %s or any parent directories",
-				directory.getAbsoluteFile()));
+	directory.getAbsoluteFile()));
 	}
 
 	/**

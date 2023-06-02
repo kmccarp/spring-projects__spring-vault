@@ -30,12 +30,12 @@ class VaultSysTemplateUnitTests {
 	void shouldReportRecoveryReplicationMode() {
 
 		VaultSysTemplate.VaultHealthImpl disabled = new VaultSysTemplate.VaultHealthImpl(true, true, true, true,
-				"disabled", 0, null);
+	"disabled", 0, null);
 
 		assertThat(disabled.isRecoveryReplicationSecondary()).isFalse();
 
 		VaultSysTemplate.VaultHealthImpl enabled = new VaultSysTemplate.VaultHealthImpl(true, true, true, true,
-				"enabled", 0, null);
+	"enabled", 0, null);
 
 		assertThat(enabled.isRecoveryReplicationSecondary()).isTrue();
 	}

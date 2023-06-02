@@ -37,7 +37,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class DefaultVaultTypeMapperUnitTests {
 
 	ConfigurableTypeInformationMapper configurableTypeInformationMapper = new ConfigurableTypeInformationMapper(
-			Collections.singletonMap(String.class, "1"));
+Collections.singletonMap(String.class, "1"));
 
 	SimpleTypeInformationMapper simpleTypeInformationMapper = new SimpleTypeInformationMapper();
 
@@ -62,7 +62,7 @@ class DefaultVaultTypeMapperUnitTests {
 	void writesMapKeyForType() {
 
 		this.typeMapper = new DefaultVaultTypeMapper(DefaultVaultTypeMapper.DEFAULT_TYPE_KEY,
-				Collections.singletonList(this.configurableTypeInformationMapper));
+	Collections.singletonList(this.configurableTypeInformationMapper));
 
 		writesTypeToField(new LinkedHashMap<>(), String.class, "1");
 		writesTypeToField(new LinkedHashMap<>(), Object.class, null);
@@ -72,7 +72,7 @@ class DefaultVaultTypeMapperUnitTests {
 	void writesClassNamesForUnmappedValuesIfConfigured() {
 
 		this.typeMapper = new DefaultVaultTypeMapper(DefaultVaultTypeMapper.DEFAULT_TYPE_KEY,
-				Arrays.asList(this.configurableTypeInformationMapper, this.simpleTypeInformationMapper));
+	Arrays.asList(this.configurableTypeInformationMapper, this.simpleTypeInformationMapper));
 		writesTypeToField(new LinkedHashMap<>(), String.class, "1");
 		writesTypeToField(new LinkedHashMap<>(), Object.class, Object.class.getName());
 	}
@@ -81,7 +81,7 @@ class DefaultVaultTypeMapperUnitTests {
 	void readsTypeForMapKey() {
 
 		this.typeMapper = new DefaultVaultTypeMapper(DefaultVaultTypeMapper.DEFAULT_TYPE_KEY,
-				Collections.singletonList(this.configurableTypeInformationMapper));
+	Collections.singletonList(this.configurableTypeInformationMapper));
 
 		readsTypeFromField(Collections.singletonMap(DefaultVaultTypeMapper.DEFAULT_TYPE_KEY, "1"), String.class);
 		readsTypeFromField(Collections.singletonMap(DefaultVaultTypeMapper.DEFAULT_TYPE_KEY, "unmapped"), null);
@@ -91,11 +91,11 @@ class DefaultVaultTypeMapperUnitTests {
 	void readsTypeLoadingClassesForUnmappedTypesIfConfigured() {
 
 		this.typeMapper = new DefaultVaultTypeMapper(DefaultVaultTypeMapper.DEFAULT_TYPE_KEY,
-				Arrays.asList(this.configurableTypeInformationMapper, this.simpleTypeInformationMapper));
+	Arrays.asList(this.configurableTypeInformationMapper, this.simpleTypeInformationMapper));
 
 		readsTypeFromField(Collections.singletonMap(DefaultVaultTypeMapper.DEFAULT_TYPE_KEY, "1"), String.class);
 		readsTypeFromField(Collections.singletonMap(DefaultVaultTypeMapper.DEFAULT_TYPE_KEY, Object.class.getName()),
-				Object.class);
+	Object.class);
 	}
 
 	@Test
@@ -120,7 +120,7 @@ class DefaultVaultTypeMapperUnitTests {
 	@Test
 	void readsTypeFromDefaultKeyByDefault() {
 		readsTypeFromField(Collections.singletonMap(DefaultVaultTypeMapper.DEFAULT_TYPE_KEY, String.class.getName()),
-				String.class);
+	String.class);
 	}
 
 	@Test

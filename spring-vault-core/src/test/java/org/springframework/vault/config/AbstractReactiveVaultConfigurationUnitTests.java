@@ -43,7 +43,7 @@ class AbstractReactiveVaultConfigurationUnitTests {
 	void shouldApplyCustomizerToWebClientFactory() {
 
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
-				WebClientCustomizerConfiguration.class);
+	WebClientCustomizerConfiguration.class);
 
 		WebClientFactory factory = context.getBean(WebClientFactory.class);
 		WebClient webClient = factory.create();
@@ -55,7 +55,7 @@ class AbstractReactiveVaultConfigurationUnitTests {
 	void shouldApplyCustomizerToTemplate() {
 
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
-				WebClientCustomizerConfiguration.class);
+	WebClientCustomizerConfiguration.class);
 
 		ReactiveVaultOperations operations = context.getBean(ReactiveVaultOperations.class);
 

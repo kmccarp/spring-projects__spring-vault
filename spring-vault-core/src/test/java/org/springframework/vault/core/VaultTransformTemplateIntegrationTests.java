@@ -64,7 +64,7 @@ class VaultTransformTemplateIntegrationTests extends IntegrationTestSupport {
 	void before() {
 
 		Assumptions.assumeTrue(prepare().getVersion().isEnterprise(),
-				"Transform Secrets Engine requires enterprise version");
+	"Transform Secrets Engine requires enterprise version");
 
 		VaultSysOperations adminOperations = this.vaultOperations.opsForSys();
 		this.transformOperations = this.vaultOperations.opsForTransform();
@@ -77,18 +77,18 @@ class VaultTransformTemplateIntegrationTests extends IntegrationTestSupport {
 
 		// Write a transformation/role
 		this.vaultOperations.write("transform/transformation/myssn", "{" + "\"type\": \"fpe\", "
-				+ "\"template\": \"builtin/socialsecuritynumber\", " + "\"allowed_roles\": [\"myrole\"]}");
+	+ "\"template\": \"builtin/socialsecuritynumber\", " + "\"allowed_roles\": [\"myrole\"]}");
 		this.vaultOperations.write("transform/role/myrole", "{\"transformations\": [\"myssn\", \"internalssn\"]}");
 
 		this.vaultOperations.write("transform/transformation/internalssn",
-				"{" + "\"type\": \"fpe\", " + "\"tweak_source\": \"internal\", "
-						+ "\"template\": \"builtin/socialsecuritynumber\", "
-						+ "\"allowed_roles\": [\"myrole\", \"internalrole\"]}");
+	"{" + "\"type\": \"fpe\", " + "\"tweak_source\": \"internal\", "
++ "\"template\": \"builtin/socialsecuritynumber\", "
++ "\"allowed_roles\": [\"myrole\", \"internalrole\"]}");
 
 		this.vaultOperations.write("transform/transformation/generatedssn",
-				"{" + "\"type\": \"fpe\", " + "\"tweak_source\": \"generated\", "
-						+ "\"template\": \"builtin/socialsecuritynumber\", "
-						+ "\"allowed_roles\": [\"generatedrole\"]}");
+	"{" + "\"type\": \"fpe\", " + "\"tweak_source\": \"generated\", "
++ "\"template\": \"builtin/socialsecuritynumber\", "
++ "\"allowed_roles\": [\"generatedrole\"]}");
 
 		this.vaultOperations.write("transform/role/internalrole", "{\"transformations\": [\"internalssn\"]}");
 		this.vaultOperations.write("transform/role/generatedrole", "{\"transformations\": [\"generatedssn\"]}");
@@ -108,12 +108,12 @@ class VaultTransformTemplateIntegrationTests extends IntegrationTestSupport {
 	void encodeCreatesCiphertextWithTransformationAndProvidedTweak() {
 
 		VaultTransformContext transformRequest = VaultTransformContext.builder()
-			.transformation("myssn")
-			.tweak("somenum".getBytes())
-			.build();
+	.transformation("myssn")
+	.tweak("somenum".getBytes())
+	.build();
 
 		TransformCiphertext ciphertext = this.transformOperations.encode("myrole", "123-45-6789".getBytes(),
-				transformRequest);
+	transformRequest);
 		assertThat(ciphertext.getCiphertext()).matches("[0-9]{3}-[0-9]{2}-[0-9]{4}");
 		assertThat(new String(ciphertext.getContext().getTweak())).isEqualTo("somenum");
 	}
@@ -134,7 +134,7 @@ class VaultTransformTemplateIntegrationTests extends IntegrationTestSupport {
 		VaultTransformContext transformRequest = VaultTransformContext.builder().transformation("internalssn").build();
 
 		TransformCiphertext ciphertext = this.transformOperations.encode("myrole", "123-45-6789".getBytes(),
-				transformRequest);
+	transformRequest);
 		assertThat(ciphertext.getCiphertext()).matches("[0-9]{3}-[0-9]{2}-[0-9]{4}");
 	}
 
@@ -142,13 +142,13 @@ class VaultTransformTemplateIntegrationTests extends IntegrationTestSupport {
 	void encodeAndDecodeYieldsStartingResultWithSameTweakValueProvided() {
 
 		VaultTransformContext transformRequest = VaultTransformContext.builder()
-			.transformation("myssn")
-			.tweak("somenum".getBytes())
-			.build();
+	.transformation("myssn")
+	.tweak("somenum".getBytes())
+	.build();
 		String targetValue = "123-45-6789";
 
 		TransformCiphertext ciphertext = this.transformOperations.encode("myrole", targetValue.getBytes(),
-				transformRequest);
+	transformRequest);
 		assertThat(ciphertext.getCiphertext()).matches("[0-9]{3}-[0-9]{2}-[0-9]{4}").isNotEqualTo(targetValue);
 
 		String decodeResponse = this.transformOperations.decode("myrole", ciphertext.getCiphertext(), transformRequest);
@@ -159,22 +159,22 @@ class VaultTransformTemplateIntegrationTests extends IntegrationTestSupport {
 	void encodeAndDecodeDoesNotYieldStartingResultWithDifferentTweakValueProvided() {
 
 		VaultTransformContext transformRequest = VaultTransformContext.builder()
-			.transformation("myssn")
-			.tweak("somenum".getBytes())
-			.build();
+	.transformation("myssn")
+	.tweak("somenum".getBytes())
+	.build();
 		String targetValue = "123-45-6789";
 
 		TransformCiphertext ciphertext = this.transformOperations.encode("myrole", targetValue.getBytes(),
-				transformRequest);
+	transformRequest);
 		assertThat(ciphertext.getCiphertext()).matches("[0-9]{3}-[0-9]{2}-[0-9]{4}").isNotEqualTo(targetValue);
 
 		VaultTransformContext otherDecodeRequest = VaultTransformContext.builder()
-			.transformation("myssn")
-			.tweak("numsome".getBytes())
-			.build();
+	.transformation("myssn")
+	.tweak("numsome".getBytes())
+	.build();
 
 		String decodeResponse = this.transformOperations.decode("myrole", ciphertext.getCiphertext(),
-				otherDecodeRequest);
+	otherDecodeRequest);
 		assertThat(decodeResponse).isNotEqualTo(targetValue);
 	}
 
@@ -184,7 +184,7 @@ class VaultTransformTemplateIntegrationTests extends IntegrationTestSupport {
 		VaultTransformContext transformRequest = VaultTransformContext.builder().transformation("generatedssn").build();
 
 		TransformCiphertext ciphertext = this.transformOperations.encode("generatedrole", "123-45-6789".getBytes(),
-				transformRequest);
+	transformRequest);
 
 		TransformPlaintext plaintext = this.transformOperations.decode("generatedrole", ciphertext);
 		assertThat(plaintext.asString()).isEqualTo("123-45-6789");
@@ -206,24 +206,24 @@ class VaultTransformTemplateIntegrationTests extends IntegrationTestSupport {
 	void batchEncodeAndDecodeYieldsStartingResults() {
 
 		VaultTransformContext transformRequest = VaultTransformContext.builder()
-			.transformation("myssn")
-			.tweak("somenum".getBytes())
-			.build();
+	.transformation("myssn")
+	.tweak("somenum".getBytes())
+	.build();
 
 		List<String> ssns = Arrays.asList("123-01-4567", "123-02-4567", "123-03-4567", "123-04-4567", "123-05-4567");
 
 		List<VaultTransformEncodeResult> encoded = this.transformOperations.encode("myrole",
-				ssns.stream()
-					.map(TransformPlaintext::of)
-					.map(plaintext -> plaintext.with(transformRequest))
-					.collect(Collectors.toList()));
+	ssns.stream()
+.map(TransformPlaintext::of)
+.map(plaintext -> plaintext.with(transformRequest))
+.collect(Collectors.toList()));
 
 		List<VaultTransformDecodeResult> decoded = this.transformOperations.decode("myrole",
-				encoded.stream()
-					.map(VaultTransformEncodeResult::getAsString)
-					.map(TransformCiphertext::of)
-					.map(ciphertext -> ciphertext.with(transformRequest))
-					.collect(Collectors.toList()));
+	encoded.stream()
+.map(VaultTransformEncodeResult::getAsString)
+.map(TransformCiphertext::of)
+.map(ciphertext -> ciphertext.with(transformRequest))
+.collect(Collectors.toList()));
 
 		for (int i = 0; i < decoded.size(); i++) {
 			assertThat(decoded.get(i).getAsString()).isEqualTo(ssns.get(i));
@@ -236,13 +236,13 @@ class VaultTransformTemplateIntegrationTests extends IntegrationTestSupport {
 		List<String> ssns = Arrays.asList("123-01-4567", "123-02-4567", "123-03-4567", "123-04-4567", "123-05-4567");
 
 		List<VaultTransformEncodeResult> encoded = this.transformOperations.encode("internalrole",
-				ssns.stream().map(TransformPlaintext::of).collect(Collectors.toList()));
+	ssns.stream().map(TransformPlaintext::of).collect(Collectors.toList()));
 
 		List<VaultTransformDecodeResult> decoded = this.transformOperations.decode("internalrole",
-				encoded.stream()
-					.map(VaultTransformEncodeResult::getAsString)
-					.map(TransformCiphertext::of)
-					.collect(Collectors.toList()));
+	encoded.stream()
+.map(VaultTransformEncodeResult::getAsString)
+.map(TransformCiphertext::of)
+.collect(Collectors.toList()));
 
 		for (int i = 0; i < decoded.size(); i++) {
 			assertThat(decoded.get(i).getAsString()).isEqualTo(ssns.get(i));

@@ -33,7 +33,7 @@ class LoginTokenUtilUnitTests {
 	void shouldCreateServiceToken() {
 
 		Map<String, ? extends Serializable> response = Map.of("type", "service", "ttl", 100, "accessor",
-				"B6oixijqmeR4bsLOJH88Ska9");
+	"B6oixijqmeR4bsLOJH88Ska9");
 
 		LoginToken loginToken = LoginTokenUtil.from("foo".toCharArray(), response);
 
@@ -45,7 +45,7 @@ class LoginTokenUtilUnitTests {
 	void shouldCreateBatchToken() {
 
 		Map<String, ? extends Serializable> response = Map.of("type", "batch", "ttl", 100, "accessor",
-				"B6oixijqmeR4bsLOJH88Ska9");
+	"B6oixijqmeR4bsLOJH88Ska9");
 
 		LoginToken loginToken = LoginTokenUtil.from("foo".toCharArray(), response);
 

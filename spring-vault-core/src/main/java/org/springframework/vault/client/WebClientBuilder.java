@@ -52,7 +52,7 @@ public class WebClientBuilder {
 	private @Nullable ReactiveVaultEndpointProvider endpointProvider;
 
 	private Supplier<ClientHttpConnector> httpConnector = () -> ClientHttpConnectorFactory.create(new ClientOptions(),
-			SslConfiguration.unconfigured());
+SslConfiguration.unconfigured());
 
 	private final Map<String, String> defaultHeaders = new LinkedHashMap<>();
 
@@ -195,11 +195,11 @@ public class WebClientBuilder {
 			builder.filter((request, next) -> {
 
 				return next
-					.exchange(ClientRequest.from(request).headers(headers -> defaultHeaders.forEach((key, value) -> {
-						if (!headers.containsKey(key)) {
-							headers.add(key, value);
-						}
-					})).build());
+			.exchange(ClientRequest.from(request).headers(headers -> defaultHeaders.forEach((key, value) -> {
+				if (!headers.containsKey(key)) {
+					headers.add(key, value);
+				}
+			})).build());
 			});
 		}
 

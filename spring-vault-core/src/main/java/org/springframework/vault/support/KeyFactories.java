@@ -115,7 +115,7 @@ class KeyFactories {
 
 			parser.read(); // skip version
 			DerParser.Asn1Object first = parser.read(); // read first token to identify
-														// how the key is represented
+			// how the key is represented
 
 			String parameterOid;
 			// EC Key nested in a sequence
@@ -126,7 +126,7 @@ class KeyFactories {
 
 				if (!EC_PUBLIC_KEY.equalsIgnoreCase(oid.getString())) {
 					throw new InvalidKeySpecException(
-							"Unsupported Public Key Algorithm. Expected EC (" + EC + "), but was: " + oid.getString());
+				"Unsupported Public Key Algorithm. Expected EC (" + EC + "), but was: " + oid.getString());
 				}
 
 				parameterOid = nested.read().getString();
@@ -202,7 +202,7 @@ class KeyFactories {
 			parser.read();// Skip version
 
 			DerParser.Asn1Object first = parser.read(); // read first token to identify
-														// how the key is represented
+			// how the key is represented
 
 			// RSA Key nested in a sequence
 			if (first.getType() == DerParser.SEQUENCE) {
@@ -212,7 +212,7 @@ class KeyFactories {
 
 				if (!RSA.equalsIgnoreCase(oid.getString())) {
 					throw new InvalidKeySpecException("Unsupported Public Key Algorithm. Expected RSA (" + RSA
-							+ "), but was: " + oid.getString());
+				+ "), but was: " + oid.getString());
 				}
 
 				DerParser.Asn1Object octetString = parser.read();
@@ -274,7 +274,7 @@ class KeyFactories {
 				DerParser.Asn1Object read = object.createNestedParser().read();
 				if (!RSA.equalsIgnoreCase(read.getString())) {
 					throw new InvalidKeySpecException("Unsupported Public Key Algorithm. Expected RSA (" + RSA
-							+ "), but was: " + read.getString());
+				+ "), but was: " + read.getString());
 				}
 
 				DerParser.Asn1Object bitString = parser.read();

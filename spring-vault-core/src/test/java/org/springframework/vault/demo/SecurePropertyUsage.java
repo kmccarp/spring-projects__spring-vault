@@ -70,9 +70,9 @@ public class SecurePropertyUsage {
 		context.stop();
 	}
 
-	@PropertySources({ @PropertySource("classpath:/org/springframework/vault/demo/secure-introduction.properties"),
-			@PropertySource("classpath:/org/springframework/vault/demo/other.properties") })
-	@VaultPropertySource({ "secret/secure-introduction" })
+	@PropertySources({@PropertySource("classpath:/org/springframework/vault/demo/secure-introduction.properties"),
+@PropertySource("classpath:/org/springframework/vault/demo/other.properties")})
+	@VaultPropertySource({"secret/secure-introduction"})
 	@Configuration
 	@ComponentScan
 	static class Config extends VaultIntegrationTestConfiguration {

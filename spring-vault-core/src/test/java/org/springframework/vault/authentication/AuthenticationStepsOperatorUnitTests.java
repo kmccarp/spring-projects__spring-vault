@@ -53,8 +53,8 @@ class AuthenticationStepsOperatorUnitTests {
 		AuthenticationSteps steps = AuthenticationSteps.just(VaultToken.of("my-token"));
 
 		login(steps).as(StepVerifier::create) //
-			.expectNext(VaultToken.of("my-token")) //
-			.verifyComplete();
+	.expectNext(VaultToken.of("my-token")) //
+	.verifyComplete();
 	}
 
 	@Test
@@ -63,52 +63,52 @@ class AuthenticationStepsOperatorUnitTests {
 		AuthenticationSteps steps = AuthenticationSteps.fromSupplier(() -> "my-token").login(VaultToken::of);
 
 		login(steps).as(StepVerifier::create) //
-			.expectNext(VaultToken.of("my-token")) //
-			.verifyComplete();
+	.expectNext(VaultToken.of("my-token")) //
+	.verifyComplete();
 	}
 
 	@Test
 	void fileResourceCredentialSupplierShouldBeLoaded() {
 
 		AuthenticationSteps steps = AuthenticationSteps
-			.fromSupplier(new ResourceCredentialSupplier(new ClassPathResource("kube-jwt-token")))
-			.login(VaultToken::of);
+	.fromSupplier(new ResourceCredentialSupplier(new ClassPathResource("kube-jwt-token")))
+	.login(VaultToken::of);
 
 		login(steps).as(StepVerifier::create) //
-			.consumeNextWith(actual -> {
-				assertThat(actual.getToken()).startsWith("eyJhbGciOiJSUz");
-			})
-			.verifyComplete();
+	.consumeNextWith(actual -> {
+		assertThat(actual.getToken()).startsWith("eyJhbGciOiJSUz");
+	})
+	.verifyComplete();
 	}
 
 	@Test
 	void absentFileResourceCredentialSupplierShouldFail() {
 
 		AuthenticationSteps steps = AuthenticationSteps
-			.fromSupplier(new ResourceCredentialSupplier(new ByteArrayResource("eyJhbGciOiJSUz".getBytes()) {
-				@Override
-				public InputStream getInputStream() throws IOException {
-					throw new IOException("Oops!");
-				}
-			}))
-			.login(VaultToken::of);
+	.fromSupplier(new ResourceCredentialSupplier(new ByteArrayResource("eyJhbGciOiJSUz".getBytes()) {
+		@Override
+		public InputStream getInputStream() throws IOException {
+			throw new IOException("Oops!");
+		}
+	}))
+	.login(VaultToken::of);
 
 		login(steps).as(StepVerifier::create) //
-			.verifyError(VaultException.class);
+	.verifyError(VaultException.class);
 	}
 
 	@Test
 	void inputStreamResourceCredentialSupplierShouldBeLoaded() {
 
 		AuthenticationSteps steps = AuthenticationSteps
-			.fromSupplier(new ResourceCredentialSupplier(new ByteArrayResource("eyJhbGciOiJSUz".getBytes())))
-			.login(VaultToken::of);
+	.fromSupplier(new ResourceCredentialSupplier(new ByteArrayResource("eyJhbGciOiJSUz".getBytes())))
+	.login(VaultToken::of);
 
 		login(steps).as(StepVerifier::create) //
-			.consumeNextWith(actual -> {
-				assertThat(actual.getToken()).startsWith("eyJhbGciOiJSUz");
-			})
-			.verifyComplete();
+	.consumeNextWith(actual -> {
+		assertThat(actual.getToken()).startsWith("eyJhbGciOiJSUz");
+	})
+	.verifyComplete();
 	}
 
 	@Test
@@ -117,10 +117,10 @@ class AuthenticationStepsOperatorUnitTests {
 		AuthenticationSteps steps = AuthenticationSteps.fromSupplier(() -> "eyJhbGciOiJSUz").login(VaultToken::of);
 
 		login(steps).as(StepVerifier::create) //
-			.consumeNextWith(actual -> {
-				assertThat(actual.getToken()).startsWith("eyJhbGciOiJSUz");
-			})
-			.verifyComplete();
+	.consumeNextWith(actual -> {
+		assertThat(actual.getToken()).startsWith("eyJhbGciOiJSUz");
+	})
+	.verifyComplete();
 	}
 
 	@Test
@@ -130,17 +130,17 @@ class AuthenticationStepsOperatorUnitTests {
 		MockClientHttpResponse response = new MockClientHttpResponse(HttpStatus.OK);
 		response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
 		response.setBody(
-				"{" + "\"auth\":{\"client_token\":\"my-token\", \"renewable\": true, \"lease_duration\": 10}" + "}");
+	"{" + "\"auth\":{\"client_token\":\"my-token\", \"renewable\": true, \"lease_duration\": 10}" + "}");
 		ClientHttpConnector connector = (method, uri, fn) -> fn.apply(request).then(Mono.just(response));
 
 		WebClient webClient = WebClient.builder().clientConnector(connector).build();
 
 		AuthenticationSteps steps = AuthenticationSteps
-			.just(post("/auth/{path}/login", "cert").as(VaultResponse.class));
+	.just(post("/auth/{path}/login", "cert").as(VaultResponse.class));
 
 		login(steps, webClient).as(StepVerifier::create) //
-			.expectNext(VaultToken.of("my-token")) //
-			.verifyComplete();
+	.expectNext(VaultToken.of("my-token")) //
+	.verifyComplete();
 	}
 
 	@Test
@@ -153,11 +153,11 @@ class AuthenticationStepsOperatorUnitTests {
 		WebClient webClient = WebClient.builder().clientConnector(connector).build();
 
 		AuthenticationSteps steps = AuthenticationSteps
-			.just(post("/auth/{path}/login", "cert").as(VaultResponse.class));
+	.just(post("/auth/{path}/login", "cert").as(VaultResponse.class));
 
 		login(steps, webClient).as(StepVerifier::create) //
-			.expectError() //
-			.verify();
+	.expectError() //
+	.verify();
 	}
 
 	@Test
@@ -185,17 +185,17 @@ class AuthenticationStepsOperatorUnitTests {
 		WebClient webClient = WebClient.builder().clientConnector(connector).build();
 
 		Node<VaultResponse> left = AuthenticationSteps
-			.fromHttpRequest(post("/auth/login/left").as(VaultResponse.class));
+	.fromHttpRequest(post("/auth/login/left").as(VaultResponse.class));
 
 		Node<VaultResponse> right = AuthenticationSteps
-			.fromHttpRequest(post("/auth/login/right").as(VaultResponse.class));
+	.fromHttpRequest(post("/auth/login/right").as(VaultResponse.class));
 
 		AuthenticationSteps steps = left.zipWith(right)
-			.login(it -> VaultToken.of(it.getLeft().getRequestId() + "-" + it.getRight().getRequestId()));
+	.login(it -> VaultToken.of(it.getLeft().getRequestId() + "-" + it.getRight().getRequestId()));
 
 		login(steps, webClient).as(StepVerifier::create) //
-			.expectNext(VaultToken.of("left-right")) //
-			.verifyComplete();
+	.expectNext(VaultToken.of("left-right")) //
+	.verifyComplete();
 	}
 
 	private Mono<VaultToken> login(AuthenticationSteps steps) {

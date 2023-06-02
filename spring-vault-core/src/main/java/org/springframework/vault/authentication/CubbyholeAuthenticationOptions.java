@@ -58,7 +58,7 @@ public class CubbyholeAuthenticationOptions {
 	private final boolean selfLookup;
 
 	private CubbyholeAuthenticationOptions(VaultToken initialToken, String path,
-			UnwrappingEndpoints unwrappingEndpoints, boolean wrappedToken, boolean selfLookup) {
+UnwrappingEndpoints unwrappingEndpoints, boolean wrappedToken, boolean selfLookup) {
 
 		this.initialToken = initialToken;
 		this.path = path;
@@ -213,7 +213,7 @@ public class CubbyholeAuthenticationOptions {
 			Assert.notNull(this.path, "Path must not be null");
 
 			return new CubbyholeAuthenticationOptions(this.initialToken, this.path, this.endpoints, this.wrappedToken,
-					this.selfLookup);
+		this.selfLookup);
 		}
 
 	}

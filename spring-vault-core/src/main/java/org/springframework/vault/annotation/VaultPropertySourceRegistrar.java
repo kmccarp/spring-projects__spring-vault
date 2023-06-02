@@ -56,8 +56,7 @@ import org.springframework.vault.core.util.PropertyTransformers;
  *
  * @author Mark Paluch
  */
-class VaultPropertySourceRegistrar
-		implements ImportBeanDefinitionRegistrar, BeanFactoryPostProcessor, EnvironmentAware {
+class VaultPropertySourceRegistrarimplements ImportBeanDefinitionRegistrar, BeanFactoryPostProcessor, EnvironmentAware {
 
 	private @Nullable Environment environment;
 
@@ -73,17 +72,17 @@ class VaultPropertySourceRegistrar
 		MutablePropertySources propertySources = env.getPropertySources();
 
 		registerPropertySources(
-				beanFactory.getBeansOfType(org.springframework.vault.core.env.VaultPropertySource.class).values(),
-				propertySources);
+	beanFactory.getBeansOfType(org.springframework.vault.core.env.VaultPropertySource.class).values(),
+	propertySources);
 
 		registerPropertySources(
-				beanFactory.getBeansOfType(org.springframework.vault.core.env.LeaseAwareVaultPropertySource.class)
-					.values(),
-				propertySources);
+	beanFactory.getBeansOfType(org.springframework.vault.core.env.LeaseAwareVaultPropertySource.class)
+.values(),
+	propertySources);
 	}
 
 	private void registerPropertySources(Collection<? extends PropertySource<?>> propertySources,
-			MutablePropertySources mutablePropertySources) {
+MutablePropertySources mutablePropertySources) {
 
 		for (PropertySource<?> vaultPropertySource : propertySources) {
 
@@ -103,13 +102,13 @@ class VaultPropertySourceRegistrar
 
 		if (!registry.isBeanNameInUse("VaultPropertySourceRegistrar")) {
 			registry.registerBeanDefinition("VaultPropertySourceRegistrar", BeanDefinitionBuilder //
-				.rootBeanDefinition(VaultPropertySourceRegistrar.class) //
-				.setRole(BeanDefinition.ROLE_INFRASTRUCTURE) //
-				.getBeanDefinition());
+		.rootBeanDefinition(VaultPropertySourceRegistrar.class) //
+		.setRole(BeanDefinition.ROLE_INFRASTRUCTURE) //
+		.getBeanDefinition());
 		}
 
 		Set<AnnotationAttributes> propertySources = attributesForRepeatable(annotationMetadata,
-				VaultPropertySources.class.getName(), VaultPropertySource.class.getName());
+	VaultPropertySources.class.getName(), VaultPropertySource.class.getName());
 
 		int counter = 0;
 
@@ -126,7 +125,7 @@ class VaultPropertySourceRegistrar
 			Assert.hasText(ref, "'vaultTemplateRef' in @EnableVaultPropertySource must not be empty");
 
 			PropertyTransformer propertyTransformer = StringUtils.hasText(propertyNamePrefix)
-					? PropertyTransformers.propertyNamePrefix(propertyNamePrefix) : PropertyTransformers.noop();
+		? PropertyTransformers.propertyNamePrefix(propertyNamePrefix) : PropertyTransformers.noop();
 
 			for (String propertyPath : paths) {
 
@@ -135,7 +134,7 @@ class VaultPropertySourceRegistrar
 				}
 
 				AbstractBeanDefinition beanDefinition = createBeanDefinition(ref, renewal, propertyTransformer,
-						ignoreSecretNotFound, potentiallyResolveRequiredPlaceholders(propertyPath));
+			ignoreSecretNotFound, potentiallyResolveRequiredPlaceholders(propertyPath));
 				beanDefinition.setSource(annotationMetadata.getClassName());
 
 				do {
@@ -158,16 +157,16 @@ class VaultPropertySourceRegistrar
 	}
 
 	private AbstractBeanDefinition createBeanDefinition(String ref, Renewal renewal,
-			PropertyTransformer propertyTransformer, boolean ignoreResourceNotFound, String propertyPath) {
+PropertyTransformer propertyTransformer, boolean ignoreResourceNotFound, String propertyPath) {
 
 		BeanDefinitionBuilder builder;
 
 		if (isRenewable(renewal)) {
 			builder = BeanDefinitionBuilder
-				.rootBeanDefinition(org.springframework.vault.core.env.LeaseAwareVaultPropertySource.class);
+		.rootBeanDefinition(org.springframework.vault.core.env.LeaseAwareVaultPropertySource.class);
 
 			RequestedSecret requestedSecret = renewal == Renewal.ROTATE ? RequestedSecret.rotating(propertyPath)
-					: RequestedSecret.renewable(propertyPath);
+		: RequestedSecret.renewable(propertyPath);
 
 			builder.addConstructorArgValue(propertyPath);
 			builder.addConstructorArgReference("secretLeaseContainer");
@@ -175,7 +174,7 @@ class VaultPropertySourceRegistrar
 		}
 		else {
 			builder = BeanDefinitionBuilder
-				.rootBeanDefinition(org.springframework.vault.core.env.VaultPropertySource.class);
+		.rootBeanDefinition(org.springframework.vault.core.env.VaultPropertySource.class);
 
 			builder.addConstructorArgValue(propertyPath);
 			builder.addConstructorArgReference(ref);
@@ -195,7 +194,7 @@ class VaultPropertySourceRegistrar
 
 	@SuppressWarnings("unchecked")
 	static Set<AnnotationAttributes> attributesForRepeatable(AnnotationMetadata metadata, String containerClassName,
-			String annotationClassName) {
+String annotationClassName) {
 
 		Set<AnnotationAttributes> result = new LinkedHashSet<>();
 		addAttributesIfNotNull(result, metadata.getAnnotationAttributes(annotationClassName, false));
@@ -210,7 +209,7 @@ class VaultPropertySourceRegistrar
 	}
 
 	private static void addAttributesIfNotNull(Set<AnnotationAttributes> result,
-			@Nullable Map<String, Object> attributes) {
+@Nullable Map<String, Object> attributes) {
 		if (attributes != null) {
 			result.add(AnnotationAttributes.fromMap(attributes));
 		}

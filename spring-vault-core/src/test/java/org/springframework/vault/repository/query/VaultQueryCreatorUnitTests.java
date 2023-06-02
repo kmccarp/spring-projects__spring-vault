@@ -186,17 +186,17 @@ class VaultQueryCreatorUnitTests {
 	@Test
 	void failsForNonIdProperties() {
 		assertThatExceptionOfType(InvalidDataAccessApiUsageException.class)
-			.isThrownBy(() -> createQuery("findByName", ""));
+	.isThrownBy(() -> createQuery("findByName", ""));
 	}
 
 	VaultQuery createQuery(String methodName, String value) {
 
 		DefaultParameters defaultParameters = new DefaultParameters(
-				ReflectionUtils.findMethod(dummy.class, "someUnrelatedMethod", String.class));
+	ReflectionUtils.findMethod(dummy.class, "someUnrelatedMethod", String.class));
 
 		PartTree partTree = new PartTree(methodName, Credentials.class);
 		VaultQueryCreator queryCreator = new VaultQueryCreator(partTree,
-				new ParametersParameterAccessor(defaultParameters, new Object[] { value }), this.mappingContext);
+	new ParametersParameterAccessor(defaultParameters, new Object[]{value}), this.mappingContext);
 
 		return queryCreator.createQuery().getCriteria();
 	}
@@ -204,11 +204,11 @@ class VaultQueryCreatorUnitTests {
 	VaultQuery createQuery(String methodName, List<String> value) {
 
 		DefaultParameters defaultParameters = new DefaultParameters(
-				ReflectionUtils.findMethod(dummy.class, "someUnrelatedMethod", List.class));
+	ReflectionUtils.findMethod(dummy.class, "someUnrelatedMethod", List.class));
 
 		PartTree partTree = new PartTree(methodName, Credentials.class);
 		VaultQueryCreator queryCreator = new VaultQueryCreator(partTree,
-				new ParametersParameterAccessor(defaultParameters, new Object[] { value }), this.mappingContext);
+	new ParametersParameterAccessor(defaultParameters, new Object[]{value}), this.mappingContext);
 
 		return queryCreator.createQuery().getCriteria();
 	}
@@ -216,12 +216,12 @@ class VaultQueryCreatorUnitTests {
 	VaultQuery createQuery(String methodName, String value, String anotherValue) {
 
 		DefaultParameters defaultParameters = new DefaultParameters(
-				ReflectionUtils.findMethod(dummy.class, "someUnrelatedMethod", String.class, String.class));
+	ReflectionUtils.findMethod(dummy.class, "someUnrelatedMethod", String.class, String.class));
 
 		PartTree partTree = new PartTree(methodName, Credentials.class);
 		VaultQueryCreator queryCreator = new VaultQueryCreator(partTree,
-				new ParametersParameterAccessor(defaultParameters, new Object[] { value, anotherValue }),
-				this.mappingContext);
+	new ParametersParameterAccessor(defaultParameters, new Object[]{value, anotherValue}),
+	this.mappingContext);
 
 		return queryCreator.createQuery().getCriteria();
 	}

@@ -73,7 +73,7 @@ public class Person {
 			return false;
 		Person person = (Person) o;
 		return Objects.equals(this.id, person.id) && Objects.equals(this.firstname, person.firstname)
-				&& Objects.equals(this.password, person.password);
+	&& Objects.equals(this.password, person.password);
 	}
 
 	@Override

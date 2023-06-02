@@ -60,7 +60,7 @@ public class MappingVaultConverter extends AbstractVaultConverter {
 	private VaultTypeMapper typeMapper;
 
 	public MappingVaultConverter(
-			MappingContext<? extends VaultPersistentEntity<?>, VaultPersistentProperty> mappingContext) {
+MappingContext<? extends VaultPersistentEntity<?>, VaultPersistentProperty> mappingContext) {
 
 		super(new DefaultConversionService());
 
@@ -100,7 +100,7 @@ public class MappingVaultConverter extends AbstractVaultConverter {
 		SecretDocument secretDocument = getSecretDocument(source);
 
 		TypeInformation<? extends S> typeToUse = secretDocument != null
-				? this.typeMapper.readType(secretDocument.getBody(), type) : (TypeInformation) TypeInformation.OBJECT;
+	? this.typeMapper.readType(secretDocument.getBody(), type) : (TypeInformation) TypeInformation.OBJECT;
 		Class<? extends S> rawType = typeToUse.getType();
 
 		if (this.conversions.hasCustomReadTarget(source.getClass(), rawType)) {
@@ -124,7 +124,7 @@ public class MappingVaultConverter extends AbstractVaultConverter {
 		}
 
 		return read((VaultPersistentEntity<S>) this.mappingContext.getRequiredPersistentEntity(typeToUse),
-				secretDocument);
+	secretDocument);
 	}
 
 	@Nullable
@@ -142,12 +142,12 @@ public class MappingVaultConverter extends AbstractVaultConverter {
 	}
 
 	private ParameterValueProvider<VaultPersistentProperty> getParameterProvider(VaultPersistentEntity<?> entity,
-			SecretDocument source) {
+SecretDocument source) {
 
 		VaultPropertyValueProvider provider = new VaultPropertyValueProvider(source);
 
 		PersistentEntityParameterValueProvider<VaultPersistentProperty> parameterProvider = new PersistentEntityParameterValueProvider<>(
-				entity, provider, source);
+	entity, provider, source);
 
 		return new ParameterValueProvider<VaultPersistentProperty>() {
 
@@ -167,7 +167,7 @@ public class MappingVaultConverter extends AbstractVaultConverter {
 		S instance = instantiator.createInstance(entity, provider);
 
 		PersistentPropertyAccessor accessor = new ConvertingPropertyAccessor(entity.getPropertyAccessor(instance),
-				this.conversionService);
+	this.conversionService);
 
 		VaultPersistentProperty idProperty = entity.getIdProperty();
 		SecretDocumentAccessor documentAccessor = new SecretDocumentAccessor(source);
@@ -177,7 +177,7 @@ public class MappingVaultConverter extends AbstractVaultConverter {
 
 		if (entity.requiresPropertyPopulation()) {
 			if (idProperty != null && !entity.isConstructorArgument(idProperty)
-					&& documentAccessor.hasValue(idProperty)) {
+		&& documentAccessor.hasValue(idProperty)) {
 
 				idValue = readIdValue(idProperty, documentAccessor);
 				accessor.setProperty(idProperty, idValue);
@@ -200,8 +200,8 @@ public class MappingVaultConverter extends AbstractVaultConverter {
 	}
 
 	private void readProperties(VaultPersistentEntity<?> entity, PersistentPropertyAccessor accessor,
-			@Nullable VaultPersistentProperty idProperty, SecretDocumentAccessor documentAccessor,
-			VaultPropertyValueProvider valueProvider) {
+@Nullable VaultPersistentProperty idProperty, SecretDocumentAccessor documentAccessor,
+VaultPropertyValueProvider valueProvider) {
 
 		for (VaultPersistentProperty prop : entity) {
 
@@ -246,7 +246,7 @@ public class MappingVaultConverter extends AbstractVaultConverter {
 	 * @return the converted {@link Collection} or array, will never be {@literal null}.
 	 */
 	@Nullable
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	private Object readCollectionOrArray(TypeInformation<?> targetType, List sourceValue) {
 
 		Assert.notNull(targetType, "Target type must not be null");
@@ -254,12 +254,12 @@ public class MappingVaultConverter extends AbstractVaultConverter {
 		Class<?> collectionType = targetType.getType();
 
 		TypeInformation<?> componentType = targetType.getComponentType() != null ? targetType.getComponentType()
-				: TypeInformation.OBJECT;
+	: TypeInformation.OBJECT;
 		Class<?> rawComponentType = componentType.getType();
 
 		collectionType = Collection.class.isAssignableFrom(collectionType) ? collectionType : List.class;
 		Collection<Object> items = targetType.getType().isArray() ? new ArrayList<>(sourceValue.size())
-				: CollectionFactory.createCollection(collectionType, rawComponentType, sourceValue.size());
+	: CollectionFactory.createCollection(collectionType, rawComponentType, sourceValue.size());
 
 		if (sourceValue.isEmpty()) {
 			return getPotentiallyConvertedSimpleRead(items, collectionType);
@@ -340,7 +340,7 @@ public class MappingVaultConverter extends AbstractVaultConverter {
 	 * @return
 	 */
 	@Nullable
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	private Object getPotentiallyConvertedSimpleRead(@Nullable Object value, @Nullable Class<?> target) {
 
 		if (value == null || target == null || target.isAssignableFrom(value.getClass())) {
@@ -421,7 +421,7 @@ public class MappingVaultConverter extends AbstractVaultConverter {
 	}
 
 	private void writeProperties(VaultPersistentEntity<?> entity, PersistentPropertyAccessor<?> accessor,
-			SecretDocumentAccessor sink, @Nullable VaultPersistentProperty idProperty) {
+SecretDocumentAccessor sink, @Nullable VaultPersistentProperty idProperty) {
 
 		// Write the properties
 		for (VaultPersistentProperty prop : entity) {
@@ -445,9 +445,9 @@ public class MappingVaultConverter extends AbstractVaultConverter {
 		}
 	}
 
-	@SuppressWarnings({ "unchecked" })
+	@SuppressWarnings({"unchecked"})
 	protected void writePropertyInternal(@Nullable Object obj, SecretDocumentAccessor accessor,
-			VaultPersistentProperty prop) {
+VaultPersistentProperty prop) {
 
 		if (obj == null) {
 			return;
@@ -478,8 +478,8 @@ public class MappingVaultConverter extends AbstractVaultConverter {
 		}
 
 		VaultPersistentEntity<?> entity = isSubtype(prop.getType(), obj.getClass())
-				? this.mappingContext.getRequiredPersistentEntity(obj.getClass())
-				: this.mappingContext.getRequiredPersistentEntity(type);
+	? this.mappingContext.getRequiredPersistentEntity(obj.getClass())
+	: this.mappingContext.getRequiredPersistentEntity(type);
 
 		SecretDocumentAccessor nested = accessor.writeNested(prop);
 
@@ -512,7 +512,7 @@ public class MappingVaultConverter extends AbstractVaultConverter {
 	 * @return the converted {@link List}.
 	 */
 	private List<Object> writeCollectionInternal(Collection<?> source, @Nullable TypeInformation<?> type,
-			List<Object> sink) {
+List<Object> sink) {
 
 		TypeInformation<?> componentType = null;
 
@@ -564,7 +564,7 @@ public class MappingVaultConverter extends AbstractVaultConverter {
 	 * @return the converted {@link Map}.
 	 */
 	protected Map<String, Object> writeMapInternal(Map<Object, Object> obj, Map<String, Object> bson,
-			TypeInformation<?> propertyType) {
+TypeInformation<?> propertyType) {
 
 		for (Entry<Object, Object> entry : obj.entrySet()) {
 
@@ -580,12 +580,12 @@ public class MappingVaultConverter extends AbstractVaultConverter {
 				else if (val instanceof Collection || val.getClass().isArray()) {
 
 					bson.put(simpleKey, writeCollectionInternal(asCollection(val), propertyType.getMapValueType(),
-							new ArrayList<>()));
+				new ArrayList<>()));
 				}
 				else {
 					SecretDocumentAccessor nested = new SecretDocumentAccessor(new SecretDocument());
 					TypeInformation<?> valueTypeInfo = propertyType.isMap() ? propertyType.getMapValueType()
-							: TypeInformation.OBJECT;
+				: TypeInformation.OBJECT;
 					writeInternal(val, nested, valueTypeInfo);
 					bson.put(simpleKey, nested.getBody());
 				}
@@ -607,7 +607,7 @@ public class MappingVaultConverter extends AbstractVaultConverter {
 	 * @param accessor must not be {@literal null}.
 	 */
 	protected void addCustomTypeKeyIfNecessary(@Nullable TypeInformation<?> type, Object value,
-			SecretDocumentAccessor accessor) {
+SecretDocumentAccessor accessor) {
 
 		Class<?> reference = type != null ? type.getActualType().getType() : Object.class;
 		Class<?> valueType = ClassUtils.getUserClass(value.getClass());

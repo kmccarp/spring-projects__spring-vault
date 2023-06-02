@@ -58,7 +58,7 @@ class BasicVaultPersistentEntityUnitTests {
 		VaultPersistentEntity<?> persistentEntity = this.mappingContext.getPersistentEntity(ExpressionEntity.class);
 
 		persistentEntity.setEvaluationContextProvider(
-				new ExtensionAwareEvaluationContextProvider(Collections.singletonList(new SampleExtension())));
+	new ExtensionAwareEvaluationContextProvider(Collections.singletonList(new SampleExtension())));
 
 		assertThat(persistentEntity.getSecretBackend()).isEqualTo("collectionName");
 

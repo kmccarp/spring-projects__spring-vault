@@ -43,17 +43,17 @@ import static org.assertj.core.api.Assertions.fail;
 @ExtendWith(VaultExtension.class)
 class LeaseAwareVaultPropertySourceIntegrationTests {
 
-	@VaultPropertySource(value = { "secret/myapp", "secret/myapp/profile" }, renewal = Renewal.RENEW)
+	@VaultPropertySource(value = {"secret/myapp", "secret/myapp/profile"}, renewal = Renewal.RENEW)
 	static class Config extends VaultIntegrationTestConfiguration {
 
 	}
 
-	@VaultPropertySource(value = { "unknown" }, ignoreSecretNotFound = false)
+	@VaultPropertySource(value = {"unknown"}, ignoreSecretNotFound = false)
 	static class FailingConfig extends VaultIntegrationTestConfiguration {
 
 	}
 
-	@VaultPropertySource(value = { "unknown" }, ignoreSecretNotFound = false, renewal = Renewal.RENEW)
+	@VaultPropertySource(value = {"unknown"}, ignoreSecretNotFound = false, renewal = Renewal.RENEW)
 	static class FailingRenewableConfig extends VaultIntegrationTestConfiguration {
 
 	}
@@ -71,7 +71,7 @@ class LeaseAwareVaultPropertySourceIntegrationTests {
 	void shouldLoadProperties() {
 
 		try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Config.class,
-				PropertyConsumer.class)) {
+	PropertyConsumer.class)) {
 			ConfigurableEnvironment env = context.getEnvironment();
 			PropertyConsumer consumer = context.getBean(PropertyConsumer.class);
 
@@ -89,7 +89,7 @@ class LeaseAwareVaultPropertySourceIntegrationTests {
 		}
 		catch (Exception e) {
 			assertThat(e).hasRootCauseInstanceOf(VaultPropertySourceNotFoundException.class)
-				.hasRootCauseMessage("Vault location [unknown] not resolvable");
+		.hasRootCauseMessage("Vault location [unknown] not resolvable");
 		}
 	}
 
@@ -97,13 +97,13 @@ class LeaseAwareVaultPropertySourceIntegrationTests {
 	void shouldFailIfRenewablePropertiesNotFound() {
 
 		try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
-				FailingRenewableConfig.class)) {
+	FailingRenewableConfig.class)) {
 
 			fail("AnnotationConfigApplicationContext startup did not fail");
 		}
 		catch (Exception e) {
 			assertThat(e).hasRootCauseInstanceOf(VaultPropertySourceNotFoundException.class)
-				.hasRootCauseMessage("Vault location [unknown] not resolvable");
+		.hasRootCauseMessage("Vault location [unknown] not resolvable");
 		}
 	}
 

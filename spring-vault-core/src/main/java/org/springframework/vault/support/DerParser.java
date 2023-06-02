@@ -142,9 +142,9 @@ class DerParser {
 			// X.690-0207 8.1.2.4.2
 			// "c) bits 7 to 1 of the first subsequent octet shall not all be zero."
 			if ((b & 0x7f) == 0) // Note: -1 will pass
-			{
-				throw new IOException("corrupted stream - invalid high tag number found");
-			}
+				{
+					throw new IOException("corrupted stream - invalid high tag number found");
+				}
 
 			while ((b >= 0) && ((b & 0x80) != 0)) {
 				tagNo |= (b & 0x7f);
@@ -344,7 +344,7 @@ class DerParser {
 					return getObjectIdentifier(this.value);
 				default:
 					throw new IllegalStateException(
-							String.format("Invalid DER: object (%d) is not a string", this.type));
+				String.format("Invalid DER: object (%d) is not a string", this.type));
 			}
 
 			return new String(this.value, encoding);
@@ -362,26 +362,26 @@ class DerParser {
 				if (value <= LONG_LIMIT) {
 					value += (b & 0x7f);
 					if ((b & 0x80) == 0) // end of number reached
-					{
-						if (first) {
-							if (value < 40) {
-								objId.append('0');
+						{
+							if (first) {
+								if (value < 40) {
+									objId.append('0');
+								}
+								else if (value < 80) {
+									objId.append('1');
+									value -= 40;
+								}
+								else {
+									objId.append('2');
+									value -= 80;
+								}
+								first = false;
 							}
-							else if (value < 80) {
-								objId.append('1');
-								value -= 40;
-							}
-							else {
-								objId.append('2');
-								value -= 80;
-							}
-							first = false;
-						}
 
-						objId.append('.');
-						objId.append(value);
-						value = 0;
-					}
+							objId.append('.');
+							objId.append(value);
+							value = 0;
+						}
 					else {
 						value <<= 7;
 					}

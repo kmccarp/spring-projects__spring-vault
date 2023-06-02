@@ -42,13 +42,13 @@ class ClientCertificateAuthenticationStepsIntegrationTests extends ClientCertifi
 	void authenticationStepsShouldLoginSuccessfully() {
 
 		ClientHttpRequestFactory clientHttpRequestFactory = ClientHttpRequestFactoryFactory.create(new ClientOptions(),
-				prepareCertAuthenticationMethod());
+	prepareCertAuthenticationMethod());
 
 		RestTemplate restTemplate = VaultClients.createRestTemplate(TestRestTemplateFactory.TEST_VAULT_ENDPOINT,
-				clientHttpRequestFactory);
+	clientHttpRequestFactory);
 
 		AuthenticationStepsExecutor executor = new AuthenticationStepsExecutor(
-				ClientCertificateAuthentication.createAuthenticationSteps(), restTemplate);
+	ClientCertificateAuthentication.createAuthenticationSteps(), restTemplate);
 
 		VaultToken login = executor.login();
 
@@ -61,14 +61,14 @@ class ClientCertificateAuthenticationStepsIntegrationTests extends ClientCertifi
 	void authenticationStepsLoginShouldFail() {
 
 		ClientHttpRequestFactory clientHttpRequestFactory = ClientHttpRequestFactoryFactory.create(new ClientOptions(),
-				Settings.createSslConfiguration());
+	Settings.createSslConfiguration());
 		RestTemplate restTemplate = VaultClients.createRestTemplate(TestRestTemplateFactory.TEST_VAULT_ENDPOINT,
-				clientHttpRequestFactory);
+	clientHttpRequestFactory);
 
 		assertThatExceptionOfType(NestedRuntimeException.class).isThrownBy(
-				() -> new AuthenticationStepsExecutor(ClientCertificateAuthentication.createAuthenticationSteps(),
-						restTemplate)
-					.login());
+	() -> new AuthenticationStepsExecutor(ClientCertificateAuthentication.createAuthenticationSteps(),
+restTemplate)
+.login());
 	}
 
 }

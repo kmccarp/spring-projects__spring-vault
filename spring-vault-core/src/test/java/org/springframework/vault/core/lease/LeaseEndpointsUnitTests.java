@@ -64,7 +64,7 @@ public class LeaseEndpointsUnitTests {
 		vaultResponseBody.put("lease_duration", 90L);
 		vaultResponseBody.put("renewable", false);
 		when(restOperations.exchange(eq("sys/renew"), eq(HttpMethod.PUT), any(HttpEntity.class), eq(Map.class)))
-			.thenReturn(new ResponseEntity<>(vaultResponseBody, HttpStatus.OK));
+	.thenReturn(new ResponseEntity<>(vaultResponseBody, HttpStatus.OK));
 
 		when(oldLease.getLeaseId()).thenReturn("old_lease");
 		when(oldLease.getLeaseDuration()).thenReturn(Duration.ofSeconds(70));
@@ -92,7 +92,7 @@ public class LeaseEndpointsUnitTests {
 		LeaseEndpoints.Legacy.revoke(oldLease, restOperations);
 
 		verify(restOperations).exchange(eq("sys/revoke"), eq(HttpMethod.PUT), httpEntityCaptor.capture(), eq(Map.class),
-				eq("old_lease"));
+	eq("old_lease"));
 
 		Map<String, String> actualRequestBodyParams = httpEntityCaptor.getValue().getBody();
 		assertThat(actualRequestBodyParams).containsOnly(entry("lease_id", "old_lease"));
@@ -110,7 +110,7 @@ public class LeaseEndpointsUnitTests {
 		vaultResponseBody.put("lease_duration", 90L);
 		vaultResponseBody.put("renewable", false);
 		when(restOperations.exchange(eq("sys/leases/renew"), eq(HttpMethod.PUT), any(HttpEntity.class), eq(Map.class)))
-			.thenReturn(new ResponseEntity<>(vaultResponseBody, HttpStatus.OK));
+	.thenReturn(new ResponseEntity<>(vaultResponseBody, HttpStatus.OK));
 
 		when(oldLease.getLeaseId()).thenReturn("old_lease");
 		when(oldLease.getLeaseDuration()).thenReturn(Duration.ofSeconds(70));
@@ -118,7 +118,7 @@ public class LeaseEndpointsUnitTests {
 		Lease renewedLease = LeaseEndpoints.Leases.renew(oldLease, restOperations);
 
 		verify(restOperations).exchange(eq("sys/leases/renew"), eq(HttpMethod.PUT), httpEntityCaptor.capture(),
-				eq(Map.class));
+	eq(Map.class));
 
 		Map<String, String> actualRequestBodyParams = httpEntityCaptor.getValue().getBody();
 		assertThat(actualRequestBodyParams).containsOnly(entry("lease_id", "old_lease"), entry("increment", "70"));
@@ -140,7 +140,7 @@ public class LeaseEndpointsUnitTests {
 		LeaseEndpoints.Leases.revoke(oldLease, restOperations);
 
 		verify(restOperations).exchange(eq("sys/leases/revoke"), eq(HttpMethod.PUT), httpEntityCaptor.capture(),
-				eq(Map.class), eq("old_lease"));
+	eq(Map.class), eq("old_lease"));
 
 		Map<String, String> actualRequestBodyParams = httpEntityCaptor.getValue().getBody();
 		assertThat(actualRequestBodyParams).containsOnly(entry("lease_id", "old_lease"));
@@ -157,7 +157,7 @@ public class LeaseEndpointsUnitTests {
 		vaultResponseBody.put("lease_duration", 90L);
 		vaultResponseBody.put("renewable", false);
 		when(restOperations.exchange(eq("sys/leases/renew"), eq(HttpMethod.PUT), any(HttpEntity.class), eq(Map.class)))
-			.thenReturn(new ResponseEntity<>(vaultResponseBody, HttpStatus.OK));
+	.thenReturn(new ResponseEntity<>(vaultResponseBody, HttpStatus.OK));
 
 		when(oldLease.getLeaseId()).thenReturn("old_lease");
 		when(oldLease.getLeaseDuration()).thenReturn(Duration.ofSeconds(70));
@@ -165,7 +165,7 @@ public class LeaseEndpointsUnitTests {
 		Lease renewedLease = LeaseEndpoints.Leases.renew(oldLease, restOperations);
 
 		verify(restOperations).exchange(eq("sys/leases/renew"), eq(HttpMethod.PUT), httpEntityCaptor.capture(),
-				eq(Map.class));
+	eq(Map.class));
 
 		Map<String, String> actualRequestBodyParams = httpEntityCaptor.getValue().getBody();
 		assertThat(actualRequestBodyParams).containsOnly(entry("lease_id", "old_lease"), entry("increment", "70"));
@@ -186,7 +186,7 @@ public class LeaseEndpointsUnitTests {
 		LeaseEndpoints.Leases.revoke(oldLease, restOperations);
 
 		verify(restOperations).exchange(eq("sys/leases/revoke"), eq(HttpMethod.PUT), httpEntityCaptor.capture(),
-				eq(Map.class), eq("old_lease"));
+	eq(Map.class), eq("old_lease"));
 
 		Map<String, String> actualRequestBodyParams = httpEntityCaptor.getValue().getBody();
 		assertThat(actualRequestBodyParams).containsOnly(entry("lease_id", "old_lease"));
@@ -203,7 +203,7 @@ public class LeaseEndpointsUnitTests {
 		vaultResponseBody.put("lease_duration", 90L);
 		vaultResponseBody.put("renewable", false);
 		when(restOperations.exchange(eq("sys/leases/renew"), eq(HttpMethod.PUT), any(HttpEntity.class), eq(Map.class)))
-			.thenReturn(new ResponseEntity<>(vaultResponseBody, HttpStatus.OK));
+	.thenReturn(new ResponseEntity<>(vaultResponseBody, HttpStatus.OK));
 
 		when(oldLease.getLeaseId()).thenReturn("old_lease");
 		when(oldLease.getLeaseDuration()).thenReturn(Duration.ofSeconds(70));
@@ -211,7 +211,7 @@ public class LeaseEndpointsUnitTests {
 		Lease renewedLease = LeaseEndpoints.LeasesRevokedByPrefix.renew(oldLease, restOperations);
 
 		verify(restOperations).exchange(eq("sys/leases/renew"), eq(HttpMethod.PUT), httpEntityCaptor.capture(),
-				eq(Map.class));
+	eq(Map.class));
 
 		Map<String, String> actualRequestBodyParams = httpEntityCaptor.getValue().getBody();
 		assertThat(actualRequestBodyParams).containsOnly(entry("lease_id", "old_lease"), entry("increment", "70"));

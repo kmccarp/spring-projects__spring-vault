@@ -47,19 +47,19 @@ class ReactiveVaultClientsUnitTests {
 		ClientHttpConnector connector = (method, uri, fn) -> fn.apply(request).then(Mono.just(response));
 
 		WebClient webClient = WebClient.builder()
-			.clientConnector(connector)
-			.filter(ReactiveVaultClients.namespace("foo/bar"))
-			.build();
+	.clientConnector(connector)
+	.filter(ReactiveVaultClients.namespace("foo/bar"))
+	.build();
 
 		webClient.get()
-			.uri("/auth/foo")
-			.retrieve()
-			.bodyToMono(String.class)
-			.as(StepVerifier::create) //
-			.verifyComplete();
+	.uri("/auth/foo")
+	.retrieve()
+	.bodyToMono(String.class)
+	.as(StepVerifier::create) //
+	.verifyComplete();
 
 		assertThat(request.getHeaders()).containsEntry(VaultHttpHeaders.VAULT_NAMESPACE,
-				Collections.singletonList("foo/bar"));
+	Collections.singletonList("foo/bar"));
 	}
 
 	@Test
@@ -71,20 +71,20 @@ class ReactiveVaultClientsUnitTests {
 		ClientHttpConnector connector = (method, uri, fn) -> fn.apply(request).then(Mono.just(response));
 
 		WebClient webClient = WebClient.builder()
-			.clientConnector(connector)
-			.filter(ReactiveVaultClients.namespace("foo/bar"))
-			.build();
+	.clientConnector(connector)
+	.filter(ReactiveVaultClients.namespace("foo/bar"))
+	.build();
 
 		webClient.get()
-			.uri("/auth/foo")
-			.header(VaultHttpHeaders.VAULT_NAMESPACE, "baz")
-			.retrieve()
-			.bodyToMono(String.class) //
-			.as(StepVerifier::create) //
-			.verifyComplete();
+	.uri("/auth/foo")
+	.header(VaultHttpHeaders.VAULT_NAMESPACE, "baz")
+	.retrieve()
+	.bodyToMono(String.class) //
+	.as(StepVerifier::create) //
+	.verifyComplete();
 
 		assertThat(request.getHeaders()).containsEntry(VaultHttpHeaders.VAULT_NAMESPACE,
-				Collections.singletonList("baz"));
+	Collections.singletonList("baz"));
 	}
 
 }

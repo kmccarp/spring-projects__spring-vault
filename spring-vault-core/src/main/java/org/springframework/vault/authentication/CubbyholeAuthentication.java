@@ -171,11 +171,11 @@ public class CubbyholeAuthentication implements ClientAuthentication, Authentica
 		HttpEntity<Object> requestEntity = getRequestEntity(options);
 
 		HttpRequest<VaultResponse> initialRequest = method(unwrapMethod, url) //
-			.with(requestEntity) //
-			.as(VaultResponse.class);
+	.with(requestEntity) //
+	.as(VaultResponse.class);
 
 		return AuthenticationSteps.fromHttpRequest(initialRequest) //
-			.login(it -> getToken(options, it, url));
+	.login(it -> getToken(options, it, url));
 	}
 
 	@Override
@@ -208,7 +208,7 @@ public class CubbyholeAuthentication implements ClientAuthentication, Authentica
 			HttpMethod unwrapMethod = getRequestMethod(this.options);
 			HttpEntity<Object> requestEntity = getRequestEntity(this.options);
 			ResponseEntity<VaultResponse> entity = this.restOperations.exchange(url, unwrapMethod, requestEntity,
-					VaultResponse.class);
+		VaultResponse.class);
 
 			Assert.state(entity.getBody() != null, "Auth response must not be null");
 
@@ -273,8 +273,8 @@ public class CubbyholeAuthentication implements ClientAuthentication, Authentica
 		Map<String, Object> data = response.getData();
 		if (data == null || data.isEmpty()) {
 			throw new VaultLoginException(
-					String.format("Cannot retrieve Token from Cubbyhole: Response at %s does not contain a token",
-							options.getPath()));
+		String.format("Cannot retrieve Token from Cubbyhole: Response at %s does not contain a token",
+	options.getPath()));
 		}
 
 		if (data.size() == 1) {
@@ -283,7 +283,7 @@ public class CubbyholeAuthentication implements ClientAuthentication, Authentica
 		}
 
 		throw new VaultLoginException(String
-			.format("Cannot retrieve Token from Cubbyhole: Response at %s does not contain an unique token", url));
+	.format("Cannot retrieve Token from Cubbyhole: Response at %s does not contain an unique token", url));
 	}
 
 }

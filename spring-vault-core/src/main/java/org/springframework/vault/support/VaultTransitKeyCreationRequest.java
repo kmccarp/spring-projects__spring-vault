@@ -38,7 +38,7 @@ public class VaultTransitKeyCreationRequest {
 	private final boolean exportable;
 
 	private VaultTransitKeyCreationRequest(boolean derived, String type, boolean convergentEncryption,
-			boolean exportable) {
+boolean exportable) {
 		this.derived = derived;
 		this.type = type;
 		this.convergentEncryption = convergentEncryption;
@@ -170,7 +170,7 @@ public class VaultTransitKeyCreationRequest {
 			Assert.hasText(this.type, "Type must not be empty");
 
 			return new VaultTransitKeyCreationRequest(this.derived, this.type, this.convergentEncryption,
-					this.exportable);
+		this.exportable);
 		}
 
 	}
