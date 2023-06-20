@@ -28,6 +28,8 @@ import org.springframework.vault.core.lease.domain.RequestedSecret;
  */
 public class SecretLeaseRotatedEvent extends SecretLeaseCreatedEvent {
 
+	private static final long serialVersionUID = 1;
+
 	private final Lease previousLease;
 
 	/**

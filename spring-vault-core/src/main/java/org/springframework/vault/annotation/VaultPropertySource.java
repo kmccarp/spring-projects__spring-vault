@@ -129,7 +129,7 @@ public @interface VaultPropertySource {
 		 * Renew secrets (like {@link #RENEW}) and request new secrets once the lease
 		 * expires.
 		 */
-		ROTATE;
+		ROTATE
 
 	}
 

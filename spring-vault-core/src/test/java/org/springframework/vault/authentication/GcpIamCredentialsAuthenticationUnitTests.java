@@ -91,9 +91,7 @@ class GcpIamCredentialsAuthenticationUnitTests {
 							ProtoLiteUtils.marshaller(SignJwtResponse.getDefaultInstance()))
 					.setType(MethodDescriptor.MethodType.UNARY)
 					.setFullMethodName("google.iam.credentials.v1.IAMCredentials/SignJwt")
-					.build(), asyncUnaryCall((request, responseObserver) -> {
-						this.serverCall.invoke(request, responseObserver);
-					}))
+					.build(), asyncUnaryCall(this.serverCall::invoke))
 				.build())
 			.build()
 			.start();
@@ -107,14 +105,14 @@ class GcpIamCredentialsAuthenticationUnitTests {
 
 	@Test
 	void shouldLogin() {
-		this.serverCall = ((request, responseObserver) -> {
+		this.serverCall = (request, responseObserver) -> {
 			SignJwtResponse signJwtResponse = SignJwtResponse.newBuilder()
 				.setSignedJwt("my-jwt")
 				.setKeyId("key-id")
 				.build();
 			responseObserver.onNext(signJwtResponse);
 			responseObserver.onCompleted();
-		});
+		};
 
 		this.mockRest.expect(requestTo("/auth/gcp/login"))
 			.andExpect(method(HttpMethod.POST))

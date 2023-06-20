@@ -540,10 +540,7 @@ public class SecretLeaseContainer extends SecretLeaseEventPublisher implements I
 
 		logRenewalCandidate(requestedSecret, lease, "renewal");
 
-		leaseRenewal.scheduleRenewal(requestedSecret, leaseToRenew -> {
-
-			return renewAndSchedule(requestedSecret, leaseRenewal, leaseToRenew);
-		}, lease, getMinRenewal(), getExpiryThreshold());
+		leaseRenewal.scheduleRenewal(requestedSecret, leaseToRenew -> renewAndSchedule(requestedSecret, leaseRenewal, leaseToRenew), lease, getMinRenewal(), getExpiryThreshold());
 
 	}
 
@@ -891,12 +888,7 @@ public class SecretLeaseContainer extends SecretLeaseEventPublisher implements I
 			if (lease.isRenewable()) {
 				return true;
 			}
-
-			if (!lease.hasLeaseId() && !lease.getLeaseDuration().isZero() && requestedSecret.getMode() == Mode.ROTATE) {
-				return true;
-			}
-
-			return false;
+			return !lease.hasLeaseId() && !lease.getLeaseDuration().isZero() && requestedSecret.getMode() == Mode.ROTATE;
 		}
 
 		@Nullable
@@ -930,7 +922,7 @@ public class SecretLeaseContainer extends SecretLeaseEventPublisher implements I
 		private static final int STATUS_FIRED = 1;
 
 		// see AtomicIntegerFieldUpdater UPDATER
-		private volatile int status = 0;
+		private volatile int status;
 
 		private final long seconds;
 

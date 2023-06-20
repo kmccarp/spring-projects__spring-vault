@@ -71,7 +71,7 @@ public class LeaseAwareVaultPropertySource extends EnumerablePropertySource<Vaul
 
 	private final LeaseListenerAdapter leaseListener;
 
-	private volatile boolean notFound = false;
+	private volatile boolean notFound;
 
 	@Nullable
 	private volatile Exception loadError;

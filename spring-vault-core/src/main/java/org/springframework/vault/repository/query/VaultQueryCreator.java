@@ -134,9 +134,9 @@ public class VaultQueryCreator extends AbstractQueryCreator<KeyValueQuery<VaultQ
 				return Pattern.compile((String) parameters.next(), isIgnoreCase(part) ? Pattern.CASE_INSENSITIVE : 0)
 					.asPredicate();
 			case TRUE:
-				return it -> it.equalsIgnoreCase("true");
+				return "true"::equalsIgnoreCase;
 			case FALSE:
-				return it -> it.equalsIgnoreCase("false");
+				return "false"::equalsIgnoreCase;
 			case SIMPLE_PROPERTY:
 				return new Criteria<>(accessor.nextString(parameters), (value, it) -> it.equals(value));
 			case NEGATING_SIMPLE_PROPERTY:
@@ -196,29 +196,30 @@ public class VaultQueryCreator extends AbstractQueryCreator<KeyValueQuery<VaultQ
 		}
 
 		public boolean equals(final Object o) {
-			if (o == this)
+			if (o == this) {
 				return true;
-			if (!(o instanceof Criteria))
+			}
+			if (!(o instanceof Criteria)) {
 				return false;
+			}
 			final Criteria<?> other = (Criteria<?>) o;
 			final Object this$value = this.getValue();
 			final Object other$value = other.getValue();
-			if (this$value == null ? other$value != null : !this$value.equals(other$value))
+			if (this$value == null ? other$value != null : !this$value.equals(other$value)) {
 				return false;
+			}
 			final Object this$predicate = this.getPredicate();
 			final Object other$predicate = other.getPredicate();
-			if (this$predicate == null ? other$predicate != null : !this$predicate.equals(other$predicate))
-				return false;
-			return true;
+			return !(this$predicate == null ? other$predicate != null : !this$predicate.equals(other$predicate));
 		}
 
 		public int hashCode() {
-			final int PRIME = 59;
+			final int prime = 59;
 			int result = 1;
 			final Object $value = this.getValue();
-			result = result * PRIME + ($value == null ? 43 : $value.hashCode());
+			result = result * prime + ($value == null ? 43 : $value.hashCode());
 			final Object $predicate = this.getPredicate();
-			result = result * PRIME + ($predicate == null ? 43 : $predicate.hashCode());
+			result = result * prime + ($predicate == null ? 43 : $predicate.hashCode());
 			return result;
 		}
 

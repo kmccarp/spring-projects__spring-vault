@@ -40,13 +40,13 @@ public abstract class AppIdAuthenticationIntegrationTestBase extends Integration
 
 		prepare().getVaultOperations().doWithSession(restOperations -> {
 
-			Map<String, String> appIdData = new HashMap<String, String>();
+			Map<String, String> appIdData = new HashMap<>();
 			appIdData.put("value", "dummy"); // policy
 			appIdData.put("display_name", "this is my test application");
 
 			restOperations.postForEntity("auth/app-id/map/app-id/myapp", appIdData, Map.class);
 
-			Map<String, String> userIdData = new HashMap<String, String>();
+			Map<String, String> userIdData = new HashMap<>();
 			userIdData.put("value", "myapp"); // name of the app-id
 			userIdData.put("cidr_block", "0.0.0.0/0");
 

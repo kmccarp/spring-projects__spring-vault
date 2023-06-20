@@ -27,7 +27,7 @@ import org.springframework.util.ObjectUtils;
  * @author Lauren Voswinkel
  * @since 2.3
  */
-public class TransformPlaintext {
+public final class TransformPlaintext {
 
 	private static final TransformPlaintext EMPTY = new TransformPlaintext(new byte[0], VaultTransformContext.empty());
 
@@ -137,10 +137,12 @@ public class TransformPlaintext {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof TransformPlaintext))
+		}
+		if (!(o instanceof TransformPlaintext)) {
 			return false;
+		}
 		TransformPlaintext that = (TransformPlaintext) o;
 		if (!ObjectUtils.nullSafeEquals(this.plaintext, that.plaintext)) {
 			return false;

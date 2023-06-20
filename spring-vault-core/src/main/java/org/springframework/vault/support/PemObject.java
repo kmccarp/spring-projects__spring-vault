@@ -42,7 +42,7 @@ import org.springframework.util.Base64Utils;
  * @author Mark Paluch
  * @since 2.2
  */
-public class PemObject {
+public final class PemObject {
 
 	private static final Pattern BEGIN_PATTERN = Pattern.compile("-+BEGIN ([A-Z ]+)-+");
 
@@ -142,7 +142,6 @@ public class PemObject {
 		StringBuilder keyBuilder = null;
 		while (true) {
 			String line = reader.readLine();
-			;
 			if (line == null) {
 				Assert.isTrue(title == null, "missing end tag " + title);
 				return null;

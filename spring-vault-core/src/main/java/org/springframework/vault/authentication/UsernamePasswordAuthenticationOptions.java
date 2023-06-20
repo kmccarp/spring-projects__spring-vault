@@ -27,7 +27,7 @@ import org.springframework.util.Assert;
  * @see UsernamePasswordAuthentication
  * @see #builder()
  */
-public class UsernamePasswordAuthenticationOptions {
+public final class UsernamePasswordAuthenticationOptions {
 
 	public static final String DEFAULT_USERPASS_AUTHENTICATION_PATH = "userpass";
 

@@ -106,7 +106,7 @@ public abstract class ClientCertificateAuthenticationIntegrationTestBase extends
 			headers.add(VaultHttpHeaders.VAULT_TOKEN, token.getToken());
 
 			return restOperations.exchange("auth/token/lookup-self", HttpMethod.GET, new HttpEntity<>(headers),
-					new ParameterizedTypeReference<Map<String, Object>>() {
+					new ParameterizedTypeReference<>() {
 					});
 		});
 	}
