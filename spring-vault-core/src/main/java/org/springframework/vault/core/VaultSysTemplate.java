@@ -314,7 +314,7 @@ public class VaultSysTemplate implements VaultSysOperations {
 
 	private static class GetMounts implements RestOperationsCallback<Map<String, VaultMount>> {
 
-		private static final ParameterizedTypeReference<VaultMountsResponse> MOUNT_TYPE_REF = new ParameterizedTypeReference<VaultMountsResponse>() {
+		private static final ParameterizedTypeReference<VaultMountsResponse> MOUNT_TYPE_REF = new ParameterizedTypeReference<>() {
 		};
 
 		private final String path;
