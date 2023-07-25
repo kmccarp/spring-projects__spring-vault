@@ -29,7 +29,7 @@ import org.springframework.util.Assert;
  * @since 2.0
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class VaultHmacRequest {
+public final class VaultHmacRequest {
 
 	private final Plaintext plaintext;
 

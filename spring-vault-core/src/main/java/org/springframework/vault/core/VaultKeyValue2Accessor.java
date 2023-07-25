@@ -53,12 +53,10 @@ abstract class VaultKeyValue2Accessor extends VaultKeyValueAccessor {
 	@SuppressWarnings("unchecked")
 	public List<String> list(String path) {
 
-		String pathToUse = path.equals("/") ? "" : path.endsWith("/") ? path : (path + "/");
+		String pathToUse = "/".equals(path) ? "" : path.endsWith("/") ? path : (path + "/");
 
-		VaultListResponse read = doRead(restOperations -> {
-			return restOperations.exchange(String.format("%s?list=true", createBackendPath("metadata", pathToUse)),
-					HttpMethod.GET, null, VaultListResponse.class);
-		});
+		VaultListResponse read = doRead(restOperations -> restOperations.exchange(String.format("%s?list=true", createBackendPath("metadata", pathToUse)),
+					HttpMethod.GET, null, VaultListResponse.class));
 
 		if (read == null) {
 			return Collections.emptyList();

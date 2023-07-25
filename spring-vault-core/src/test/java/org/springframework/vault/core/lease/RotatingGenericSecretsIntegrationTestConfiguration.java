@@ -61,7 +61,7 @@ public class RotatingGenericSecretsIntegrationTestConfiguration {
 			Map<String, LeaseAwareVaultPropertySource> leaseAwareVaultPropertySources = this.appContext
 				.getBeansOfType(LeaseAwareVaultPropertySource.class);
 			for (LeaseAwareVaultPropertySource candidate : leaseAwareVaultPropertySources.values()) {
-				if (candidate.getRequestedSecret().getPath().equals("versioned/rotating")) {
+				if ("versioned/rotating".equals(candidate.getRequestedSecret().getPath())) {
 					this.propertySource = candidate;
 					break;
 				}

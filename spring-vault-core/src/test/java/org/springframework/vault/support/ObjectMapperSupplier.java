@@ -25,7 +25,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class ObjectMapperSupplier {
 
-	private final static ObjectMapperSupplier instance = new ObjectMapperSupplier();
+	private static final ObjectMapperSupplier instance = new ObjectMapperSupplier();
 
 	private final ObjectMapper objectMapper = new ObjectMapper();
 

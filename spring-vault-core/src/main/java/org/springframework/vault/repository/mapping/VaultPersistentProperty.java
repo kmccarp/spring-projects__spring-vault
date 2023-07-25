@@ -32,7 +32,7 @@ import org.springframework.data.mapping.model.SimpleTypeHolder;
  */
 public class VaultPersistentProperty extends KeyValuePersistentProperty<VaultPersistentProperty> {
 
-	private static final Set<String> SUPPORTED_ID_PROPERTY_NAMES = new HashSet<String>();
+	private static final Set<String> SUPPORTED_ID_PROPERTY_NAMES = new HashSet<>();
 
 	static {
 		SUPPORTED_ID_PROPERTY_NAMES.add("id");

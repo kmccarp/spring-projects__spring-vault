@@ -176,9 +176,7 @@ public class ReactiveVaultClients {
 
 		Assert.hasText(namespace, "Vault Namespace must not be empty!");
 
-		return ExchangeFilterFunction.ofRequestProcessor(request -> {
-
-			return Mono.fromSupplier(() -> {
+		return ExchangeFilterFunction.ofRequestProcessor(request -> Mono.fromSupplier(() -> {
 
 				return ClientRequest.from(request).headers(headers -> {
 
@@ -186,8 +184,7 @@ public class ReactiveVaultClients {
 						headers.add(VaultHttpHeaders.VAULT_NAMESPACE, namespace);
 					}
 				}).build();
-			});
-		});
+			}));
 	}
 
 	/**

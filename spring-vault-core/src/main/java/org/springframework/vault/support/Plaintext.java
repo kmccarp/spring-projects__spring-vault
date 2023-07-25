@@ -29,7 +29,7 @@ import org.springframework.util.Assert;
  * @author Mark Paluch
  * @since 1.1
  */
-public class Plaintext {
+public final class Plaintext {
 
 	private static final Plaintext EMPTY = new Plaintext(new byte[0], VaultTransitContext.empty());
 
@@ -140,10 +140,12 @@ public class Plaintext {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (!(o instanceof Plaintext))
-			return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Plaintext)) {
+            return false;
+        }
 		Plaintext plaintext1 = (Plaintext) o;
 		return Arrays.equals(this.plaintext, plaintext1.plaintext) && this.context.equals(plaintext1.context);
 	}
