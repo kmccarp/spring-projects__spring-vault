@@ -24,7 +24,7 @@ import org.springframework.lang.Nullable;
  *
  * @author Mark Paluch
  */
-public class VaultTransitKeyConfiguration {
+public final class VaultTransitKeyConfiguration {
 
 	@JsonProperty("deletion_allowed")
 	@Nullable

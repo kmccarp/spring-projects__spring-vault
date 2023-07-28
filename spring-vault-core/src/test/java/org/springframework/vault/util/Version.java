@@ -27,7 +27,7 @@ import org.springframework.util.StringUtils;
  *
  * @author Mark Paluch
  */
-public class Version implements Comparable<Version> {
+public final class Version implements Comparable<Version> {
 
 	private static final String VERSION_PARSE_ERROR = "Invalid version string! Could not parse segment %s within %s.";
 
@@ -182,7 +182,7 @@ public class Version implements Comparable<Version> {
 	@Override
 	public String toString() {
 
-		List<Integer> digits = new ArrayList<Integer>();
+		List<Integer> digits = new ArrayList<>();
 		digits.add(this.major);
 		digits.add(this.minor);
 
@@ -199,10 +199,12 @@ public class Version implements Comparable<Version> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof Version))
+		}
+		if (!(o instanceof Version)) {
 			return false;
+		}
 		Version version = (Version) o;
 		return this.major == version.major && this.minor == version.minor && this.bugfix == version.bugfix
 				&& this.build == version.build && this.enterprise == version.enterprise;

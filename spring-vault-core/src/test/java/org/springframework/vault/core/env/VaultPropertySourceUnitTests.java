@@ -140,7 +140,7 @@ class VaultPropertySourceUnitTests {
 
 	private void prepareResponse() {
 
-		Map<String, Object> data = new LinkedHashMap<String, Object>();
+		Map<String, Object> data = new LinkedHashMap<>();
 		data.put("key", "value");
 		data.put("integer", 1);
 		data.put("empty", null);

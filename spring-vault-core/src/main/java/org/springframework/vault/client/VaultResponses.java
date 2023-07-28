@@ -126,7 +126,7 @@ public abstract class VaultResponses {
 			}
 		};
 
-		return new ParameterizedTypeReference<VaultResponseSupport<T>>() {
+		return new ParameterizedTypeReference<>() {
 			@Override
 			public Type getType() {
 				return supportType;

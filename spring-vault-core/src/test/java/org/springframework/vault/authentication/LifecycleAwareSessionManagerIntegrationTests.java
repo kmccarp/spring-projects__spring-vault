@@ -42,7 +42,7 @@ import static org.assertj.core.api.Assertions.fail;
  */
 class LifecycleAwareSessionManagerIntegrationTests extends IntegrationTestSupport {
 
-	private ThreadPoolTaskScheduler taskScheduler = new ThreadPoolTaskScheduler();
+	private final ThreadPoolTaskScheduler taskScheduler = new ThreadPoolTaskScheduler();
 
 	@BeforeEach
 	void before() {

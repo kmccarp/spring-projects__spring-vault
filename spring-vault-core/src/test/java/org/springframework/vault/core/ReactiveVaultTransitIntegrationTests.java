@@ -129,7 +129,7 @@ public class ReactiveVaultTransitIntegrationTests extends IntegrationTestSupport
 	@RequiresVaultVersion("0.6.4")
 	void createKeyShouldCreateEcDsaKey() {
 
-		createEcdsaP256Key().flatMap(keyName -> this.reactiveTransitOperations.getKey(keyName))
+		createEcdsaP256Key().flatMap(this.reactiveTransitOperations::getKey)
 			.as(StepVerifier::create)
 			.assertNext(myKey -> {
 				assertThat(myKey).isNotNull();
@@ -787,7 +787,7 @@ public class ReactiveVaultTransitIntegrationTests extends IntegrationTestSupport
 			.build();
 
 		createEcdsaP256Key()
-			.flatMap((keyName) -> this.reactiveTransitOperations.sign(keyName, request)
+			.flatMap(keyName -> this.reactiveTransitOperations.sign(keyName, request)
 				.map(signature -> VaultSignatureVerificationRequest.builder()
 					.signatureAlgorithm("sha2-512")
 					.plaintext(plaintext)

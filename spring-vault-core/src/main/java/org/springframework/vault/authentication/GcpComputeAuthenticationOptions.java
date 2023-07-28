@@ -29,7 +29,7 @@ import org.springframework.util.Assert;
  * @see #builder()
  * @since 2.1
  */
-public class GcpComputeAuthenticationOptions {
+public final class GcpComputeAuthenticationOptions {
 
 	public static final String DEFAULT_GCP_AUTHENTICATION_PATH = "gcp";
 

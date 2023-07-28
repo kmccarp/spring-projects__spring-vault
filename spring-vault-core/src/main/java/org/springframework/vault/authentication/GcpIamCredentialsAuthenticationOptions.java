@@ -37,7 +37,7 @@ import com.google.auth.oauth2.ServiceAccountCredentials;
  * @see #builder()
  * @since 2.3.2
  */
-public class GcpIamCredentialsAuthenticationOptions extends GcpIamAuthenticationSupport {
+public final class GcpIamCredentialsAuthenticationOptions extends GcpIamAuthenticationSupport {
 
 	public static final String DEFAULT_GCP_AUTHENTICATION_PATH = "gcp";
 

@@ -37,7 +37,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
  */
 class VaultQueryCreatorUnitTests {
 
-	private VaultMappingContext mappingContext = new VaultMappingContext();
+	private final VaultMappingContext mappingContext = new VaultMappingContext();
 
 	@Test
 	void greaterThan() {
@@ -238,7 +238,8 @@ class VaultQueryCreatorUnitTests {
 
 	private static class Credentials {
 
-		String id, name;
+		String id;
+		String name;
 
 	}
 
