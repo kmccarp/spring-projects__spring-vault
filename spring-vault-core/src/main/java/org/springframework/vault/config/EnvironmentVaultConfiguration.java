@@ -476,13 +476,13 @@ public class EnvironmentVaultConfiguration extends AbstractVaultConfiguration im
 
 	enum AppIdUserId {
 
-		IP_ADDRESS, MAC_ADDRESS;
+		IP_ADDRESS, MAC_ADDRESS
 
 	}
 
 	enum AuthenticationMethod {
 
-		TOKEN, APPID, APPROLE, AWS_EC2, AWS_IAM, AZURE, CERT, CUBBYHOLE, KUBERNETES;
+		TOKEN, APPID, APPROLE, AWS_EC2, AWS_IAM, AZURE, CERT, CUBBYHOLE, KUBERNETES
 
 	}
 

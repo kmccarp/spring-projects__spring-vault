@@ -68,7 +68,7 @@ class KubernetesAuthenticationIntegrationTests extends KubernetesAuthenticationI
 		RestTemplate restTemplate = TestRestTemplateFactory.create(Settings.createSslConfiguration());
 
 		assertThatExceptionOfType(VaultException.class)
-			.isThrownBy(() -> new KubernetesAuthentication(options, restTemplate).login());
+			.isThrownBy(new KubernetesAuthentication(options, restTemplate)::login);
 	}
 
 	@Test
@@ -84,7 +84,7 @@ class KubernetesAuthenticationIntegrationTests extends KubernetesAuthenticationI
 		RestTemplate restTemplate = TestRestTemplateFactory.create(Settings.createSslConfiguration());
 
 		assertThatExceptionOfType(VaultException.class)
-			.isThrownBy(() -> new KubernetesAuthentication(options, restTemplate).login());
+			.isThrownBy(new KubernetesAuthentication(options, restTemplate)::login);
 	}
 
 }

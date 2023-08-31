@@ -166,16 +166,16 @@ class VaultWrappingTemplateIntegrationTests extends IntegrationTestSupport {
 		}
 
 		public boolean equals(final Object o) {
-			if (o == this)
-				return true;
-			if (!(o instanceof Secret))
-				return false;
+            if (o == this) {
+                return true;
+            }
+            if (!(o instanceof Secret)) {
+                return false;
+            }
 			final Secret other = (Secret) o;
 			final Object this$key = this.getKey();
 			final Object other$key = other.getKey();
-			if (this$key == null ? other$key != null : !this$key.equals(other$key))
-				return false;
-			return true;
+            return !(this$key == null ? other$key != null : !this$key.equals(other$key));
 		}
 
 		public int hashCode() {

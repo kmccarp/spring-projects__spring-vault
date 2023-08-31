@@ -90,10 +90,8 @@ public class VaultWrappingTemplate implements VaultWrappingOperations {
 	@Override
 	public VaultResponse read(VaultToken token) {
 
-		return doUnwrap(token, (restOperations, entity) -> {
-			return restOperations.exchange("sys/wrapping/unwrap", HttpMethod.POST, entity, VaultResponse.class)
-				.getBody();
-		});
+		return doUnwrap(token, (restOperations, entity) -> restOperations.exchange("sys/wrapping/unwrap", HttpMethod.POST, entity, VaultResponse.class)
+				.getBody());
 	}
 
 	@Nullable
@@ -102,9 +100,7 @@ public class VaultWrappingTemplate implements VaultWrappingOperations {
 
 		ParameterizedTypeReference<VaultResponseSupport<T>> ref = VaultResponses.getTypeReference(responseType);
 
-		return doUnwrap(token, (restOperations, entity) -> {
-			return restOperations.exchange("sys/wrapping/unwrap", HttpMethod.POST, entity, ref).getBody();
-		});
+		return doUnwrap(token, (restOperations, entity) -> restOperations.exchange("sys/wrapping/unwrap", HttpMethod.POST, entity, ref).getBody());
 	}
 
 	@Nullable
@@ -168,11 +164,11 @@ public class VaultWrappingTemplate implements VaultWrappingOperations {
 
 	private static WrappedMetadata getWrappedMetadata(Map<String, ?> wrapInfo, VaultToken token) {
 
-		TemporalAccessor creation_time = getDate(wrapInfo, "creation_time");
+		TemporalAccessor creationTime = getDate(wrapInfo, "creation_time");
 		String path = (String) wrapInfo.get("creation_path");
 		Duration ttl = getTtl(wrapInfo);
 
-		return new WrappedMetadata(token, ttl, Instant.from(creation_time), path);
+		return new WrappedMetadata(token, ttl, Instant.from(creationTime), path);
 	}
 
 	@Nullable

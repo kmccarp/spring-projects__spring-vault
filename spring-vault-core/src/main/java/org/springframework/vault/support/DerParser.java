@@ -147,7 +147,7 @@ class DerParser {
 			}
 
 			while ((b >= 0) && ((b & 0x80) != 0)) {
-				tagNo |= (b & 0x7f);
+				tagNo |= b & 0x7f;
 				tagNo <<= 7;
 				b = s.read();
 			}
@@ -156,7 +156,7 @@ class DerParser {
 				throw new EOFException("EOF found inside tag value.");
 			}
 
-			tagNo |= (b & 0x7f);
+			tagNo |= b & 0x7f;
 		}
 
 		return tagNo;
@@ -350,17 +350,17 @@ class DerParser {
 			return new String(this.value, encoding);
 		}
 
-		private static String getObjectIdentifier(byte bytes[]) {
+		private static String getObjectIdentifier(byte[] bytes) {
 			StringBuffer objId = new StringBuffer();
 			long value = 0;
 			BigInteger bigValue = null;
 			boolean first = true;
 
-			for (int i = 0; i != bytes.length; i++) {
+			for (int i = 0; i < bytes.length; i++) {
 				int b = bytes[i] & 0xff;
 
 				if (value <= LONG_LIMIT) {
-					value += (b & 0x7f);
+					value += b & 0x7f;
 					if ((b & 0x80) == 0) // end of number reached
 					{
 						if (first) {
