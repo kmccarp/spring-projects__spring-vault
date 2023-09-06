@@ -33,7 +33,7 @@ import org.springframework.util.Assert;
  * @see AzureMsiAuthenticationOptions
  * @see #builder()
  */
-public class AzureMsiAuthenticationOptions {
+public final class AzureMsiAuthenticationOptions {
 
 	public static final String DEFAULT_AZURE_AUTHENTICATION_PATH = "azure";
 

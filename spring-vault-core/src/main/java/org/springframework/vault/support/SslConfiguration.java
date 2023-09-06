@@ -590,13 +590,13 @@ public class SslConfiguration {
 
 	}
 
-	/**
-	 * Configuration for a key in a keystore.
-	 *
-	 * @author Mark Paluch
-	 * @since 2.2
-	 */
-	public static class KeyConfiguration {
+    /**
+     * Configuration for a key in a keystore.
+     *
+     * @author Mark Paluch
+     * @since 2.2
+     */
+    public static final class KeyConfiguration {
 
 		private static final KeyConfiguration UNCONFIGURED = new KeyConfiguration(null, null);
 
@@ -655,7 +655,7 @@ public class SslConfiguration {
 
 	}
 
-	static class AbsentResource extends AbstractResource {
+    static final class AbsentResource extends AbstractResource {
 
 		static final AbsentResource INSTANCE = new AbsentResource();
 
