@@ -47,7 +47,7 @@ import org.springframework.web.reactive.function.client.WebClient;
  * @see ClientHttpConnectorFactory
  * @see WebClientCustomizer
  */
-public class WebClientBuilder {
+public final class WebClientBuilder {
 
 	private @Nullable ReactiveVaultEndpointProvider endpointProvider;
 
@@ -192,15 +192,12 @@ public class WebClientBuilder {
 		if (!this.defaultHeaders.isEmpty()) {
 
 			Map<String, String> defaultHeaders = this.defaultHeaders;
-			builder.filter((request, next) -> {
-
-				return next
+			builder.filter((request, next) -> next
 					.exchange(ClientRequest.from(request).headers(headers -> defaultHeaders.forEach((key, value) -> {
 						if (!headers.containsKey(key)) {
 							headers.add(key, value);
 						}
-					})).build());
-			});
+					})).build()));
 		}
 
 		builder.filters(exchangeFilterFunctions -> exchangeFilterFunctions.addAll(this.filterFunctions));

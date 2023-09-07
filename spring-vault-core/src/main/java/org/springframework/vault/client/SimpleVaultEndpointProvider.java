@@ -23,7 +23,7 @@ import org.springframework.util.Assert;
  * @author Mark Paluch
  * @since 1.1
  */
-public class SimpleVaultEndpointProvider implements VaultEndpointProvider {
+public final class SimpleVaultEndpointProvider implements VaultEndpointProvider {
 
 	private final VaultEndpoint endpoint;
 

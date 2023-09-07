@@ -285,10 +285,10 @@ public class AuthenticationSteps {
 
 	}
 
-	/**
-	 * Builder for {@link HttpRequest}.
-	 */
-	public static class HttpRequestBuilder {
+    /**
+     * Builder for {@link HttpRequest}.
+     */
+    public static final class HttpRequestBuilder {
 
 		HttpMethod method;
 
@@ -506,10 +506,12 @@ public class AuthenticationSteps {
 
 		@Override
 		public boolean equals(Object o) {
-			if (this == o)
-				return true;
-			if (!(o instanceof HttpRequestNode))
-				return false;
+            if (this == o) {
+                return true;
+            }
+            if (!(o instanceof HttpRequestNode)) {
+                return false;
+            }
 			HttpRequestNode<?> that = (HttpRequestNode<?>) o;
 			return this.definition.equals(that.definition) && this.previous.equals(that.previous);
 		}
@@ -551,10 +553,12 @@ public class AuthenticationSteps {
 
 		@Override
 		public boolean equals(Object o) {
-			if (this == o)
-				return true;
-			if (!(o instanceof MapStep))
-				return false;
+            if (this == o) {
+                return true;
+            }
+            if (!(o instanceof MapStep)) {
+                return false;
+            }
 			MapStep<?, ?> mapStep = (MapStep<?, ?>) o;
 			return this.mapper.equals(mapStep.mapper) && this.previous.equals(mapStep.previous);
 		}
@@ -597,10 +601,12 @@ public class AuthenticationSteps {
 
 		@Override
 		public boolean equals(Object o) {
-			if (this == o)
-				return true;
-			if (!(o instanceof ZipStep))
-				return false;
+            if (this == o) {
+                return true;
+            }
+            if (!(o instanceof ZipStep)) {
+                return false;
+            }
 			ZipStep<?, ?> zipStep = (ZipStep<?, ?>) o;
 			return this.left.equals(zipStep.left) && this.right.equals(zipStep.right);
 		}
@@ -643,10 +649,12 @@ public class AuthenticationSteps {
 
 		@Override
 		public boolean equals(Object o) {
-			if (this == o)
-				return true;
-			if (!(o instanceof OnNextStep))
-				return false;
+            if (this == o) {
+                return true;
+            }
+            if (!(o instanceof OnNextStep)) {
+                return false;
+            }
 			OnNextStep<?> that = (OnNextStep<?>) o;
 			return this.consumer.equals(that.consumer) && this.previous.equals(that.previous);
 		}
@@ -684,10 +692,12 @@ public class AuthenticationSteps {
 
 		@Override
 		public boolean equals(Object o) {
-			if (this == o)
-				return true;
-			if (!(o instanceof ScalarValueStep))
-				return false;
+            if (this == o) {
+                return true;
+            }
+            if (!(o instanceof ScalarValueStep)) {
+                return false;
+            }
 			ScalarValueStep<?> that = (ScalarValueStep<?>) o;
 			return this.value.equals(that.value) && this.previous.equals(that.previous);
 		}
@@ -729,10 +739,12 @@ public class AuthenticationSteps {
 
 		@Override
 		public boolean equals(Object o) {
-			if (this == o)
-				return true;
-			if (!(o instanceof SupplierStep))
-				return false;
+            if (this == o) {
+                return true;
+            }
+            if (!(o instanceof SupplierStep)) {
+                return false;
+            }
 			SupplierStep<?> that = (SupplierStep<?>) o;
 			return this.supplier.equals(that.supplier) && this.previous.equals(that.previous);
 		}
@@ -750,14 +762,14 @@ public class AuthenticationSteps {
 
 	}
 
-	/**
-	 * A tuple of two things.
-	 *
-	 * @param <L>
-	 * @param <R>
-	 * @since 2.1
-	 */
-	public static class Pair<L, R> {
+    /**
+     * A tuple of two things.
+     *
+     * @param <L>
+     * @param <R>
+     * @since 2.1
+     */
+    public static final class Pair<L, R> {
 
 		private final L left;
 
@@ -796,10 +808,12 @@ public class AuthenticationSteps {
 
 		@Override
 		public boolean equals(Object o) {
-			if (this == o)
-				return true;
-			if (!(o instanceof Pair))
-				return false;
+            if (this == o) {
+                return true;
+            }
+            if (!(o instanceof Pair)) {
+                return false;
+            }
 			Pair<?, ?> pair = (Pair<?, ?>) o;
 			return this.left.equals(pair.left) && this.right.equals(pair.right);
 		}

@@ -417,13 +417,11 @@ public class VaultTokenRequest {
 
 			}
 			Map<String, String> meta;
-			switch (this.meta.size()) {
-				case 0:
-					meta = Collections.emptyMap();
-					break;
-				default:
-					meta = Collections.unmodifiableMap(new LinkedHashMap<>(this.meta));
-			}
+            if (this.meta.size() == 0) {
+                meta = Collections.emptyMap();
+            } else {
+                meta = Collections.unmodifiableMap(new LinkedHashMap<>(this.meta));
+            }
 
 			return new VaultTokenRequest(this.id, policies, meta, this.noParent, this.noDefaultPolicy, this.renewable,
 					this.ttl, this.explicitMaxTtl, this.displayName, this.numUses);

@@ -35,7 +35,7 @@ import org.springframework.vault.support.VaultToken;
  * @see AppRoleAuthentication
  * @see #builder()
  */
-public class AppRoleAuthenticationOptions {
+public final class AppRoleAuthenticationOptions {
 
 	public static final String DEFAULT_APPROLE_AUTHENTICATION_PATH = "approle";
 

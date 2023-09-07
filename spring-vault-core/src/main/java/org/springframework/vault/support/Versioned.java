@@ -48,7 +48,7 @@ import org.springframework.util.Assert;
  * @see Version
  * @see Metadata
  */
-public class Versioned<T> {
+public final class Versioned<T> {
 
 	private final @Nullable T data;
 
@@ -195,10 +195,12 @@ public class Versioned<T> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (!(o instanceof Versioned))
-			return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Versioned)) {
+            return false;
+        }
 		Versioned<?> versioned = (Versioned<?>) o;
 		return Objects.equals(this.data, versioned.data) && Objects.equals(this.version, versioned.version)
 				&& Objects.equals(this.metadata, versioned.metadata);
@@ -210,10 +212,10 @@ public class Versioned<T> {
 		return Objects.hash(this.data, this.version, this.metadata);
 	}
 
-	/**
-	 * Value object representing version metadata such as creation/deletion time.
-	 */
-	public static class Metadata {
+    /**
+     * Value object representing version metadata such as creation/deletion time.
+     */
+    public static final class Metadata {
 
 		private final Instant createdAt;
 
@@ -282,10 +284,10 @@ public class Versioned<T> {
 					+ ", destroyed=" + this.destroyed + ", version=" + this.version + ']';
 		}
 
-		/**
-		 * Builder for {@link Metadata} objects.
-		 */
-		public static class MetadataBuilder {
+        /**
+         * Builder for {@link Metadata} objects.
+         */
+        public static final class MetadataBuilder {
 
 			private @Nullable Instant createdAt;
 
@@ -372,16 +374,16 @@ public class Versioned<T> {
 
 	}
 
-	/**
-	 * Value object representing a Vault version.
-	 * <p/>
-	 * Versions greater zero point to a specific secret version whereas version number
-	 * zero points to a placeholder whose meaning is tied to a specific operation. Version
-	 * number zero can mean first created version, latest version.
-	 *
-	 * @author Mark Paluch
-	 */
-	public static class Version {
+    /**
+     * Value object representing a Vault version.
+     * <p/>
+     * Versions greater zero point to a specific secret version whereas version number
+     * zero points to a placeholder whose meaning is tied to a specific operation. Version
+     * number zero can mean first created version, latest version.
+     *
+     * @author Mark Paluch
+     */
+    public static final class Version {
 
 		static final Version UNVERSIONED = new Version(0);
 
@@ -433,10 +435,12 @@ public class Versioned<T> {
 
 		@Override
 		public boolean equals(Object o) {
-			if (this == o)
-				return true;
-			if (!(o instanceof Version))
-				return false;
+            if (this == o) {
+                return true;
+            }
+            if (!(o instanceof Version)) {
+                return false;
+            }
 			Version version1 = (Version) o;
 			return this.version == version1.version;
 		}
