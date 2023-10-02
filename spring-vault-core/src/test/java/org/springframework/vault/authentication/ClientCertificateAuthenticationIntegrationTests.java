@@ -126,7 +126,7 @@ class ClientCertificateAuthenticationIntegrationTests extends ClientCertificateA
 				clientHttpRequestFactory);
 
 		assertThatExceptionOfType(NestedRuntimeException.class)
-			.isThrownBy(() -> new ClientCertificateAuthentication(restTemplate).login());
+			.isThrownBy(new ClientCertificateAuthentication(restTemplate)::login);
 	}
 
 }

@@ -55,7 +55,7 @@ public class SecurePropertyUsage {
 		PrepareVault prepareVault = initializer.prepare();
 		VaultOperations vaultOperations = prepareVault.getVaultOperations();
 
-		Map<String, String> data = new HashMap<String, String>();
+		Map<String, String> data = new HashMap<>();
 		data.put("encrypted", "Much secret. Very confidential. Wow.");
 
 		vaultOperations.write("secret/secure-introduction", data);

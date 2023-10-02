@@ -55,7 +55,7 @@ class ClientHttpConnectorFactoryIntegrationTests {
 	@Test
 	void reactorNettyClientWithExplicitEnabledCipherSuitesShouldWork() {
 
-		List<String> enabledCipherSuites = new ArrayList<String>();
+		List<String> enabledCipherSuites = new ArrayList<>();
 		enabledCipherSuites.add("TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384");
 		enabledCipherSuites.add("TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256");
 
@@ -72,7 +72,7 @@ class ClientHttpConnectorFactoryIntegrationTests {
 	@Test
 	void reactorNettyClientWithExplicitEnabledProtocolsShouldWork() {
 
-		List<String> enabledProtocols = new ArrayList<String>();
+		List<String> enabledProtocols = new ArrayList<>();
 		enabledProtocols.add("TLSv1.2");
 
 		ClientHttpConnector factory = ReactorNetty.usingReactorNetty(new ClientOptions(),
@@ -101,7 +101,7 @@ class ClientHttpConnectorFactoryIntegrationTests {
 	@Test
 	void httpAsyncClientWithExplicitEnabledCipherSuitesShouldWork() throws Exception {
 
-		List<String> enabledCipherSuites = new ArrayList<String>();
+		List<String> enabledCipherSuites = new ArrayList<>();
 		enabledCipherSuites.add("TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384");
 		enabledCipherSuites.add("TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256");
 
@@ -130,7 +130,7 @@ class ClientHttpConnectorFactoryIntegrationTests {
 	@Test
 	void jettyClientWithExplicitEnabledCipherSuitesShouldWork() throws Exception {
 
-		List<String> enabledCipherSuites = new ArrayList<String>();
+		List<String> enabledCipherSuites = new ArrayList<>();
 		enabledCipherSuites.add("TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384");
 		enabledCipherSuites.add("TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256");
 
@@ -147,7 +147,7 @@ class ClientHttpConnectorFactoryIntegrationTests {
 	@Test
 	void jettyClientWithExplicitEnabledProtocolsShouldWork() throws Exception {
 
-		List<String> enabledProtocols = new ArrayList<String>();
+		List<String> enabledProtocols = new ArrayList<>();
 		enabledProtocols.add("TLSv1.2");
 
 		ClientHttpConnector factory = JettyClient.usingJetty(new ClientOptions(),

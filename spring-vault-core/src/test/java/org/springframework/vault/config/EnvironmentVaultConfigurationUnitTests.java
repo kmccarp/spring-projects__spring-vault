@@ -76,7 +76,7 @@ class EnvironmentVaultConfigurationUnitTests {
 	@Test
 	void shouldConfigureSsl() {
 
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<>();
 		map.put("vault.ssl.key-store", "classpath:certificate.json");
 		map.put("vault.ssl.trust-store", "classpath:certificate.json");
 		map.put("vault.ssl.enabled-protocols", "TLSv1.2 , TLSv1.1 ");

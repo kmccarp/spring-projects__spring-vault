@@ -37,7 +37,7 @@ import org.springframework.util.StringUtils;
  * @see ResourceCredentialSupplier
  * @see #builder()
  */
-public class PcfAuthenticationOptions {
+public final class PcfAuthenticationOptions {
 
 	public static final String DEFAULT_PCF_AUTHENTICATION_PATH = "pcf";
 

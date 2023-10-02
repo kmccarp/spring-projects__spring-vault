@@ -33,7 +33,7 @@ import org.springframework.util.Assert;
  * @see JwtAuthentication
  * @see #builder()
  */
-public class JwtAuthenticationOptions {
+public final class JwtAuthenticationOptions {
 
 	public static final String DEFAULT_JWT_AUTHENTICATION_PATH = "jwt";
 

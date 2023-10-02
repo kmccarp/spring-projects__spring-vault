@@ -102,7 +102,7 @@ class LifecycleAwareSessionManagerUnitTests {
 
 		when(this.clientAuthentication.login()).thenThrow(new VaultLoginException("foo"));
 
-		assertThatExceptionOfType(VaultLoginException.class).isThrownBy(() -> this.sessionManager.getSessionToken());
+		assertThatExceptionOfType(VaultLoginException.class).isThrownBy(this.sessionManager::getSessionToken);
 		verifyNoInteractions(this.listener);
 		verify(this.errorListener).onAuthenticationError(any(LoginFailedEvent.class));
 	}

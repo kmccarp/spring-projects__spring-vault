@@ -115,9 +115,7 @@ public abstract class AbstractVaultConfiguration implements ApplicationContextAw
 	@Bean
 	public RestTemplateFactory restTemplateFactory(ClientFactoryWrapper requestFactoryWrapper) {
 
-		return new DefaultRestTemplateFactory(requestFactoryWrapper.getClientHttpRequestFactory(), it -> {
-			return restTemplateBuilder(vaultEndpointProvider(), it);
-		});
+		return new DefaultRestTemplateFactory(requestFactoryWrapper.getClientHttpRequestFactory(), it -> restTemplateBuilder(vaultEndpointProvider(), it));
 	}
 
 	/**
