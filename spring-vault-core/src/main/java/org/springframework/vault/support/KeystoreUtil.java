@@ -93,8 +93,8 @@ class KeystoreUtil {
 
 		Assert.notNull(keyPassword, "keyPassword must not be null");
 
-		PrivateKey privateKey = (privateKeySpec instanceof RSAPrivateKeySpec
-				|| privateKeySpec instanceof PKCS8EncodedKeySpec) ? RSA_KEY_FACTORY.generatePrivate(privateKeySpec)
+		PrivateKey privateKey = privateKeySpec instanceof RSAPrivateKeySpec
+				|| privateKeySpec instanceof PKCS8EncodedKeySpec ? RSA_KEY_FACTORY.generatePrivate(privateKeySpec)
 						: EC_KEY_FACTORY.generatePrivate(privateKeySpec);
 
 		KeyStore keyStore = createKeyStore();
