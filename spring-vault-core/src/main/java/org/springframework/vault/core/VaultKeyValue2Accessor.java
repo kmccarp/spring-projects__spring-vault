@@ -53,7 +53,7 @@ abstract class VaultKeyValue2Accessor extends VaultKeyValueAccessor {
 	@SuppressWarnings("unchecked")
 	public List<String> list(String path) {
 
-		String pathToUse = path.equals("/") ? "" : path.endsWith("/") ? path : (path + "/");
+		String pathToUse = "/".equals(path) ? "" : path.endsWith("/") ? path : (path + "/");
 
 		VaultListResponse read = doRead(restOperations -> {
 			return restOperations.exchange(String.format("%s?list=true", createBackendPath("metadata", pathToUse)),

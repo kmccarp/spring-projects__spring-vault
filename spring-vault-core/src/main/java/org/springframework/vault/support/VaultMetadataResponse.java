@@ -28,7 +28,7 @@ import org.springframework.lang.Nullable;
  * @author Zakaria Amine
  * @since 2.3
  */
-public class VaultMetadataResponse {
+public final class VaultMetadataResponse {
 
 	private final boolean casRequired;
 

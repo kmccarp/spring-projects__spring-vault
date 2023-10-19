@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  * @author Mark Paluch
  */
-public class VaultInitializationRequest {
+public final class VaultInitializationRequest {
 
 	@JsonProperty("secret_shares")
 	private final int secretShares;

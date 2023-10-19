@@ -129,7 +129,7 @@ abstract class VaultKeyValueAccessor implements VaultKeyValueOperationsSupport {
 	@Nullable
 	<T> T doRead(String path, ParameterizedTypeReference<T> typeReference) {
 
-		return doRead((restOperations) -> {
+		return doRead(restOperations -> {
 			return restOperations.exchange(path, HttpMethod.GET, null, typeReference);
 		});
 	}
@@ -160,7 +160,7 @@ abstract class VaultKeyValueAccessor implements VaultKeyValueOperationsSupport {
 	@Nullable
 	<T> T doRead(Function<RestOperations, ResponseEntity<T>> callback) {
 
-		return this.vaultOperations.doWithSession((restOperations) -> {
+		return this.vaultOperations.doWithSession(restOperations -> {
 
 			try {
 				return callback.apply(restOperations).getBody();
@@ -189,10 +189,8 @@ abstract class VaultKeyValueAccessor implements VaultKeyValueOperationsSupport {
 
 		try {
 
-			return this.vaultOperations.doWithSession((restOperations) -> {
-				return restOperations.exchange(path, HttpMethod.POST, new HttpEntity<>(body), VaultResponse.class)
-					.getBody();
-			});
+			return this.vaultOperations.doWithSession(restOperations -> restOperations.exchange(path, HttpMethod.POST, new HttpEntity<>(body), VaultResponse.class)
+					.getBody());
 		}
 		catch (HttpStatusCodeException e) {
 			throw VaultResponses.buildException(e, path);

@@ -26,7 +26,7 @@ import org.springframework.util.Assert;
  * @author Mark Paluch
  * @since 1.1
  */
-public class Ciphertext {
+public final class Ciphertext {
 
 	private final String ciphertext;
 
@@ -73,10 +73,12 @@ public class Ciphertext {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof Ciphertext))
+		}
+		if (!(o instanceof Ciphertext)) {
 			return false;
+		}
 		Ciphertext that = (Ciphertext) o;
 		return this.ciphertext.equals(that.ciphertext) && this.context.equals(that.context);
 	}

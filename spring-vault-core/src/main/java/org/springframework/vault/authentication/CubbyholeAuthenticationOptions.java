@@ -29,7 +29,7 @@ import org.springframework.vault.support.VaultToken;
  * @see CubbyholeAuthentication
  * @see #builder()
  */
-public class CubbyholeAuthenticationOptions {
+public final class CubbyholeAuthenticationOptions {
 
 	/**
 	 * Initial {@link VaultToken} to access Cubbyhole.

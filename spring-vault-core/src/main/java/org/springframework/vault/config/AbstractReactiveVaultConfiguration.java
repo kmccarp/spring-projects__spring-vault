@@ -130,9 +130,7 @@ public abstract class AbstractReactiveVaultConfiguration extends AbstractVaultCo
 
 		ClientHttpConnector httpConnector = clientHttpConnector();
 
-		return new DefaultWebClientFactory(httpConnector, clientHttpConnector -> {
-			return webClientBuilder(reactiveVaultEndpointProvider(), clientHttpConnector);
-		});
+		return new DefaultWebClientFactory(httpConnector, clientHttpConnector -> webClientBuilder(reactiveVaultEndpointProvider(), clientHttpConnector));
 	}
 
 	/**

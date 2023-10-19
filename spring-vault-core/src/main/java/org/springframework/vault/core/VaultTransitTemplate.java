@@ -785,10 +785,12 @@ public class VaultTransitTemplate implements VaultTransitOperations {
 
 		@Override
 		public boolean equals(Object o) {
-			if (this == o)
+			if (this == o) {
 				return true;
-			if (!(o instanceof VaultTransitKeyImpl))
+			}
+			if (!(o instanceof VaultTransitKeyImpl)) {
 				return false;
+			}
 			VaultTransitKeyImpl that = (VaultTransitKeyImpl) o;
 			return this.allowPlaintextBackup == that.allowPlaintextBackup
 					&& this.deletionAllowed == that.deletionAllowed && this.derived == that.derived
@@ -844,10 +846,12 @@ public class VaultTransitTemplate implements VaultTransitOperations {
 
 		@Override
 		public boolean equals(Object o) {
-			if (this == o)
+			if (this == o) {
 				return true;
-			if (!(o instanceof RawTransitKeyImpl))
+			}
+			if (!(o instanceof RawTransitKeyImpl)) {
 				return false;
+			}
 			RawTransitKeyImpl that = (RawTransitKeyImpl) o;
 			return this.keys.equals(that.keys) && Objects.equals(this.name, that.name);
 		}

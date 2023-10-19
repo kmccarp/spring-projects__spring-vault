@@ -66,7 +66,7 @@ import org.springframework.vault.support.Policy.PolicySerializer;
  */
 @JsonSerialize(using = PolicySerializer.class)
 @JsonDeserialize(using = PolicyDeserializer.class)
-public class Policy {
+public final class Policy {
 
 	private static final Policy EMPTY = new Policy(Collections.emptySet());
 
@@ -154,10 +154,12 @@ public class Policy {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (!(o instanceof Policy))
+		}
+		if (!(o instanceof Policy)) {
 			return false;
+		}
 		Policy policy = (Policy) o;
 		return this.rules.equals(policy.rules);
 	}
@@ -174,7 +176,7 @@ public class Policy {
 	 * @author Mark Paluch
 	 */
 	@JsonInclude(Include.NON_EMPTY)
-	public static class Rule {
+	public static final class Rule {
 
 		/**
 		 * Path or path with asterisk to which this rule applies to.
@@ -295,10 +297,12 @@ public class Policy {
 
 		@Override
 		public boolean equals(Object o) {
-			if (this == o)
+			if (this == o) {
 				return true;
-			if (!(o instanceof Rule))
+			}
+			if (!(o instanceof Rule)) {
 				return false;
+			}
 			Rule rule = (Rule) o;
 			return this.path.equals(rule.path);
 		}
@@ -323,9 +327,9 @@ public class Policy {
 			@Nullable
 			private Duration maxWrappingTtl;
 
-			private Map<String, List<String>> allowedParameters = new LinkedHashMap<String, List<String>>();
+			private Map<String, List<String>> allowedParameters = new LinkedHashMap<>();
 
-			private Map<String, List<String>> deniedParameters = new LinkedHashMap<String, List<String>>();
+			private Map<String, List<String>> deniedParameters = new LinkedHashMap<>();
 
 			;
 
